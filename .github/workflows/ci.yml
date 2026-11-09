@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  linux:
+    name: Linux, Swift ${{ matrix.swift }}, ${{ matrix.syntax }} swift-syntax
+    runs-on: ubuntu-latest
+    container: swift:${{ matrix.swift }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The lowest Swift that the package supports, with the lowest swift-syntax in its range.
+          - swift: '6.2'
+            syntax: lowest
+          # The newest Swift, with the highest swift-syntax in the range.
+          - swift: '6.4'
+            syntax: highest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve the lowest swift-syntax
+        if: matrix.syntax == 'lowest'
+        run: swift package resolve swift-syntax --version 600.0.0
+
+      - name: Resolve the highest swift-syntax
+        if: matrix.syntax == 'highest'
+        run: swift package update
+
+      - name: Test
+        run: swift test
+
+      - name: Check that the tables are formatted
+        run: swift package --allow-writing-to-package-directory tabletest-format --check
+
+  macos:
+    name: macOS, Xcode on the runner
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Show the toolchain
+        run: xcodebuild -version && swift --version
+
+      - name: Test
+        run: swift test
+
+      - name: Check the command plugin in a package that depends on this one
+        run: scripts/check-plugin.sh
