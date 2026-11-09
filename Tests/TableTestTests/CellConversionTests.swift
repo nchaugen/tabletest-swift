@@ -50,6 +50,35 @@ struct CellConversionTests {
         #expect(result.matches, "converted to \(result.actual)")
     }
 
+    @Test("Converts a cell with a built-in conversion", arguments: [
+        (scenario: "Date at midnight UTC", cell: "2025-03-14", conversion: Conversion.to(Date(timeIntervalSince1970: 1741910400))),
+        (scenario: "Date and time in UTC", cell: "2025-03-14T10:30:00Z", conversion: .to(Date(timeIntervalSince1970: 1741948200))),
+        (scenario: "Date and time with an offset", cell: "2025-03-14T10:30:00+01:00",
+         conversion: .to(Date(timeIntervalSince1970: 1741944600))),
+        (scenario: "Fraction of a second", cell: "2025-03-14T10:30:00.5Z", conversion: .to(Date(timeIntervalSince1970: 1741948200.5))),
+        (scenario: "List of dates", cell: "[2025-01-01, 2025-03-14]",
+         conversion: .to([Date(timeIntervalSince1970: 1735689600), Date(timeIntervalSince1970: 1741910400)])),
+        (scenario: "Date in a struct", cell: "[opened: 2025-03-14]", conversion: .to(Tasting(opened: Date(timeIntervalSince1970: 1741910400)))),
+        (scenario: "Closed range", cell: "2028...2030", conversion: .to(2028...2030)),
+        (scenario: "Half-open range", cell: "2028..<2031", conversion: .to(2028..<2031)),
+        (scenario: "Closed range as a list", cell: "[2028, 2030]", conversion: .to(2028...2030)),
+        (scenario: "Range of negative numbers", cell: "-5...-1", conversion: .to(-5 ... -1)),
+        (scenario: "Range of fractions", cell: "1.5...2.5", conversion: .to(1.5...2.5)),
+        (scenario: "Range of dates", cell: "2025-01-01...2025-03-14",
+         conversion: .to(Date(timeIntervalSince1970: 1735689600)...Date(timeIntervalSince1970: 1741910400))),
+        (scenario: "Range in a struct", cell: "[years: 2028...2030]", conversion: .to(DrinkWindow(years: 2028...2030))),
+        (scenario: "Blank cell to an optional range", cell: "", conversion: .to(ClosedRange<Int>?.none)),
+        (scenario: "Character", cell: "a", conversion: .plain(Character("a"))),
+        (scenario: "Character of two scalars", cell: "e\u{301}", conversion: .plain(Character("e\u{301}"))),
+        (scenario: "Quoted space", cell: "' '", conversion: .plain(Character(" "))),
+        (scenario: "List of characters", cell: "[a, b]", conversion: .plain([Character("a"), Character("b")])),
+    ])
+    func convertsWithABuiltInConversion(scenario: String, cell: String, conversion: Conversion) throws {
+        let result = try conversion.convert(cellValue(cell))
+
+        #expect(result.matches, "converted to \(result.actual)")
+    }
+
     @Test("Converts a cell with the type's own conversion", arguments: [
         (scenario: "Amount and currency", cell: "12.50 EUR", conversion: Conversion.own(Money(cents: 1250, currency: "EUR"))),
         (scenario: "List of amounts", cell: "[1.00 EUR, 2.50 USD]",
@@ -181,6 +210,20 @@ struct CellConversionTests {
         (cell: "[month(year: 2025, month: 3)]", target: .to([Vintage].self),
          message: "Cannot convert `[month(year: 2025, month: 3)]` to a list or a set: quote an element that has a comma or a colon"),
         (cell: "Ada", target: .to(Person.self), message: "Cannot convert `Ada` to a map"),
+        (cell: "2025-3-14", target: .to(Date.self), message: "Cannot convert `2025-3-14` to Date"),
+        (cell: "2025-02-30", target: .to(Date.self), message: "Cannot convert `2025-02-30` to Date"),
+        (cell: "1741910400", target: .to(Date.self), message: "Cannot convert `1741910400` to Date"),
+        (cell: "2025-03-14T10:30:00", target: .to(Date.self),
+         message: "Cannot convert `2025-03-14T10:30:00` to Date: add a zone, such as `Z` or `+01:00`"),
+        (cell: "2030...2028", target: .to(ClosedRange<Int>.self),
+         message: "Cannot convert `2030...2028` to ClosedRange<Int>: the lower bound is above the upper bound"),
+        (cell: "2031..<2028", target: .to(Range<Int>.self),
+         message: "Cannot convert `2031..<2028` to Range<Int>: the lower bound is above the upper bound"),
+        (cell: "2028...x", target: .to(ClosedRange<Int>.self), message: "Cannot convert `x` to Int"),
+        (cell: "2028", target: .to(ClosedRange<Int>.self), message: "Cannot convert `2028` to ClosedRange<Int>"),
+        (cell: "2028...2030", target: .to(Range<Int>.self), message: "Cannot convert `2028...2030` to Range<Int>"),
+        (cell: "ab", target: .plain(Character.self), message: "Cannot convert `ab` to Character"),
+        (cell: "", target: .plain(Character.self), message: "Cannot convert a blank cell to Character"),
         (cell: "x", target: .plain(Opaque.self),
          message: "Opaque does not convert from a cell: make it Decodable or TableValueDecodable"),
     ])
@@ -308,6 +351,14 @@ enum Window: Codable, Equatable, Sendable {
 
 struct Bottle: Decodable, Equatable, Sendable {
     let vintage: Vintage
+}
+
+struct Tasting: Decodable, Equatable, Sendable {
+    let opened: Date
+}
+
+struct DrinkWindow: Decodable, Equatable, Sendable {
+    let years: ClosedRange<Int>
 }
 
 struct Palette: Decodable, Equatable, Sendable {
