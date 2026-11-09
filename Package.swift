@@ -9,6 +9,7 @@ let package = Package(
         .library(name: "TableTest", targets: ["TableTest"]),
         .library(name: "TableTestParser", targets: ["TableTestParser"]),
         .library(name: "TableTestFormat", targets: ["TableTestFormat"]),
+        .executable(name: "tabletest-format", targets: ["tabletest-format"]),
     ],
     dependencies: [
         .package(url: "https://github.com/swiftlang/swift-syntax.git", "600.0.0"..<"604.0.0"),
@@ -58,6 +59,7 @@ let package = Package(
             dependencies: ["TableTestFormat", "SpecFixtures"],
             resources: [.copy("Fixtures")]
         ),
+        .executableTarget(name: "tabletest-format", dependencies: ["TableTestSourceFormat"]),
         .testTarget(
             name: "TableTestSourceFormatTests",
             dependencies: ["TableTestSourceFormat"]
