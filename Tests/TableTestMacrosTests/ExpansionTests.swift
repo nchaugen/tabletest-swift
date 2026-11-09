@@ -79,6 +79,76 @@ struct ExpansionTests {
         )
     }
 
+    @Test("Names the nested test type after the title")
+    func namesTheTypeAfterTheTitle() {
+        assertTableTestExpansion(
+            """
+            struct YearTests {
+                @TableTest("Leap years, by rule", table: \"\"\"
+                    Year | Leap?
+                    2004 | true
+                    \"\"\")
+                func knowsALeapYear(year: Int, leap: Bool) {}
+            }
+            """,
+            expandedSource: #"""
+            struct YearTests {
+                func knowsALeapYear(year: Int, leap: Bool) {}
+
+                struct `Leap years, by rule` {
+                    @Test("Leap years, by rule", arguments: try TableTestRows.make(
+                    table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 46, indentation: 8, isMultiline: true)
+                    ))
+                    func scenarios(_ row: TableTestRow) throws {
+                        do throws(TableCellError) {
+                            try YearTests().knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                        } catch {
+                            Issue.record(error, sourceLocation: error.sourceLocation)
+                        }
+                    }
+                }
+            }
+            """#
+        )
+    }
+
+    @Test("Names the type after the function when a type name cannot hold the title")
+    func fallsBackToTheFunctionName() {
+        assertTableTestExpansion(
+            """
+            struct YearTests {
+                @TableTest("Leap years by `year`", table: \"\"\"
+                    Year | Leap?
+                    2004 | true
+                    \"\"\")
+                func knowsALeapYear(year: Int, leap: Bool) {}
+            }
+            """,
+            expandedSource: #"""
+            struct YearTests {
+                func knowsALeapYear(year: Int, leap: Bool) {}
+
+                struct knowsALeapYear {
+                    @Test("Leap years by `year`", arguments: try TableTestRows.make(
+                    table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 47, indentation: 8, isMultiline: true)
+                    ))
+                    func scenarios(_ row: TableTestRow) throws {
+                        do throws(TableCellError) {
+                            try YearTests().knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                        } catch {
+                            Issue.record(error, sourceLocation: error.sourceLocation)
+                        }
+                    }
+                }
+            }
+            """#
+        )
+    }
+
     @Test("Takes the title from a raw identifier")
     func takesTheTitleFromARawIdentifier() {
         assertTableTestExpansion(

@@ -7,8 +7,9 @@ import TableTestParser
 /// Expands `@TableTest` on a function to a Swift Testing test that calls the function once
 /// for each row of the table.
 ///
-/// The expansion is a nested type with the function's name that holds the `@Test` function
-/// `scenarios`, so the Xcode test tree reads `Suite > name > scenarios(_:) > case`. A `@Test`
+/// The expansion is a nested type that holds the `@Test` function `scenarios`, so the Xcode
+/// test tree reads `Suite > title > scenarios(_:) > case`. The type takes the test's title as a
+/// raw identifier, or else the function's name. A `@Test`
 /// written directly beside the function does not compile, because a nested macro expansion does
 /// not see the enclosing type. The `@Test` function cannot share the type's name: Swift Testing
 /// creates the suite instance by the type's name, which inside the type would name the function.
@@ -86,7 +87,7 @@ public struct TableTestMacro: PeerMacro {
 
         return [
             """
-            \(raw: isolation(of: function, in: context))struct \(raw: typeName(for: function)) {
+            \(raw: isolation(of: function, in: context))struct \(raw: typeName(for: function, title: arguments.displayName)) {
                 @Test(\(raw: testAttributeArguments))
                 func scenarios(_ row: TableTestRow) \(raw: isAsync ? "async " : "")throws {
                     \(raw: isThrowing ? "do" : "do throws(TableCellError)") {
@@ -115,14 +116,17 @@ public struct TableTestMacro: PeerMacro {
         }
     }
 
-    /// The function's own name, or `__tabletest_<name>` for a static function, which cannot
-    /// share its name with a type.
-    private static func typeName(for function: FunctionDeclSyntax) -> String {
+    /// The test's title as a raw identifier, so Xcode shows the title. Else the function's own
+    /// name; for a static function, which cannot share its name with a type, `__tabletest_<name>`.
+    private static func typeName(for function: FunctionDeclSyntax, title: StringLiteralExprSyntax?) -> String {
         let name = function.name.text
-        guard function.isStatic else {
-            return name
+        if function.isStatic {
+            return name.hasPrefix("`") ? "`__tabletest_\(name.withoutBackticks)`" : "__tabletest_\(name)"
         }
-        return name.hasPrefix("`") ? "`__tabletest_\(name.withoutBackticks)`" : "__tabletest_\(name)"
+        if let title = title?.representedLiteralValue, title.canBeRawIdentifier {
+            return "`\(title)`"
+        }
+        return name
     }
 
     /// `Type.` for a static function, and `Type().` for an instance function.
@@ -228,6 +232,15 @@ extension FunctionDeclSyntax {
 extension String {
     var withoutBackticks: String {
         filter { $0 != "`" }
+    }
+
+    /// Whether the text can stand between backticks as a name: it holds a letter or a digit, and
+    /// no backtick, backslash or control character.
+    var canBeRawIdentifier: Bool {
+        unicodeScalars.contains { $0.properties.isAlphabetic || $0.properties.numericType != nil }
+            && !unicodeScalars.contains {
+                $0 == "`" || $0 == "\\" || [.control, .lineSeparator, .paragraphSeparator].contains($0.properties.generalCategory)
+            }
     }
 }
 

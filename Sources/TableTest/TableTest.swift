@@ -16,12 +16,12 @@ import Testing
 ///     #expect(Year(year).isLeap == leap)
 /// }
 /// ```
-@attached(peer, names: overloaded, prefixed(__tabletest_))
+@attached(peer, names: arbitrary)
 public macro TableTest(_ table: String) = #externalMacro(module: "TableTestMacros", type: "TableTestMacro")
 
 /// Runs the attached function once for each data row of the table, with a display name and
 /// the traits of a Swift Testing test.
-@attached(peer, names: overloaded, prefixed(__tabletest_))
+@attached(peer, names: arbitrary)
 public macro TableTest(
     _ displayName: String,
     _ traits: any TestTrait...,
@@ -30,7 +30,7 @@ public macro TableTest(
 
 /// Runs the attached function once for each data row of the table, with the traits of a
 /// Swift Testing test.
-@attached(peer, names: overloaded, prefixed(__tabletest_))
+@attached(peer, names: arbitrary)
 public macro TableTest(
     _ traits: any TestTrait...,
     table: String
