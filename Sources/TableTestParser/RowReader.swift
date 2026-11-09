@@ -262,7 +262,7 @@ struct RowReader {
                 kind: .duplicateKey,
                 line: line.index,
                 column: pairs[duplicate].column,
-                message: "Duplicate key `\(pairs[duplicate].key)` in map `[\(map)]`"
+                message: "Duplicate key `\(pairs[duplicate].key)` in map `[\(map)]` in row `\(rowText)`"
             )
         }
         return pairs.map { TableMapEntry(key: $0.key, value: $0.value) }
@@ -317,14 +317,18 @@ struct RowReader {
 
     // MARK: Errors
 
+    /// The row as written, for an error message: every error names its row (SPEC 1.7).
+    private var rowText: String {
+        line.text.trimmingTableWhitespace()
+    }
+
     private func malformed(at column: Int) -> TableParseError {
         let rest = text(from: column, to: line.scalars.count)
-        let row = line.text.trimmingTableWhitespace()
         return TableParseError(
             kind: .malformed,
             line: line.index,
             column: column,
-            message: "Failed to parse `\(rest)` in row `\(row)`"
+            message: "Failed to parse `\(rest)` in row `\(rowText)`"
         )
     }
 }
