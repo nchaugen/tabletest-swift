@@ -24,6 +24,7 @@ let package = Package(
             ]
         ),
         .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser"]),
+        .target(name: "SpecFixtures", dependencies: ["TableTestParser"], path: "Tests/SpecFixtures"),
         .testTarget(name: "TableTestTests", dependencies: ["TableTest"]),
         .testTarget(
             name: "TableTestMacrosTests",
@@ -34,7 +35,7 @@ let package = Package(
         ),
         .testTarget(
             name: "TableTestParserTests",
-            dependencies: ["TableTestParser"],
+            dependencies: ["TableTestParser", "SpecFixtures"],
             resources: [.copy("Fixtures")]
         ),
     ]
