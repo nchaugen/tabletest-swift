@@ -29,7 +29,7 @@ extension TableValueDecoding {
         if type == Locale.Currency.self {
             return try fromText(Locale.Currency.self, value, codingPath) { text in
                 let currency = Locale.Currency(text)
-                return currency.isISOCurrency ? currency : nil
+                return Locale.Currency.isoCurrencies.contains(currency) ? currency : nil
             }
         }
         if type == DateComponents.self {
