@@ -1,0 +1,90 @@
+name: Release
+
+# Releases a version: stamps the CHANGELOG's [Unreleased] section with the version and the date,
+# sets the version in the README's install snippet, tests, tags X.Y.Z (no prefix: SwiftPM reads
+# plain semantic-version tags), pushes, and creates the GitHub release from the CHANGELOG section.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. 0.1.0)'
+        required: true
+        type: string
+      dry-run:
+        description: 'Test and show the release commit, without tagging remotely or pushing'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  VERSION: ${{ inputs.version }}
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # macOS has swift, git and gh. The steps edit files with perl, which works the same on any runner.
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Validate preconditions
+        run: |
+          if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Version '$VERSION' is not a semantic version such as 0.1.0"
+            exit 1
+          fi
+          UNRELEASED=$(sed -n '/^## \[Unreleased\]/,/^## \[/p' CHANGELOG.md | sed '1d;/^## \[/d' | grep -v '^[[:space:]]*$' || true)
+          if [ -z "$UNRELEASED" ]; then
+            echo "::error::CHANGELOG.md has no content under [Unreleased]"
+            exit 1
+          fi
+          if git tag -l "$VERSION" | grep -q .; then
+            echo "::error::Tag $VERSION already exists"
+            exit 1
+          fi
+          echo "All preconditions passed"
+
+      - name: Stamp CHANGELOG.md
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          perl -0pi -e "s/^## \[Unreleased\]\n/## [Unreleased]\n\n## [$VERSION] - $TODAY\n/m" CHANGELOG.md
+
+      - name: Set the version in the README
+        run: |
+          perl -pi -e 's/(tabletest-swift\.git", from: ")[0-9]+\.[0-9]+\.[0-9]+(")/${1}$ENV{VERSION}${2}/' README.md
+
+      - name: Commit the release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md README.md
+          git commit -m "release: prepare $VERSION"
+
+      - name: Show the release commit
+        run: git log --patch HEAD~1..HEAD
+
+      - name: Test
+        run: swift test
+
+      - name: Extract the release notes
+        run: |
+          perl -ne 'if (/^## \[\Q$ENV{VERSION}\E\]/) { $on = 1; next } if (/^## \[/) { $on = 0 } print if $on' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+          cat "$RUNNER_TEMP/notes.md"
+
+      - name: Tag, push and create the GitHub release
+        if: ${{ !inputs.dry-run }}
+        run: |
+          git tag -a "$VERSION" -m "TableTest for Swift $VERSION"
+          git push origin HEAD:main "$VERSION"
+          gh release create "$VERSION" \
+            --title "TableTest for Swift $VERSION" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            --latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
