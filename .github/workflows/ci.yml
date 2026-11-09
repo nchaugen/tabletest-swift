@@ -25,7 +25,9 @@ jobs:
 
       - name: Resolve the lowest swift-syntax
         if: matrix.syntax == 'lowest'
-        run: swift package resolve swift-syntax --version 600.0.0
+        run: |
+          swift package resolve
+          swift package resolve swift-syntax --version 600.0.0
 
       - name: Resolve the highest swift-syntax
         if: matrix.syntax == 'highest'
