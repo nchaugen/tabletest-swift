@@ -7,7 +7,7 @@ import Testing
 /// `TestModule` and a file named `test.swift`.
 @Suite("Expansion")
 struct ExpansionTests {
-    @Test("Generates a nested test type that calls an instance function")
+    @Test("Names the nested test type after the function")
     func callsAnInstanceFunction() {
         assertTableTestExpansion(
             """
@@ -23,13 +23,13 @@ struct ExpansionTests {
             struct YearTests {
                 func knowsALeapYear(year: Int, leap: Bool) {}
 
-                struct __tabletest_knowsALeapYear {
+                struct knowsALeapYear {
                     @Test("knowsALeapYear", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true)
                     ))
-                    func rows(_ row: TableTestRow) throws {
+                    func scenarios(_ row: TableTestRow) throws {
                         do throws(TableCellError) {
                             try YearTests().knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
                         } catch {
@@ -66,7 +66,7 @@ struct ExpansionTests {
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 3, column: 55, indentation: 8, isMultiline: true)
                     ))
-                    func rows(_ row: TableTestRow) async throws {
+                    func scenarios(_ row: TableTestRow) async throws {
                         do {
                             try await YearTests.knowsALeapYear(row.decode(0, as: (Int).self), row.decode(1, as: (Bool).self))
                         } catch let error as TableCellError {
@@ -95,13 +95,13 @@ struct ExpansionTests {
             extension YearTests {
                 func `knows a leap year`(year: Int, leap: Bool) {}
 
-                struct `__tabletest_knows a leap year` {
+                struct `knows a leap year` {
                     @Test("knows a leap year", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true)
                     ))
-                    func rows(_ row: TableTestRow) throws {
+                    func scenarios(_ row: TableTestRow) throws {
                         do throws(TableCellError) {
                             try YearTests().`knows a leap year`(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
                         } catch {

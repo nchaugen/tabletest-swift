@@ -7,9 +7,12 @@ import TableTestParser
 /// Expands `@TableTest` on a function to a Swift Testing test that calls the function once
 /// for each row of the table.
 ///
-/// The expansion is a nested type `__tabletest_<name>` that holds the `@Test` function. A
-/// `@Test` written directly beside the function does not compile, because a nested macro
-/// expansion does not see the enclosing type. The table text goes to the runtime, which parses
+/// The expansion is a nested type with the function's name that holds the `@Test` function
+/// `scenarios`, so the Xcode test tree reads `Suite > name > scenarios(_:) > case`. A `@Test`
+/// written directly beside the function does not compile, because a nested macro expansion does
+/// not see the enclosing type. The `@Test` function cannot share the type's name: Swift Testing
+/// creates the suite instance by the type's name, which inside the type would name the function.
+/// A static function cannot share its name with a type, so its type is `__tabletest_<name>`. The table text goes to the runtime, which parses
 /// it and converts the cells: the macro only reads the syntax around it.
 public struct TableTestMacro: PeerMacro {
     public static func expansion(
@@ -83,9 +86,9 @@ public struct TableTestMacro: PeerMacro {
 
         return [
             """
-            \(raw: isolation(of: function, in: context))struct \(raw: generatedName(for: name)) {
+            \(raw: isolation(of: function, in: context))struct \(raw: typeName(for: function)) {
                 @Test(\(raw: testAttributeArguments))
-                func rows(_ row: TableTestRow) \(raw: isAsync ? "async " : "")throws {
+                func scenarios(_ row: TableTestRow) \(raw: isAsync ? "async " : "")throws {
                     \(raw: isThrowing ? "do" : "do throws(TableCellError)") {
                         \(raw: call)
                     } \(raw: isThrowing ? "catch let error as TableCellError" : "catch") {
@@ -112,9 +115,14 @@ public struct TableTestMacro: PeerMacro {
         }
     }
 
-    /// `__tabletest_<name>`, in backticks when the function's name is a raw identifier.
-    private static func generatedName(for name: String) -> String {
-        name.hasPrefix("`") ? "`__tabletest_\(name.withoutBackticks)`" : "__tabletest_\(name)"
+    /// The function's own name, or `__tabletest_<name>` for a static function, which cannot
+    /// share its name with a type.
+    private static func typeName(for function: FunctionDeclSyntax) -> String {
+        let name = function.name.text
+        guard function.isStatic else {
+            return name
+        }
+        return name.hasPrefix("`") ? "`__tabletest_\(name.withoutBackticks)`" : "__tabletest_\(name)"
     }
 
     /// `Type.` for a static function, and `Type().` for an instance function.
@@ -122,10 +130,7 @@ public struct TableTestMacro: PeerMacro {
         guard let enclosingType = context.lexicalContext.lazy.compactMap(\.typeName).first else {
             return ""
         }
-        let isStatic = function.modifiers.contains {
-            $0.name.tokenKind == .keyword(.static) || $0.name.tokenKind == .keyword(.class)
-        }
-        return isStatic ? "\(enclosingType)." : "\(enclosingType)()."
+        return function.isStatic ? "\(enclosingType)." : "\(enclosingType)()."
     }
 
     /// The global actor of the function, or else of its enclosing type, as an attribute prefix.
@@ -213,6 +218,10 @@ extension StringLiteralExprSyntax {
 extension FunctionDeclSyntax {
     var parameters: FunctionParameterListSyntax {
         signature.parameterClause.parameters
+    }
+
+    var isStatic: Bool {
+        modifiers.contains { $0.name.tokenKind == .keyword(.static) || $0.name.tokenKind == .keyword(.class) }
     }
 }
 
