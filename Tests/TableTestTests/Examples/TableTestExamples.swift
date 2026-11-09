@@ -78,9 +78,9 @@ struct ValueSetExamples {
     }
 
     @TableTest("""
-        Values       | Size?
-        {1, 2, 3}    | 3
-        {}           | 0
+        Values    | Size?
+        {1, 2, 3} | 3
+        {}        | 0
         """)
     func countsTheWholeSet(values: Set<Int>, size: Int) {
         #expect(values.count == size)
@@ -89,18 +89,18 @@ struct ValueSetExamples {
 
 struct ValueExamples {
     @TableTest("""
-        Scenario       | Name | Nickname | Greeting?
-        With nickname  | Ada  | Countess | Hello, Countess
-        No nickname    | Ada  |          | Hello, Ada
+        Scenario      | Name | Nickname | Greeting?
+        With nickname | Ada  | Countess | Hello, Countess
+        No nickname   | Ada  |          | Hello, Ada
         """)
     func greetsByNickname(name: String, nickname: String?, greeting: String) {
         #expect("Hello, \(nickname ?? name)" == greeting)
     }
 
     @TableTest("""
-        Scenario    | Scores           | Bonus             | Total?
-        No bonus    | [1, 2, 3]        | [:]               | 6
-        With bonus  | [10]             | [early: 2, late: 1] | 13
+        Scenario   | Scores    | Bonus               | Total?
+        No bonus   | [1, 2, 3] | [:]                 | 6
+        With bonus | [10]      | [early: 2, late: 1] | 13
         """)
     func addsScoresAndBonus(scores: [Int], bonus: [String: Int], total: Int) {
         #expect(scores.reduce(0, +) + bonus.values.reduce(0, +) == total)
