@@ -76,13 +76,7 @@ extension Dictionary: TableValueDecodable where Key == String, Value: TableValue
 extension TableValueDecodable where Self: CaseIterable {
     /// The case whose name is the text of the cell, for an enum with no raw value.
     public init(tableValue: TableValue) throws {
-        guard case .string(let name) = tableValue else {
-            throw TableValueConversionError("Cannot convert `\(tableValue.tableText)` to \(typeName(Self.self))")
-        }
-        guard let match = Self.allCases.first(where: { String(describing: $0) == name }) else {
-            throw TableValueConversionError("\(typeName(Self.self)) has no case named `\(name)`")
-        }
-        self = match
+        self = try TableValueDecoding.namedCase(of: Self.self, from: tableValue)
     }
 }
 
