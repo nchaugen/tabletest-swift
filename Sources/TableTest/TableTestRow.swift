@@ -206,6 +206,11 @@ public struct TableTestRow: Sendable, CustomTestStringConvertible, CustomTestArg
         try converting(column) { try TableValueDecoding.decode($0, as: T.self) }
     }
 
+    /// Converts a cell to a raw-value enum, an enum with no raw value, or a collection of them.
+    public func decode<T>(_ column: Int, as type: T.Type) throws(TableCellError) -> T {
+        try converting(column) { try TableValueDecoding.convert($0, to: T.self) }
+    }
+
     public func decode<T: TableValueDecodable>(_ column: Int, as type: T.Type) throws(TableCellError) -> T {
         try converting(column) { try TableValueDecoding.decode($0, as: T.self) }
     }

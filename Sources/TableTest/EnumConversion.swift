@@ -1,0 +1,99 @@
+/// Converts a cell to a type that is neither `Decodable` nor ``TableValueDecodable``: a
+/// raw-value enum, an enum with no raw value, and an optional, list, set or map of them.
+///
+/// A raw-value enum reads its raw value, as a `Decodable` one does. An enum with no raw value
+/// reads its case name, as the ``TableValueDecodable`` default for `CaseIterable` does.
+extension TableValueDecoding {
+    static func convert<T>(_ value: TableValue, to type: T.Type) throws -> T {
+        try instance(of: T.self, from: value) as! T
+    }
+
+    /// The value as an instance of the type, by the first conversion the type has.
+    static func instance(of type: Any.Type, from value: TableValue) throws -> Any {
+        if let own = type as? any TableValueDecodable.Type {
+            return try own.init(tableValue: value)
+        }
+        if let decodable = type as? any Decodable.Type {
+            return try decodeOpened(value, as: decodable)
+        }
+        if let collection = type as? any EnumCollection.Type {
+            return try collection.init(converting: value)
+        }
+        if let rawValued = type as? any RawRepresentable.Type {
+            return try rawValueCase(of: rawValued, from: value)
+        }
+        if let enumerable = type as? any CaseIterable.Type {
+            return try namedCase(of: enumerable, from: value)
+        }
+        throw TableValueConversionError(
+            "\(typeName(type)) does not convert from a cell: make it Decodable or TableValueDecodable"
+        )
+    }
+
+    /// The case whose name is the text of the cell.
+    static func namedCase<T: CaseIterable>(of type: T.Type, from value: TableValue) throws -> T {
+        guard case .string(let name) = value else {
+            throw TableValueConversionError("Cannot convert `\(value.tableText)` to \(typeName(T.self))")
+        }
+        guard let match = T.allCases.first(where: { String(describing: $0) == name }) else {
+            throw TableValueConversionError("\(typeName(T.self)) has no case named `\(name)`")
+        }
+        return match
+    }
+
+    private static func decodeOpened<T: Decodable>(_ value: TableValue, as type: T.Type) throws -> T {
+        try decode(value, as: T.self, codingPath: [])
+    }
+
+    private static func rawValueCase<T: RawRepresentable>(of type: T.Type, from value: TableValue) throws -> T {
+        let rawValue = try convert(value, to: T.RawValue.self)
+        guard let match = T(rawValue: rawValue) else {
+            throw TableValueConversionError("\(typeName(T.self)) has no case with the raw value `\(value.tableText)`")
+        }
+        return match
+    }
+}
+
+/// A Swift collection whose elements convert through ``TableValueDecoding/instance(of:from:)``.
+protocol EnumCollection {
+    init(converting value: TableValue) throws
+}
+
+extension Optional: EnumCollection {
+    init(converting value: TableValue) throws {
+        self = value == .null ? nil : .some(try TableValueDecoding.convert(value, to: Wrapped.self))
+    }
+}
+
+extension Array: EnumCollection {
+    init(converting value: TableValue) throws {
+        self = try value.elements(convertingTo: Self.self).map {
+            try TableValueDecoding.convert($0, to: Element.self)
+        }
+    }
+}
+
+extension Set: EnumCollection {
+    init(converting value: TableValue) throws {
+        self = Set(try [Element](converting: value))
+        try TableValueDecoding.refuseMergedElements(self, of: value, as: Self.self)
+    }
+}
+
+extension Dictionary: EnumCollection {
+    init(converting value: TableValue) throws {
+        guard case .map(let entries) = value else {
+            throw TableValueConversionError("Cannot convert `\(value.tableText)` to \(typeName(Self.self))")
+        }
+        self = try Dictionary(
+            entries.map {
+                (
+                    try TableValueDecoding.convert(.string($0.key), to: Key.self),
+                    try TableValueDecoding.convert($0.value, to: Value.self)
+                )
+            },
+            uniquingKeysWith: { first, _ in first }
+        )
+        try TableValueDecoding.refuseMergedElements(self, of: value, as: Self.self)
+    }
+}

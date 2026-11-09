@@ -58,6 +58,23 @@ struct CellConversionTests {
         #expect(result.matches, "converted to \(result.actual)")
     }
 
+    @Test("Converts a cell to an enum that is not Decodable", arguments: [
+        (scenario: "Raw value", cell: "grand_cru", conversion: Conversion.plain(Band.grandCru)),
+        (scenario: "Raw value to an optional", cell: "premier_cru", conversion: .plain(Band?.some(.premierCru))),
+        (scenario: "Blank cell to an optional", cell: "", conversion: .plain(Band?.none)),
+        (scenario: "List of raw values", cell: "[grand_cru, premier_cru]", conversion: .plain([Band.grandCru, .premierCru])),
+        (scenario: "Case name of an enum with no raw value", cell: "oak", conversion: .plain(Note.oak)),
+        (scenario: "Set of case names", cell: "{fruit, oak}", conversion: .plain(Set([Note.fruit, .oak]))),
+        (scenario: "Map with enum keys", cell: "[fruit: grand_cru]", conversion: .plain([Note.fruit: Band.grandCru])),
+        (scenario: "Map with text keys", cell: "[a: oak]", conversion: .plain(["a": Note.oak])),
+        (scenario: "Nested optional list", cell: "[oak]", conversion: .plain([Note]?.some([.oak]))),
+    ])
+    func convertsToAnEnumThatIsNotDecodable(scenario: String, cell: String, conversion: Conversion) throws {
+        let result = try conversion.convert(cellValue(cell))
+
+        #expect(result.matches, "converted to \(result.actual)")
+    }
+
     @Test("Refuses a cell that does not convert, and says why", arguments: [
         (cell: "abc", target: FailedConversion.to(Int.self), message: "Cannot convert `abc` to Int"),
         (cell: "300", target: .to(UInt8.self), message: "Cannot convert `300` to UInt8"),
@@ -75,6 +92,12 @@ struct CellConversionTests {
         (cell: "[é: 1, e\u{301}: 2]", target: .to([String: Int].self),
          message: "Cannot convert `[é: 1, e\u{301}: 2]` to Dictionary<String, Int>: Swift treats two of its elements as equal"),
         (cell: "west", target: .own(Compass.self), message: "Compass has no case named `west`"),
+        (cell: "third_cru", target: .plain(Band.self), message: "Band has no case with the raw value `third_cru`"),
+        (cell: "wood", target: .plain(Note.self), message: "Note has no case named `wood`"),
+        (cell: "[oak, wood]", target: .plain([Note].self), message: "Note has no case named `wood`"),
+        (cell: "[oak]", target: .plain(Note.self), message: "Cannot convert `[oak]` to Note"),
+        (cell: "x", target: .plain(Opaque.self),
+         message: "Opaque does not convert from a cell: make it Decodable or TableValueDecodable"),
     ])
     func refusesACellThatDoesNotConvert(cell: String, target: FailedConversion, message: String) throws {
         #expect(target.message(converting: try cellValue(cell)) == message)
@@ -99,6 +122,14 @@ struct Conversion: Sendable, CustomTestStringConvertible {
         }
     }
 
+    /// Converts a type that only `RawRepresentable` or `CaseIterable` describes.
+    static func plain<T: Equatable & Sendable>(_ expected: T) -> Conversion {
+        Conversion(testDescription: "\(T.self) \(expected)") { value in
+            let actual = try TableValueDecoding.convert(value, to: T.self)
+            return (actual == expected, String(describing: actual))
+        }
+    }
+
     /// Converts through ``TableValueDecodable``.
     static func own<T: TableValueDecodable & Equatable & Sendable>(_ expected: T) -> Conversion {
         Conversion(testDescription: "\(T.self) \(expected)") { value in
@@ -115,6 +146,10 @@ struct FailedConversion: Sendable, CustomTestStringConvertible {
 
     static func to<T: Decodable & Sendable>(_ type: T.Type) -> FailedConversion {
         FailedConversion(testDescription: "\(T.self)") { _ = try TableValueDecoding.decode($0, as: T.self) }
+    }
+
+    static func plain<T>(_ type: T.Type) -> FailedConversion {
+        FailedConversion(testDescription: "\(T.self)") { _ = try TableValueDecoding.convert($0, to: T.self) }
     }
 
     static func own<T: TableValueDecodable & Sendable>(_ type: T.Type) -> FailedConversion {
@@ -194,3 +229,6 @@ struct Doubled: Decodable, TableValueDecodable, Equatable, Sendable {
 struct Boxed: Decodable, Equatable, Sendable {
     let item: Doubled
 }
+
+/// A type with no conversion at all.
+struct Opaque: Sendable {}

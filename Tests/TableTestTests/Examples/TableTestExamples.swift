@@ -114,6 +114,15 @@ struct ValueExamples {
     func knowsAWarmColour(colour: Hue, warm: Bool) {
         #expect((colour == .red) == warm)
     }
+
+    @TableTest("""
+        Scenario       | Band      | Notes        | Shades             | Best?
+        Raw value      | grand_cru | [fruit, oak] | [fruit: grand_cru] | true
+        Blank optional |           | []           | [:]                | false
+        """)
+    func readsAnEnumThatIsNotDecodable(band: Band?, notes: Set<Note>, shades: [Note: Band], best: Bool) {
+        #expect((band == .grandCru) == best)
+    }
 }
 
 @MainActor
@@ -134,6 +143,17 @@ enum MainActorCounter {
 
 enum Hue: String, Decodable {
     case red, blue
+}
+
+/// A raw-value enum that is not `Decodable`.
+enum Band: String, CaseIterable, Sendable {
+    case grandCru = "grand_cru"
+    case premierCru = "premier_cru"
+}
+
+/// An enum with no raw value, which is not `Decodable` and not `TableValueDecodable`.
+enum Note: Hashable, CaseIterable, Sendable {
+    case fruit, oak
 }
 
 extension Tag {
