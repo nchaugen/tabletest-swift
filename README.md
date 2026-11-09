@@ -28,6 +28,8 @@ struct LeapYearTests {
 
 **Status:** unpublished, in development.
 
+**Latest updates:** see the [changelog](CHANGELOG.md).
+
 **Requirements:** Swift 6.2 or later (Xcode 26 or later); macOS 13 or iOS 16 or later. The package depends on
 swift-syntax `600.0.0..<604.0.0`.
 
@@ -44,6 +46,7 @@ swift-syntax `600.0.0..<604.0.0`.
 - [Formatter](#formatter)
 - [Differences from TableTest for the JVM](#differences-from-tabletest-for-the-jvm)
 - [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
@@ -609,3 +612,8 @@ scripts/sync-fixtures.sh
 
 The tables in this README are copies of `Tests/ReadmeExamples/ReadmeExamples.swift`, and
 `ReadmeSyncTests` fails when a README table is not in that file.
+
+## License
+
+TableTest for Swift is licensed under the [Apache License, Version 2.0](LICENSE), as the other
+TableTest products are.
