@@ -16,10 +16,15 @@ let package = Package(
     targets: [
         .target(name: "TableTestParser"),
         .target(name: "TableTestFormat", dependencies: ["TableTestParser"]),
+        .target(
+            name: "TableTestSyntax",
+            dependencies: [.product(name: "SwiftSyntax", package: "swift-syntax")]
+        ),
         .macro(
             name: "TableTestMacros",
             dependencies: [
                 "TableTestParser",
+                "TableTestSyntax",
                 .product(name: "SwiftDiagnostics", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
