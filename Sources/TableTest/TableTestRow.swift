@@ -54,6 +54,15 @@ public struct TableParameter: Sendable {
 
 /// A table that does not fit the function it is attached to.
 public struct TableTestError: Error, CustomStringConvertible, Sendable {
+    /// The run error classes of the spec's run fixtures.
+    public enum Kind: Sendable, Equatable {
+        /// The table has two or more columns more than the function has parameters, or fewer.
+        case columnCount
+        /// A data row has another number of cells than the header row.
+        case rowWidth
+    }
+
+    public let kind: Kind
     public let description: String
 }
 
@@ -69,7 +78,7 @@ public enum TableTestRows {
         do {
             layout = try parsed.columnLayout(parameterCount: parameters.count)
         } catch {
-            throw TableTestError(description: error.message)
+            throw TableTestError(kind: error.kind == .columnCount ? .columnCount : .rowWidth, description: error.message)
         }
         let leading = layout.leadingColumns
         let parameterHeaders = parsed.headers.dropFirst(leading).map(\.tableText)

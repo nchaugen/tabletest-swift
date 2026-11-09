@@ -65,16 +65,25 @@ struct TableTestRowsTests {
 
     @Test("Refuses a table that does not fit the function", arguments: [
         (scenario: "Two columns more than parameters", table: ["a | b | c", "1 | 2 | 3"], parameters: 1,
-         message: "The table has 3 columns, but the function has 1 parameter: give it one parameter for each column, or for each column after a scenario column"),
+         kind: TableTestError.Kind.columnCount, message: "The table has 3 columns, but the function has 1 parameter: give it one parameter for each column, or for each column after a scenario column"),
         (scenario: "Fewer columns than parameters", table: ["a", "1"], parameters: 2,
-         message: "The table has 1 column, but the function has 2 parameters: give it one parameter for each column, or for each column after a scenario column"),
+         kind: .columnCount, message: "The table has 1 column, but the function has 2 parameters: give it one parameter for each column, or for each column after a scenario column"),
         (scenario: "A row with a missing cell", table: ["a | b", "1 | 2", "3"], parameters: 2,
-         message: "Row 2 has 1 cell, but the header has 2"),
+         kind: .rowWidth, message: "Row 2 has 1 cell, but the header has 2"),
     ])
-    func refusesATableThatDoesNotFit(scenario: String, table: [String], parameters: Int, message: String) {
-        #expect(throws: TableTestError(description: message)) {
+    func refusesATableThatDoesNotFit(
+        scenario: String,
+        table: [String],
+        parameters: Int,
+        kind: TableTestError.Kind,
+        message: String
+    ) {
+        let error = #expect(throws: TableTestError.self) {
             try TableTestRows.make(table: table.joined(separator: "\n"), parameters: .values(parameters), source: Self.source)
         }
+
+        #expect(error?.kind == kind)
+        #expect(error?.description == message)
     }
 
     @Test("Reports a cell that does not convert by its row, column and position")
@@ -114,11 +123,6 @@ struct EncodedArgument: Encodable {
     }
 }
 
-extension TableTestError: Equatable {
-    public static func == (lhs: TableTestError, rhs: TableTestError) -> Bool {
-        lhs.description == rhs.description
-    }
-}
 
 extension Array where Element == TableParameter {
     /// Parameters that do not take a set.

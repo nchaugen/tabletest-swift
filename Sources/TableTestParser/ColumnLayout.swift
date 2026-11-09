@@ -17,6 +17,15 @@ public enum ColumnLayout: Sendable, Equatable {
 
 /// Why a table does not fit a test function, and where.
 public struct TableFitError: Error, Sendable, Equatable {
+    /// The run error classes of the spec's run fixtures that the layout can give.
+    public enum Kind: Sendable, Equatable {
+        /// The table has two or more columns more than the function has parameters, or fewer.
+        case columnCount
+        /// A data row has another number of cells than the header row.
+        case rowWidth
+    }
+
+    public let kind: Kind
     /// The 0-based index of the line in the input.
     public let line: Int
     /// The 0-based Unicode scalar offset on the line.
@@ -41,6 +50,7 @@ extension Table {
         case parameterCount + 1: return .scenarioFirst
         default:
             throw TableFitError(
+                kind: .columnCount,
                 line: header.line,
                 column: header.cells.first?.column ?? 0,
                 message: "The table has \(counted(header.cells.count, "column")), but the function has "
@@ -57,6 +67,7 @@ extension Table {
         }
         let row = rows[offset]
         throw TableFitError(
+            kind: .rowWidth,
             line: row.line,
             column: row.cells.first?.column ?? 0,
             message: "Row \(offset + 1) has \(counted(row.cells.count, "cell")), but the header has \(width)"
