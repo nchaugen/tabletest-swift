@@ -76,8 +76,20 @@ targets: [
 3. Build the tests. Xcode asks you to trust the `TableTestMacros` macro: select
    **Trust & Enable**.
 
-On a CI machine, pass `-skipMacroValidation` to `xcodebuild`, or trust the macro once on that
-machine.
+### Trusting the macro
+
+Xcode asks you to trust every macro that comes from a package. These facts help you decide and
+plan for it:
+
+- **What the macro does.** `TableTestMacros` checks the table, so that a malformed table is a
+  compile-time error, and generates the Swift Testing `@Test` that calls your function. The
+  table is parsed again when the tests run. Swift runs every macro in a sandbox, with no access
+  to files or the network.
+- **One trust for each version.** Xcode stores the trust for the package's commit, for every
+  project on your machine. Each new version of TableTest asks again.
+- **Only Xcode asks.** `swift build` and `swift test` on the command line do not ask.
+- **On a CI machine,** pass `-skipMacroValidation` to `xcodebuild`, or trust the macro once on
+  that machine.
 
 ## Usage
 
