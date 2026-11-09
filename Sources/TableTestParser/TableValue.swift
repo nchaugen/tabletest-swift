@@ -77,3 +77,14 @@ extension String {
         unicodeScalars.elementsEqual(other.unicodeScalars)
     }
 }
+
+extension Array where Element == TableValue {
+    /// The first occurrence of each value, in order, by the spec's equality (SPEC 2.6).
+    func withoutDuplicates() -> [TableValue] {
+        reduce(into: []) { kept, value in
+            if !kept.contains(value) {
+                kept.append(value)
+            }
+        }
+    }
+}
