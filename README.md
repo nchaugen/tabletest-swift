@@ -23,10 +23,8 @@ struct LeapYearTests {
 
 - **Readable**: the inputs and the expected result of each example are on one line.
 - **Easy to extend**: a new example is a new row.
-- **Shared**: the table format is the same as
-  [TableTest for Java and Kotlin](https://github.com/nchaugen/tabletest)
-  ([tabletest.org](https://tabletest.org)), defined by
-  [tabletest-spec](https://github.com/nchaugen/tabletest-spec).
+- **Specified**: the table format has its own specification,
+  [tabletest-spec](https://github.com/nchaugen/tabletest-spec), with conformance fixtures.
 
 **Status:** unpublished, in development.
 
@@ -400,9 +398,8 @@ then reads the value as Swift spells it.
 
 ### Your own conversion
 
-The JVM version of TableTest converts a cell with a `@TypeConverter` method. In Swift, the type
-converts itself. For a text form that you invent, such as `12.50 EUR`, conform the type to
-`TableTextDecodable`. Return `nil` when the text does not convert, and TableTest reports the cell:
+A type converts itself. For a text form that you invent, such as `12.50 EUR`, conform the type
+to `TableTextDecodable`. Return `nil` when the text does not convert, and TableTest reports the cell:
 
 ```swift
 struct Money: Equatable {
@@ -553,7 +550,9 @@ string interpolation.
 
 ## Formatter
 
-`tabletest-format` aligns the columns of the tables in `.swift` and `.table` files.
+`tabletest-format` aligns the columns of the tables in `.swift` and `.table` files. A `.table`
+file holds one table and nothing else. `@TableTest` cannot read one: it takes its table only as
+a string literal.
 
 ### Command plugin
 
@@ -591,12 +590,15 @@ parse.
 
 ## Differences from TableTest for the JVM
 
-The table format is the same, and the conformance fixtures of
-[tabletest-spec](https://github.com/nchaugen/tabletest-spec) check both implementations. These parts differ:
+TableTest started on the JVM: [TableTest for Java and Kotlin](https://github.com/nchaugen/tabletest)
+extends JUnit, and [tabletest.org](https://tabletest.org) documents it. Both implementations read
+the same table format, and the conformance fixtures of
+[tabletest-spec](https://github.com/nchaugen/tabletest-spec) check both, so a table parses and
+formats the same way in both. If you know the JVM version, these parts differ:
 
 | Topic | JVM | Swift |
 |---|---|---|
-| Your own conversion | a `@TypeConverter` method | a `TableTextDecodable` or `TableValueDecodable` conformance |
+| Your own conversion | a `@TypeConverter` method converts a value | the type converts itself: a `TableTextDecodable` or `TableValueDecodable` conformance |
 | Enums | the constant name, `MEDIUM_MINUS` | the `String` raw value, else the case name |
 | A table in an external `.table` file | `@TableTest(resource = …)` | not supported; a macro cannot read files |
 | The scenario as a parameter | `@Scenario` | not supported; the scenario only names the row |
