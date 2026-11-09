@@ -36,13 +36,15 @@ struct CellConversionTests {
         (scenario: "Own conversion inside a Decodable struct", cell: "[item: 5]",
          conversion: .to(Boxed(item: Doubled(value: 10)))),
         (scenario: "Own conversion before Decodable", cell: "5", conversion: .to(Doubled(value: 10))),
-        (scenario: "Case name of a Decodable enum", cell: "grosseLage", conversion: .to(Site.grosseLage)),
+        (scenario: "Raw value of a Decodable enum", cell: "grosse_lage", conversion: .to(Site.grosseLage)),
         (scenario: "Case name of a number raw-value enum", cell: "high", conversion: .to(Level.high)),
-        (scenario: "Case name in a Decodable struct", cell: "[site: ersteLage]",
+        (scenario: "Raw value in a Decodable struct", cell: "[site: erste_lage]",
          conversion: .to(Vineyard(site: .ersteLage))),
-        (scenario: "List of case names", cell: "[ersteLage, grosseLage]", conversion: .to([Site.ersteLage, .grosseLage])),
-        (scenario: "Map with case-name keys", cell: "[grosseLage: 1]", conversion: .to([Site.grosseLage: 1])),
-        (scenario: "Map with coding-key case names", cell: "[topTier: 1]", conversion: .to([Tier.topTier: 1])),
+        (scenario: "List of raw values", cell: "[erste_lage, grosse_lage]", conversion: .to([Site.ersteLage, .grosseLage])),
+        (scenario: "Map with raw-value keys", cell: "[grosse_lage: 1]", conversion: .to([Site.grosseLage: 1])),
+        (scenario: "Map with coding-key raw values", cell: "[top_tier: 1]", conversion: .to([Tier.topTier: 1])),
+        (scenario: "Case name of an enum that chooses case names", cell: "premierCru", conversion: .to(Rank.premierCru)),
+        (scenario: "Raw value with a space", cell: "screw cap", conversion: .to(Closure.screwCap)),
     ])
     func convertsToADecodableType(scenario: String, cell: String, conversion: Conversion) throws {
         let result = try conversion.convert(cellValue(cell))
@@ -128,10 +130,10 @@ struct CellConversionTests {
     @Test("Converts part of a cell with the library's rules", arguments: [
         (scenario: "Number", cell: "42", conversion: Conversion.part(42)),
         (scenario: "Decimal amount", cell: "12.50", conversion: .part(Decimal(string: "12.50")!)),
-        (scenario: "Case name of an enum that is not Decodable", cell: "grandCru", conversion: .part(Band.grandCru)),
+        (scenario: "Raw value of an enum that is not Decodable", cell: "grand_cru", conversion: .part(Band.grandCru)),
         (scenario: "List of case names", cell: "[fruit, oak]", conversion: .part([Note.fruit, .oak])),
         (scenario: "Text conversion", cell: "1.00 EUR", conversion: .part(Price(cents: 100, currency: "EUR"))),
-        (scenario: "Map read by a hand-written conversion", cell: "[band: premierCru, price: 9.00 EUR]",
+        (scenario: "Map read by a hand-written conversion", cell: "[band: premier_cru, price: 9.00 EUR]",
          conversion: .part(Listing(band: .premierCru, price: Price(cents: 900, currency: "EUR")))),
     ])
     func convertsPartOfACell(scenario: String, cell: String, conversion: Conversion) throws {
@@ -166,15 +168,15 @@ struct CellConversionTests {
     }
 
     @Test("Converts a cell to a type that is not Decodable", arguments: [
-        (scenario: "Case name of a raw-value enum", cell: "grandCru", conversion: Conversion.plain(Band.grandCru)),
+        (scenario: "Raw value of a text raw-value enum", cell: "grand_cru", conversion: Conversion.plain(Band.grandCru)),
         (scenario: "Case name of a number raw-value enum", cell: "reference", conversion: .plain(Source.reference)),
         (scenario: "Raw value of an enum with no case list", cell: "B", conversion: .plain(Grade.good)),
-        (scenario: "Case name to an optional", cell: "premierCru", conversion: .plain(Band?.some(.premierCru))),
+        (scenario: "Raw value to an optional", cell: "premier_cru", conversion: .plain(Band?.some(.premierCru))),
         (scenario: "Blank cell to an optional", cell: "", conversion: .plain(Band?.none)),
-        (scenario: "List of case names", cell: "[grandCru, premierCru]", conversion: .plain([Band.grandCru, .premierCru])),
+        (scenario: "List of raw values", cell: "[grand_cru, premier_cru]", conversion: .plain([Band.grandCru, .premierCru])),
         (scenario: "Case name of an enum with no raw value", cell: "oak", conversion: .plain(Note.oak)),
         (scenario: "Set of case names", cell: "{fruit, oak}", conversion: .plain(Set([Note.fruit, .oak]))),
-        (scenario: "Map with enum keys", cell: "[fruit: grandCru]", conversion: .plain([Note.fruit: Band.grandCru])),
+        (scenario: "Map with enum keys", cell: "[fruit: grand_cru]", conversion: .plain([Note.fruit: Band.grandCru])),
         (scenario: "Map with text keys", cell: "[a: oak]", conversion: .plain(["a": Note.oak])),
         (scenario: "Nested optional list", cell: "[oak]", conversion: .plain([Note]?.some([.oak]))),
         (scenario: "Text of a LosslessStringConvertible type", cell: "978-0", conversion: .plain(Isbn("978-0")!)),
@@ -196,21 +198,22 @@ struct CellConversionTests {
         (cell: "abc", target: .to([Int].self), message: "Cannot convert `abc` to a list or a set"),
         (cell: "[1, x]", target: .to([Int].self), message: "Cannot convert `x` to Int (at `[1]`)"),
         (cell: "12,50", target: .to(Decimal.self), message: "Cannot convert `12,50` to Decimal"),
-        (cell: "purple", target: .to(Colour.self),
-         message: "Cannot initialize Colour from invalid String value purple"),
+        (cell: "purple", target: .to(Colour.self), message: "Colour has no case with the raw value `purple`"),
         (cell: "[name: Ada]", target: .to(Person.self), message: "The map has no key `age`"),
         (cell: "{é, e\u{301}}", target: .to(Set<String>.self),
          message: "Cannot convert `{é, e\u{301}}` to Set<String>: Swift treats two of its elements as equal"),
         (cell: "[é: 1, e\u{301}: 2]", target: .to([String: Int].self),
          message: "Cannot convert `[é: 1, e\u{301}: 2]` to Dictionary<String, Int>: Swift treats two of its elements as equal"),
         (cell: "west", target: .own(Compass.self), message: "Compass has no case named `west`"),
-        (cell: "grand_cru", target: .plain(Band.self),
-         message: "Band has no case named `grand_cru`; the case with this raw value is `grandCru`"),
-        (cell: "grosse_lage", target: .to(Site.self),
-         message: "Site has no case named `grosse_lage`; the case with this raw value is `grosseLage`"),
+        (cell: "grandCru", target: .plain(Band.self),
+         message: "Band has no case with the raw value `grandCru`; the raw value of `grandCru` is `grand_cru`"),
+        (cell: "grosseLage", target: .to(Site.self),
+         message: "Site has no case with the raw value `grosseLage`; the raw value of `grosseLage` is `grosse_lage`"),
+        (cell: "premier_cru", target: .to(Rank.self),
+         message: "Rank has no case named `premier_cru`; the case with this raw value is `premierCru`"),
         (cell: "2", target: .to(Level.self), message: "Level has no case named `2`; the case with this raw value is `high`"),
-        (cell: "[site: erste_lage]", target: .to(Vineyard.self),
-         message: "Site has no case named `erste_lage`; the case with this raw value is `ersteLage` (at `site`)"),
+        (cell: "[site: ersteLage]", target: .to(Vineyard.self),
+         message: "Site has no case with the raw value `ersteLage`; the raw value of `ersteLage` is `erste_lage` (at `site`)"),
         (cell: "[1]", target: .to(Site.self), message: "Cannot convert `[1]` to Site"),
         (cell: "E", target: .plain(Grade.self), message: "Grade has no case with the raw value `E`"),
         (cell: "wood", target: .plain(Note.self), message: "Note has no case named `wood`"),
@@ -222,7 +225,7 @@ struct CellConversionTests {
         (cell: "[1.00 EUR]", target: .own(Price.self), message: "Cannot convert `[1.00 EUR]` to Price"),
         (cell: "[1, x]", target: .part([Int].self), message: "Cannot convert `x` to Int (at `[1]`)"),
         (cell: "[band: grand, price: 9.00 EUR]", target: .part(Listing.self),
-         message: "Band has no case named `grand`"),
+         message: "Band has no case with the raw value `grand`"),
         (cell: "yeer(2025)", target: .to(Vintage.self), message: "Vintage has no case named `yeer`"),
         (cell: "year(abc)", target: .to(Vintage.self), message: "Cannot convert `abc` to Int (at `year._0`)"),
         (cell: "year(2025", target: .to(Vintage.self), message: "Cannot convert `year(2025` to Vintage"),
@@ -348,10 +351,21 @@ enum Priority: Int, Decodable, Sendable {
     case low = 1, high = 2
 }
 
-/// A `Decodable` enum with a case list, which a cell names by its case name.
+/// A `Decodable` enum with a case list and text raw values, which a cell names by its raw value.
 enum Site: String, Decodable, CaseIterable, Sendable {
     case grosseLage = "grosse_lage"
     case ersteLage = "erste_lage"
+}
+
+/// A text raw-value enum that chooses its case names for a table.
+enum Rank: String, Decodable, CaseIterable, TableValueDecodable, Sendable {
+    case premierCru = "premier_cru"
+}
+
+/// A raw value that is the domain's own words.
+enum Closure: String, Decodable, CaseIterable, Sendable {
+    case cork
+    case screwCap = "screw cap"
 }
 
 enum Level: Int, Decodable, CaseIterable, Sendable {

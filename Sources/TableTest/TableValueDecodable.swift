@@ -121,7 +121,8 @@ extension Dictionary: TableValueDecodable where Key == String, Value: TableValue
 }
 
 extension TableValueDecodable where Self: CaseIterable {
-    /// The case whose name is the text of the cell, for an enum with no raw value.
+    /// The case whose name is the text of the cell. An enum with text raw values that declares
+    /// `TableValueDecodable` reads its case names in place of its raw values.
     public init(tableValue: TableValue) throws {
         self = try TableValueDecoding.namedCase(of: Self.self, from: tableValue)
     }

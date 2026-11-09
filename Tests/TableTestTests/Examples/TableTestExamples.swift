@@ -116,9 +116,9 @@ struct ValueExamples {
     }
 
     @TableTest("""
-        Scenario       | Band     | Notes        | Shades            | Best?
-        Case name      | grandCru | [fruit, oak] | [fruit: grandCru] | true
-        Blank optional |          | []           | [:]               | false
+        Scenario       | Band      | Notes        | Shades             | Best?
+        Raw value      | grand_cru | [fruit, oak] | [fruit: grand_cru] | true
+        Blank optional |           | []           | [:]                | false
         """)
     func readsAnEnumThatIsNotDecodable(band: Band?, notes: Set<Note>, shades: [Note: Band], best: Bool) {
         #expect((band == .grandCru) == best)
@@ -154,7 +154,7 @@ enum Hue: String, Decodable {
     case red, blue
 }
 
-/// A raw-value enum that is not `Decodable`, which a cell names by its case name.
+/// A raw-value enum that is not `Decodable`, which a cell names by its raw value.
 enum Band: String, CaseIterable, Sendable {
     case grandCru = "grand_cru"
     case premierCru = "premier_cru"

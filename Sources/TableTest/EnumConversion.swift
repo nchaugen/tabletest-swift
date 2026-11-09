@@ -2,10 +2,11 @@
 /// raw-value enum, an enum with no raw value, a `LosslessStringConvertible` type, and an
 /// optional, list, set or map of them.
 ///
-/// A `CaseIterable` enum reads its case name, as the ``TableValueDecodable`` default for
-/// `CaseIterable` does, so a cell names a case as Swift code does. A `LosslessStringConvertible`
-/// type reads the text of the cell. A raw-value enum with no case list reads its raw value. A `Decodable` enum does not come here: `TableValueDecoding.decode`
-/// reads its case name when it is `CaseIterable`, and its raw value otherwise.
+/// An enum with text raw values reads its raw value. Another `CaseIterable` enum reads its case
+/// name, as the ``TableValueDecodable`` default for `CaseIterable` does. A
+/// `LosslessStringConvertible` type reads the text of the cell. A raw-value enum with no case
+/// list reads its raw value. A `Decodable` type does not come here: `TableValueDecoding.decode`
+/// applies the same order before `Decodable`.
 extension TableValueDecoding {
     static func convert<T>(_ value: TableValue, to type: T.Type) throws -> T {
         try instance(of: T.self, from: value) as! T
@@ -18,6 +19,9 @@ extension TableValueDecoding {
         }
         if let builtIn = try builtIn(type, from: value, codingPath: []) {
             return builtIn
+        }
+        if let rawValueCase = try textRawValueCase(of: type, from: value, codingPath: []) {
+            return rawValueCase
         }
         if let decodable = type as? any Decodable.Type {
             return try decodeOpened(value, as: decodable)
@@ -61,6 +65,41 @@ extension TableValueDecoding {
             )
         }
         return match
+    }
+
+    /// The case whose raw value is the text of the cell, for a type with text raw values, or
+    /// `nil` for any other type. A case name in the cell is an error that gives the raw value.
+    static func textRawValueCase(of type: Any.Type, from value: TableValue, codingPath: [any CodingKey]) throws -> Any? {
+        guard let rawValued = type as? any RawRepresentable.Type else {
+            return nil
+        }
+        return try caseWithTextRawValue(of: rawValued, from: value, codingPath: codingPath)
+    }
+
+    private static func caseWithTextRawValue<T: RawRepresentable>(
+        of type: T.Type,
+        from value: TableValue,
+        codingPath: [any CodingKey]
+    ) throws -> T? {
+        guard T.RawValue.self == String.self else {
+            return nil
+        }
+        let text = try SingleCellContainer(value: value, codingPath: codingPath).text(for: T.self)
+        if let match = T(rawValue: text as! T.RawValue) {
+            return match
+        }
+        let namedCase = (T.self as? any CaseIterable.Type).flatMap { caseNamed(text, in: $0) }
+        throw DecodingError.dataCorrupted(
+            DecodingError.Context(
+                codingPath: codingPath,
+                debugDescription: "\(typeName(T.self)) has no case with the raw value `\(text)`"
+                    + (namedCase.flatMap(rawValueText(of:)).map { "; the raw value of `\(text)` is `\($0)`" } ?? "")
+            )
+        )
+    }
+
+    private static func caseNamed<T: CaseIterable>(_ name: String, in type: T.Type) -> T? {
+        T.allCases.first { String(describing: $0) == name }
     }
 
     /// The raw value of a case as it reads in a cell, or `nil` for an enum with no raw value.

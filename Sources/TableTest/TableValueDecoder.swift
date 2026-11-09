@@ -1,8 +1,8 @@
 import Foundation
 
 /// Converts the parsed value of a cell to a Swift type by the first route that applies: the
-/// type's own ``TableValueDecodable`` conformance, a built-in conversion, the case name of a
-/// `CaseIterable` enum, and then `Decodable`. A `Decodable` enum with associated values also
+/// type's own ``TableValueDecodable`` conformance, a built-in conversion, the raw value of an
+/// enum with text raw values, the case name of another `CaseIterable` enum, and then `Decodable`. A `Decodable` enum with associated values also
 /// reads the Swift spelling of a case, such as `month(year: 2025, month: 3)`.
 enum TableValueDecoding {
     static func decode<T: Decodable>(
@@ -18,6 +18,9 @@ enum TableValueDecoding {
         }
         if let builtIn = try builtIn(T.self, from: value, codingPath: codingPath) {
             return builtIn as! T
+        }
+        if let rawValueCase = try textRawValueCase(of: T.self, from: value, codingPath: codingPath) {
+            return rawValueCase as! T
         }
         if let enumerable = T.self as? any CaseIterable.Type {
             return try namedCase(of: enumerable, from: value, codingPath: codingPath) as! T
