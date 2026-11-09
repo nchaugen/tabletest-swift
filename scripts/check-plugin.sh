@@ -8,7 +8,7 @@ trap 'rm -rf "$package"' EXIT
 
 mkdir -p "$package/Tests/DemoTests"
 cat > "$package/Package.swift" <<SWIFT
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 import PackageDescription
 
 let package = Package(
