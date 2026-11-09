@@ -6,10 +6,6 @@ import Testing
 /// Runs the run fixtures of `tabletest-spec` against ``TableTestRows``.
 @Suite("Spec run fixtures")
 struct RunFixtureTests {
-    /// Fixture files whose rules the runtime does not implement yet. Their cases run as known
-    /// issues until the runtime passes them.
-    private static let pendingFiles: Set<String> = ["value-sets.json"]
-
     @Test("Finds the vendored run fixture cases")
     func findsVendoredRunFixtureCases() throws {
         #expect(try RunFixture.all().count > 0)
@@ -17,11 +13,7 @@ struct RunFixtureTests {
 
     @Test("Makes the test cases that each run fixture states", arguments: try RunFixture.all())
     func makesTheStatedCases(_ fixture: RunFixture) {
-        withKnownIssue("The runtime does not implement \(fixture.file) yet", isIntermittent: true) {
-            #expect(RunOutcome.of(fixture.inputText, parameterKinds: fixture.parameters) == fixture.expect, "rule \(fixture.rule)")
-        } when: {
-            Self.pendingFiles.contains(fixture.file)
-        }
+        #expect(RunOutcome.of(fixture.inputText, parameterKinds: fixture.parameters) == fixture.expect, "rule \(fixture.rule)")
     }
 }
 
@@ -128,6 +120,7 @@ extension TableTestError.Kind {
         switch self {
         case .columnCount: "column-count"
         case .rowWidth: "row-width"
+        case .emptyValueSet: "empty-value-set"
         }
     }
 }

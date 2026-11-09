@@ -42,13 +42,35 @@ public struct TableParameter: Sendable {
     /// Whether the parameter takes a whole set cell, rather than one test case for each element.
     let takesSet: Bool
 
-    /// The parameter of a type.
+    /// The parameter of a type. It takes a set when its type is a `SetAlgebra` type, such as
+    /// `Set` or an `OptionSet`, or ``TableValue``, or an optional of one (SPEC 3.6).
     public init<T>(_ type: T.Type) {
-        takesSet = false
+        takesSet = Self.holdsASet(T.self)
     }
 
     init(takesSet: Bool) {
         self.takesSet = takesSet
+    }
+
+    private static func holdsASet(_ type: Any.Type) -> Bool {
+        if type is any SetAlgebra.Type || type == TableValue.self {
+            return true
+        }
+        if let optional = type as? any OptionalType.Type {
+            return holdsASet(optional.wrappedType)
+        }
+        return false
+    }
+}
+
+/// An optional type, so that a parameter of type `Set<Int>?` still takes a set.
+private protocol OptionalType {
+    static var wrappedType: Any.Type { get }
+}
+
+extension Optional: OptionalType {
+    fileprivate static var wrappedType: Any.Type {
+        Wrapped.self
     }
 }
 
@@ -60,6 +82,8 @@ public struct TableTestError: Error, CustomStringConvertible, Sendable {
         case columnCount
         /// A data row has another number of cells than the header row.
         case rowWidth
+        /// A value set in the column of a parameter that does not take a set has no elements.
+        case emptyValueSet
     }
 
     public let kind: Kind
@@ -68,10 +92,13 @@ public struct TableTestError: Error, CustomStringConvertible, Sendable {
 
 /// Builds the test cases of a table.
 public enum TableTestRows {
-    /// One row for each data row of the table.
+    /// The test cases of a table: one for each data row, or one for each combination of the
+    /// row's value sets.
     ///
     /// When the table has one more column than the function has parameters, the first column
     /// is the scenario name of each row. Otherwise every column maps to a parameter, in order.
+    /// A set cell in the column of a parameter that does not take a set is a value set: the row
+    /// gives one test case for each element, and the first column changes slowest (SPEC 3.5).
     public static func make(table: String, parameters: [TableParameter], source: TableSource) throws -> [TableTestRow] {
         let parsed = try TableParser.parse(table)
         let layout: ColumnLayout
@@ -81,19 +108,58 @@ public enum TableTestRows {
             throw TableTestError(kind: error.kind == .columnCount ? .columnCount : .rowWidth, description: error.message)
         }
         let leading = layout.leadingColumns
-        let parameterHeaders = parsed.headers.dropFirst(leading).map(\.tableText)
-        return parsed.rows.enumerated().map { offset, row in
-            TableTestRow(
-                index: offset + 1,
-                scenario: layout == .scenarioFirst ? row.cells[0].value.scenarioName : nil,
-                headers: parameterHeaders,
-                cells: row.cells.dropFirst(leading).map { cell in
-                    TableTestRow.Cell(
-                        value: cell.value,
-                        location: source.location(line: row.line, column: cell.column)
-                    )
-                }
+        let headers = parsed.headers.dropFirst(leading).map(\.tableText)
+        return try parsed.rows.enumerated().flatMap { offset, row in
+            let cells = row.cells.dropFirst(leading).map { cell in
+                TableTestRow.Cell(value: cell.value, location: source.location(line: row.line, column: cell.column))
+            }
+            let choices = try cells.enumerated().map { column, cell in
+                try choicesOf(cell, parameter: parameters[column], header: headers[column], row: offset + 1)
+            }
+            return combinations(of: choices).enumerated().map { caseOffset, combination in
+                TableTestRow(
+                    index: offset + 1,
+                    caseNumber: caseOffset + 1,
+                    scenario: layout == .scenarioFirst ? row.cells[0].value.scenarioName : nil,
+                    headers: headers,
+                    cells: combination.map(\.cell),
+                    expandedValues: zip(headers, combination)
+                        .filter { $1.isExpanded }
+                        .map { header, choice in "\(header) = \(choice.cell.value.tableText)" }
+                )
+            }
+        }
+    }
+
+    /// One choice of a cell in a test case: the cell itself, or one element of its value set.
+    private struct Choice {
+        let cell: TableTestRow.Cell
+        let isExpanded: Bool
+    }
+
+    private static func choicesOf(
+        _ cell: TableTestRow.Cell,
+        parameter: TableParameter,
+        header: String,
+        row: Int
+    ) throws -> [Choice] {
+        guard case .set(let elements) = cell.value, !parameter.takesSet else {
+            return [Choice(cell: cell, isExpanded: false)]
+        }
+        guard !elements.isEmpty else {
+            throw TableTestError(
+                kind: .emptyValueSet,
+                description: "Row \(row), column '\(header)': the value set is empty, so the row would give no "
+                    + "test case. A value set needs at least one value; use a blank cell for null"
             )
+        }
+        return elements.map { Choice(cell: TableTestRow.Cell(value: $0, location: cell.location), isExpanded: true) }
+    }
+
+    /// Every combination of one choice from each column, with the first column changing slowest.
+    private static func combinations(of choices: [[Choice]]) -> [[Choice]] {
+        choices.reduce([[]]) { partial, column in
+            partial.flatMap { prefix in column.map { prefix + [$0] } }
         }
     }
 }
@@ -107,19 +173,28 @@ public struct TableTestRow: Sendable, CustomTestStringConvertible, CustomTestArg
 
     /// The 1-based number of the row among the data rows.
     public let index: Int
+    /// The 1-based number of the test case among the cases of its row.
+    public let caseNumber: Int
     let scenario: String?
     let headers: [String]
     let cells: [Cell]
+    /// `header = element` for each column whose value set gave this case an element.
+    let expandedValues: [String]
 
-    /// The scenario name, or the cells of the row when the table has no scenario column.
+    /// The scenario name, followed by the expanded values in parentheses, or the cells of the
+    /// case when the table has no scenario column (SPEC 3.4).
     public var testDescription: String {
-        scenario ?? cells.map(\.value.tableText).joined(separator: " | ")
+        guard let scenario else {
+            return cells.map(\.value.tableText).joined(separator: " | ")
+        }
+        return expandedValues.isEmpty ? scenario : "\(scenario) (\(expandedValues.joined(separator: ", ")))"
     }
 
-    /// The row number, which identifies the row when Xcode reruns one test case.
+    /// The row number and the case number, which identify the case when Xcode reruns it.
     public func encodeTestArgument(to encoder: some Encoder) throws {
-        var container = encoder.singleValueContainer()
+        var container = encoder.unkeyedContainer()
         try container.encode(index)
+        try container.encode(caseNumber)
     }
 
     /// The source location of the row's first parameter cell.

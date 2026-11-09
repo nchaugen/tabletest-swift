@@ -67,6 +67,26 @@ struct LeapYearExamples {
     }
 }
 
+struct ValueSetExamples {
+    @TableTest("""
+        Scenario       | x         | y       | Even sum?
+        Even plus even | {2, 4, 6} | {8, 10} | true
+        Odd plus even  | {1, 3, 5} | {6, 8}  | false
+        """)
+    func knowsAnEvenSum(x: Int, y: Int, evenSum: Bool) {
+        #expect(((x + y) % 2 == 0) == evenSum)
+    }
+
+    @TableTest("""
+        Values       | Size?
+        {1, 2, 3}    | 3
+        {}           | 0
+        """)
+    func countsTheWholeSet(values: Set<Int>, size: Int) {
+        #expect(values.count == size)
+    }
+}
+
 struct ValueExamples {
     @TableTest("""
         Scenario       | Name | Nickname | Greeting?

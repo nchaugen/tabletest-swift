@@ -54,13 +54,28 @@ struct TableTestRowsTests {
         #expect(rows.map { $0.cells.map { Position($0.location) } } == locations)
     }
 
-    @Test("Encodes the row number as the test argument")
-    func encodesTheRowNumber() throws {
-        let rows = try TableTestRows.make(table: "Year\n2004\n2001\n2000", parameters: .values(1), source: Self.source)
+    @Test("Encodes the row and case numbers as the test argument")
+    func encodesTheRowAndCaseNumbers() throws {
+        let rows = try TableTestRows.make(table: "Year\n{2004, 2008}\n2001", parameters: .values(1), source: Self.source)
 
         let encoded = try rows.map { String(decoding: try JSONEncoder().encode(EncodedArgument(row: $0)), as: UTF8.self) }
 
-        #expect(encoded == ["1", "2", "3"])
+        #expect(encoded == ["[1,1]", "[1,2]", "[2,1]"])
+    }
+
+    @Test("Takes a whole set for a parameter whose type can hold one", arguments: [
+        (type: "Set<String>", parameter: TableParameter(Set<String>.self), takesSet: true),
+        (type: "Typealias of Set<Int>", parameter: TableParameter(Years.self), takesSet: true),
+        (type: "OptionSet", parameter: TableParameter(Permissions.self), takesSet: true),
+        (type: "Optional Set<Int>", parameter: TableParameter(Set<Int>?.self), takesSet: true),
+        (type: "TableValue", parameter: TableParameter(TableValue.self), takesSet: true),
+        (type: "Array of Int", parameter: TableParameter([Int].self), takesSet: false),
+        (type: "Dictionary", parameter: TableParameter([String: Int].self), takesSet: false),
+        (type: "Int", parameter: TableParameter(Int.self), takesSet: false),
+        (type: "Optional String", parameter: TableParameter(String?.self), takesSet: false),
+    ])
+    func takesAWholeSet(type: String, parameter: TableParameter, takesSet: Bool) {
+        #expect(parameter.takesSet == takesSet)
     }
 
     @Test("Refuses a table that does not fit the function", arguments: [
@@ -129,4 +144,10 @@ extension Array where Element == TableParameter {
     static func values(_ count: Int) -> [TableParameter] {
         Array(repeating: TableParameter(takesSet: false), count: count)
     }
+}
+
+typealias Years = Set<Int>
+
+struct Permissions: OptionSet, Sendable {
+    let rawValue: Int
 }
