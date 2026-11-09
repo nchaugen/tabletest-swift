@@ -1,0 +1,52 @@
+[
+  {
+    "name": "One column for each parameter",
+    "rule": "columns-and-parameters",
+    "input": ["Year | Leap?", "2004 | true"],
+    "parameters": ["value", "value"],
+    "expect": {"cases": [{"name": null, "arguments": ["2004", "true"]}]}
+  },
+  {
+    "name": "A scenario column before the parameters",
+    "rule": "columns-and-parameters",
+    "input": ["Scenario | Year", "Leap | 2004"],
+    "parameters": ["value"],
+    "expect": {"cases": [{"name": "Leap", "arguments": ["2004"]}]}
+  },
+  {
+    "name": "Two columns more than parameters",
+    "rule": "columns-and-parameters",
+    "source": "TableTestArgumentsProviderTest (fewer parameters)",
+    "input": ["a | b | c", "1 | 2 | 3"],
+    "parameters": ["value"],
+    "expect": {"error": "column-count"}
+  },
+  {
+    "name": "A row with a missing cell",
+    "rule": "row-width",
+    "input": ["a | b", "1 | 2", "3"],
+    "parameters": ["value", "value"],
+    "expect": {"error": "row-width"}
+  },
+  {
+    "name": "A row with an extra cell",
+    "rule": "row-width",
+    "input": ["a | b", "1 | 2 | 3"],
+    "parameters": ["value", "value"],
+    "expect": {"error": "row-width"}
+  },
+  {
+    "name": "A blank cell",
+    "rule": "null-arguments",
+    "input": ["Name | Nickname", "Ada | "],
+    "parameters": ["value", "value"],
+    "expect": {"cases": [{"name": null, "arguments": ["Ada", null]}]}
+  },
+  {
+    "name": "A question mark on a header",
+    "rule": "expectation-columns",
+    "input": ["Input | Output?", "a | b"],
+    "parameters": ["value", "value"],
+    "expect": {"cases": [{"name": null, "arguments": ["a", "b"]}]}
+  }
+]

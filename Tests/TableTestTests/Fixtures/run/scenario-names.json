@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Scenario name",
+    "rule": "scenario-names",
+    "input": ["Scenario | Year", "Leap year | 2004"],
+    "parameters": ["value"],
+    "expect": {"cases": [{"name": "Leap year", "arguments": ["2004"]}]}
+  },
+  {
+    "name": "Quoted scenario name",
+    "rule": "scenario-names",
+    "input": ["Scenario | Year", "'Leap | year' | 2004"],
+    "parameters": ["value"],
+    "expect": {"cases": [{"name": "Leap | year", "arguments": ["2004"]}]}
+  }
+]

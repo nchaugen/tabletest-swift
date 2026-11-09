@@ -1,0 +1,84 @@
+[
+  {
+    "name": "One value set",
+    "rule": "value-sets",
+    "source": "USERGUIDE.md, Value Sets (testLeapYear)",
+    "input": ["Scenario | Year | Leap?", "Divisible by 4 | {2004, 2008} | true"],
+    "parameters": ["value", "value"],
+    "expect": {"cases": [{"name": "Divisible by 4 (Year = 2004)", "arguments": ["2004", "true"]}, {"name": "Divisible by 4 (Year = 2008)", "arguments": ["2008", "true"]}]}
+  },
+  {
+    "name": "Two value sets",
+    "rule": "value-sets",
+    "source": "USERGUIDE.md, Value Sets (testEvenOddSums)",
+    "input": ["Scenario | x | y | Even sum?", "Even plus even | {2, 4} | {8, 10} | true"],
+    "parameters": ["value", "value", "value"],
+    "expect": {"cases": [{"name": "Even plus even (x = 2, y = 8)", "arguments": ["2", "8", "true"]}, {"name": "Even plus even (x = 2, y = 10)", "arguments": ["2", "10", "true"]}, {"name": "Even plus even (x = 4, y = 8)", "arguments": ["4", "8", "true"]}, {"name": "Even plus even (x = 4, y = 10)", "arguments": ["4", "10", "true"]}]}
+  },
+  {
+    "name": "A value set without a scenario column",
+    "rule": "value-sets",
+    "input": ["Year | Leap?", "{2004, 2008} | true"],
+    "parameters": ["value", "value"],
+    "expect": {"cases": [{"name": null, "arguments": ["2004", "true"]}, {"name": null, "arguments": ["2008", "true"]}]}
+  },
+  {
+    "name": "Rows in order, each one expanded",
+    "rule": "value-sets",
+    "input": ["Scenario | Year | Leap?", "Leap | {2004, 2008} | true", "Common | {2001, 2002} | false"],
+    "parameters": ["value", "value"],
+    "expect": {"cases": [{"name": "Leap (Year = 2004)", "arguments": ["2004", "true"]}, {"name": "Leap (Year = 2008)", "arguments": ["2008", "true"]}, {"name": "Common (Year = 2001)", "arguments": ["2001", "false"]}, {"name": "Common (Year = 2002)", "arguments": ["2002", "false"]}]}
+  },
+  {
+    "name": "A repeated element",
+    "rule": "value-sets",
+    "input": ["Scenario | Year", "Twice | {2004, 2004}"],
+    "parameters": ["value"],
+    "expect": {"cases": [{"name": "Twice (Year = 2004)", "arguments": ["2004"]}]}
+  },
+  {
+    "name": "A quoted element",
+    "rule": "value-sets",
+    "input": ["Scenario | Word", "Words | {'a b', c}"],
+    "parameters": ["value"],
+    "expect": {"cases": [{"name": "Words (Word = a b)", "arguments": ["a b"]}, {"name": "Words (Word = c)", "arguments": ["c"]}]}
+  },
+  {
+    "name": "A set parameter",
+    "rule": "set-parameters",
+    "source": "USERGUIDE.md, Value Sets (testSetParameter)",
+    "input": ["Values | Size?", "{1, 2, 3} | 3"],
+    "parameters": ["set", "value"],
+    "expect": {"cases": [{"name": null, "arguments": [{"set": ["1", "2", "3"]}, "3"]}]}
+  },
+  {
+    "name": "An empty set for a set parameter",
+    "rule": "set-parameters",
+    "source": "TableTestArgumentsProviderTest#allows_empty_set_for_set_typed_parameter",
+    "input": ["Values | Size?", "{} | 0"],
+    "parameters": ["set", "value"],
+    "expect": {"cases": [{"name": null, "arguments": [{"set": []}, "0"]}]}
+  },
+  {
+    "name": "A set parameter with a scenario column",
+    "rule": "set-parameters",
+    "input": ["Scenario | Values", "Three | {a, b, c}"],
+    "parameters": ["set"],
+    "expect": {"cases": [{"name": "Three", "arguments": [{"set": ["a", "b", "c"]}]}]}
+  },
+  {
+    "name": "A value set beside a set parameter",
+    "rule": "set-parameters",
+    "input": ["Scenario | Years | Tags", "Mixed | {2004, 2008} | {a, b}"],
+    "parameters": ["value", "set"],
+    "expect": {"cases": [{"name": "Mixed (Years = 2004)", "arguments": ["2004", {"set": ["a", "b"]}]}, {"name": "Mixed (Years = 2008)", "arguments": ["2008", {"set": ["a", "b"]}]}]}
+  },
+  {
+    "name": "An empty value set",
+    "rule": "empty-value-sets",
+    "source": "TableTestArgumentsProviderTest#fails_when_value_set_to_be_expanded_is_empty",
+    "input": ["Scenario | Year", "None | {}"],
+    "parameters": ["value"],
+    "expect": {"error": "empty-value-set"}
+  }
+]
