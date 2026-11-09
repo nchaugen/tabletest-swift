@@ -1,0 +1,15 @@
+[
+  {"name": "Keeps a comment line above the header", "rule": "kept-lines", "source": "CommentAndBlankLineTest", "input": ["// intro", "name|age", "Alice|30"], "expect": {"output": ["// intro", "name  | age", "Alice | 30"]}},
+  {"name": "Keeps a comment line between rows", "rule": "kept-lines", "source": "CommentAndBlankLineTest", "input": ["name|age", "// note", "Alice|30"], "expect": {"output": ["name  | age", "// note", "Alice | 30"]}},
+  {"name": "Keeps a comment line below the last row", "rule": "kept-lines", "source": "CommentAndBlankLineTest", "input": ["name|age", "Alice|30", "// trailing"], "expect": {"output": ["name  | age", "Alice | 30", "// trailing"]}},
+  {"name": "Keeps a blank line between rows", "rule": "kept-lines", "source": "CommentAndBlankLineTest", "input": ["name|age", "Alice|30", "", "Bob|25"], "expect": {"output": ["name  | age", "Alice | 30", "", "Bob   | 25"]}},
+  {"name": "Keeps comments and blank lines together", "rule": "kept-lines", "source": "CommentAndBlankLineTest", "input": ["name|age", "// First", "Alice|30", "", "// Second", "Bob|25"], "expect": {"output": ["name  | age", "// First", "Alice | 30", "", "// Second", "Bob   | 25"]}},
+  {"name": "Keeps the whitespace before a comment", "rule": "kept-lines", "input": ["a|b", "   // note", "x|y"], "expect": {"output": ["a | b", "   // note", "x | y"]}},
+  {"name": "Keeps the whitespace of a blank line", "rule": "kept-lines", "input": ["a|b", "   ", "x|y"], "expect": {"output": ["a | b", "   ", "x | y"]}},
+  {"name": "Keeps a blank line before the first row", "rule": "kept-lines", "input": ["", "// intro", "a|b", "x|y"], "expect": {"output": ["", "// intro", "a | b", "x | y"]}},
+  {"name": "Keeps a final line feed", "rule": "line-endings", "input": ["a|b", "x|y", ""], "expect": {"output": ["a | b", "x | y", ""]}},
+  {"name": "Adds no final line feed", "rule": "line-endings", "input": ["a|b", "x|y"], "expect": {"output": ["a | b", "x | y"]}},
+  {"name": "Keeps two final line feeds", "rule": "line-endings", "input": ["a|b", "x|y", "", ""], "expect": {"output": ["a | b", "x | y", "", ""]}},
+  {"name": "Keeps CRLF line endings", "rule": "line-endings", "input": ["a|b\r", "// note\r", "x|y\r", ""], "expect": {"output": ["a | b\r", "// note\r", "x | y\r", ""]}},
+  {"name": "Keeps the ending of each line when they differ", "rule": "line-endings", "input": ["a|b\r", "x|y", "z|w\r", ""], "expect": {"output": ["a | b\r", "x | y", "z | w\r", ""]}}
+]

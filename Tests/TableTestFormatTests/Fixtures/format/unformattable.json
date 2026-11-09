@@ -1,0 +1,12 @@
+[
+  {"name": "Leaves a table with an extra cell in a row unchanged", "rule": "unformattable-input", "source": "TableTestFormatterTest#leavesUnparseableInputUntouched", "input": ["name|age", "Alice|30", "Bob|25|London"], "expect": "unchanged"},
+  {"name": "Leaves a table with a missing cell in a row unchanged", "rule": "unformattable-input", "source": "TableTestFormatterTest#leavesUnparseableInputUntouched", "input": ["name|age|city", "Alice|30", "Bob|25|London"], "expect": "unchanged"},
+  {"name": "Leaves a value with a backslash-escaped quote unchanged", "rule": "unformattable-input", "source": "TableTestFormatterTest#leavesUnparseableInputUntouched", "input": ["name|message", "test|\"He said \\\"hello\\\"\""], "expect": "unchanged"},
+  {"name": "Leaves empty input unchanged", "rule": "unformattable-input", "source": "TableTestFormatterTest#leavesUnparseableInputUntouched", "input": [], "expect": "unchanged"},
+  {"name": "Leaves blank input unchanged", "rule": "unformattable-input", "source": "TableTestFormatterTest#leavesUnparseableInputUntouched", "input": ["   ", "  ", "   "], "expect": "unchanged"},
+  {"name": "Leaves input of only comments unchanged", "rule": "unformattable-input", "input": ["// a", "// b"], "expect": "unchanged"},
+  {"name": "Leaves a table with a blank header cell unchanged", "rule": "unformattable-input", "input": ["a|b|", "x|y|"], "expect": "unchanged"},
+  {"name": "Leaves a map with a repeated key unchanged", "rule": "unformattable-input", "input": ["v", "[a: 1, a: 2]"], "expect": "unchanged"},
+  {"name": "Leaves an unclosed list unchanged", "rule": "unformattable-input", "input": ["v|w", "[a,b|c"], "expect": "unchanged"},
+  {"name": "Leaves a list with a blank element unchanged", "rule": "unformattable-input", "input": ["v", "[ ]"], "expect": "unchanged"}
+]

@@ -8,12 +8,14 @@ let package = Package(
     products: [
         .library(name: "TableTest", targets: ["TableTest"]),
         .library(name: "TableTestParser", targets: ["TableTestParser"]),
+        .library(name: "TableTestFormat", targets: ["TableTestFormat"]),
     ],
     dependencies: [
         .package(url: "https://github.com/swiftlang/swift-syntax.git", "600.0.0"..<"604.0.0"),
     ],
     targets: [
         .target(name: "TableTestParser"),
+        .target(name: "TableTestFormat", dependencies: ["TableTestParser"]),
         .macro(
             name: "TableTestMacros",
             dependencies: [
@@ -36,6 +38,11 @@ let package = Package(
                 "TableTestMacros",
                 .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax"),
             ]
+        ),
+        .testTarget(
+            name: "TableTestFormatTests",
+            dependencies: ["TableTestFormat", "SpecFixtures"],
+            resources: [.copy("Fixtures")]
         ),
         .testTarget(
             name: "TableTestParserTests",

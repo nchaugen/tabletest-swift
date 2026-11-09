@@ -1,0 +1,16 @@
+[
+  {"name": "Pads each column to its widest cell", "rule": "column-width", "source": "TableTestFormatterTest#shouldFormatTableWithColumnAlignment", "input": ["name|age", "Alice|30", "Bob|25", ""], "expect": {"output": ["name  | age", "Alice | 30", "Bob   | 25", ""]}},
+  {"name": "Measures the header cell with the data", "rule": "column-width", "source": "ColumnWidthTest", "input": ["name|x", "Al|y"], "expect": {"output": ["name | x", "Al   | y"]}},
+  {"name": "Measures a blank cell as zero columns", "rule": "column-width", "source": "ColumnWidthTest", "input": ["name|value", "|longest"], "expect": {"output": ["name | value", "     | longest"]}},
+  {"name": "Pads every column of a wide table", "rule": "column-width", "source": "LargeTableTest", "input": ["id|name|city|zip|country|note", "1|Alice|Oslo|0150|Norway|first", "22|Bo|Bergen|5003|NO|"], "expect": {"output": ["id | name  | city   | zip  | country | note", "1  | Alice | Oslo   | 0150 | Norway  | first", "22 | Bo    | Bergen | 5003 | NO      |"]}},
+  {"name": "Starts every row at the start of its line", "rule": "row-layout", "source": "FEATURES.md#row-alignment", "input": ["    a|b", "longer value|d", "        x|y"], "expect": {"output": ["a            | b", "longer value | d", "x            | y"]}},
+  {"name": "Removes a tab before a row", "rule": "row-layout", "input": ["\ta|b", "x|y"], "expect": {"output": ["a | b", "x | y"]}},
+  {"name": "Removes whitespace at the end of a row", "rule": "row-layout", "input": ["a|b   ", "x|y\t"], "expect": {"output": ["a | b", "x | y"]}},
+  {"name": "Writes one space on each side of a pipe", "rule": "row-layout", "source": "FEATURES.md#pipe-spacing", "input": ["a   |  b|c", "x|y   |   z"], "expect": {"output": ["a | b | c", "x | y | z"]}},
+  {"name": "Pads a blank first cell", "rule": "row-layout", "source": "RowLayoutTest#formatsARow", "input": ["Alice|age", "|30"], "expect": {"output": ["Alice | age", "      | 30"]}},
+  {"name": "Pads a blank middle cell", "rule": "row-layout", "source": "RowLayoutTest#formatsARow", "input": ["a|b|c", "a||c"], "expect": {"output": ["a | b | c", "a |   | c"]}},
+  {"name": "Ends a row with a pipe when its last cell is blank", "rule": "row-layout", "source": "FEATURES.md#empty-cell-handling", "input": ["a|b|c", "x|y|"], "expect": {"output": ["a | b | c", "x | y |"]}},
+  {"name": "Pads a row of blank cells", "rule": "row-layout", "source": "FEATURES.md#empty-cell-handling", "input": ["a|b|c", "||"], "expect": {"output": ["a | b | c", "  |   |"]}},
+  {"name": "Leaves a table of one column without padding", "rule": "row-layout", "source": "RowLayoutTest#formatsARow", "input": ["  col", "a  ", "longer"], "expect": {"output": ["col", "a", "longer"]}},
+  {"name": "Formats a table with only a header row", "rule": "row-layout", "source": "TableTestFormatterTest#shouldFormatHeaderOnlyTable", "input": ["name|age"], "expect": {"output": ["name | age"]}}
+]

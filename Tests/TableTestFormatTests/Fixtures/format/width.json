@@ -1,0 +1,20 @@
+[
+  {"name": "Counts a CJK ideograph as two columns", "rule": "display-width", "source": "DisplayWidthTest#measuresStringWidth", "input": ["a|b", "你好|x"], "expect": {"output": ["a    | b", "你好 | x"]}},
+  {"name": "Counts a Hangul syllable as two columns", "rule": "display-width", "source": "DisplayWidthTest#measuresCodePointWidth", "input": ["a|b", "한국|x"], "expect": {"output": ["a    | b", "한국 | x"]}},
+  {"name": "Counts a fullwidth letter as two columns", "rule": "display-width", "source": "DisplayWidthTest#measuresCodePointWidth", "input": ["a|b", "ＡＢ|x"], "expect": {"output": ["a    | b", "ＡＢ | x"]}},
+  {"name": "Counts an emoji as two columns", "rule": "display-width", "source": "DisplayWidthTest#measuresCodePointWidth", "input": ["a|b", "😀|x"], "expect": {"output": ["a  | b", "😀 | x"]}},
+  {"name": "Adds the widths of the characters in a text", "rule": "display-width", "source": "DisplayWidthTest#measuresStringWidth", "input": ["a|b", "Hello 👋 World|x"], "expect": {"output": ["a              | b", "Hello 👋 World | x"]}},
+  {"name": "Counts a letter and a combining accent as one column", "rule": "display-width", "source": "DisplayWidthTest#measuresCodePointWidth", "input": ["a|b", "é|x"], "expect": {"output": ["a | b", "é | x"]}},
+  {"name": "Counts a precomposed accented letter as one column", "rule": "display-width", "input": ["a|b", "é|x"], "expect": {"output": ["a | b", "é | x"]}},
+  {"name": "Counts an ambiguous-width character as one column", "rule": "display-width", "input": ["a|b", "±Ω|x"], "expect": {"output": ["a  | b", "±Ω | x"]}},
+  {"name": "Counts a symbol with text presentation as one column", "rule": "display-width", "input": ["a|b", "☀|x"], "expect": {"output": ["a | b", "☀ | x"]}},
+  {"name": "Counts a symbol with the emoji selector as two columns", "rule": "display-width", "input": ["a|b", "☀️|x"], "expect": {"output": ["a  | b", "☀️ | x"]}},
+  {"name": "Counts a flag as two columns", "rule": "display-width", "input": ["a|b", "🇳🇴|x"], "expect": {"output": ["a  | b", "🇳🇴 | x"]}},
+  {"name": "Counts a joined emoji sequence as two columns", "rule": "display-width", "input": ["a|b", "👨‍👩‍👧|x"], "expect": {"output": ["a  | b", "👨‍👩‍👧 | x"]}},
+  {"name": "Counts an emoji with a skin tone as two columns", "rule": "display-width", "input": ["a|b", "👍🏽|x"], "expect": {"output": ["a  | b", "👍🏽 | x"]}},
+  {"name": "Counts a keycap as two columns", "rule": "display-width", "input": ["a|b", "1️⃣|x"], "expect": {"output": ["a  | b", "1️⃣ | x"]}},
+  {"name": "Counts a soft hyphen as zero columns", "rule": "display-width", "input": ["a|b", "a­b|x"], "expect": {"output": ["a  | b", "a­b | x"]}},
+  {"name": "Counts a Tangut ideograph as two columns", "rule": "display-width", "input": ["a|b", "𗀀|x"], "expect": {"output": ["a  | b", "𗀀 | x"]}},
+  {"name": "Counts a syllable of joined Hangul letters as two columns", "rule": "display-width", "input": ["a|b", "한|x"], "expect": {"output": ["a  | b", "한 | x"]}},
+  {"name": "Counts a tab inside a value as zero columns", "rule": "display-width", "input": ["a|b", "x\ty|x"], "expect": {"output": ["a  | b", "x\ty | x"]}}
+]

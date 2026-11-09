@@ -1,6 +1,7 @@
 #!/bin/sh
 # Copies the fixtures of tabletest-spec into the test targets and records the spec commit:
-# the parse fixtures into TableTestParserTests, the run fixtures into TableTestTests.
+# the parse fixtures into TableTestParserTests, the run fixtures into TableTestTests, and the
+# format fixtures into TableTestFormatTests.
 # The spec checkout defaults to ../tabletest-spec; set TABLETEST_SPEC to use another one.
 set -eu
 repo=$(cd "$(dirname "$0")/.." && pwd)
@@ -27,3 +28,4 @@ copy() {
 
 copy parse "$repo/Tests/TableTestParserTests/Fixtures"
 copy run "$repo/Tests/TableTestTests/Fixtures"
+copy format "$repo/Tests/TableTestFormatTests/Fixtures"
