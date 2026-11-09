@@ -113,11 +113,11 @@ struct FailedConversion: Sendable, CustomTestStringConvertible {
     let testDescription: String
     let attempt: @Sendable (TableValue) throws -> Void
 
-    static func to<T: Decodable>(_ type: T.Type) -> FailedConversion {
+    static func to<T: Decodable & Sendable>(_ type: T.Type) -> FailedConversion {
         FailedConversion(testDescription: "\(T.self)") { _ = try TableValueDecoding.decode($0, as: T.self) }
     }
 
-    static func own<T: TableValueDecodable>(_ type: T.Type) -> FailedConversion {
+    static func own<T: TableValueDecodable & Sendable>(_ type: T.Type) -> FailedConversion {
         FailedConversion(testDescription: "\(T.self)") { _ = try TableValueDecoding.decode($0, as: T.self) }
     }
 
