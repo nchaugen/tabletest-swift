@@ -50,15 +50,20 @@ public enum TableTestRows {
     /// is the scenario name of each row. Otherwise every column maps to a parameter, in order.
     public static func make(table: String, parameterCount: Int, source: TableSource) throws -> [TableTestRow] {
         let parsed = try TableParser.parse(table)
-        let hasScenario = try hasScenarioColumn(parsed, parameterCount: parameterCount)
-        try refuseRowsOfAnotherWidth(parsed)
-        let parameterHeaders = parsed.headers.dropFirst(hasScenario ? 1 : 0).map(\.tableText)
+        let layout: ColumnLayout
+        do {
+            layout = try parsed.columnLayout(parameterCount: parameterCount)
+        } catch {
+            throw TableTestError(description: error.message)
+        }
+        let leading = layout.leadingColumns
+        let parameterHeaders = parsed.headers.dropFirst(leading).map(\.tableText)
         return parsed.rows.enumerated().map { offset, row in
             TableTestRow(
                 index: offset + 1,
-                scenario: hasScenario ? row.cells[0].value.scenarioName : nil,
+                scenario: layout == .scenarioFirst ? row.cells[0].value.scenarioName : nil,
                 headers: parameterHeaders,
-                cells: Array(row.cells.dropFirst(hasScenario ? 1 : 0)).map { cell in
+                cells: row.cells.dropFirst(leading).map { cell in
                     TableTestRow.Cell(
                         value: cell.value,
                         location: source.location(line: row.line, column: cell.column)
@@ -66,29 +71,6 @@ public enum TableTestRows {
                 }
             )
         }
-    }
-
-    private static func hasScenarioColumn(_ table: Table, parameterCount: Int) throws -> Bool {
-        switch table.header.cells.count {
-        case parameterCount: return false
-        case parameterCount + 1: return true
-        default:
-            throw TableTestError(
-                description: "The table has \(table.header.cells.count) columns, but the function has "
-                    + "\(parameterCount) parameters: give it one parameter for each column, or for each "
-                    + "column after a scenario column"
-            )
-        }
-    }
-
-    private static func refuseRowsOfAnotherWidth(_ table: Table) throws {
-        let width = table.header.cells.count
-        guard let offset = table.rows.firstIndex(where: { $0.cells.count != width }) else {
-            return
-        }
-        throw TableTestError(
-            description: "Row \(offset + 1) has \(table.rows[offset].cells.count) cells, but the header has \(width)"
-        )
     }
 }
 
