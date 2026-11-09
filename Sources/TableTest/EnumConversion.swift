@@ -1,8 +1,9 @@
 /// Converts a cell to a type that is neither `Decodable` nor ``TableValueDecodable``: a
 /// raw-value enum, an enum with no raw value, and an optional, list, set or map of them.
 ///
-/// A raw-value enum reads its raw value, as a `Decodable` one does. An enum with no raw value
-/// reads its case name, as the ``TableValueDecodable`` default for `CaseIterable` does.
+/// A `CaseIterable` enum reads its case name, as the ``TableValueDecodable`` default for
+/// `CaseIterable` does, so a cell names a case as Swift code does. A raw-value enum with no case
+/// list reads its raw value. A `Decodable` enum does not come here: it reads its raw value.
 extension TableValueDecoding {
     static func convert<T>(_ value: TableValue, to type: T.Type) throws -> T {
         try instance(of: T.self, from: value) as! T
@@ -19,11 +20,11 @@ extension TableValueDecoding {
         if let collection = type as? any EnumCollection.Type {
             return try collection.init(converting: value)
         }
-        if let rawValued = type as? any RawRepresentable.Type {
-            return try rawValueCase(of: rawValued, from: value)
-        }
         if let enumerable = type as? any CaseIterable.Type {
             return try namedCase(of: enumerable, from: value)
+        }
+        if let rawValued = type as? any RawRepresentable.Type {
+            return try rawValueCase(of: rawValued, from: value)
         }
         throw TableValueConversionError(
             "\(typeName(type)) does not convert from a cell: make it Decodable or TableValueDecodable"

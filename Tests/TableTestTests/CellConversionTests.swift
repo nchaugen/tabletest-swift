@@ -62,13 +62,15 @@ struct CellConversionTests {
     }
 
     @Test("Converts a cell to an enum that is not Decodable", arguments: [
-        (scenario: "Raw value", cell: "grand_cru", conversion: Conversion.plain(Band.grandCru)),
-        (scenario: "Raw value to an optional", cell: "premier_cru", conversion: .plain(Band?.some(.premierCru))),
+        (scenario: "Case name of a raw-value enum", cell: "grandCru", conversion: Conversion.plain(Band.grandCru)),
+        (scenario: "Case name of a number raw-value enum", cell: "reference", conversion: .plain(Source.reference)),
+        (scenario: "Raw value of an enum with no case list", cell: "B", conversion: .plain(Grade.good)),
+        (scenario: "Case name to an optional", cell: "premierCru", conversion: .plain(Band?.some(.premierCru))),
         (scenario: "Blank cell to an optional", cell: "", conversion: .plain(Band?.none)),
-        (scenario: "List of raw values", cell: "[grand_cru, premier_cru]", conversion: .plain([Band.grandCru, .premierCru])),
+        (scenario: "List of case names", cell: "[grandCru, premierCru]", conversion: .plain([Band.grandCru, .premierCru])),
         (scenario: "Case name of an enum with no raw value", cell: "oak", conversion: .plain(Note.oak)),
         (scenario: "Set of case names", cell: "{fruit, oak}", conversion: .plain(Set([Note.fruit, .oak]))),
-        (scenario: "Map with enum keys", cell: "[fruit: grand_cru]", conversion: .plain([Note.fruit: Band.grandCru])),
+        (scenario: "Map with enum keys", cell: "[fruit: grandCru]", conversion: .plain([Note.fruit: Band.grandCru])),
         (scenario: "Map with text keys", cell: "[a: oak]", conversion: .plain(["a": Note.oak])),
         (scenario: "Nested optional list", cell: "[oak]", conversion: .plain([Note]?.some([.oak]))),
     ])
@@ -95,7 +97,8 @@ struct CellConversionTests {
         (cell: "[é: 1, e\u{301}: 2]", target: .to([String: Int].self),
          message: "Cannot convert `[é: 1, e\u{301}: 2]` to Dictionary<String, Int>: Swift treats two of its elements as equal"),
         (cell: "west", target: .own(Compass.self), message: "Compass has no case named `west`"),
-        (cell: "third_cru", target: .plain(Band.self), message: "Band has no case with the raw value `third_cru`"),
+        (cell: "grand_cru", target: .plain(Band.self), message: "Band has no case named `grand_cru`"),
+        (cell: "E", target: .plain(Grade.self), message: "Grade has no case with the raw value `E`"),
         (cell: "wood", target: .plain(Note.self), message: "Note has no case named `wood`"),
         (cell: "[oak, wood]", target: .plain([Note].self), message: "Note has no case named `wood`"),
         (cell: "[oak]", target: .plain(Note.self), message: "Cannot convert `[oak]` to Note"),
@@ -235,6 +238,16 @@ struct Doubled: Decodable, TableValueDecodable, Equatable, Sendable {
 
 struct Boxed: Decodable, Equatable, Sendable {
     let item: Doubled
+}
+
+/// A raw-value enum with no case list.
+enum Grade: String, Sendable {
+    case good = "B"
+}
+
+/// A number raw-value enum that is not `Decodable`.
+enum Source: Int, CaseIterable, Sendable {
+    case tastings, reference
 }
 
 /// A type with no conversion at all.
