@@ -1,9 +1,10 @@
 /// Converts a cell to a type that is neither `Decodable` nor ``TableValueDecodable``: a
-/// raw-value enum, an enum with no raw value, and an optional, list, set or map of them.
+/// raw-value enum, an enum with no raw value, a `LosslessStringConvertible` type, and an
+/// optional, list, set or map of them.
 ///
 /// A `CaseIterable` enum reads its case name, as the ``TableValueDecodable`` default for
-/// `CaseIterable` does, so a cell names a case as Swift code does. A raw-value enum with no case
-/// list reads its raw value. A `Decodable` enum does not come here: `TableValueDecoding.decode`
+/// `CaseIterable` does, so a cell names a case as Swift code does. A `LosslessStringConvertible`
+/// type reads the text of the cell. A raw-value enum with no case list reads its raw value. A `Decodable` enum does not come here: `TableValueDecoding.decode`
 /// reads its case name when it is `CaseIterable`, and its raw value otherwise.
 extension TableValueDecoding {
     static func convert<T>(_ value: TableValue, to type: T.Type) throws -> T {
@@ -27,12 +28,24 @@ extension TableValueDecoding {
         if let enumerable = type as? any CaseIterable.Type {
             return try namedCase(of: enumerable, from: value)
         }
+        if let lossless = type as? any LosslessStringConvertible.Type {
+            return try described(as: lossless, by: value)
+        }
         if let rawValued = type as? any RawRepresentable.Type {
             return try rawValueCase(of: rawValued, from: value)
         }
         throw TableValueConversionError(
-            "\(typeName(type)) does not convert from a cell: make it Decodable or TableValueDecodable"
+            "\(typeName(type)) does not convert from a cell: make it Decodable, or conform it to TableCellText"
         )
+    }
+
+    /// The value that the type's `init?(_:)` reads from the text of the cell.
+    private static func described<T: LosslessStringConvertible>(as type: T.Type, by value: TableValue) throws -> T {
+        let text = try SingleCellContainer(value: value, codingPath: []).text(for: T.self)
+        guard let result = T(text) else {
+            throw SingleCellContainer.mismatch(T.self, text: text, codingPath: [])
+        }
+        return result
     }
 
     /// The case whose name is the text of the cell.

@@ -165,7 +165,7 @@ struct CellConversionTests {
         #expect(result.matches, "converted to \(result.actual)")
     }
 
-    @Test("Converts a cell to an enum that is not Decodable", arguments: [
+    @Test("Converts a cell to a type that is not Decodable", arguments: [
         (scenario: "Case name of a raw-value enum", cell: "grandCru", conversion: Conversion.plain(Band.grandCru)),
         (scenario: "Case name of a number raw-value enum", cell: "reference", conversion: .plain(Source.reference)),
         (scenario: "Raw value of an enum with no case list", cell: "B", conversion: .plain(Grade.good)),
@@ -177,8 +177,11 @@ struct CellConversionTests {
         (scenario: "Map with enum keys", cell: "[fruit: grandCru]", conversion: .plain([Note.fruit: Band.grandCru])),
         (scenario: "Map with text keys", cell: "[a: oak]", conversion: .plain(["a": Note.oak])),
         (scenario: "Nested optional list", cell: "[oak]", conversion: .plain([Note]?.some([.oak]))),
+        (scenario: "Text of a LosslessStringConvertible type", cell: "978-0", conversion: .plain(Isbn("978-0")!)),
+        (scenario: "List of LosslessStringConvertible values", cell: "[1-2, 3-4]", conversion: .plain([Isbn("1-2")!, Isbn("3-4")!])),
+        (scenario: "Blank cell to an optional LosslessStringConvertible", cell: "", conversion: .plain(Isbn?.none)),
     ])
-    func convertsToAnEnumThatIsNotDecodable(scenario: String, cell: String, conversion: Conversion) throws {
+    func convertsToATypeThatIsNotDecodable(scenario: String, cell: String, conversion: Conversion) throws {
         let result = try conversion.convert(cellValue(cell))
 
         #expect(result.matches, "converted to \(result.actual)")
@@ -251,8 +254,10 @@ struct CellConversionTests {
         (cell: "12:30:60", target: .to(DateComponents.self), message: "Cannot convert `12:30:60` to DateComponents"),
         (cell: "ab", target: .plain(Character.self), message: "Cannot convert `ab` to Character"),
         (cell: "", target: .plain(Character.self), message: "Cannot convert a blank cell to Character"),
+        (cell: "978", target: .plain(Isbn.self), message: "Cannot convert `978` to Isbn"),
+        (cell: "", target: .plain(Isbn.self), message: "Cannot convert a blank cell to Isbn"),
         (cell: "x", target: .plain(Opaque.self),
-         message: "Opaque does not convert from a cell: make it Decodable or TableValueDecodable"),
+         message: "Opaque does not convert from a cell: make it Decodable, or conform it to TableCellText"),
     ])
     func refusesACellThatDoesNotConvert(cell: String, target: FailedConversion, message: String) throws {
         #expect(target.message(converting: try cellValue(cell)) == message)
@@ -277,7 +282,8 @@ struct Conversion: Sendable, CustomTestStringConvertible {
         }
     }
 
-    /// Converts a type that only `RawRepresentable` or `CaseIterable` describes.
+    /// Converts a type that is not `Decodable`, such as an enum that only `RawRepresentable` or
+    /// `CaseIterable` describes.
     static func plain<T: Equatable & Sendable>(_ expected: T) -> Conversion {
         Conversion(testDescription: "\(T.self) \(expected)") { value in
             let actual = try TableValueDecoding.convert(value, to: T.self)
@@ -499,6 +505,18 @@ enum Grade: String, Sendable {
 /// A number raw-value enum that is not `Decodable`.
 enum Source: Int, CaseIterable, Sendable {
     case tastings, reference
+}
+
+/// A type that reads its text with `init?(_:)`, and is not `Decodable`.
+struct Isbn: LosslessStringConvertible, Equatable, Sendable {
+    let description: String
+
+    init?(_ description: String) {
+        guard description.contains("-") else {
+            return nil
+        }
+        self.description = description
+    }
 }
 
 /// A type with no conversion at all.
