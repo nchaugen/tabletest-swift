@@ -25,6 +25,13 @@ let package = Package(
         .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser"]),
         .testTarget(name: "TableTestTests", dependencies: ["TableTest"]),
         .testTarget(
+            name: "TableTestMacrosTests",
+            dependencies: [
+                "TableTestMacros",
+                .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax"),
+            ]
+        ),
+        .testTarget(
             name: "TableTestParserTests",
             dependencies: ["TableTestParser"],
             resources: [.copy("Fixtures")]
