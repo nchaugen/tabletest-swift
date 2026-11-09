@@ -24,6 +24,8 @@ public struct Row: Sendable {
 /// One cell of a row and where it starts on its line.
 public struct Cell: Sendable {
     public let value: TableValue
+    /// The cell as written, for a formatter.
+    package let written: WrittenValue
     /// The 0-based Unicode scalar offset of the cell's first character that is not whitespace.
     /// For a blank cell, the offset of the `|` or the line end that closes it.
     public let column: Int

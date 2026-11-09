@@ -29,10 +29,10 @@ struct RowReader {
         while true {
             skipWhitespace()
             let column = position
-            guard let value = try cellValue() else {
+            guard let cell = try cellValue() else {
                 throw malformed(at: column)
             }
-            cells.append(Cell(value: value, column: column))
+            cells.append(Cell(value: cell.value, written: cell.written, column: column))
             skipWhitespace()
             if isAtEnd {
                 return Row(line: line.index, cells: cells)
@@ -43,48 +43,48 @@ struct RowReader {
         }
     }
 
-    private mutating func cellValue() throws(TableParseError) -> TableValue? {
+    private mutating func cellValue() throws(TableParseError) -> ReadValue? {
         if let collection = try collection() {
             return collection
         }
         if let quoted = quotedString() {
-            return .string(quoted)
+            return quoted
         }
         return unquotedCellValue()
     }
 
     /// The text up to the next `|` or the line end. A blank cell holds null (SPEC 1.6, 2.1).
-    private mutating func unquotedCellValue() -> TableValue? {
+    private mutating func unquotedCellValue() -> ReadValue? {
         guard let first = current else {
-            return .null
+            return .blank
         }
         switch first {
-        case "|": return .null
+        case "|": return .blank
         case "[", "{": return nil
-        default: return .string(trimmedText(while: { $0 != "|" }))
+        default: return .text(trimmedText(while: { $0 != "|" }))
         }
     }
 
     // MARK: Strings (SPEC 2.2, 2.4)
 
     /// The text between two equal quote characters, or `nil` when there is no closing quote.
-    private mutating func quotedString() -> String? {
+    private mutating func quotedString() -> ReadValue? {
         guard let quote = current, quote == "'" || quote == "\"" else {
             return nil
         }
-        let start = position + 1
-        guard let end = line.scalars[start...].firstIndex(of: quote) else {
+        let start = position
+        guard let end = line.scalars[(start + 1)...].firstIndex(of: quote) else {
             return nil
         }
         position = end + 1
-        return text(from: start, to: end)
+        return ReadValue(value: .string(text(from: start + 1, to: end)), written: .text(text(from: start, to: position)))
     }
 
     // MARK: Lists, sets and maps (SPEC 2.5–2.11)
 
     /// A list, a set, or a map at the cursor. A `[` is read as a map first, and as a list when
     /// its content is not pairs.
-    private mutating func collection() throws(TableParseError) -> TableValue? {
+    private mutating func collection() throws(TableParseError) -> ReadValue? {
         switch current {
         case "[":
             if let map = try map() {
@@ -98,7 +98,7 @@ struct RowReader {
         }
     }
 
-    private mutating func list() throws(TableParseError) -> TableValue? {
+    private mutating func list() throws(TableParseError) -> ReadValue? {
         let start = position
         guard consume("[") else {
             return nil
@@ -107,10 +107,11 @@ struct RowReader {
         guard consume("]") else {
             return backtrack(to: start)
         }
-        return .list(elements)
+        return ReadValue(value: .list(elements.map(\.value)), written: .list(elements.map(\.written)))
     }
 
-    private mutating func set() throws(TableParseError) -> TableValue? {
+    /// A set holds each value once; its written form keeps a repeated element.
+    private mutating func set() throws(TableParseError) -> ReadValue? {
         let start = position
         guard consume("{") else {
             return nil
@@ -119,26 +120,30 @@ struct RowReader {
         guard consume("}") else {
             return backtrack(to: start)
         }
-        return .set(elements.withoutDuplicates())
+        return ReadValue(value: .set(elements.map(\.value).withoutDuplicates()), written: .set(elements.map(\.written)))
     }
 
-    private mutating func map() throws(TableParseError) -> TableValue? {
+    private mutating func map() throws(TableParseError) -> ReadValue? {
         let start = position
         guard consume("[") else {
             return nil
         }
-        let entries: [TableMapEntry]
+        let pairs: [KeyedPair]
         if emptyMapContent() {
-            entries = []
-        } else if let pairs = try pairs() {
-            entries = try entriesWithUniqueKeys(pairs, mapStart: start)
+            pairs = []
+        } else if let read = try self.pairs() {
+            pairs = read
         } else {
             return backtrack(to: start)
         }
+        let entries = try entriesWithUniqueKeys(pairs, mapStart: start)
         guard consume("]") else {
             return backtrack(to: start)
         }
-        return .map(entries)
+        return ReadValue(
+            value: .map(entries),
+            written: .map(pairs.map { WrittenPair(key: $0.writtenKey, value: $0.value.written) })
+        )
     }
 
     /// Reads the `:` of `[:]`, with any whitespace around it.
@@ -153,7 +158,7 @@ struct RowReader {
         return true
     }
 
-    private mutating func elements() throws(TableParseError) -> [TableValue]? {
+    private mutating func elements() throws(TableParseError) -> [ReadValue]? {
         guard let first = try element() else {
             return nil
         }
@@ -165,7 +170,7 @@ struct RowReader {
     }
 
     /// A `,` and the element after it.
-    private mutating func nextElement() throws(TableParseError) -> TableValue? {
+    private mutating func nextElement() throws(TableParseError) -> ReadValue? {
         let start = position
         guard consume(","), let element = try element() else {
             return backtrack(to: start)
@@ -174,16 +179,16 @@ struct RowReader {
     }
 
     /// One element, with the whitespace around it (SPEC 2.8).
-    private mutating func element() throws(TableParseError) -> TableValue? {
+    private mutating func element() throws(TableParseError) -> ReadValue? {
         let start = position
         skipWhitespace()
-        let element: TableValue
+        let element: ReadValue
         if let collection = try collection() {
             element = collection
         } else if let quoted = quotedString() {
-            element = .string(quoted)
+            element = quoted
         } else if let unquoted = unquotedText(endingBefore: Self.elementEndings) {
-            element = .string(unquoted)
+            element = .text(unquoted)
         } else {
             return backtrack(to: start)
         }
@@ -215,14 +220,17 @@ struct RowReader {
         let start = position
         skipWhitespace()
         let column = position
-        guard let key = quotedString() ?? unquotedText(endingBefore: Self.keyEndings) else {
+        guard let key = quotedString() ?? unquotedText(endingBefore: Self.keyEndings).map(ReadValue.text) else {
             return backtrack(to: start)
         }
         skipWhitespace()
         guard consume(":"), let value = try element() else {
             return backtrack(to: start)
         }
-        return KeyedPair(key: key, column: column, value: value)
+        guard case .string(let keyText) = key.value, case .text(let writtenKey) = key.written else {
+            return backtrack(to: start)
+        }
+        return KeyedPair(key: keyText, writtenKey: writtenKey, column: column, value: value)
     }
 
     /// The scalars that cannot start an unquoted element or key (SPEC 2.8, 2.9).
@@ -244,8 +252,22 @@ struct RowReader {
     /// A map pair, with the column of its key for a duplicate-key error.
     private struct KeyedPair {
         let key: String
+        let writtenKey: String
         let column: Int
+        let value: ReadValue
+    }
+
+    /// The value of a cell or an element, and how it is written.
+    private struct ReadValue {
         let value: TableValue
+        let written: WrittenValue
+
+        static let blank = ReadValue(value: .null, written: .blank)
+
+        /// Unquoted text: its value and its written form are the same text.
+        static func text(_ text: String) -> ReadValue {
+            ReadValue(value: .string(text), written: .text(text))
+        }
     }
 
     /// The pairs as map entries, refusing a key that occurs twice (SPEC 2.10).
@@ -265,7 +287,7 @@ struct RowReader {
                 message: "Duplicate key `\(pairs[duplicate].key)` in map `[\(map)]` in row `\(rowText)`"
             )
         }
-        return pairs.map { TableMapEntry(key: $0.key, value: $0.value) }
+        return pairs.map { TableMapEntry(key: $0.key, value: $0.value.value) }
     }
 
     // MARK: Cursor
