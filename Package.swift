@@ -23,6 +23,7 @@ let package = Package(
             ]
         ),
         .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser"]),
+        .testTarget(name: "TableTestTests", dependencies: ["TableTest"]),
         .testTarget(
             name: "TableTestParserTests",
             dependencies: ["TableTestParser"],
