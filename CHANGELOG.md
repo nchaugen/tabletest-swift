@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- A `@TableTest` in a type whose `init` throws or is `async` compiles; an `init` that throws fails the row, as it fails a Swift Testing test
+
 ## [0.1.0] - 2026-11-09
 
 The first release: TableTest tables for Swift Testing. The table format is the one that

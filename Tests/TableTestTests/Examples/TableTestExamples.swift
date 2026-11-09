@@ -145,6 +145,54 @@ struct MainActorExamples {
     }
 }
 
+/// A suite whose `init` can throw, as a suite that opens a store does.
+struct ThrowingInitExamples {
+    let base: Int
+
+    init() throws {
+        base = try Int.parse("10")
+    }
+
+    @TableTest("""
+        Count | Total?
+        2     | 12
+        """)
+    func addsToTheBase(count: Int, total: Int) {
+        #expect(base + count == total)
+    }
+}
+
+/// A suite whose `init` suspends and can throw.
+@MainActor
+struct AsyncInitExamples {
+    let base: Int
+
+    init() async throws {
+        base = try await Int.parseLater("10")
+    }
+
+    @TableTest("""
+        Count | Total?
+        2     | 12
+        """)
+    func addsToTheBase(count: Int, total: Int) {
+        #expect(base + count == total)
+    }
+}
+
+extension Int {
+    struct NotANumber: Error {}
+
+    static func parse(_ text: String) throws -> Int {
+        guard let value = Int(text) else { throw NotANumber() }
+        return value
+    }
+
+    static func parseLater(_ text: String) async throws -> Int {
+        try parse(text)
+    }
+}
+
 @MainActor
 enum MainActorCounter {
     static func double(_ count: Int) -> Int { count * 2 }

@@ -92,6 +92,14 @@ public struct TableTestError: Error, CustomStringConvertible, Sendable {
 
 /// Builds the test cases of a table.
 public enum TableTestRows {
+    /// The suite instance that runs a row. The expansion writes `try await` before it, which a
+    /// suite `init` that neither throws nor suspends would otherwise warn about; a suite `init`
+    /// that throws fails the row, as it fails a Swift Testing test.
+    public static func suite<Suite>(_ suite: consuming Suite,
+                                    isolation: isolated (any Actor)? = #isolation) async throws -> Suite {
+        suite
+    }
+
     /// The test cases of a table: one for each data row, or one for each combination of the
     /// row's value sets.
     ///

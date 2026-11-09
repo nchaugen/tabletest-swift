@@ -125,9 +125,9 @@ The table follows these rules:
   **scenario**. It names each row in the test results and maps to no parameter.
 - Every row has as many cells as the header.
 
-The function can be `static`, `async` and `throws`. To call main-actor code, put `@MainActor` on
-the type. A function name can be a raw identifier, for example
-``func `knows a leap year`(year: Int, leap: Bool)``.
+The function can be `static`, `async` and `throws`, and the type's `init` can be `async` and
+`throws`. To call main-actor code, put `@MainActor` on the type. A function name can be a raw
+identifier, for example ``func `knows a leap year`(year: Int, leap: Bool)``.
 
 In Xcode the test navigator shows each row as its own result, under the title of the test, or
 else the name of the function: `LeapYearTests > knowsALeapYear > scenarios(_:) > Divisible by 4`.

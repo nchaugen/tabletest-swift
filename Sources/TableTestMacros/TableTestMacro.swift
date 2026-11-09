@@ -85,14 +85,15 @@ public struct TableTestMacro: PeerMacro {
             let label = parameter.firstName.tokenKind == .wildcard ? "" : "\(parameter.firstName.text): "
             return "\(label)row.decode(\(column), as: (\(parameter.type.trimmedDescription)).self)"
         }.joined(separator: ", ")
-        let call = "try \(isAsync ? "await " : "")\(receiver(of: function, in: context))\(name)(\(callArguments))"
+        let receiver = receiver(of: function, in: context)
+        let call = "try \(isAsync ? "await " : "")\(receiver.prefix)\(name)(\(callArguments))"
 
         return [
             """
             \(raw: isolation(of: function, in: context))struct \(raw: typeName(for: function, title: arguments.displayName)) {
                 @Test(\(raw: testAttributeArguments))
-                func scenarios(_ row: TableTestRow) \(raw: isAsync ? "async " : "")throws {
-                    \(raw: isThrowing ? "do" : "do throws(TableCellError)") {
+                func scenarios(_ row: TableTestRow) \(raw: isAsync || receiver.makesSuite ? "async " : "")throws {
+                    \(raw: receiver.statement)\(raw: isThrowing ? "do" : "do throws(TableCellError)") {
                         \(raw: call)
                     } \(raw: isThrowing ? "catch let error as TableCellError" : "catch") {
                         Issue.record(error, sourceLocation: error.sourceLocation)
@@ -131,12 +132,18 @@ public struct TableTestMacro: PeerMacro {
         return name
     }
 
-    /// `Type.` for a static function, and `Type().` for an instance function.
-    private static func receiver(of function: FunctionDeclSyntax, in context: some MacroExpansionContext) -> String {
+    /// How the expansion reaches the function: `Type.` for a static function. For an instance
+    /// function it makes the suite first, as Swift Testing does, so that the suite's `init` can
+    /// throw or suspend outside the block that catches only cell errors.
+    private static func receiver(of function: FunctionDeclSyntax,
+                                 in context: some MacroExpansionContext) -> (statement: String, prefix: String, makesSuite: Bool) {
         guard let enclosingType = context.lexicalContext.lazy.compactMap(\.typeName).first else {
-            return ""
+            return ("", "", false)
         }
-        return function.isStatic ? "\(enclosingType)." : "\(enclosingType)()."
+        if function.isStatic {
+            return ("", "\(enclosingType).", false)
+        }
+        return ("let suite = try await TableTestRows.suite(\(enclosingType)())\n        ", "suite.", true)
     }
 
     /// The global actor of the function, or else of its enclosing type, as an attribute prefix.

@@ -29,9 +29,10 @@ struct ExpansionTests {
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true)
                     ))
-                    func scenarios(_ row: TableTestRow) throws {
+                    func scenarios(_ row: TableTestRow) async throws {
+                        let suite = try await TableTestRows.suite(YearTests())
                         do throws(TableCellError) {
-                            try YearTests().knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                            try suite.knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
                         } catch {
                             Issue.record(error, sourceLocation: error.sourceLocation)
                         }
@@ -101,9 +102,10 @@ struct ExpansionTests {
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 46, indentation: 8, isMultiline: true)
                     ))
-                    func scenarios(_ row: TableTestRow) throws {
+                    func scenarios(_ row: TableTestRow) async throws {
+                        let suite = try await TableTestRows.suite(YearTests())
                         do throws(TableCellError) {
-                            try YearTests().knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                            try suite.knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
                         } catch {
                             Issue.record(error, sourceLocation: error.sourceLocation)
                         }
@@ -136,9 +138,10 @@ struct ExpansionTests {
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 47, indentation: 8, isMultiline: true)
                     ))
-                    func scenarios(_ row: TableTestRow) throws {
+                    func scenarios(_ row: TableTestRow) async throws {
+                        let suite = try await TableTestRows.suite(YearTests())
                         do throws(TableCellError) {
-                            try YearTests().knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                            try suite.knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
                         } catch {
                             Issue.record(error, sourceLocation: error.sourceLocation)
                         }
@@ -171,9 +174,10 @@ struct ExpansionTests {
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true)
                     ))
-                    func scenarios(_ row: TableTestRow) throws {
+                    func scenarios(_ row: TableTestRow) async throws {
+                        let suite = try await TableTestRows.suite(YearTests())
                         do throws(TableCellError) {
-                            try YearTests().`knows a leap year`(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                            try suite.`knows a leap year`(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
                         } catch {
                             Issue.record(error, sourceLocation: error.sourceLocation)
                         }
