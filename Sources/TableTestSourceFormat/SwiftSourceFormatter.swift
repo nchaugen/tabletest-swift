@@ -118,7 +118,9 @@ extension String {
     /// The text without whitespace (U+0000–U+0020, SPEC "Terms") at its start and its end.
     func trimmingTableWhitespace() -> String {
         let scalars = unicodeScalars.drop { $0.value <= 0x20 }
-        let end = scalars.lastIndex { $0.value > 0x20 }.map { scalars.index(after: $0) } ?? scalars.startIndex
-        return String(String.UnicodeScalarView(scalars[scalars.startIndex..<end]))
+        guard let last = scalars.lastIndex(where: { $0.value > 0x20 }) else {
+            return ""
+        }
+        return String(String.UnicodeScalarView(scalars[...last]))
     }
 }
