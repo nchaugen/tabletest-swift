@@ -10,6 +10,7 @@ let package = Package(
         .library(name: "TableTestParser", targets: ["TableTestParser"]),
         .library(name: "TableTestFormat", targets: ["TableTestFormat"]),
         .executable(name: "tabletest-format", targets: ["tabletest-format"]),
+        .plugin(name: "TableTestFormatPlugin", targets: ["TableTestFormatPlugin"]),
     ],
     dependencies: [
         .package(url: "https://github.com/swiftlang/swift-syntax.git", "600.0.0"..<"604.0.0"),
@@ -60,6 +61,19 @@ let package = Package(
             resources: [.copy("Fixtures")]
         ),
         .executableTarget(name: "tabletest-format", dependencies: ["TableTestSourceFormat"]),
+        .plugin(
+            name: "TableTestFormatPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "tabletest-format",
+                    description: "Formats the TableTest tables in .swift and .table files"
+                ),
+                permissions: [
+                    .writeToPackageDirectory(reason: "Aligns the columns of the TableTest tables in the sources"),
+                ]
+            ),
+            dependencies: ["tabletest-format"]
+        ),
         .testTarget(
             name: "TableTestSourceFormatTests",
             dependencies: ["TableTestSourceFormat"]
