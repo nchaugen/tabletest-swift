@@ -32,6 +32,10 @@ struct CellConversionTests {
         (scenario: "Map with enum keys in a struct", cell: "[counts: [red: 1]]",
          conversion: .to(Palette(counts: [.red: 1]))),
         (scenario: "Map to a struct", cell: "[name: Ada, age: 36]", conversion: .to(Person(name: "Ada", age: 36))),
+        (scenario: "Map that leaves out its collection fields", cell: "[name: Ada]",
+         conversion: .to(Taster(name: "Ada", notes: [], regions: [], scores: [:]))),
+        (scenario: "Map that names a collection field", cell: "[name: Ada, notes: [cherry]]",
+         conversion: .to(Taster(name: "Ada", notes: ["cherry"], regions: [], scores: [:]))),
         (scenario: "Nested lists", cell: "[[1, 2], [3]]", conversion: .to([[1, 2], [3]])),
         (scenario: "Own conversion inside a Decodable struct", cell: "[item: 5]",
          conversion: .to(Boxed(item: Doubled(value: 10)))),
@@ -414,6 +418,14 @@ struct Step: Decodable, Equatable, Sendable {
 
 struct Palette: Decodable, Equatable, Sendable {
     let counts: [Colour: Int]
+}
+
+/// A struct whose collection fields a map can leave out.
+struct Taster: Decodable, Equatable, Sendable {
+    let name: String
+    var notes: [String] = []
+    var regions: Set<String> = []
+    var scores: [String: Int] = [:]
 }
 
 struct Person: Decodable, Equatable, Sendable {

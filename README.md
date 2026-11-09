@@ -398,8 +398,8 @@ func findsTheOldestVintage(bottles: [Bottle], oldest: Int?) {
 }
 ```
 
-A synthesised `Decodable` needs a key for every field that is not optional, also for a field
-with a default value. When a struct only collects the inputs of one example, give each field its
+A list, set or map field that the map leaves out is empty. A synthesised `Decodable` needs a key
+for every other field that is not optional, also for a field with a default value. When a struct only collects the inputs of one example, give each field its
 own column, and build the struct in the test body.
 
 ### Types from the app

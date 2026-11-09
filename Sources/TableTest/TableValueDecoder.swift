@@ -337,8 +337,14 @@ struct MapContainer<Key: CodingKey>: KeyedDecodingContainerProtocol {
         try value(for: key) == .null
     }
 
+    /// A field that the map leaves out is an error, except a list, a set or a map field, which
+    /// is empty: a synthesised `Decodable` asks for every field that is not optional, also for
+    /// `var notes: [String] = []`.
     func decode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        try TableValueDecoding.decode(value(for: key), as: T.self, codingPath: codingPath + [key])
+        if entry(for: key) == nil, let collection = T.self as? any LeftOutAsEmpty.Type {
+            return try TableValueDecoding.decode(collection.emptyValue, as: T.self, codingPath: codingPath + [key])
+        }
+        return try TableValueDecoding.decode(value(for: key), as: T.self, codingPath: codingPath + [key])
     }
 
     func decode(_ type: Bool.Type, forKey key: Key) throws -> Bool { try decodeValue(type, key) }
@@ -412,4 +418,21 @@ struct ElementKey: CodingKey {
 
     var stringValue: String { "\(index)" }
     var intValue: Int? { index }
+}
+
+/// A collection that a map field reads as empty when the map leaves the field out.
+protocol LeftOutAsEmpty {
+    static var emptyValue: TableValue { get }
+}
+
+extension Array: LeftOutAsEmpty {
+    static var emptyValue: TableValue { .list([]) }
+}
+
+extension Set: LeftOutAsEmpty {
+    static var emptyValue: TableValue { .set([]) }
+}
+
+extension Dictionary: LeftOutAsEmpty {
+    static var emptyValue: TableValue { .map([]) }
 }

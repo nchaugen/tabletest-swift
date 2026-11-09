@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- A map cell can leave out a list, set or map field of a `Decodable` struct, which is then empty: `[body: light]` for a struct with `var aromas: Set<Aroma> = []`
+
 ### Fixed
 - A `@TableTest` in a type whose `init` throws or is `async` compiles; an `init` that throws fails the row, as it fails a Swift Testing test
 
