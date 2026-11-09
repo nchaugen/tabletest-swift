@@ -36,6 +36,13 @@ struct CellConversionTests {
         (scenario: "Own conversion inside a Decodable struct", cell: "[item: 5]",
          conversion: .to(Boxed(item: Doubled(value: 10)))),
         (scenario: "Own conversion before Decodable", cell: "5", conversion: .to(Doubled(value: 10))),
+        (scenario: "Case name of a Decodable enum", cell: "grosseLage", conversion: .to(Site.grosseLage)),
+        (scenario: "Case name of a number raw-value enum", cell: "high", conversion: .to(Level.high)),
+        (scenario: "Case name in a Decodable struct", cell: "[site: ersteLage]",
+         conversion: .to(Vineyard(site: .ersteLage))),
+        (scenario: "List of case names", cell: "[ersteLage, grosseLage]", conversion: .to([Site.ersteLage, .grosseLage])),
+        (scenario: "Map with case-name keys", cell: "[grosseLage: 1]", conversion: .to([Site.grosseLage: 1])),
+        (scenario: "Map with coding-key case names", cell: "[topTier: 1]", conversion: .to([Tier.topTier: 1])),
     ])
     func convertsToADecodableType(scenario: String, cell: String, conversion: Conversion) throws {
         let result = try conversion.convert(cellValue(cell))
@@ -124,7 +131,14 @@ struct CellConversionTests {
         (cell: "[é: 1, e\u{301}: 2]", target: .to([String: Int].self),
          message: "Cannot convert `[é: 1, e\u{301}: 2]` to Dictionary<String, Int>: Swift treats two of its elements as equal"),
         (cell: "west", target: .own(Compass.self), message: "Compass has no case named `west`"),
-        (cell: "grand_cru", target: .plain(Band.self), message: "Band has no case named `grand_cru`"),
+        (cell: "grand_cru", target: .plain(Band.self),
+         message: "Band has no case named `grand_cru`; the case with this raw value is `grandCru`"),
+        (cell: "grosse_lage", target: .to(Site.self),
+         message: "Site has no case named `grosse_lage`; the case with this raw value is `grosseLage`"),
+        (cell: "2", target: .to(Level.self), message: "Level has no case named `2`; the case with this raw value is `high`"),
+        (cell: "[site: erste_lage]", target: .to(Vineyard.self),
+         message: "Site has no case named `erste_lage`; the case with this raw value is `ersteLage` (at `site`)"),
+        (cell: "[1]", target: .to(Site.self), message: "Cannot convert `[1]` to Site"),
         (cell: "E", target: .plain(Grade.self), message: "Grade has no case with the raw value `E`"),
         (cell: "wood", target: .plain(Note.self), message: "Note has no case named `wood`"),
         (cell: "[oak, wood]", target: .plain([Note].self), message: "Note has no case named `wood`"),
@@ -134,8 +148,8 @@ struct CellConversionTests {
         (cell: "", target: .own(Price.self), message: "Cannot convert a blank cell to Price"),
         (cell: "[1.00 EUR]", target: .own(Price.self), message: "Cannot convert `[1.00 EUR]` to Price"),
         (cell: "[1, x]", target: .part([Int].self), message: "Cannot convert `x` to Int (at `[1]`)"),
-        (cell: "[band: grand_cru, price: 9.00 EUR]", target: .part(Listing.self),
-         message: "Band has no case named `grand_cru`"),
+        (cell: "[band: grand, price: 9.00 EUR]", target: .part(Listing.self),
+         message: "Band has no case named `grand`"),
         (cell: "x", target: .plain(Opaque.self),
          message: "Opaque does not convert from a cell: make it Decodable or TableValueDecodable"),
     ])
@@ -225,6 +239,25 @@ enum Colour: String, Decodable, Sendable {
 
 enum Priority: Int, Decodable, Sendable {
     case low = 1, high = 2
+}
+
+/// A `Decodable` enum with a case list, which a cell names by its case name.
+enum Site: String, Decodable, CaseIterable, Sendable {
+    case grosseLage = "grosse_lage"
+    case ersteLage = "erste_lage"
+}
+
+enum Level: Int, Decodable, CaseIterable, Sendable {
+    case low = 1, high = 2
+}
+
+/// An enum that `Dictionary`'s own `Decodable` conformance reads by its raw value.
+enum Tier: String, Decodable, CaseIterable, CodingKeyRepresentable, Sendable {
+    case topTier = "top_tier"
+}
+
+struct Vineyard: Decodable, Equatable, Sendable {
+    let site: Site
 }
 
 struct Palette: Decodable, Equatable, Sendable {

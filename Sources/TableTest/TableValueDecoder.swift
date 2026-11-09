@@ -1,7 +1,8 @@
 import Foundation
 
-/// Converts the parsed value of a cell to a Swift type: through ``TableValueDecodable`` when the
-/// type conforms to it, and otherwise through `Decodable`.
+/// Converts the parsed value of a cell to a Swift type by the first route that applies: the
+/// type's own ``TableValueDecodable`` conformance, a built-in conversion, the case name of a
+/// `CaseIterable` enum, and then `Decodable`.
 enum TableValueDecoding {
     static func decode<T: Decodable>(
         _ value: TableValue,
@@ -19,6 +20,9 @@ enum TableValueDecoding {
         }
         if T.self == URL.self {
             return try url(from: value, codingPath: codingPath) as! T
+        }
+        if let enumerable = T.self as? any CaseIterable.Type {
+            return try namedCase(of: enumerable, from: value, codingPath: codingPath) as! T
         }
         let result = try T(from: TableValueDecoder(value: value, codingPath: codingPath))
         try refuseMergedElements(result, of: value, as: T.self)
@@ -50,6 +54,21 @@ enum TableValueDecoding {
         throw TableValueConversionError(
             "Cannot convert `\(value.tableText)` to \(typeName(T.self)): Swift treats two of its elements as equal"
         )
+    }
+
+    /// The case whose name is the text of the cell, with the path to the cell in an error.
+    private static func namedCase<T: CaseIterable>(
+        of type: T.Type,
+        from value: TableValue,
+        codingPath: [any CodingKey]
+    ) throws -> T {
+        do {
+            return try namedCase(of: T.self, from: value)
+        } catch let error as TableValueConversionError {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: codingPath, debugDescription: error.description)
+            )
+        }
     }
 
     private static func decimal(from value: TableValue, codingPath: [any CodingKey]) throws -> Decimal {
