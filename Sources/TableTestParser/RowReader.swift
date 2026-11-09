@@ -1,8 +1,13 @@
 /// Reads one row of a table by recursive descent over the scalars of its line.
 ///
-/// Each grammar function returns `nil` when the text at the cursor does not match it, and
-/// ``attempt(_:)`` then puts the cursor back. That is the backtracking of the JVM parser's
-/// `either`. An error that no other reading can repair, such as a duplicate map key, throws.
+/// Each grammar function returns `nil` when the text at the cursor does not match it, and then
+/// leaves the cursor where it found it. A caller can therefore try another reading, as the JVM
+/// parser's `either` does. An error that no other reading can repair, such as a duplicate map
+/// key, throws.
+///
+/// The functions restore the cursor themselves, with no closure-based helper, because nesting
+/// recurses through them: fewer frames for each level of nesting keep deep input inside the
+/// small stack of a test thread.
 struct RowReader {
     private let line: SourceLine
     private var position = 0
@@ -42,7 +47,7 @@ struct RowReader {
         if let collection = try collection() {
             return collection
         }
-        if let quoted = try attempt({ $0.quotedString() }) {
+        if let quoted = quotedString() {
             return .string(quoted)
         }
         return unquotedCellValue()
@@ -82,31 +87,39 @@ struct RowReader {
     private mutating func collection() throws(TableParseError) -> TableValue? {
         switch current {
         case "[":
-            if let map = try attempt({ reader throws(TableParseError) in try reader.map() }) {
+            if let map = try map() {
                 return map
             }
-            return try attempt { reader throws(TableParseError) in try reader.list() }
+            return try list()
         case "{":
-            return try attempt { reader throws(TableParseError) in try reader.set() }
+            return try set()
         default:
             return nil
         }
     }
 
     private mutating func list() throws(TableParseError) -> TableValue? {
+        let start = position
         guard consume("[") else {
             return nil
         }
-        let elements = try attempt { reader throws(TableParseError) in try reader.elements() } ?? []
-        return consume("]") ? .list(elements) : nil
+        let elements = try elements() ?? []
+        guard consume("]") else {
+            return backtrack(to: start)
+        }
+        return .list(elements)
     }
 
     private mutating func set() throws(TableParseError) -> TableValue? {
+        let start = position
         guard consume("{") else {
             return nil
         }
-        let elements = try attempt { reader throws(TableParseError) in try reader.elements() } ?? []
-        return consume("}") ? .set(elements.withoutDuplicates()) : nil
+        let elements = try elements() ?? []
+        guard consume("}") else {
+            return backtrack(to: start)
+        }
+        return .set(elements.withoutDuplicates())
     }
 
     private mutating func map() throws(TableParseError) -> TableValue? {
@@ -115,24 +128,29 @@ struct RowReader {
             return nil
         }
         let entries: [TableMapEntry]
-        if try attempt({ $0.emptyMapContent() }) != nil {
+        if emptyMapContent() {
             entries = []
-        } else if let pairs = try attempt({ reader throws(TableParseError) in try reader.pairs() }) {
+        } else if let pairs = try pairs() {
             entries = try entriesWithUniqueKeys(pairs, mapStart: start)
         } else {
-            return nil
+            return backtrack(to: start)
         }
-        return consume("]") ? .map(entries) : nil
+        guard consume("]") else {
+            return backtrack(to: start)
+        }
+        return .map(entries)
     }
 
-    /// The `:` of `[:]`, with any whitespace around it.
-    private mutating func emptyMapContent() -> Void? {
+    /// Reads the `:` of `[:]`, with any whitespace around it.
+    private mutating func emptyMapContent() -> Bool {
+        let start = position
         skipWhitespace()
         guard consume(":") else {
-            return nil
+            position = start
+            return false
         }
         skipWhitespace()
-        return ()
+        return true
     }
 
     private mutating func elements() throws(TableParseError) -> [TableValue]? {
@@ -140,24 +158,34 @@ struct RowReader {
             return nil
         }
         var elements = [first]
-        while let next = try attempt({ reader throws(TableParseError) in
-            reader.consume(",") ? try reader.element() : nil
-        }) {
+        while let next = try nextElement() {
             elements.append(next)
         }
         return elements
     }
 
+    /// A `,` and the element after it.
+    private mutating func nextElement() throws(TableParseError) -> TableValue? {
+        let start = position
+        guard consume(","), let element = try element() else {
+            return backtrack(to: start)
+        }
+        return element
+    }
+
     /// One element, with the whitespace around it (SPEC 2.8).
     private mutating func element() throws(TableParseError) -> TableValue? {
+        let start = position
         skipWhitespace()
-        let element: TableValue?
+        let element: TableValue
         if let collection = try collection() {
             element = collection
-        } else if let quoted = try attempt({ $0.quotedString() }) {
+        } else if let quoted = quotedString() {
             element = .string(quoted)
+        } else if let unquoted = unquotedText(endingBefore: Self.elementEndings) {
+            element = .string(unquoted)
         } else {
-            element = unquotedText(endingBefore: Self.elementEndings).map(TableValue.string)
+            return backtrack(to: start)
         }
         skipWhitespace()
         return element
@@ -168,30 +196,33 @@ struct RowReader {
             return nil
         }
         var pairs = [first]
-        while let next = try attempt({ reader throws(TableParseError) in
-            reader.consume(",") ? try reader.pair() : nil
-        }) {
+        while let next = try nextPair() {
             pairs.append(next)
         }
         return pairs
     }
 
+    /// A `,` and the pair after it.
+    private mutating func nextPair() throws(TableParseError) -> KeyedPair? {
+        let start = position
+        guard consume(","), let pair = try pair() else {
+            return backtrack(to: start)
+        }
+        return pair
+    }
+
     private mutating func pair() throws(TableParseError) -> KeyedPair? {
+        let start = position
         skipWhitespace()
         let column = position
-        guard let key = try attempt({ $0.quotedString() }) ?? unquotedKey() else {
-            return nil
+        guard let key = quotedString() ?? unquotedText(endingBefore: Self.keyEndings) else {
+            return backtrack(to: start)
         }
         skipWhitespace()
         guard consume(":"), let value = try element() else {
-            return nil
+            return backtrack(to: start)
         }
         return KeyedPair(key: key, column: column, value: value)
-    }
-
-    /// An unquoted key (SPEC 2.9). Unlike an element, a key can hold `}` but not `[`.
-    private mutating func unquotedKey() -> String? {
-        unquotedText(endingBefore: Self.keyEndings)
     }
 
     /// The scalars that cannot start an unquoted element or key (SPEC 2.8, 2.9).
@@ -261,14 +292,8 @@ struct RowReader {
         }
     }
 
-    /// Runs a grammar function, and puts the cursor back when it does not match.
-    private mutating func attempt<Value>(
-        _ parse: (inout RowReader) throws(TableParseError) -> Value?
-    ) throws(TableParseError) -> Value? {
-        let start = position
-        if let value = try parse(&self) {
-            return value
-        }
+    /// Puts the cursor back to where a grammar function started, and reports no match.
+    private mutating func backtrack<Value>(to start: Int) -> Value? {
         position = start
         return nil
     }
