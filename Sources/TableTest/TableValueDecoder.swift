@@ -11,6 +11,9 @@ enum TableValueDecoding {
         if let custom = T.self as? any TableValueDecodable.Type {
             return try custom.init(tableValue: value) as! T
         }
+        if let map = T.self as? any MapCollection.Type, !map.decodesFromAMap {
+            return try map.init(converting: value) as! T
+        }
         if T.self == Decimal.self {
             return try decimal(from: value, codingPath: codingPath) as! T
         }

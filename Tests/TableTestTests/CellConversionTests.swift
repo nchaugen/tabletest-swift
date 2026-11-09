@@ -28,6 +28,9 @@ struct CellConversionTests {
         (scenario: "List with a repeated element to a set", cell: "[a, a]", conversion: .to(Set(["a"]))),
         (scenario: "Map with text keys", cell: "[a: 1, b: 2]", conversion: .to(["a": 1, "b": 2])),
         (scenario: "Map with number keys", cell: "[1: one, 2: two]", conversion: .to([1: "one", 2: "two"])),
+        (scenario: "Map with enum keys", cell: "[red: 1, green: 2]", conversion: .to([Colour.red: 1, .green: 2])),
+        (scenario: "Map with enum keys in a struct", cell: "[counts: [red: 1]]",
+         conversion: .to(Palette(counts: [.red: 1]))),
         (scenario: "Map to a struct", cell: "[name: Ada, age: 36]", conversion: .to(Person(name: "Ada", age: 36))),
         (scenario: "Nested lists", cell: "[[1, 2], [3]]", conversion: .to([[1, 2], [3]])),
         (scenario: "Own conversion inside a Decodable struct", cell: "[item: 5]",
@@ -173,6 +176,10 @@ enum Colour: String, Decodable, Sendable {
 
 enum Priority: Int, Decodable, Sendable {
     case low = 1, high = 2
+}
+
+struct Palette: Decodable, Equatable, Sendable {
+    let counts: [Colour: Int]
 }
 
 struct Person: Decodable, Equatable, Sendable {

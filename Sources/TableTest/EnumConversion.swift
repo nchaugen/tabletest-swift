@@ -80,6 +80,18 @@ extension Set: EnumCollection {
     }
 }
 
+/// A Swift dictionary, which `Decodable` reads from a map only for some key types.
+protocol MapCollection: EnumCollection {
+    /// Whether the dictionary's own `init(from:)` reads a map; for other keys it reads a list.
+    static var decodesFromAMap: Bool { get }
+}
+
+extension Dictionary: MapCollection {
+    static var decodesFromAMap: Bool {
+        Key.self == String.self || Key.self == Int.self || Key.self is any CodingKeyRepresentable.Type
+    }
+}
+
 extension Dictionary: EnumCollection {
     init(converting value: TableValue) throws {
         guard case .map(let entries) = value else {
