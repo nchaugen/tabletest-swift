@@ -37,6 +37,21 @@ public struct TableSource: Sendable {
     }
 }
 
+/// One parameter of the function that a table is attached to.
+public struct TableParameter: Sendable {
+    /// Whether the parameter takes a whole set cell, rather than one test case for each element.
+    let takesSet: Bool
+
+    /// The parameter of a type.
+    public init<T>(_ type: T.Type) {
+        takesSet = false
+    }
+
+    init(takesSet: Bool) {
+        self.takesSet = takesSet
+    }
+}
+
 /// A table that does not fit the function it is attached to.
 public struct TableTestError: Error, CustomStringConvertible, Sendable {
     public let description: String
@@ -48,11 +63,11 @@ public enum TableTestRows {
     ///
     /// When the table has one more column than the function has parameters, the first column
     /// is the scenario name of each row. Otherwise every column maps to a parameter, in order.
-    public static func make(table: String, parameterCount: Int, source: TableSource) throws -> [TableTestRow] {
+    public static func make(table: String, parameters: [TableParameter], source: TableSource) throws -> [TableTestRow] {
         let parsed = try TableParser.parse(table)
         let layout: ColumnLayout
         do {
-            layout = try parsed.columnLayout(parameterCount: parameterCount)
+            layout = try parsed.columnLayout(parameterCount: parameters.count)
         } catch {
             throw TableTestError(description: error.message)
         }

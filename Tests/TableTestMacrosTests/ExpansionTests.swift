@@ -26,7 +26,7 @@ struct ExpansionTests {
                 struct __tabletest_knowsALeapYear {
                     @Test("knowsALeapYear", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
-                    parameterCount: 2,
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true)
                     ))
                     func rows(_ row: TableTestRow) throws {
@@ -63,7 +63,7 @@ struct ExpansionTests {
                 @MainActor struct __tabletest_knowsALeapYear {
                     @Test("Leap years", .tags(.calendar), arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
-                    parameterCount: 2,
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 3, column: 55, indentation: 8, isMultiline: true)
                     ))
                     func rows(_ row: TableTestRow) async throws {
@@ -98,7 +98,7 @@ struct ExpansionTests {
                 struct `__tabletest_knows a leap year` {
                     @Test("knows a leap year", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
-                    parameterCount: 2,
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
                     source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true)
                     ))
                     func rows(_ row: TableTestRow) throws {

@@ -56,12 +56,15 @@ public struct TableTestMacro: PeerMacro {
         }
 
         let name = function.name.text
+        let parameterList = function.parameters
+            .map { "TableParameter((\($0.type.trimmedDescription)).self)" }
+            .joined(separator: ", ")
         let title = arguments.displayName?.trimmedDescription ?? "\"\(name.withoutBackticks)\""
         let testAttributeArguments = ([title] + arguments.traits.map(\.trimmedDescription) + [
             """
             arguments: try TableTestRows.make(
                 table: \(StringLiteralExprSyntax(content: table)),
-                parameterCount: \(function.parameters.count),
+                parameters: [\(parameterList)],
                 source: TableSource(fileID: \(fileID.file), filePath: \(filePath.file), line: \(fileID.line), \
             column: \(fileID.column), indentation: \(arguments.table.indentation), \
             isMultiline: \(arguments.table.isMultiline))

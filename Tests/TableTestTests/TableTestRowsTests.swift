@@ -29,7 +29,7 @@ struct TableTestRowsTests {
         names: [String],
         cells: [[String]]
     ) throws {
-        let rows = try TableTestRows.make(table: table.joined(separator: "\n"), parameterCount: parameters, source: Self.source)
+        let rows = try TableTestRows.make(table: table.joined(separator: "\n"), parameters: .values(parameters), source: Self.source)
 
         #expect(rows.map(\.testDescription) == names)
         #expect(rows.map { $0.cells.map(\.value.tableText) } == cells)
@@ -49,14 +49,14 @@ struct TableTestRowsTests {
             line: 10, column: 20, indentation: 4, isMultiline: isMultiline
         )
 
-        let rows = try TableTestRows.make(table: table.joined(separator: "\n"), parameterCount: 1, source: source)
+        let rows = try TableTestRows.make(table: table.joined(separator: "\n"), parameters: .values(1), source: source)
 
         #expect(rows.map { $0.cells.map { Position($0.location) } } == locations)
     }
 
     @Test("Encodes the row number as the test argument")
     func encodesTheRowNumber() throws {
-        let rows = try TableTestRows.make(table: "Year\n2004\n2001\n2000", parameterCount: 1, source: Self.source)
+        let rows = try TableTestRows.make(table: "Year\n2004\n2001\n2000", parameters: .values(1), source: Self.source)
 
         let encoded = try rows.map { String(decoding: try JSONEncoder().encode(EncodedArgument(row: $0)), as: UTF8.self) }
 
@@ -73,13 +73,13 @@ struct TableTestRowsTests {
     ])
     func refusesATableThatDoesNotFit(scenario: String, table: [String], parameters: Int, message: String) {
         #expect(throws: TableTestError(description: message)) {
-            try TableTestRows.make(table: table.joined(separator: "\n"), parameterCount: parameters, source: Self.source)
+            try TableTestRows.make(table: table.joined(separator: "\n"), parameters: .values(parameters), source: Self.source)
         }
     }
 
     @Test("Reports a cell that does not convert by its row, column and position")
     func reportsACellThatDoesNotConvert() throws {
-        let rows = try TableTestRows.make(table: "Scenario | Year\nLeap | 2004\nTypo | 200x", parameterCount: 1, source: Self.source)
+        let rows = try TableTestRows.make(table: "Scenario | Year\nLeap | 2004\nTypo | 200x", parameters: .values(1), source: Self.source)
 
         let error = #expect(throws: TableCellError.self) { try rows[1].decode(0, as: Int.self) }
 
@@ -117,5 +117,12 @@ struct EncodedArgument: Encodable {
 extension TableTestError: Equatable {
     public static func == (lhs: TableTestError, rhs: TableTestError) -> Bool {
         lhs.description == rhs.description
+    }
+}
+
+extension Array where Element == TableParameter {
+    /// Parameters that do not take a set.
+    static func values(_ count: Int) -> [TableParameter] {
+        Array(repeating: TableParameter(takesSet: false), count: count)
     }
 }
