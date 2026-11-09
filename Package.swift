@@ -8,5 +8,10 @@ let package = Package(
     ],
     targets: [
         .target(name: "TableTestParser"),
+        .testTarget(
+            name: "TableTestParserTests",
+            dependencies: ["TableTestParser"],
+            resources: [.copy("Fixtures")]
+        ),
     ]
 )

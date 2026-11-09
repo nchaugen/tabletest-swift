@@ -1,0 +1,261 @@
+[
+  {
+    "name": "Unquoted",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | abc"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "abc"]]}
+  },
+  {
+    "name": "With spaces",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | abc def"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "abc def"]]}
+  },
+  {
+    "name": "Unquoted is trimmed",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x |  a b c "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a b c"]]}
+  },
+  {
+    "name": "Integer stays text",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | 1"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "1"]]}
+  },
+  {
+    "name": "Decimal stays text",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | 3.14"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "3.14"]]}
+  },
+  {
+    "name": "Number with underscores stays text",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | 1_000_000"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "1_000_000"]]}
+  },
+  {
+    "name": "Quotes inside an unquoted value",
+    "rule": "unquoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | a'b\"c"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a'b\"c"]]}
+  },
+  {
+    "name": "Single quoted",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | 'abc'"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "abc"]]}
+  },
+  {
+    "name": "Double quoted",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \"abc\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "abc"]]}
+  },
+  {
+    "name": "Single quoted is not trimmed",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | ' a b c '"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", " a b c "]]}
+  },
+  {
+    "name": "Double quoted is not trimmed",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \" a b c \""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", " a b c "]]}
+  },
+  {
+    "name": "Single quoted pipe",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | '|'"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "|"]]}
+  },
+  {
+    "name": "Double quoted pipe",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \"|\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "|"]]}
+  },
+  {
+    "name": "Single quoted opening bracket",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | '['"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "["]]}
+  },
+  {
+    "name": "Double quoted opening bracket",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \"[\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "["]]}
+  },
+  {
+    "name": "Single quoted opening brace",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | '{'"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "{"]]}
+  },
+  {
+    "name": "Double quoted opening brace",
+    "rule": "quoted-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \"{\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "{"]]}
+  },
+  {
+    "name": "Blank is null",
+    "rule": "blank-and-empty-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x |  "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", null]]}
+  },
+  {
+    "name": "Empty single quoted",
+    "rule": "blank-and-empty-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | ''"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", ""]]}
+  },
+  {
+    "name": "Empty double quoted",
+    "rule": "blank-and-empty-values",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \"\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", ""]]}
+  },
+  {
+    "name": "Unmatched single quote",
+    "rule": "unmatched-quotes",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | '"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "'"]]}
+  },
+  {
+    "name": "Unmatched double quote",
+    "rule": "unmatched-quotes",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | \""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "\""]]}
+  },
+  {
+    "name": "Unterminated quote is literal",
+    "rule": "unmatched-quotes",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | 'abc"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "'abc"]]}
+  },
+  {
+    "name": "Triple single quotes",
+    "rule": "unmatched-quotes",
+    "source": "ValueGrammarTest#shouldHandleInvalidQuotedStringSyntax",
+    "input": ["Case | Value", "x | '''"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Triple double quotes",
+    "rule": "unmatched-quotes",
+    "source": "ValueGrammarTest#shouldHandleInvalidQuotedStringSyntax",
+    "input": ["Case | Value", "x | \"\"\""],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "A control character at the end of a value is removed",
+    "rule": "unquoted-values",
+    "input": ["Case | Value", "x | v\u000b"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "v"]]}
+  },
+  {
+    "name": "No-break space is kept",
+    "rule": "unquoted-values",
+    "input": ["Case | Value", "x | \u00a0v\u00a0"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "\u00a0v\u00a0"]]}
+  },
+  {
+    "name": "Unicode text",
+    "rule": "unquoted-values",
+    "input": ["名前 | 値", "東京 | 🍷"],
+    "expect": {"headers": ["名前", "値"], "rows": [["東京", "🍷"]]}
+  },
+  {
+    "name": "Text after a closing quote",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | 'a'b"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Whitespace after a closing quote",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | 'a'  "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a"]]}
+  },
+  {
+    "name": "Single quote inside double quotes",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | \"it's\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "it's"]]}
+  },
+  {
+    "name": "Double quotes inside single quotes",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | 'say \"hi\"'"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "say \"hi\""]]}
+  },
+  {
+    "name": "A backslash does not escape a quote",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | 'a\\'b'"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "A value with a pipe and both quote styles",
+    "rule": "unwritable-values",
+    "input": ["Case | Value", "x | 'He said \"hi\" | it's'"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "A control character before a quoted value",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | \u000b'a'"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a"]]}
+  },
+  {
+    "name": "A control character after a quoted value",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | 'a'\u000b"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a"]]}
+  },
+  {
+    "name": "A control character inside quotes is kept",
+    "rule": "quoted-values",
+    "input": ["Case | Value", "x | '\u000ba\u000b'"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "\u000ba\u000b"]]}
+  },
+  {
+    "name": "NUL at the end of a value is removed",
+    "rule": "unquoted-values",
+    "input": ["Case | Value", "x | a\u0000"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a"]]}
+  },
+  {
+    "name": "A control character inside a value is kept",
+    "rule": "unquoted-values",
+    "input": ["Case | Value", "x | a\u000bb"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a\u000bb"]]}
+  }
+]

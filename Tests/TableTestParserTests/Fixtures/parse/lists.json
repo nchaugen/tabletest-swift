@@ -1,0 +1,161 @@
+[
+  {
+    "name": "Null list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", null]]}
+  },
+  {
+    "name": "Empty list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | []"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": []}]]}
+  },
+  {
+    "name": "Basic list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | [a, b, c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a", "b", "c"]}]]}
+  },
+  {
+    "name": "Nested list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | [[a], [b], [c]]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": [{"list": ["a"]}, {"list": ["b"]}, {"list": ["c"]}]}]]}
+  },
+  {
+    "name": "Mixed content list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | [[],a]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": [{"list": []}, "a"]}]]}
+  },
+  {
+    "name": "List with set",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | [{a,b}, c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": [{"set": ["a", "b"]}, "c"]}]]}
+  },
+  {
+    "name": "List with map",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | [[a:b], c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": [{"map": [["a", "b"]]}, "c"]}]]}
+  },
+  {
+    "name": "List with quoted value",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x | [\"a,b\", c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a,b", "c"]}]]}
+  },
+  {
+    "name": "Extra whitespace",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureLists",
+    "input": ["Case | Value", "x |   [  a  ,  a  ]  "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a", "a"]}]]}
+  },
+  {
+    "name": "Unquoted string in a list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [a]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a"]}]]}
+  },
+  {
+    "name": "Double quoted string in a list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [\"a\"]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a"]}]]}
+  },
+  {
+    "name": "Single quoted string in a list",
+    "rule": "lists",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | ['a']"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a"]}]]}
+  },
+  {
+    "name": "Quoted brackets",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | \"[]\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "[]"]]}
+  },
+  {
+    "name": "Only closing bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | ]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "]"]]}
+  },
+  {
+    "name": "Unexpected leading character",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | a[]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a[]"]]}
+  },
+  {
+    "name": "Only opening bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | ["],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Closed by the wrong delimiter",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | [a, b}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Double opening bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | [[]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Double closing bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | []]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Unexpected trailing character",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | []a"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Missing element",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidListSyntax",
+    "input": ["Case | Value", "x | [a,]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Blank element between commas",
+    "rule": "lists",
+    "input": ["Case | Value", "x | [a, , b]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Whitespace between brackets",
+    "rule": "lists",
+    "input": ["Case | Value", "x | [ ]"],
+    "expect": {"error": "malformed"}
+  }
+]

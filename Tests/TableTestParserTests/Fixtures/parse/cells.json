@@ -1,0 +1,130 @@
+[
+  {
+    "name": "No pipe at all",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "a"],
+    "expect": {"headers": ["Field"], "rows": [["a"]]}
+  },
+  {
+    "name": "One pipe",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "a | b"],
+    "expect": {"headers": ["Field"], "rows": [["a", "b"]]}
+  },
+  {
+    "name": "Spaced pipes",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "a | b | c"],
+    "expect": {"headers": ["Field"], "rows": [["a", "b", "c"]]}
+  },
+  {
+    "name": "Unspaced pipes",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "a|b|c"],
+    "expect": {"headers": ["Field"], "rows": [["a", "b", "c"]]}
+  },
+  {
+    "name": "A trailing pipe",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "a | b |"],
+    "expect": {"headers": ["Field"], "rows": [["a", "b", null]]}
+  },
+  {
+    "name": "A leading pipe",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "| a | b"],
+    "expect": {"headers": ["Field"], "rows": [[null, "a", "b"]]}
+  },
+  {
+    "name": "An empty cell between pipes",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "a | | c"],
+    "expect": {"headers": ["Field"], "rows": [["a", null, "c"]]}
+  },
+  {
+    "name": "Nothing but pipes",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldDivideRowIntoFields",
+    "input": ["Field", "|||"],
+    "expect": {"headers": ["Field"], "rows": [[null, null, null, null]]}
+  },
+  {
+    "name": "Double quoted pipe",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldKeepPipeInsideQuotedField",
+    "input": ["Field", "\"a | b\" | c"],
+    "expect": {"headers": ["Field"], "rows": [["a | b", "c"]]}
+  },
+  {
+    "name": "Single quoted pipe",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldKeepPipeInsideQuotedField",
+    "input": ["Field", "'a | b' | c"],
+    "expect": {"headers": ["Field"], "rows": [["a | b", "c"]]}
+  },
+  {
+    "name": "Whole row quoted",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldKeepPipeInsideQuotedField",
+    "input": ["Field", "\"a | b | c\""],
+    "expect": {"headers": ["Field"], "rows": [["a | b | c"]]}
+  },
+  {
+    "name": "Unquoted pipe in a list",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldRejectUnquotedPipeInsideCollection",
+    "input": ["Field", "[a | b]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Unquoted pipe in a set",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldRejectUnquotedPipeInsideCollection",
+    "input": ["Field", "{a | b}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Unquoted pipe in a map value",
+    "rule": "cells",
+    "source": "RowGrammarTest#shouldRejectUnquotedPipeInsideCollection",
+    "input": ["Field", "[k: a | b]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Tabs around cells",
+    "rule": "cells",
+    "input": ["a\t|\tb", "\t1\t|\t2\t"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Only pipes as a data row",
+    "rule": "cells",
+    "input": ["a | b", "|"],
+    "expect": {"headers": ["a", "b"], "rows": [[null, null]]}
+  },
+  {
+    "name": "A cell of control characters",
+    "rule": "cells",
+    "input": ["a | b", "\u000b | 1"],
+    "expect": {"headers": ["a", "b"], "rows": [[null, "1"]]}
+  },
+  {
+    "name": "A control character before a list",
+    "rule": "cells",
+    "input": ["Case | Value", "x | \u000b[a]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a"]}]]}
+  },
+  {
+    "name": "A no-break space cell is not blank",
+    "rule": "cells",
+    "input": ["a | b", "\u00a0 | 1"],
+    "expect": {"headers": ["a", "b"], "rows": [["\u00a0", "1"]]}
+  }
+]

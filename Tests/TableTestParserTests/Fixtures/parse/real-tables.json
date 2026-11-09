@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Collections, comments and Unicode from a JVM project",
+    "rule": "header-and-data-rows",
+    "source": "tabletest-examples ide-fixtures/table-probes/TableCollectionsAndUnicodeProbe.java#shouldExerciseCollectionLiteralsAndUnicodeTokens",
+    "input": ["Collection literal | Map literal                    | Set literal?", "    []                 | [:]                            | {}", "    [[]]               | [a: []]                        | {[]}", "    [[:]]              | [a: [:]]                       | {[:]}", "    [{}]               | [a: {}]                        | {{}}", "    [1, 2, 3]          | [one: 1, two: 2, three: 3]     | {1, 2, 3}", "    ['1', \"2\", 3]      | [one: '1', two: \"2\", three: 3] | {'1', \"2\", 3}", "    [[], [], []]       | [a: [], b: [], c: []]          | {[], [], []}", "    abc                | a,b,c                          | > [ a , b , c ] <", "                       |                                |", "    1                  | 2                              | 3", "    '1'                | \"2\"                            | 3", "    ''                 | \"\"                             |", "", "    //", "    // comment", "", "    xx                 | yy                             | zz", "    æææ                | øøø                            | ååå", "    [1, 2, 3]          | [one: 1, two: 2, three: 3]     | {1, 2, 3}", "    !@#$%^&*()_+-=     | \"|,[]{}:\"                      | 12:34:56.789", "    你好世界           | こんにちは世界                 | 안녕하세요", "    مرحبا بالعالم      | Привет мир                     | Γεια σου κόσμε", "    שלום עולם          | สวัสดีโลก                      | नमस्ते संसार", "    😀                  | Hello 👋 World                  | Café ☕ tastes good 😋", "    🌍🌎🌏                | 👨‍💻                            | 🇺🇸", "    naïve résumé       | α β γ δ ε                      | ∑ ∏ ∫ √", "    ┌─┐│ │└─┘          | $€£¥₹                          | «»\"\"''—–", "    //   the end"],
+    "expect": {"headers": ["Collection literal", "Map literal", "Set literal?"], "rows": [[{"list": []}, {"map": []}, {"set": []}], [{"list": [{"list": []}]}, {"map": [["a", {"list": []}]]}, {"set": [{"list": []}]}], [{"list": [{"map": []}]}, {"map": [["a", {"map": []}]]}, {"set": [{"map": []}]}], [{"list": [{"set": []}]}, {"map": [["a", {"set": []}]]}, {"set": [{"set": []}]}], [{"list": ["1", "2", "3"]}, {"map": [["one", "1"], ["two", "2"], ["three", "3"]]}, {"set": ["1", "2", "3"]}], [{"list": ["1", "2", "3"]}, {"map": [["one", "1"], ["two", "2"], ["three", "3"]]}, {"set": ["1", "2", "3"]}], [{"list": [{"list": []}, {"list": []}, {"list": []}]}, {"map": [["a", {"list": []}], ["b", {"list": []}], ["c", {"list": []}]]}, {"set": [{"list": []}]}], ["abc", "a,b,c", "> [ a , b , c ] <"], [null, null, null], ["1", "2", "3"], ["1", "2", "3"], ["", "", null], ["xx", "yy", "zz"], ["æææ", "øøø", "ååå"], [{"list": ["1", "2", "3"]}, {"map": [["one", "1"], ["two", "2"], ["three", "3"]]}, {"set": ["1", "2", "3"]}], ["!@#$%^&*()_+-=", "|,[]{}:", "12:34:56.789"], ["你好世界", "こんにちは世界", "안녕하세요"], ["مرحبا بالعالم", "Привет мир", "Γεια σου κόσμε"], ["שלום עולם", "สวัสดีโลก", "नमस्ते संसार"], ["😀", "Hello 👋 World", "Café ☕ tastes good 😋"], ["🌍🌎🌏", "👨‍💻", "🇺🇸"], ["naïve résumé", "α β γ δ ε", "∑ ∏ ∫ √"], ["┌─┐│ │└─┘", "$€£¥₹", "«»\"\"''—–"]]}
+  },
+  {
+    "name": "Composed and decomposed é are two set elements",
+    "rule": "sets",
+    "input": ["Case | Value", "x | {é, e\u0301}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["é", "e\u0301"]}]]}
+  },
+  {
+    "name": "Composed and decomposed é are two keys",
+    "rule": "duplicate-keys",
+    "input": ["Case | Value", "x | [é: 1, e\u0301: 2]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["é", "1"], ["e\u0301", "2"]]}]]}
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Spaces inside an element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [a b, c d]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a b", "c d"]}]]}
+  },
+  {
+    "name": "Quoted closing bracket in an element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [\"a]\", b]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a]", "b"]}]]}
+  },
+  {
+    "name": "Closing brace inside a list element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [a}b]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Opening brace inside a list element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [a{b]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a{b"]}]]}
+  },
+  {
+    "name": "Colon inside a list element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [a:b:c]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Text after a quoted element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | ['a'b]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Quote inside an unquoted element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [a'b]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a'b"]}]]}
+  },
+  {
+    "name": "Control characters around an element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [\u000ba\u000b, \u000b'b'\u000b]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a", "b"]}]]}
+  },
+  {
+    "name": "Opening bracket inside a list element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | [a[b]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"list": ["a[b"]}]]}
+  },
+  {
+    "name": "Closing bracket inside a set element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | {a]b}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Unmatched quote at the start of an element",
+    "rule": "elements",
+    "input": ["Case | Value", "x | ['a]"],
+    "expect": {"error": "malformed"}
+  }
+]

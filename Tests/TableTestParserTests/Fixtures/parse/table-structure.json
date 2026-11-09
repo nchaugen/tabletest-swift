@@ -1,0 +1,233 @@
+[
+  {
+    "name": "One data row",
+    "rule": "header-and-data-rows",
+    "source": "TableStructureTest#shouldParseHeaderRowFollowedByDataRows",
+    "input": ["a | b", "1 | 2"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Two data rows",
+    "rule": "header-and-data-rows",
+    "source": "TableStructureTest#shouldParseHeaderRowFollowedByDataRows",
+    "input": ["a | b", "1 | 2", "3 | 4"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"], ["3", "4"]]}
+  },
+  {
+    "name": "Single column",
+    "rule": "header-and-data-rows",
+    "source": "TableStructureTest#shouldParseHeaderRowFollowedByDataRows",
+    "input": ["a", "1", "2"],
+    "expect": {"headers": ["a"], "rows": [["1"], ["2"]]}
+  },
+  {
+    "name": "Three columns",
+    "rule": "header-and-data-rows",
+    "source": "TableStructureTest#shouldParseHeaderRowFollowedByDataRows",
+    "input": ["a | b | c", "1 | 2 | 3"],
+    "expect": {"headers": ["a", "b", "c"], "rows": [["1", "2", "3"]]}
+  },
+  {
+    "name": "Header row only",
+    "rule": "header-and-data-rows",
+    "input": ["a | b"],
+    "expect": {"headers": ["a", "b"], "rows": []}
+  },
+  {
+    "name": "Blank lines around the table",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["", "   ", "a | b", "1 | 2", "  "],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Blank line between rows",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["a | b", "1 | 2", "", "3 | 4"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"], ["3", "4"]]}
+  },
+  {
+    "name": "Comment line above header",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["// intro", "a | b", "1 | 2"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Comment line between rows",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["a | b", "// note", "1 | 2"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Comment line holding pipes",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["a | b", "// 0 | 1", "1 | 2"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Indented comment line",
+    "rule": "blank-and-comment-lines",
+    "input": ["a | b", "   // note", "1 | 2"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "Quoted leading slashes",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["a | b", "'//2' | 3"],
+    "expect": {"headers": ["a", "b"], "rows": [["//2", "3"]]}
+  },
+  {
+    "name": "Slashes after cell text",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["a | b", "4 // | 5"],
+    "expect": {"headers": ["a", "b"], "rows": [["4 //", "5"]]}
+  },
+  {
+    "name": "Slashes starting a cell",
+    "rule": "blank-and-comment-lines",
+    "source": "TableStructureTest#shouldIgnoreBlankLinesAndCommentLines",
+    "input": ["a | b", "6 | // 7"],
+    "expect": {"headers": ["a", "b"], "rows": [["6", "// 7"]]}
+  },
+  {
+    "name": "Empty input",
+    "rule": "no-rows",
+    "source": "TableStructureTest#shouldRejectInputWithoutTableRows",
+    "input": [""],
+    "expect": {"error": "no-rows"}
+  },
+  {
+    "name": "Blank input",
+    "rule": "no-rows",
+    "source": "TableStructureTest#shouldRejectInputWithoutTableRows",
+    "input": ["   "],
+    "expect": {"error": "no-rows"}
+  },
+  {
+    "name": "Only a comment",
+    "rule": "no-rows",
+    "source": "TableStructureTest#shouldRejectInputWithoutTableRows",
+    "input": ["// just a comment"],
+    "expect": {"error": "no-rows"}
+  },
+  {
+    "name": "Comments and blank lines",
+    "rule": "no-rows",
+    "source": "TableStructureTest#shouldRejectInputWithoutTableRows",
+    "input": ["// one", "   ", "// two"],
+    "expect": {"error": "no-rows"}
+  },
+  {
+    "name": "Blank first header",
+    "rule": "header-cells",
+    "source": "TableStructureTest#shouldRejectBlankHeaderCells",
+    "input": [" | b | c", "1 | 2 | 3"],
+    "expect": {"error": "blank-header"}
+  },
+  {
+    "name": "Blank middle header",
+    "rule": "header-cells",
+    "source": "TableStructureTest#shouldRejectBlankHeaderCells",
+    "input": ["a |  | c", "1 | 2 | 3"],
+    "expect": {"error": "blank-header"}
+  },
+  {
+    "name": "Blank last header",
+    "rule": "header-cells",
+    "source": "TableStructureTest#shouldRejectBlankHeaderCells",
+    "input": ["a | b | ", "1 | 2 | 3"],
+    "expect": {"error": "blank-header"}
+  },
+  {
+    "name": "Quoted headers",
+    "rule": "header-cells",
+    "source": "TableStructureTest#shouldPreserveQuotesForHeaders",
+    "input": ["\"Scenario\" | 'Other'", "1 | 2"],
+    "expect": {"headers": ["Scenario", "Other"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "A row that does not parse",
+    "rule": "malformed-rows",
+    "source": "ValueGrammarTest#shouldThrowExceptionOnParsingErrors",
+    "input": ["Scenario         | Purchase time       | Past purchases        | Count previous 30 days?", "Purchase too old | 2025-09-30T23:59:59 | [2025-08-01T00:00:00] | 0"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Fewer cells than headers",
+    "rule": "cell-count",
+    "input": ["a | b | c", "1"],
+    "expect": {"headers": ["a", "b", "c"], "rows": [["1"]]}
+  },
+  {
+    "name": "More cells than headers",
+    "rule": "cell-count",
+    "input": ["a", "1 | 2 | 3"],
+    "expect": {"headers": ["a"], "rows": [["1", "2", "3"]]}
+  },
+  {
+    "name": "CRLF line endings",
+    "rule": "lines",
+    "input": ["a | b\r", "1 | 2\r"],
+    "expect": {"headers": ["a", "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "CRLF after a quoted value",
+    "rule": "lines",
+    "input": ["a\r", "'x'\r"],
+    "expect": {"headers": ["a"], "rows": [["x"]]}
+  },
+  {
+    "name": "A lone carriage return does not end a line",
+    "rule": "lines",
+    "input": ["a | b\r1 | 2"],
+    "expect": {"headers": ["a", "b\r1", "2"], "rows": []}
+  },
+  {
+    "name": "Form feed line is blank",
+    "rule": "blank-and-comment-lines",
+    "input": ["a", "\f", "1"],
+    "expect": {"headers": ["a"], "rows": [["1"]]}
+  },
+  {
+    "name": "A line of control characters is blank",
+    "rule": "blank-and-comment-lines",
+    "input": ["a", "\u000b", "1"],
+    "expect": {"headers": ["a"], "rows": [["1"]]}
+  },
+  {
+    "name": "A list as a header",
+    "rule": "header-cells",
+    "input": ["[a] | b", "1 | 2"],
+    "expect": {"headers": [{"list": ["a"]}, "b"], "rows": [["1", "2"]]}
+  },
+  {
+    "name": "A control character before a comment",
+    "rule": "blank-and-comment-lines",
+    "input": ["a", "\u000b// c", "1"],
+    "expect": {"headers": ["a"], "rows": [["1"]]}
+  },
+  {
+    "name": "A CR before the line feed",
+    "rule": "lines",
+    "input": ["a\r", "1\r", "\r", "2"],
+    "expect": {"headers": ["a"], "rows": [["1"], ["2"]]}
+  },
+  {
+    "name": "A no-break space line is a row",
+    "rule": "blank-and-comment-lines",
+    "input": ["a", "\u00a0"],
+    "expect": {"headers": ["a"], "rows": [["\u00a0"]]}
+  },
+  {
+    "name": "A header of control characters",
+    "rule": "header-cells",
+    "input": ["a | \u000b", "1 | 2"],
+    "expect": {"error": "blank-header"}
+  }
+]

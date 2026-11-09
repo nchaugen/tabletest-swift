@@ -1,0 +1,185 @@
+[
+  {
+    "name": "Null set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", null]]}
+  },
+  {
+    "name": "Empty set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": []}]]}
+  },
+  {
+    "name": "Basic set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {a, b, a, a, c}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a", "b", "c"]}]]}
+  },
+  {
+    "name": "Nested set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {{a}, {b}, {b}}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"set": ["a"]}, {"set": ["b"]}]}]]}
+  },
+  {
+    "name": "Mixed content set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {{},a,a,{}}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"set": []}, "a"]}]]}
+  },
+  {
+    "name": "Set with list",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {[a],[b],[b]}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"list": ["a"]}, {"list": ["b"]}]}]]}
+  },
+  {
+    "name": "Set with map",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {[a:b], [a:b]}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"map": [["a", "b"]]}]}]]}
+  },
+  {
+    "name": "Set with quoted value",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x | {\"a,b\", c, \"a,b\"}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a,b", "c"]}]]}
+  },
+  {
+    "name": "Extra whitespace",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureSets",
+    "input": ["Case | Value", "x |   {  a  ,  a  }  "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a"]}]]}
+  },
+  {
+    "name": "Unquoted string in a set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | {a}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a"]}]]}
+  },
+  {
+    "name": "Double quoted string in a set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | {\"a\"}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a"]}]]}
+  },
+  {
+    "name": "Single quoted string in a set",
+    "rule": "sets",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | {'a'}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a"]}]]}
+  },
+  {
+    "name": "Quoted braces",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | \"{}\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "{}"]]}
+  },
+  {
+    "name": "Missing opening brace",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | }"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "}"]]}
+  },
+  {
+    "name": "Unexpected leading character",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | a{}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a{}"]]}
+  },
+  {
+    "name": "Missing closing brace",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | {"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Closed by the wrong delimiter",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | {a, b]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Double opening brace",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | {{}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Double closing brace",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | {}}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Unexpected trailing character",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | {}a"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Missing element",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidSetSyntax",
+    "input": ["Case | Value", "x | {a,}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Quoted and unquoted duplicates in a set",
+    "rule": "sets",
+    "input": ["Case | Value", "x | {a, \"a\"}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["a"]}]]}
+  },
+  {
+    "name": "Sets with the same elements in another order",
+    "rule": "sets",
+    "input": ["Case | Value", "x | {{a, b}, {b, a}}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"set": ["a", "b"]}]}]]}
+  },
+  {
+    "name": "Maps with the same pairs in another order",
+    "rule": "sets",
+    "input": ["Case | Value", "x | {[a:1, b:2], [b:2, a:1]}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"map": [["a", "1"], ["b", "2"]]}]}]]}
+  },
+  {
+    "name": "Lists with the same elements in another order",
+    "rule": "sets",
+    "input": ["Case | Value", "x | {[a, b], [b, a]}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": [{"list": ["a", "b"]}, {"list": ["b", "a"]}]}]]}
+  },
+  {
+    "name": "Whitespace between braces",
+    "rule": "sets",
+    "input": ["Case | Value", "x | { }"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Quoted text and a list are different set elements",
+    "rule": "sets",
+    "input": ["Case | Value", "x | {\"[a]\", [a]}"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"set": ["[a]", {"list": ["a"]}]}]]}
+  }
+]

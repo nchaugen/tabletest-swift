@@ -1,0 +1,281 @@
+[
+  {
+    "name": "Null map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", null]]}
+  },
+  {
+    "name": "Empty map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [:]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": []}]]}
+  },
+  {
+    "name": "Basic map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [a:b, c:d]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a", "b"], ["c", "d"]]}]]}
+  },
+  {
+    "name": "Nested map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [A:[a:1], B:[b:2], C:[c:3]]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["A", {"map": [["a", "1"]]}], ["B", {"map": [["b", "2"]]}], ["C", {"map": [["c", "3"]]}]]}]]}
+  },
+  {
+    "name": "Mixed content map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [m:[:], s:a]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["m", {"map": []}], ["s", "a"]]}]]}
+  },
+  {
+    "name": "Map with set",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [s:{a,b}, t:{c}]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["s", {"set": ["a", "b"]}], ["t", {"set": ["c"]}]]}]]}
+  },
+  {
+    "name": "Map with list",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [l:[a,b], i:[c]]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["l", {"list": ["a", "b"]}], ["i", {"list": ["c"]}]]}]]}
+  },
+  {
+    "name": "Map with quoted value",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [q:\"a,b\", u:c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["q", "a,b"], ["u", "c"]]}]]}
+  },
+  {
+    "name": "Extra whitespace",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x |   [   a   :  a   ]  "],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a", "a"]]}]]}
+  },
+  {
+    "name": "Unquoted value in a map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [a: a]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a", "a"]]}]]}
+  },
+  {
+    "name": "Double quoted value in a map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [a: \"a\"]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a", "a"]]}]]}
+  },
+  {
+    "name": "Single quoted value in a map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [a: 'a']"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a", "a"]]}]]}
+  },
+  {
+    "name": "Double quoted strings nested in a map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [double: [\"a\"]]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["double", {"list": ["a"]}]]}]]}
+  },
+  {
+    "name": "Single quoted strings nested in a map",
+    "rule": "maps",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [single: ['a']]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["single", {"list": ["a"]}]]}]]}
+  },
+  {
+    "name": "Double quoted key with spaces",
+    "rule": "map-keys",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [\"key with spaces\": value]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["key with spaces", "value"]]}]]}
+  },
+  {
+    "name": "Single quoted key with a colon",
+    "rule": "map-keys",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | ['key:colon': value]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["key:colon", "value"]]}]]}
+  },
+  {
+    "name": "Mixed quoted keys",
+    "rule": "map-keys",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [\"a,b\": value, plain: other]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a,b", "value"], ["plain", "other"]]}]]}
+  },
+  {
+    "name": "Empty quoted key",
+    "rule": "map-keys",
+    "source": "ValueGrammarTest#shouldCaptureMaps",
+    "input": ["Case | Value", "x | [\"\": value]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["", "value"]]}]]}
+  },
+  {
+    "name": "Double quoted key",
+    "rule": "map-keys",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | [\"k\": v]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["k", "v"]]}]]}
+  },
+  {
+    "name": "Single quoted key",
+    "rule": "map-keys",
+    "source": "ValueGrammarTest#shouldCaptureValuesWithQuotesDiscardedOrKept",
+    "input": ["Case | Value", "x | ['k': v]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["k", "v"]]}]]}
+  },
+  {
+    "name": "Quoted empty map",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | \"[:]\""],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "[:]"]]}
+  },
+  {
+    "name": "Missing opening bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | :]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", ":]"]]}
+  },
+  {
+    "name": "Unexpected leading character",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | a[:]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", "a[:]"]]}
+  },
+  {
+    "name": "Missing closing bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [:"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Closed by the wrong delimiter",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [a: b}"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Double opening bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [[:]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Double closing bracket",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [:]]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Unexpected trailing character",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [:]a"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Missing element",
+    "rule": "brackets-and-braces",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [a:b,]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Duplicate keys",
+    "rule": "duplicate-keys",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [a:b, a:c]"],
+    "expect": {"error": "duplicate-key"}
+  },
+  {
+    "name": "Duplicate quoted key",
+    "rule": "duplicate-keys",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [a:b, \"a\":c]"],
+    "expect": {"error": "duplicate-key"}
+  },
+  {
+    "name": "Same key with different value types",
+    "rule": "duplicate-keys",
+    "source": "ValueGrammarTest#shouldHandleInvalidMapSyntax",
+    "input": ["Case | Value", "x | [a:b, a:[b], a:{b}, a:[b:c]]"],
+    "expect": {"error": "duplicate-key"}
+  },
+  {
+    "name": "Whitespace in an empty map",
+    "rule": "maps",
+    "input": ["Case | Value", "x | [ : ]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": []}]]}
+  },
+  {
+    "name": "Blank map value",
+    "rule": "maps",
+    "input": ["Case | Value", "x | [a: ]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Missing map key",
+    "rule": "maps",
+    "input": ["Case | Value", "x | [: a]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Space inside a key",
+    "rule": "map-keys",
+    "input": ["Case | Value", "x | [a b: c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a b", "c"]]}]]}
+  },
+  {
+    "name": "Opening brace inside a key",
+    "rule": "map-keys",
+    "input": ["Case | Value", "x | [a{b: c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a{b", "c"]]}]]}
+  },
+  {
+    "name": "Closing brace inside a key",
+    "rule": "map-keys",
+    "input": ["Case | Value", "x | [a}b: c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a}b", "c"]]}]]}
+  },
+  {
+    "name": "Quote inside a key",
+    "rule": "map-keys",
+    "input": ["Case | Value", "x | [a'b: c]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a'b", "c"]]}]]}
+  },
+  {
+    "name": "Opening bracket inside a key",
+    "rule": "map-keys",
+    "input": ["Case | Value", "x | [a[b: c]"],
+    "expect": {"error": "malformed"}
+  },
+  {
+    "name": "Deeply nested maps and lists",
+    "rule": "maps",
+    "source": "RowParserTest#shouldHandleNestedStructures",
+    "input": ["Case | Value", "x | [a: [x: [1, 2], y: [m: 'n']], b: ['c']]"],
+    "expect": {"headers": ["Case", "Value"], "rows": [["x", {"map": [["a", {"map": [["x", {"list": ["1", "2"]}], ["y", {"map": [["m", "n"]]}]]}], ["b", {"list": ["c"]}]]}]]}
+  }
+]
