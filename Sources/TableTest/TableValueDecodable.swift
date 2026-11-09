@@ -3,22 +3,69 @@
 /// A type that converts itself from the parsed value of a table cell.
 ///
 /// Every `Decodable` type already converts from a cell. Conform to this protocol when a type
-/// is not `Decodable`, or when it needs its own reading of the cell, such as `12.50 EUR` for a
-/// money type. When a type conforms to both protocols, this one decides.
+/// needs its own reading of a list, a set or a map; for a text form, such as `12.50 EUR`,
+/// conform to ``TableCellText``. When a type conforms to both this protocol and `Decodable`,
+/// this one decides. ``TableValue/converted(to:)`` converts each part with the library's rules.
 ///
 /// ```swift
-/// extension Money: TableValueDecodable {
+/// extension Shelf: @retroactive TableValueDecodable {
 ///     init(tableValue: TableValue) throws {
-///         guard case .string(let text) = tableValue, let money = Money(parsing: text) else {
-///             throw TableValueConversionError("Cannot read `\(tableValue)` as money")
+///         guard case .list(let elements) = tableValue else {
+///             throw TableValueConversionError("A shelf is a list of wines")
 ///         }
-///         self = money
+///         self.init(wines: try elements.map { try $0.converted(to: Wine.self) })
 ///     }
 /// }
 /// ```
 public protocol TableValueDecodable {
     /// Creates a value from the parsed value of one cell, or of one element of a cell.
     init(tableValue: TableValue) throws
+}
+
+/// A type that converts itself from the text of a table cell, such as `12.50 EUR` for a money
+/// type.
+///
+/// Return `nil` when the text does not convert: the library then reports the cell. A blank cell,
+/// a list, a set and a map do not convert, and an optional parameter takes a blank cell as `nil`.
+///
+/// ```swift
+/// extension Money: @retroactive TableCellText {
+///     init?(tableText: String) {
+///         self.init(parsing: tableText)
+///     }
+/// }
+/// ```
+public protocol TableCellText: TableValueDecodable {
+    /// Creates a value from the text of one cell, or of one element of a cell, or returns `nil`.
+    init?(tableText: String)
+}
+
+extension TableCellText {
+    public init(tableValue: TableValue) throws {
+        let text = try SingleCellContainer(value: tableValue, codingPath: []).text(for: Self.self)
+        guard let value = Self(tableText: text) else {
+            throw SingleCellContainer.mismatch(Self.self, text: text, codingPath: [])
+        }
+        self = value
+    }
+}
+
+extension TableValue {
+    /// The value converted to a type by the rules the library applies to a cell, for a
+    /// ``TableValueDecodable`` conversion that reads a list or a map by hand.
+    ///
+    /// ```swift
+    /// self.init(colour: try entry.value.converted(to: Colour.self))
+    /// ```
+    public func converted<T>(to type: T.Type) throws -> T {
+        do {
+            return try TableValueDecoding.convert(self, to: T.self)
+        } catch let error as TableValueConversionError {
+            throw error
+        } catch {
+            throw TableValueConversionError(TableValueDecoding.message(of: error))
+        }
+    }
 }
 
 /// The error a ``TableValueDecodable`` type throws when a cell does not convert.

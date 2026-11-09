@@ -61,6 +61,33 @@ struct CellConversionTests {
         #expect(result.matches, "converted to \(result.actual)")
     }
 
+    @Test("Converts a cell with the type's text conversion", arguments: [
+        (scenario: "Amount and currency", cell: "12.50 EUR", conversion: Conversion.own(Price(cents: 1250, currency: "EUR"))),
+        (scenario: "List of amounts", cell: "[1.00 EUR, 2.50 USD]",
+         conversion: .own([Price(cents: 100, currency: "EUR"), Price(cents: 250, currency: "USD")])),
+        (scenario: "Blank cell to an optional", cell: "", conversion: .own(Price?.none)),
+    ])
+    func convertsWithTheTypesTextConversion(scenario: String, cell: String, conversion: Conversion) throws {
+        let result = try conversion.convert(cellValue(cell))
+
+        #expect(result.matches, "converted to \(result.actual)")
+    }
+
+    @Test("Converts part of a cell with the library's rules", arguments: [
+        (scenario: "Number", cell: "42", conversion: Conversion.part(42)),
+        (scenario: "Decimal amount", cell: "12.50", conversion: .part(Decimal(string: "12.50")!)),
+        (scenario: "Case name of an enum that is not Decodable", cell: "grandCru", conversion: .part(Band.grandCru)),
+        (scenario: "List of case names", cell: "[fruit, oak]", conversion: .part([Note.fruit, .oak])),
+        (scenario: "Text conversion", cell: "1.00 EUR", conversion: .part(Price(cents: 100, currency: "EUR"))),
+        (scenario: "Map read by a hand-written conversion", cell: "[band: premierCru, price: 9.00 EUR]",
+         conversion: .part(Listing(band: .premierCru, price: Price(cents: 900, currency: "EUR")))),
+    ])
+    func convertsPartOfACell(scenario: String, cell: String, conversion: Conversion) throws {
+        let result = try conversion.convert(cellValue(cell))
+
+        #expect(result.matches, "converted to \(result.actual)")
+    }
+
     @Test("Converts a cell to an enum that is not Decodable", arguments: [
         (scenario: "Case name of a raw-value enum", cell: "grandCru", conversion: Conversion.plain(Band.grandCru)),
         (scenario: "Case name of a number raw-value enum", cell: "reference", conversion: .plain(Source.reference)),
@@ -102,6 +129,13 @@ struct CellConversionTests {
         (cell: "wood", target: .plain(Note.self), message: "Note has no case named `wood`"),
         (cell: "[oak, wood]", target: .plain([Note].self), message: "Note has no case named `wood`"),
         (cell: "[oak]", target: .plain(Note.self), message: "Cannot convert `[oak]` to Note"),
+        (cell: "12.50", target: .own(Price.self), message: "Cannot convert `12.50` to Price"),
+        (cell: "[1.00 EUR, x]", target: .own([Price].self), message: "Cannot convert `x` to Price"),
+        (cell: "", target: .own(Price.self), message: "Cannot convert a blank cell to Price"),
+        (cell: "[1.00 EUR]", target: .own(Price.self), message: "Cannot convert `[1.00 EUR]` to Price"),
+        (cell: "[1, x]", target: .part([Int].self), message: "Cannot convert `x` to Int (at `[1]`)"),
+        (cell: "[band: grand_cru, price: 9.00 EUR]", target: .part(Listing.self),
+         message: "Band has no case named `grand_cru`"),
         (cell: "x", target: .plain(Opaque.self),
          message: "Opaque does not convert from a cell: make it Decodable or TableValueDecodable"),
     ])
@@ -136,6 +170,14 @@ struct Conversion: Sendable, CustomTestStringConvertible {
         }
     }
 
+    /// Converts with ``TableValue/converted(to:)``, the public entry for a hand-written conversion.
+    static func part<T: Equatable & Sendable>(_ expected: T) -> Conversion {
+        Conversion(testDescription: "\(T.self) \(expected)") { value in
+            let actual = try value.converted(to: T.self)
+            return (actual == expected, String(describing: actual))
+        }
+    }
+
     /// Converts through ``TableValueDecodable``.
     static func own<T: TableValueDecodable & Equatable & Sendable>(_ expected: T) -> Conversion {
         Conversion(testDescription: "\(T.self) \(expected)") { value in
@@ -156,6 +198,10 @@ struct FailedConversion: Sendable, CustomTestStringConvertible {
 
     static func plain<T>(_ type: T.Type) -> FailedConversion {
         FailedConversion(testDescription: "\(T.self)") { _ = try TableValueDecoding.convert($0, to: T.self) }
+    }
+
+    static func part<T>(_ type: T.Type) -> FailedConversion {
+        FailedConversion(testDescription: "\(T.self)") { _ = try $0.converted(to: T.self) }
     }
 
     static func own<T: TableValueDecodable & Sendable>(_ type: T.Type) -> FailedConversion {
@@ -209,6 +255,46 @@ struct Money: TableValueDecodable, Hashable, Sendable {
             throw TableValueConversionError("Cannot read `\(text)` as money")
         }
         self.init(cents: cents, currency: String(parts[1]))
+    }
+}
+
+/// An amount in cents with its currency, written as `12.50 EUR`, read from the text of a cell.
+struct Price: TableCellText, Hashable, Sendable {
+    let cents: Int
+    let currency: String
+
+    init(cents: Int, currency: String) {
+        self.cents = cents
+        self.currency = currency
+    }
+
+    init?(tableText: String) {
+        let parts = tableText.split(separator: " ")
+        guard parts.count == 2, let cents = Int(parts[0].replacingOccurrences(of: ".", with: "")) else {
+            return nil
+        }
+        self.init(cents: cents, currency: String(parts[1]))
+    }
+}
+
+/// A struct that reads a map by hand, and converts each value with the library's rules.
+struct Listing: TableValueDecodable, Equatable, Sendable {
+    let band: Band
+    let price: Price
+
+    init(band: Band, price: Price) {
+        self.band = band
+        self.price = price
+    }
+
+    init(tableValue: TableValue) throws {
+        guard case .map(let entries) = tableValue,
+              let band = entries.first(where: { $0.key == "band" }),
+              let price = entries.first(where: { $0.key == "price" })
+        else {
+            throw TableValueConversionError("A listing is a map with a band and a price")
+        }
+        self.init(band: try band.value.converted(to: Band.self), price: try price.value.converted(to: Price.self))
     }
 }
 
