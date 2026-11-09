@@ -23,12 +23,17 @@ struct LeapYearTests {
 
 - **Readable**: the inputs and the expected result of each example are on one line.
 - **Easy to extend**: a new example is a new row.
-- **Shared**: the table format is the same as TableTest for Java and Kotlin
-  ([tabletest.org](https://tabletest.org)), defined by `tabletest-spec`.
+- **Shared**: the table format is the same as
+  [TableTest for Java and Kotlin](https://github.com/nchaugen/tabletest)
+  ([tabletest.org](https://tabletest.org)), defined by
+  [tabletest-spec](https://github.com/nchaugen/tabletest-spec).
 
 **Status:** unpublished, in development.
 
 **Latest updates:** see the [changelog](CHANGELOG.md).
+
+**Examples:** [tabletest-swift-examples](https://github.com/nchaugen/tabletest-swift-examples) is
+an Xcode project that uses the package, with an app target and hosted tests.
 
 **Requirements:** Swift 6.2 or later (Xcode 26 or later); macOS 13 or iOS 16 or later. The package depends on
 swift-syntax `600.0.0..<604.0.0`.
@@ -586,8 +591,8 @@ parse.
 
 ## Differences from TableTest for the JVM
 
-The table format is the same, and the conformance fixtures of `tabletest-spec` check both
-implementations. These parts differ:
+The table format is the same, and the conformance fixtures of
+[tabletest-spec](https://github.com/nchaugen/tabletest-spec) check both implementations. These parts differ:
 
 | Topic | JVM | Swift |
 |---|---|---|
