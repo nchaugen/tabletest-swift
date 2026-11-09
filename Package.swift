@@ -17,6 +17,15 @@ let package = Package(
         .target(name: "TableTestParser"),
         .target(name: "TableTestFormat", dependencies: ["TableTestParser"]),
         .target(
+            name: "TableTestSourceFormat",
+            dependencies: [
+                "TableTestFormat",
+                "TableTestSyntax",
+                .product(name: "SwiftParser", package: "swift-syntax"),
+                .product(name: "SwiftSyntax", package: "swift-syntax"),
+            ]
+        ),
+        .target(
             name: "TableTestSyntax",
             dependencies: [.product(name: "SwiftSyntax", package: "swift-syntax")]
         ),
@@ -48,6 +57,10 @@ let package = Package(
             name: "TableTestFormatTests",
             dependencies: ["TableTestFormat", "SpecFixtures"],
             resources: [.copy("Fixtures")]
+        ),
+        .testTarget(
+            name: "TableTestSourceFormatTests",
+            dependencies: ["TableTestSourceFormat"]
         ),
         .testTarget(
             name: "TableTestParserTests",
