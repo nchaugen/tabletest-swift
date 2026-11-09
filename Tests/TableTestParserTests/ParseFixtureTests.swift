@@ -7,7 +7,7 @@ struct ParseFixtureTests {
     /// issues until the parser passes them.
     private static let pendingFiles: Set<String> = [
         "cells.json", "elements.json", "lists.json", "maps.json", "real-tables.json",
-        "sets.json", "single-values.json", "table-structure.json",
+        "sets.json", "table-structure.json",
     ]
 
     @Test("Finds the vendored fixture cases")
