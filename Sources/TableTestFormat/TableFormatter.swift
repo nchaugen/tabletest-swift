@@ -8,12 +8,18 @@ public enum TableFormatter {
     /// The table text with its columns lined up, or the text unchanged when it is not a table
     /// (SPEC 4.2).
     public static func format(_ text: String) -> String {
+        formattedTable(text) ?? text
+    }
+
+    /// The table text with its columns lined up, or `nil` when the text does not parse or a data
+    /// row has another number of cells than the header row.
+    package static func formattedTable(_ text: String) -> String? {
         guard let table = try? TableParser.parse(text) else {
-            return text
+            return nil
         }
         let rows = [table.header] + table.rows
         guard rows.allSatisfy({ $0.cells.count == table.header.cells.count }) else {
-            return text
+            return nil
         }
         let printedRows = rows.map { $0.cells.map(\.written.cellText) }
         let widths = table.header.cells.indices.map { column in
