@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-09
+
 The first release: TableTest tables for Swift Testing. The table format is the one that
 TableTest for the JVM uses, defined by `tabletest-spec`.
 
