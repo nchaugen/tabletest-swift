@@ -15,6 +15,9 @@ extension TableValueDecoding {
         if let own = type as? any TableValueDecodable.Type {
             return try own.init(tableValue: value)
         }
+        if let builtIn = try builtIn(type, from: value, codingPath: []) {
+            return builtIn
+        }
         if let decodable = type as? any Decodable.Type {
             return try decodeOpened(value, as: decodable)
         }

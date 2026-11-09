@@ -16,11 +16,8 @@ enum TableValueDecoding {
         if let map = T.self as? any MapCollection.Type, !map.decodesFromAMap {
             return try map.init(converting: value) as! T
         }
-        if T.self == Decimal.self {
-            return try decimal(from: value, codingPath: codingPath) as! T
-        }
-        if T.self == URL.self {
-            return try url(from: value, codingPath: codingPath) as! T
+        if let builtIn = try builtIn(T.self, from: value, codingPath: codingPath) {
+            return builtIn as! T
         }
         if let enumerable = T.self as? any CaseIterable.Type {
             return try namedCase(of: enumerable, from: value, codingPath: codingPath) as! T
@@ -99,24 +96,6 @@ enum TableValueDecoding {
                 DecodingError.Context(codingPath: codingPath, debugDescription: error.description)
             )
         }
-    }
-
-    private static func decimal(from value: TableValue, codingPath: [any CodingKey]) throws -> Decimal {
-        let text = try SingleCellContainer(value: value, codingPath: codingPath).text(for: Decimal.self)
-        guard let decimal = Decimal(string: text, locale: Locale(identifier: "en_US_POSIX")),
-              text.allSatisfy({ $0.isNumber || "+-.eE".contains($0) })
-        else {
-            throw SingleCellContainer.mismatch(Decimal.self, text: text, codingPath: codingPath)
-        }
-        return decimal
-    }
-
-    private static func url(from value: TableValue, codingPath: [any CodingKey]) throws -> URL {
-        let text = try SingleCellContainer(value: value, codingPath: codingPath).text(for: URL.self)
-        guard let url = URL(string: text) else {
-            throw SingleCellContainer.mismatch(URL.self, text: text, codingPath: codingPath)
-        }
-        return url
     }
 
     /// The message of a conversion error, with the path to the element that failed.
