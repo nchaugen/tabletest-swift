@@ -257,7 +257,7 @@ struct CellConversionTests {
         (cell: "978", target: .plain(Isbn.self), message: "Cannot convert `978` to Isbn"),
         (cell: "", target: .plain(Isbn.self), message: "Cannot convert a blank cell to Isbn"),
         (cell: "x", target: .plain(Opaque.self),
-         message: "Opaque does not convert from a cell: make it Decodable, or conform it to TableCellText"),
+         message: "Opaque does not convert from a cell: make it Decodable, or conform it to TableTextDecodable"),
     ])
     func refusesACellThatDoesNotConvert(cell: String, target: FailedConversion, message: String) throws {
         #expect(target.message(converting: try cellValue(cell)) == message)
@@ -430,7 +430,7 @@ struct Money: TableValueDecodable, Hashable, Sendable {
 }
 
 /// An amount in cents with its currency, written as `12.50 EUR`, read from the text of a cell.
-struct Price: TableCellText, Hashable, Sendable {
+struct Price: TableTextDecodable, Hashable, Sendable {
     let cents: Int
     let currency: String
 

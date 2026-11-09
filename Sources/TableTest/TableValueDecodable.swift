@@ -4,7 +4,7 @@
 ///
 /// Every `Decodable` type already converts from a cell. Conform to this protocol when a type
 /// needs its own reading of a list, a set or a map; for a text form, such as `12.50 EUR`,
-/// conform to ``TableCellText``. When a type conforms to both this protocol and `Decodable`,
+/// conform to ``TableTextDecodable``. When a type conforms to both this protocol and `Decodable`,
 /// this one decides. ``TableValue/converted(to:)`` converts each part with the library's rules.
 ///
 /// ```swift
@@ -29,18 +29,18 @@ public protocol TableValueDecodable {
 /// a list, a set and a map do not convert, and an optional parameter takes a blank cell as `nil`.
 ///
 /// ```swift
-/// extension Money: @retroactive TableCellText {
+/// extension Money: @retroactive TableTextDecodable {
 ///     init?(tableText: String) {
 ///         self.init(parsing: tableText)
 ///     }
 /// }
 /// ```
-public protocol TableCellText: TableValueDecodable {
+public protocol TableTextDecodable: TableValueDecodable {
     /// Creates a value from the text of one cell, or of one element of a cell, or returns `nil`.
     init?(tableText: String)
 }
 
-extension TableCellText {
+extension TableTextDecodable {
     public init(tableValue: TableValue) throws {
         let text = try SingleCellContainer(value: tableValue, codingPath: []).text(for: Self.self)
         guard let value = Self(tableText: text) else {

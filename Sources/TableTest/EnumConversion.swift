@@ -35,7 +35,7 @@ extension TableValueDecoding {
             return try rawValueCase(of: rawValued, from: value)
         }
         throw TableValueConversionError(
-            "\(typeName(type)) does not convert from a cell: make it Decodable, or conform it to TableCellText"
+            "\(typeName(type)) does not convert from a cell: make it Decodable, or conform it to TableTextDecodable"
         )
     }
 
