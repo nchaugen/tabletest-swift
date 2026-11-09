@@ -2,7 +2,8 @@ import Foundation
 
 /// Converts the parsed value of a cell to a Swift type by the first route that applies: the
 /// type's own ``TableValueDecodable`` conformance, a built-in conversion, the case name of a
-/// `CaseIterable` enum, and then `Decodable`.
+/// `CaseIterable` enum, and then `Decodable`. A `Decodable` enum with associated values also
+/// reads the Swift spelling of a case, such as `month(year: 2025, month: 3)`.
 enum TableValueDecoding {
     static func decode<T: Decodable>(
         _ value: TableValue,
@@ -24,9 +25,38 @@ enum TableValueDecoding {
         if let enumerable = T.self as? any CaseIterable.Type {
             return try namedCase(of: enumerable, from: value, codingPath: codingPath) as! T
         }
-        let result = try T(from: TableValueDecoder(value: value, codingPath: codingPath))
+        let result: T
+        do {
+            result = try T(from: TableValueDecoder(value: value, codingPath: codingPath))
+        } catch {
+            guard case .string(let text) = value, CaseKeyProbe.readsACaseKey(T.self) else {
+                throw error
+            }
+            result = try enumCase(spelled: text, as: T.self, codingPath: codingPath)
+        }
         try refuseMergedElements(result, of: value, as: T.self)
         return result
+    }
+
+    /// The enum case that the text spells as Swift does, such as `month(year: 2025, month: 3)`.
+    private static func enumCase<T: Decodable>(
+        spelled text: String,
+        as type: T.Type,
+        codingPath: [any CodingKey]
+    ) throws -> T {
+        guard let spelling = SwiftSpelling(text) else {
+            throw SingleCellContainer.mismatch(T.self, text: text, codingPath: codingPath)
+        }
+        do {
+            return try T(from: TableValueDecoder(value: spelling.keyedForm, codingPath: codingPath))
+        } catch DecodingError.typeMismatch(_, let context) where context.codingPath.count == codingPath.count {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: codingPath,
+                    debugDescription: "\(typeName(T.self)) has no case named `\(spelling.caseName)`"
+                )
+            )
+        }
     }
 
     static func decode<T: TableValueDecodable>(_ value: TableValue, as type: T.Type) throws -> T {
@@ -133,6 +163,14 @@ struct TableValueDecoder: Decoder {
         switch value {
         case let .list(elements), let .set(elements):
             return ElementsContainer(elements: elements, codingPath: codingPath)
+        case let .map(entries) where entries.contains(where: { $0.key.contains("(") }):
+            throw DecodingError.typeMismatch(
+                [Any].self,
+                context(
+                    "Cannot convert `\(value.tableText)` to a list or a set: "
+                        + "quote an element that has a comma or a colon"
+                )
+            )
         default:
             throw DecodingError.typeMismatch(
                 [Any].self,

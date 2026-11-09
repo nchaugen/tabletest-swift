@@ -123,6 +123,15 @@ struct ValueExamples {
     func readsAnEnumThatIsNotDecodable(band: Band?, notes: Set<Note>, shades: [Note: Band], best: Bool) {
         #expect((band == .grandCru) == best)
     }
+
+    @TableTest("""
+        Scenario       | Vintage                     | Others                           | Years?
+        Year           | year(2025)                  | [year(2024), nonVintage]         | [2025, 2024]
+        Year and month | month(year: 2025, month: 3) | ['month(year: 2024, month: 12)'] | [2025, 2024]
+        """)
+    func readsTheSwiftSpellingOfACase(vintage: Vintage, others: [Vintage], years: [Int]) {
+        #expect(([vintage] + others).compactMap(\.year) == years)
+    }
 }
 
 @MainActor
@@ -149,6 +158,15 @@ enum Hue: String, Decodable {
 enum Band: String, CaseIterable, Sendable {
     case grandCru = "grand_cru"
     case premierCru = "premier_cru"
+}
+
+extension Vintage {
+    var year: Int? {
+        switch self {
+        case let .year(year), let .month(year, _), let .span(year, _): year
+        case .nonVintage: nil
+        }
+    }
 }
 
 /// An enum with no raw value, which is not `Decodable` and not `TableValueDecodable`.

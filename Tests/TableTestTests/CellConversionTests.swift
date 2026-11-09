@@ -95,6 +95,31 @@ struct CellConversionTests {
         #expect(result.matches, "converted to \(result.actual)")
     }
 
+    @Test("Converts the Swift spelling of an enum case", arguments: [
+        (scenario: "One unlabelled value", cell: "year(2025)", conversion: Conversion.to(Vintage.year(2025))),
+        (scenario: "Labelled values", cell: "month(year: 2025, month: 3)", conversion: .to(Vintage.month(year: 2025, month: 3))),
+        (scenario: "No values", cell: "nonVintage", conversion: .to(Vintage.nonVintage)),
+        (scenario: "Unlabelled and labelled values", cell: "span(2020, to: 2025)", conversion: .to(Vintage.span(2020, to: 2025))),
+        (scenario: "Keyed form", cell: "[year: [_0: 2025]]", conversion: .to(Vintage.year(2025))),
+        (scenario: "Case of another enum as a value", cell: "since(month(year: 2025, month: 3))",
+         conversion: .to(Window.since(.month(year: 2025, month: 3)))),
+        (scenario: "Optional value of nil", cell: "open(until: nil)", conversion: .to(Window.open(until: nil))),
+        (scenario: "Optional value", cell: "open(until: 2030)", conversion: .to(Window.open(until: 2030))),
+        (scenario: "Quoted text with a comma", cell: "note('dry, firm')", conversion: .to(Window.note("dry, firm"))),
+        (scenario: "List of values", cell: "notes([a, b])", conversion: .to(Window.notes(["a", "b"]))),
+        (scenario: "In a struct", cell: "[vintage: year(2025)]", conversion: .to(Bottle(vintage: .year(2025)))),
+        (scenario: "In a list", cell: "[year(2025), nonVintage]", conversion: .to([Vintage.year(2025), .nonVintage])),
+        (scenario: "Quoted in a list", cell: "['month(year: 2025, month: 3)', nonVintage]",
+         conversion: .to([Vintage.month(year: 2025, month: 3), .nonVintage])),
+        (scenario: "In a set", cell: "{year(2015), nonVintage}", conversion: .to(Set([Vintage.year(2015), .nonVintage]))),
+        (scenario: "Blank cell to an optional", cell: "", conversion: .to(Vintage?.none)),
+    ])
+    func convertsTheSwiftSpellingOfAnEnumCase(scenario: String, cell: String, conversion: Conversion) throws {
+        let result = try conversion.convert(cellValue(cell))
+
+        #expect(result.matches, "converted to \(result.actual)")
+    }
+
     @Test("Converts a cell to an enum that is not Decodable", arguments: [
         (scenario: "Case name of a raw-value enum", cell: "grandCru", conversion: Conversion.plain(Band.grandCru)),
         (scenario: "Case name of a number raw-value enum", cell: "reference", conversion: .plain(Source.reference)),
@@ -150,6 +175,12 @@ struct CellConversionTests {
         (cell: "[1, x]", target: .part([Int].self), message: "Cannot convert `x` to Int (at `[1]`)"),
         (cell: "[band: grand, price: 9.00 EUR]", target: .part(Listing.self),
          message: "Band has no case named `grand`"),
+        (cell: "yeer(2025)", target: .to(Vintage.self), message: "Vintage has no case named `yeer`"),
+        (cell: "year(abc)", target: .to(Vintage.self), message: "Cannot convert `abc` to Int (at `year._0`)"),
+        (cell: "year(2025", target: .to(Vintage.self), message: "Cannot convert `year(2025` to Vintage"),
+        (cell: "[month(year: 2025, month: 3)]", target: .to([Vintage].self),
+         message: "Cannot convert `[month(year: 2025, month: 3)]` to a list or a set: quote an element that has a comma or a colon"),
+        (cell: "Ada", target: .to(Person.self), message: "Cannot convert `Ada` to a map"),
         (cell: "x", target: .plain(Opaque.self),
          message: "Opaque does not convert from a cell: make it Decodable or TableValueDecodable"),
     ])
@@ -258,6 +289,25 @@ enum Tier: String, Decodable, CaseIterable, CodingKeyRepresentable, Sendable {
 
 struct Vineyard: Decodable, Equatable, Sendable {
     let site: Site
+}
+
+/// A `Codable` enum with associated values, which a cell names as Swift spells the case.
+enum Vintage: Codable, Hashable, Sendable {
+    case year(Int)
+    case month(year: Int, month: Int)
+    case span(Int, to: Int)
+    case nonVintage
+}
+
+enum Window: Codable, Equatable, Sendable {
+    case since(Vintage)
+    case open(until: Int?)
+    case note(String)
+    case notes([String])
+}
+
+struct Bottle: Decodable, Equatable, Sendable {
+    let vintage: Vintage
 }
 
 struct Palette: Decodable, Equatable, Sendable {
