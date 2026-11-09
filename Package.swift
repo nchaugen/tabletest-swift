@@ -78,6 +78,7 @@ let package = Package(
             name: "TableTestSourceFormatTests",
             dependencies: ["TableTestSourceFormat"]
         ),
+        .testTarget(name: "ReadmeExamples", dependencies: ["TableTest"]),
         .testTarget(
             name: "TableTestParserTests",
             dependencies: ["TableTestParser", "SpecFixtures"],
