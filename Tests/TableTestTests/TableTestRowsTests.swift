@@ -65,11 +65,11 @@ struct TableTestRowsTests {
 
     @Test("Refuses a table that does not fit the function", arguments: [
         (scenario: "Two columns more than parameters", table: ["a | b | c", "1 | 2 | 3"], parameters: 1,
-         message: "The table has 3 columns, but the function has 1 parameters: give it one parameter for each column, or for each column after a scenario column"),
+         message: "The table has 3 columns, but the function has 1 parameter: give it one parameter for each column, or for each column after a scenario column"),
         (scenario: "Fewer columns than parameters", table: ["a", "1"], parameters: 2,
-         message: "The table has 1 columns, but the function has 2 parameters: give it one parameter for each column, or for each column after a scenario column"),
+         message: "The table has 1 column, but the function has 2 parameters: give it one parameter for each column, or for each column after a scenario column"),
         (scenario: "A row with a missing cell", table: ["a | b", "1 | 2", "3"], parameters: 2,
-         message: "Row 2 has 1 cells, but the header has 2"),
+         message: "Row 2 has 1 cell, but the header has 2"),
     ])
     func refusesATableThatDoesNotFit(scenario: String, table: [String], parameters: Int, message: String) {
         #expect(throws: TableTestError(description: message)) {

@@ -43,9 +43,9 @@ extension Table {
             throw TableFitError(
                 line: header.line,
                 column: header.cells.first?.column ?? 0,
-                message: "The table has \(header.cells.count) columns, but the function has "
-                    + "\(parameterCount) parameters: give it one parameter for each column, or for each "
-                    + "column after a scenario column"
+                message: "The table has \(counted(header.cells.count, "column")), but the function has "
+                    + "\(counted(parameterCount, "parameter")): give it one parameter for each column, or for "
+                    + "each column after a scenario column"
             )
         }
     }
@@ -59,7 +59,12 @@ extension Table {
         throw TableFitError(
             line: row.line,
             column: row.cells.first?.column ?? 0,
-            message: "Row \(offset + 1) has \(row.cells.count) cells, but the header has \(width)"
+            message: "Row \(offset + 1) has \(counted(row.cells.count, "cell")), but the header has \(width)"
         )
     }
+}
+
+/// `1 column`, `2 columns`.
+private func counted(_ count: Int, _ noun: String) -> String {
+    "\(count) \(noun)\(count == 1 ? "" : "s")"
 }

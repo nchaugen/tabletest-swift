@@ -1,6 +1,8 @@
 import SwiftCompilerPlugin
+import SwiftDiagnostics
 import SwiftSyntax
 import SwiftSyntaxMacros
+import TableTestParser
 
 /// Expands `@TableTest` on a function to a Swift Testing test that calls the function once
 /// for each row of the table.
@@ -18,9 +20,34 @@ public struct TableTestMacro: PeerMacro {
         guard let function = declaration.as(FunctionDeclSyntax.self) else {
             throw MacroError("@TableTest applies only to a function")
         }
-        let arguments = try TableTestArguments(of: node)
+        guard context.lexicalContext.contains(where: { $0.typeName != nil }) else {
+            throw MacroError(
+                "@TableTest applies only to a function inside a type: the generated test calls it through the type"
+            )
+        }
+        let arguments: TableTestArguments
+        do {
+            arguments = try TableTestArguments(of: node)
+        } catch let error as ArgumentError {
+            context.diagnose(Diagnostic(node: error.node, message: TableTestDiagnostic(error.message)))
+            return []
+        }
+        if let interpolation = arguments.table.segments.first(where: { $0.is(ExpressionSegmentSyntax.self) }) {
+            context.diagnose(Diagnostic(
+                node: interpolation,
+                message: TableTestDiagnostic("@TableTest needs a table without string interpolation")
+            ))
+            return []
+        }
         guard let table = arguments.table.representedLiteralValue else {
-            throw MacroError("@TableTest needs a table without string interpolation")
+            throw MacroError("@TableTest cannot read the table literal")
+        }
+        if let problem = problem(in: table, parameterCount: function.parameters.count) {
+            context.diagnose(Diagnostic(
+                node: arguments.table.node(atLine: problem.line),
+                message: TableTestDiagnostic(problem.message)
+            ))
+            return []
         }
         guard let fileID = context.location(of: arguments.table, at: .afterLeadingTrivia, filePathMode: .fileID),
               let filePath = context.location(of: arguments.table, at: .afterLeadingTrivia, filePathMode: .filePath)
@@ -67,6 +94,21 @@ public struct TableTestMacro: PeerMacro {
         ]
     }
 
+    /// The first reason the table does not parse or does not fit the function, with its position
+    /// in the table text.
+    private static func problem(in table: String, parameterCount: Int) -> (line: Int, column: Int, message: String)? {
+        do {
+            _ = try TableParser.parse(table).columnLayout(parameterCount: parameterCount)
+            return nil
+        } catch let error as TableParseError {
+            return (error.line, error.column, error.message)
+        } catch let error as TableFitError {
+            return (error.line, error.column, error.message)
+        } catch {
+            return (0, 0, String(describing: error))
+        }
+    }
+
     /// `__tabletest_<name>`, in backticks when the function's name is a raw identifier.
     private static func generatedName(for name: String) -> String {
         name.hasPrefix("`") ? "`__tabletest_\(name.withoutBackticks)`" : "__tabletest_\(name)"
@@ -106,10 +148,13 @@ struct TableTestArguments {
         let arguments = Array(attribute.arguments?.as(LabeledExprListSyntax.self) ?? [])
         let labelled = arguments.first { $0.label?.text == "table" }
         guard let tableArgument = labelled ?? arguments.last else {
-            throw MacroError("@TableTest needs a table")
+            throw ArgumentError(node: Syntax(attribute), message: "@TableTest needs a table")
         }
         guard let table = tableArgument.expression.as(StringLiteralExprSyntax.self) else {
-            throw MacroError("@TableTest needs the table as a string literal")
+            throw ArgumentError(
+                node: Syntax(tableArgument.expression),
+                message: "@TableTest needs the table as a string literal, so that it can check the table at compile time"
+            )
         }
         let leading = arguments.filter { $0.label == nil && $0.id != tableArgument.id }
         let displayName = leading.first?.expression.as(StringLiteralExprSyntax.self)
@@ -119,7 +164,32 @@ struct TableTestArguments {
     }
 }
 
+/// An argument of `@TableTest` that the macro cannot use, and the syntax to point at.
+struct ArgumentError: Error {
+    let node: Syntax
+    let message: String
+}
+
 extension StringLiteralExprSyntax {
+    /// The syntax node of a line of the literal's value, for a diagnostic: the string segment
+    /// that starts the line in a multiline literal, or else the literal itself.
+    ///
+    /// A diagnostic cannot point at a column inside a node. The compiler places a macro
+    /// diagnostic at the start of its node and ignores `Diagnostic.position`.
+    func node(atLine line: Int) -> Syntax {
+        guard isMultiline else {
+            return Syntax(self)
+        }
+        var linesBefore = 0
+        for segment in segments {
+            if linesBefore == line {
+                return Syntax(segment)
+            }
+            linesBefore += segment.description.utf8.count { $0 == UInt8(ascii: "\n") }
+        }
+        return Syntax(self)
+    }
+
     var isMultiline: Bool {
         openingQuote.tokenKind == .multilineStringQuote
     }
@@ -151,7 +221,7 @@ extension String {
 
 extension SyntaxProtocol {
     /// The name of the type this syntax node declares or extends, if it is one.
-    fileprivate var typeName: String? {
+    var typeName: String? {
         if let decl = self.as(StructDeclSyntax.self) { return decl.name.text }
         if let decl = self.as(ClassDeclSyntax.self) { return decl.name.text }
         if let decl = self.as(ActorDeclSyntax.self) { return decl.name.text }
@@ -170,6 +240,23 @@ extension AttributeListSyntax.Element {
         }
         let name = attribute.attributeName.trimmedDescription
         return name.hasSuffix("Actor") ? name : nil
+    }
+}
+
+/// An error in a table, reported at its place in the source.
+struct TableTestDiagnostic: DiagnosticMessage {
+    let message: String
+
+    init(_ message: String) {
+        self.message = message
+    }
+
+    var diagnosticID: MessageID {
+        MessageID(domain: "TableTest", id: "table")
+    }
+
+    var severity: DiagnosticSeverity {
+        .error
     }
 }
 
