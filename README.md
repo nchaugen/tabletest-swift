@@ -34,7 +34,7 @@ struct LeapYearTests {
 an Xcode project that uses the package, with an app target and hosted tests.
 
 **Requirements:** Swift 6.2 or later (Xcode 26 or later); macOS 13 or iOS 16 or later. The package depends on
-swift-syntax `600.0.0..<604.0.0`.
+swift-syntax `602.0.0..<604.0.0`.
 
 ## Contents
 
