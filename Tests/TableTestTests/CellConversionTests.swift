@@ -68,6 +68,22 @@ struct CellConversionTests {
          conversion: .to(Date(timeIntervalSince1970: 1735689600)...Date(timeIntervalSince1970: 1741910400))),
         (scenario: "Range in a struct", cell: "[years: 2028...2030]", conversion: .to(DrinkWindow(years: 2028...2030))),
         (scenario: "Blank cell to an optional range", cell: "", conversion: .to(ClosedRange<Int>?.none)),
+        (scenario: "Duration in seconds", cell: "1.5 seconds", conversion: .to(Duration.seconds(1.5))),
+        (scenario: "Duration of one second", cell: "1 second", conversion: .to(Duration.seconds(1))),
+        (scenario: "Duration in milliseconds", cell: "250 milliseconds", conversion: .to(Duration.milliseconds(250))),
+        (scenario: "Duration in microseconds", cell: "5 microseconds", conversion: .to(Duration.microseconds(5))),
+        (scenario: "Duration in nanoseconds", cell: "7 nanoseconds", conversion: .to(Duration.nanoseconds(7))),
+        (scenario: "Negative duration", cell: "-2 seconds", conversion: .to(Duration.seconds(-2))),
+        (scenario: "Duration in a struct", cell: "[pause: 250 milliseconds]", conversion: .to(Step(pause: .milliseconds(250)))),
+        (scenario: "Time zone", cell: "Europe/Oslo", conversion: .to(TimeZone(identifier: "Europe/Oslo")!)),
+        (scenario: "Locale", cell: "nb_NO", conversion: .to(Locale(identifier: "nb_NO"))),
+        (scenario: "Locale of a language", cell: "fr", conversion: .to(Locale(identifier: "fr"))),
+        (scenario: "Currency", cell: "EUR", conversion: .to(Locale.Currency("EUR"))),
+        (scenario: "Year", cell: "2025", conversion: .to(DateComponents(year: 2025))),
+        (scenario: "Year and month", cell: "2025-03", conversion: .to(DateComponents(year: 2025, month: 3))),
+        (scenario: "Calendar date", cell: "2025-03-14", conversion: .to(DateComponents(year: 2025, month: 3, day: 14))),
+        (scenario: "Hour and minute", cell: "12:30", conversion: .to(DateComponents(hour: 12, minute: 30))),
+        (scenario: "Time with seconds", cell: "12:30:15", conversion: .to(DateComponents(hour: 12, minute: 30, second: 15))),
         (scenario: "Character", cell: "a", conversion: .plain(Character("a"))),
         (scenario: "Character of two scalars", cell: "e\u{301}", conversion: .plain(Character("e\u{301}"))),
         (scenario: "Quoted space", cell: "' '", conversion: .plain(Character(" "))),
@@ -222,6 +238,17 @@ struct CellConversionTests {
         (cell: "2028...x", target: .to(ClosedRange<Int>.self), message: "Cannot convert `x` to Int"),
         (cell: "2028", target: .to(ClosedRange<Int>.self), message: "Cannot convert `2028` to ClosedRange<Int>"),
         (cell: "2028...2030", target: .to(Range<Int>.self), message: "Cannot convert `2028...2030` to Range<Int>"),
+        (cell: "1.5 minutes", target: .to(Duration.self), message: "Cannot convert `1.5 minutes` to Duration"),
+        (cell: "1.5", target: .to(Duration.self), message: "Cannot convert `1.5` to Duration"),
+        (cell: "0.5 nanoseconds", target: .to(Duration.self), message: "Cannot convert `0.5 nanoseconds` to Duration"),
+        (cell: "Europe/Olso", target: .to(TimeZone.self), message: "Cannot convert `Europe/Olso` to TimeZone"),
+        (cell: "xx_NO", target: .to(Locale.self), message: "Cannot convert `xx_NO` to Locale"),
+        (cell: "nb_XY", target: .to(Locale.self), message: "Cannot convert `nb_XY` to Locale"),
+        (cell: "EUX", target: .to(Locale.Currency.self), message: "Cannot convert `EUX` to Locale.Currency"),
+        (cell: "2025-13", target: .to(DateComponents.self), message: "Cannot convert `2025-13` to DateComponents"),
+        (cell: "2025-02-30", target: .to(DateComponents.self), message: "Cannot convert `2025-02-30` to DateComponents"),
+        (cell: "24:00", target: .to(DateComponents.self), message: "Cannot convert `24:00` to DateComponents"),
+        (cell: "12:30:60", target: .to(DateComponents.self), message: "Cannot convert `12:30:60` to DateComponents"),
         (cell: "ab", target: .plain(Character.self), message: "Cannot convert `ab` to Character"),
         (cell: "", target: .plain(Character.self), message: "Cannot convert a blank cell to Character"),
         (cell: "x", target: .plain(Opaque.self),
@@ -359,6 +386,10 @@ struct Tasting: Decodable, Equatable, Sendable {
 
 struct DrinkWindow: Decodable, Equatable, Sendable {
     let years: ClosedRange<Int>
+}
+
+struct Step: Decodable, Equatable, Sendable {
+    let pause: Duration
 }
 
 struct Palette: Decodable, Equatable, Sendable {

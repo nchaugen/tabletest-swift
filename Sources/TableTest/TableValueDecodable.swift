@@ -151,6 +151,9 @@ extension TableValue {
 
 /// The name of a type as a test author writes it, for an error message.
 func typeName<T>(_ type: T.Type) -> String {
-    let name = String(describing: type)
-    return name == "NSDecimal" ? "Decimal" : name
+    switch String(reflecting: type) {
+    case "Foundation.Decimal", "__C.NSDecimal": return "Decimal"
+    case "Foundation.Locale.Currency": return "Locale.Currency"
+    default: return String(describing: type)
+    }
 }

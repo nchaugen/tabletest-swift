@@ -15,7 +15,25 @@ extension TableValueDecoding {
             return try date(from: value, codingPath: codingPath)
         }
         if type == Character.self {
-            return try character(from: value, codingPath: codingPath)
+            return try fromText(Character.self, value, codingPath) { $0.count == 1 ? $0.first : nil }
+        }
+        if type == Duration.self {
+            return try fromText(Duration.self, value, codingPath, duration(_:))
+        }
+        if type == TimeZone.self {
+            return try fromText(TimeZone.self, value, codingPath) { TimeZone(identifier: $0) }
+        }
+        if type == Locale.self {
+            return try fromText(Locale.self, value, codingPath, locale(_:))
+        }
+        if type == Locale.Currency.self {
+            return try fromText(Locale.Currency.self, value, codingPath) { text in
+                let currency = Locale.Currency(text)
+                return currency.isISOCurrency ? currency : nil
+            }
+        }
+        if type == DateComponents.self {
+            return try fromText(DateComponents.self, value, codingPath, dateComponents(_:))
         }
         if let range = type as? any SpelledRange.Type, value.isText {
             return try range.init(spelled: value, codingPath: codingPath)
@@ -63,13 +81,77 @@ extension TableValueDecoding {
         return formatter.date(from: text)
     }
 
-    /// One grapheme, such as `a` or `e` + U+0301.
-    private static func character(from value: TableValue, codingPath: [any CodingKey]) throws -> Character {
-        let text = try SingleCellContainer(value: value, codingPath: codingPath).text(for: Character.self)
-        guard text.count == 1, let character = text.first else {
-            throw SingleCellContainer.mismatch(Character.self, text: text, codingPath: codingPath)
+    /// The value that the text of the cell gives, or a conversion error when it gives none.
+    private static func fromText<T>(
+        _ type: T.Type,
+        _ value: TableValue,
+        _ codingPath: [any CodingKey],
+        _ parse: (String) -> T?
+    ) throws -> T {
+        let text = try SingleCellContainer(value: value, codingPath: codingPath).text(for: T.self)
+        guard let result = parse(text) else {
+            throw SingleCellContainer.mismatch(T.self, text: text, codingPath: codingPath)
         }
-        return character
+        return result
+    }
+
+    /// An amount and a unit, as Swift writes a duration: `1.5 seconds`, `250 milliseconds`.
+    private static func duration(_ text: String) -> Duration? {
+        let parts = text.split(separator: " ")
+        guard parts.count == 2 else {
+            return nil
+        }
+        let amount = String(parts[0])
+        let whole = Int64(amount)
+        let fraction = Double(amount).flatMap { $0.isFinite ? $0 : nil }
+        switch parts[1] {
+        case "second", "seconds": return whole.map { .seconds($0) } ?? fraction.map { .seconds($0) }
+        case "millisecond", "milliseconds": return whole.map { .milliseconds($0) } ?? fraction.map { .milliseconds($0) }
+        case "microsecond", "microseconds": return whole.map { .microseconds($0) } ?? fraction.map { .microseconds($0) }
+        case "nanosecond", "nanoseconds": return whole.map { .nanoseconds($0) }
+        default: return nil
+        }
+    }
+
+    /// The locale of an identifier whose language, and region if it has one, are ISO codes.
+    private static func locale(_ text: String) -> Locale? {
+        let locale = Locale(identifier: text)
+        guard locale.language.languageCode?.isISOLanguage == true, locale.region?.isISORegion ?? true else {
+            return nil
+        }
+        return locale
+    }
+
+    /// A year, a month or a date, `2025`, `2025-03`, `2025-03-14`; or a time of day, `12:30`,
+    /// `12:30:15`.
+    private static func dateComponents(_ text: String) -> DateComponents? {
+        if text.contains(":") {
+            guard let parts = numbers(in: text, separator: ":", widths: [2, 2, 2]),
+                  parts[0] < 24, parts[1] < 60, parts.count < 3 || parts[2] < 60
+            else {
+                return nil
+            }
+            return DateComponents(hour: parts[0], minute: parts[1], second: parts.count == 3 ? parts[2] : nil)
+        }
+        guard let parts = numbers(in: text, separator: "-", widths: [4, 2, 2]) else {
+            return nil
+        }
+        switch parts.count {
+        case 1: return DateComponents(year: parts[0])
+        case 2: return (1...12).contains(parts[1]) ? DateComponents(year: parts[0], month: parts[1]) : nil
+        default: return calendarDate(text).map { _ in DateComponents(year: parts[0], month: parts[1], day: parts[2]) }
+        }
+    }
+
+    /// The numbers between the separators, each with the number of digits its position needs.
+    private static func numbers(in text: String, separator: Character, widths: [Int]) -> [Int]? {
+        let parts = text.split(separator: separator, omittingEmptySubsequences: false)
+        guard parts.count <= widths.count,
+              zip(parts, widths).allSatisfy({ $0.count == $1 && $0.allSatisfy(\.isASCII) && $0.allSatisfy(\.isNumber) })
+        else {
+            return nil
+        }
+        return parts.compactMap { Int($0) }
     }
 
     private static func decimal(from value: TableValue, codingPath: [any CodingKey]) throws -> Decimal {
