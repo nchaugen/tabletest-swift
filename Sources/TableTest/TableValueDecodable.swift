@@ -1,3 +1,4 @@
+import Foundation
 @_exported import TableTestParser
 
 /// A type that converts itself from the parsed value of a table cell.
@@ -151,10 +152,13 @@ extension TableValue {
 }
 
 /// The name of a type as a test author writes it, for an error message.
+///
+/// The types are compared, not their names: a Foundation type lives in another module on Linux
+/// (`FoundationEssentials.Locale.Currency`), and `Decimal` is `NSDecimal` on Apple platforms.
 func typeName<T>(_ type: T.Type) -> String {
-    switch String(reflecting: type) {
-    case "Foundation.Decimal", "__C.NSDecimal": return "Decimal"
-    case "Foundation.Locale.Currency": return "Locale.Currency"
-    default: return String(describing: type)
+    switch ObjectIdentifier(type) {
+    case ObjectIdentifier(Decimal.self): "Decimal"
+    case ObjectIdentifier(Locale.Currency.self): "Locale.Currency"
+    default: String(describing: type)
     }
 }
