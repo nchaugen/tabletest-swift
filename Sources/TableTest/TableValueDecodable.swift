@@ -9,12 +9,12 @@ import Foundation
 /// this one decides. ``TableValue/converted(to:)`` converts each part with the library's rules.
 ///
 /// ```swift
-/// extension Shelf: @retroactive TableValueDecodable {
+/// extension Pantry: TableValueDecodable {
 ///     init(tableValue: TableValue) throws {
 ///         guard case .list(let elements) = tableValue else {
-///             throw TableValueConversionError("A shelf is a list of wines")
+///             throw TableValueConversionError("A pantry is a list of items")
 ///         }
-///         self.init(wines: try elements.map { try $0.converted(to: Wine.self) })
+///         self.init(items: try elements.map { try $0.converted(to: String.self) })
 ///     }
 /// }
 /// ```
@@ -23,14 +23,14 @@ public protocol TableValueDecodable {
     init(tableValue: TableValue) throws
 }
 
-/// A type that converts itself from the text of a table cell, such as `12.50 EUR` for a money
+/// A type that converts itself from the text of a table cell, such as `250 g` for a quantity
 /// type.
 ///
 /// Return `nil` when the text does not convert: the library then reports the cell. A blank cell,
 /// a list, a set and a map do not convert, and an optional parameter takes a blank cell as `nil`.
 ///
 /// ```swift
-/// extension Money: @retroactive TableTextDecodable {
+/// extension Quantity: TableTextDecodable {
 ///     init?(tableText: String) {
 ///         self.init(parsing: tableText)
 ///     }

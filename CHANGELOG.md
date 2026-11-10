@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+### Documentation
+- The README says `@retroactive` only for an Xcode app project: in a Swift package, the app and its tests are one package, and `@retroactive` is an error there
 ## [0.1.2] - 2026-11-10
 
 ### Added

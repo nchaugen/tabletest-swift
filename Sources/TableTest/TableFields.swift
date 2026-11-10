@@ -2,7 +2,7 @@ import Foundation
 
 extension TableValue {
     /// Reads a map cell field by field, for a ``TableValueDecodable`` conversion whose cell names
-    /// only the fields it sets, such as `[racks: 3]` for a type whose other fields have defaults.
+    /// only the fields it sets, such as `[rows: 4]` for a type whose other fields have defaults.
     ///
     /// The closure reads each field with ``TableFields/value(_:as:)`` or
     /// ``TableFields/required(_:as:)``, which convert it by the library's rules. When the closure
@@ -10,12 +10,12 @@ extension TableValue {
     /// silently. A cell that is not a map fails too.
     ///
     /// ```swift
-    /// extension Cellar: @retroactive TableValueDecodable {
+    /// extension Tray: TableValueDecodable {
     ///     public init(tableValue: TableValue) throws {
     ///         self = try tableValue.readingFields { fields in
-    ///             var cellar = Cellar()
-    ///             cellar.racks = try fields.value("racks") ?? cellar.racks
-    ///             return cellar
+    ///             var tray = Tray()
+    ///             tray.rows = try fields.value("rows") ?? tray.rows
+    ///             return tray
     ///         }
     ///     }
     /// }

@@ -330,8 +330,8 @@ func knowsACutForTheGrill(cut: Cut, forTheGrill: Bool) {
 }
 ```
 
-When the enum belongs to the app, write `extension Cut: @retroactive TableValueDecodable {}`
-in the test target.
+When the enum belongs to the app, write `extension Cut: TableValueDecodable {}` in the test
+target, with `@retroactive` in an Xcode app project ([Your own conversion](#your-own-conversion)).
 
 ### Enums with associated values
 
@@ -502,9 +502,15 @@ func holdsTheCookiesOfItsRows(tray: Tray, capacity: Int) {
 
 `fields.required("rows")` fails the cell when the map leaves the key out.
 
-When the type belongs to the app, write the conformance with `@retroactive` in the test target,
-and make its initialiser `public`: `public init(tableValue:)` or `public init?(tableText:)`. Under
+When the type belongs to the app, write the conformance in the test target, and make its
+initialiser `public`: `public init(tableValue:)` or `public init?(tableText:)`. Under
 `@testable import`, an app type has the access of a public type, so the build fails without it.
+
+- In a Swift package, the app and its tests are one package. Write the conformance as it is:
+  `@retroactive` is an error there.
+- In an Xcode app project, the app and its tests are not in a package. Mark the conformance
+  `@retroactive`: `extension Tray: @retroactive TableValueDecodable`.
+
 Swift does not synthesise `Codable` or `CaseIterable` in the test target, so that one word belongs
 on the app type ([Types from the app](#types-from-the-app)). A type that conforms to `TableTextDecodable` cannot be a field of a synthesised `Decodable`
 struct, because Swift needs every field to be `Decodable`.
