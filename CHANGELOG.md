@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Added
-- `TableValue.readingFields` reads a map cell field by field in a `TableValueDecodable` conversion, so a cell names only the fields it sets: `[racks: 3]` for a type whose other fields have defaults. A key that the conversion does not read fails the cell, and an error names the key: ``Cannot convert `x` to Int (at `racks`)``
+- `TableValue.readingFields` reads a map cell field by field in a `TableValueDecodable` conversion, so a cell names only the fields it sets: `[rows: 4]` for a type whose other fields have defaults. A key that the conversion does not read fails the cell, and an error names the key: ``Cannot convert `x` to Int (at `rows`)``
 
 ### Documentation
 - The README says that a conformance of an app type in the test target needs a `public` initialiser
