@@ -110,6 +110,11 @@ struct CellConversionTests {
          conversion: .own(["rent": Money(cents: 90000, currency: "EUR")])),
         (scenario: "Blank cell to an optional", cell: "", conversion: .own(Money?.none)),
         (scenario: "Case name of an enum with no raw value", cell: "south", conversion: .own(Compass.south)),
+        (scenario: "Map that names some fields", cell: "[racks: 3, bins: [north, south]]",
+         conversion: .own(Cellar(racks: 3, bins: ["north", "south"]))),
+        (scenario: "Map that names no field", cell: "[:]", conversion: .own(Cellar())),
+        (scenario: "List of maps read field by field", cell: "[[humidity: 70], [:]]",
+         conversion: .own([Cellar(humidity: 70), Cellar()])),
         (scenario: "Parsed value unconverted", cell: "[a: [1]]",
          conversion: .own(TableValue.map([TableMapEntry(key: "a", value: .list([.string("1")]))]))),
     ])
@@ -229,7 +234,13 @@ struct CellConversionTests {
         (cell: "[1.00 EUR]", target: .own(Price.self), message: "Cannot convert `[1.00 EUR]` to Price"),
         (cell: "[1, x]", target: .part([Int].self), message: "Cannot convert `x` to Int (at `[1]`)"),
         (cell: "[band: grand, price: 9.00 EUR]", target: .part(Listing.self),
-         message: "Band has no case with the raw value `grand`"),
+         message: "Band has no case with the raw value `grand` (at `band`)"),
+        (cell: "[band: premier_cru]", target: .part(Listing.self), message: "The map has no key `price`"),
+        (cell: "[rack: 3]", target: .own(Cellar.self), message: "Cellar does not read the key `rack`"),
+        (cell: "[rack: 3, bin: [a]]", target: .own(Cellar.self), message: "Cellar does not read the keys `rack`, `bin`"),
+        (cell: "[racks: x]", target: .own(Cellar.self), message: "Cannot convert `x` to Int (at `racks`)"),
+        (cell: "[bins: [a, [b]]]", target: .own(Cellar.self), message: "Cannot convert `[b]` to String (at `bins[1]`)"),
+        (cell: "racks", target: .own(Cellar.self), message: "Cannot convert `racks` to a map"),
         (cell: "yeer(2025)", target: .to(Vintage.self), message: "Vintage has no case named `yeer`"),
         (cell: "year(abc)", target: .to(Vintage.self), message: "Cannot convert `abc` to Int (at `year._0`)"),
         (cell: "year(2025", target: .to(Vintage.self), message: "Cannot convert `year(2025` to Vintage"),
@@ -485,13 +496,32 @@ struct Listing: TableValueDecodable, Equatable, Sendable {
     }
 
     init(tableValue: TableValue) throws {
-        guard case .map(let entries) = tableValue,
-              let band = entries.first(where: { $0.key == "band" }),
-              let price = entries.first(where: { $0.key == "price" })
-        else {
-            throw TableValueConversionError("A listing is a map with a band and a price")
+        self = try tableValue.readingFields { fields in
+            Listing(band: try fields.required("band"), price: try fields.required("price"))
         }
-        self.init(band: try band.value.converted(to: Band.self), price: try price.value.converted(to: Price.self))
+    }
+}
+
+/// A struct whose conversion reads a map field by field, so a cell names only the fields it sets.
+struct Cellar: TableValueDecodable, Equatable, Sendable {
+    var racks = 1
+    var humidity: Int?
+    var bins: [String] = []
+
+    init(racks: Int = 1, humidity: Int? = nil, bins: [String] = []) {
+        self.racks = racks
+        self.humidity = humidity
+        self.bins = bins
+    }
+
+    init(tableValue: TableValue) throws {
+        self = try tableValue.readingFields { fields in
+            var cellar = Cellar()
+            cellar.racks = try fields.value("racks") ?? cellar.racks
+            cellar.humidity = try fields.value("humidity")
+            cellar.bins = try fields.value("bins") ?? cellar.bins
+            return cellar
+        }
     }
 }
 

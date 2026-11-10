@@ -400,7 +400,8 @@ func findsTheOldestVintage(bottles: [Bottle], oldest: Int?) {
 
 A list, set or map field that the map leaves out is empty. A synthesised `Decodable` needs a key
 for every other field that is not optional, also for a field with a default value. When a struct only collects the inputs of one example, give each field its
-own column, and build the struct in the test body.
+own column, and build the struct in the test body. When a cell must name only the fields it
+sets, read the map with `readingFields` ([Your own conversion](#your-own-conversion)).
 
 ### Types from the app
 
@@ -466,8 +467,47 @@ func countsTheBottlesOnAShelf(shelf: Shelf, bottles: Int) {
 }
 ```
 
-When the type belongs to the app, write the conformance with `@retroactive` in the test target.
-A type that conforms to `TableTextDecodable` cannot be a field of a synthesised `Decodable`
+To read a map that names only the fields it sets, use `readingFields`. Each field converts by the
+rules above. A key that the conversion does not read fails the cell, so a misspelt key is not left
+out silently:
+
+```swift
+struct Cellar {
+    var racks = 1
+    var bottlesPerRack = 120
+
+    var capacity: Int { racks * bottlesPerRack }
+}
+
+extension Cellar: TableValueDecodable {
+    init(tableValue: TableValue) throws {
+        self = try tableValue.readingFields { fields in
+            var cellar = Cellar()
+            cellar.racks = try fields.value("racks") ?? cellar.racks
+            cellar.bottlesPerRack = try fields.value("bottlesPerRack") ?? cellar.bottlesPerRack
+            return cellar
+        }
+    }
+}
+
+@TableTest("""
+    Cellar                          | Capacity?
+    [racks: 3]                      | 360
+    [racks: 2, bottlesPerRack: 100] | 200
+    [:]                             | 120
+    """)
+func holdsTheBottlesOfItsRacks(cellar: Cellar, capacity: Int) {
+    #expect(cellar.capacity == capacity)
+}
+```
+
+`fields.required("racks")` fails the cell when the map leaves the key out.
+
+When the type belongs to the app, write the conformance with `@retroactive` in the test target,
+and make its initialiser `public`: `public init(tableValue:)` or `public init?(tableText:)`. Under
+`@testable import`, an app type has the access of a public type, so the build fails without it.
+Swift does not synthesise `Codable` or `CaseIterable` in the test target, so that one word belongs
+on the app type ([Types from the app](#types-from-the-app)). A type that conforms to `TableTextDecodable` cannot be a field of a synthesised `Decodable`
 struct, because Swift needs every field to be `Decodable`.
 
 ## Value sets

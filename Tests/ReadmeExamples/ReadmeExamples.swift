@@ -190,6 +190,25 @@ extension Shelf: TableValueDecodable {
     }
 }
 
+/// A cellar whose cell names only the fields it sets.
+struct Cellar {
+    var racks = 1
+    var bottlesPerRack = 120
+
+    var capacity: Int { racks * bottlesPerRack }
+}
+
+extension Cellar: TableValueDecodable {
+    init(tableValue: TableValue) throws {
+        self = try tableValue.readingFields { fields in
+            var cellar = Cellar()
+            cellar.racks = try fields.value("racks") ?? cellar.racks
+            cellar.bottlesPerRack = try fields.value("bottlesPerRack") ?? cellar.bottlesPerRack
+            return cellar
+        }
+    }
+}
+
 struct ConversionTests {
     @TableTest("""
         Scenario            | Tasted                    | Window                  | Inside?
@@ -280,6 +299,16 @@ struct ConversionTests {
         """)
     func countsTheBottlesOnAShelf(shelf: Shelf, bottles: Int) {
         #expect(shelf.wines.count == bottles)
+    }
+
+    @TableTest("""
+        Cellar                          | Capacity?
+        [racks: 3]                      | 360
+        [racks: 2, bottlesPerRack: 100] | 200
+        [:]                             | 120
+        """)
+    func holdsTheBottlesOfItsRacks(cellar: Cellar, capacity: Int) {
+        #expect(cellar.capacity == capacity)
     }
 }
 
