@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-10
+
 ### Added
 - A map cell can leave out a list, set or map field of a `Decodable` struct, which is then empty: `[body: light]` for a struct with `var aromas: Set<Aroma> = []`
 
