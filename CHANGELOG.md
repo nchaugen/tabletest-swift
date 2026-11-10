@@ -7,6 +7,7 @@
 
 ### Documentation
 - The README says that a conformance of an app type in the test target needs a `public` initialiser
+- The README examples use cooking, which every reader knows, in place of wine-tasting terms
 ## [0.1.1] - 2026-11-10
 
 ### Added

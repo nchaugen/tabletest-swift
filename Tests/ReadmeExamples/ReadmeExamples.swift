@@ -113,110 +113,109 @@ struct ValueFormatTests {
     }
 }
 
-/// How a bottle is closed; a cell gives the raw value.
-enum Closure: String, Codable {
-    case cork
-    case screwCap = "screw cap"
+/// A diet; a cell gives the raw value.
+enum Diet: String, Codable {
+    case vegetarian
+    case glutenFree = "gluten-free"
 }
 
-/// The body of a wine on the WSET scale.
-enum Body: String, Codable, CaseIterable {
-    case light
-    case mediumMinus = "medium(-)"
+/// How hot a dish is, mildest first.
+enum Heat: String, Codable, CaseIterable {
+    case mild
     case medium
-    case mediumPlus = "medium(+)"
-    case full
+    case hot
+    case extraHot = "extra hot"
 
     var rank: Int {
-        Body.allCases.firstIndex(of: self)!
+        Heat.allCases.firstIndex(of: self)!
     }
 }
 
-/// A VDP vineyard tier. The raw values are storage keys, so the tests name the cases.
-enum VdpTier: String, CaseIterable {
-    case grosseLage = "grosse_lage"
-    case ersteLage = "erste_lage"
+/// A cut of meat. The raw values are a supplier's codes, so the tests name the cases.
+enum Cut: String, CaseIterable {
+    case sirloin = "SIRLOIN_STEAK"
+    case brisket = "BRISKET"
 }
 
-extension VdpTier: TableValueDecodable {}
+extension Cut: TableValueDecodable {}
 
-/// When a wine is ready to drink.
-enum Readiness: Codable, Equatable {
+/// When a kitchen alarm rings.
+enum Alarm: Codable, Equatable {
     case now
-    case from(year: Int)
+    case after(minutes: Int)
     case between(Int, Int)
 
-    func allows(_ year: Int) -> Bool {
+    func rings(atMinute minute: Int) -> Bool {
         switch self {
         case .now: true
-        case let .from(first): year >= first
-        case let .between(first, last): (first...last).contains(year)
+        case let .after(minutes): minute >= minutes
+        case let .between(first, last): (first...last).contains(minute)
         }
     }
 }
 
-struct Bottle: Decodable {
-    let wine: String
-    let vintage: Int?
+struct Recipe: Decodable {
+    let dish: String
+    let minutes: Int?
 }
 
-/// An amount of money, written `12.50 EUR` in a cell.
-struct Money: Equatable {
-    let cents: Int
-    let currency: String
+/// An amount of an ingredient, written `250 g` or `1.5 kg` in a cell.
+struct Quantity: Equatable {
+    let grams: Int
 }
 
-extension Money: TableTextDecodable {
+extension Quantity: TableTextDecodable {
     init?(tableText: String) {
         let parts = tableText.split(separator: " ")
-        guard parts.count == 2, let amount = Decimal(string: String(parts[0])) else {
+        guard parts.count == 2, let amount = Double(parts[0]),
+              let gramsPerUnit = ["g": 1.0, "kg": 1000.0][String(parts[1])] else {
             return nil
         }
-        self.init(cents: NSDecimalNumber(decimal: amount * 100).intValue, currency: String(parts[1]))
+        self.init(grams: Int((amount * gramsPerUnit).rounded()))
     }
 }
 
-/// A shelf of bottles, written as a list of wine names in a cell.
-struct Shelf {
-    let wines: [String]
+/// A pantry, written as a list of items in a cell.
+struct Pantry {
+    let items: [String]
 }
 
-extension Shelf: TableValueDecodable {
+extension Pantry: TableValueDecodable {
     init(tableValue: TableValue) throws {
         guard case .list(let elements) = tableValue else {
-            throw TableValueConversionError("A shelf is a list of wines")
+            throw TableValueConversionError("A pantry is a list of items")
         }
-        self.init(wines: try elements.map { try $0.converted(to: String.self) })
+        self.init(items: try elements.map { try $0.converted(to: String.self) })
     }
 }
 
-/// A cellar whose cell names only the fields it sets.
-struct Cellar {
-    var racks = 1
-    var bottlesPerRack = 120
+/// A baking tray whose cell names only the fields it sets.
+struct Tray {
+    var rows = 3
+    var cookiesPerRow = 4
 
-    var capacity: Int { racks * bottlesPerRack }
+    var capacity: Int { rows * cookiesPerRow }
 }
 
-extension Cellar: TableValueDecodable {
+extension Tray: TableValueDecodable {
     init(tableValue: TableValue) throws {
         self = try tableValue.readingFields { fields in
-            var cellar = Cellar()
-            cellar.racks = try fields.value("racks") ?? cellar.racks
-            cellar.bottlesPerRack = try fields.value("bottlesPerRack") ?? cellar.bottlesPerRack
-            return cellar
+            var tray = Tray()
+            tray.rows = try fields.value("rows") ?? tray.rows
+            tray.cookiesPerRow = try fields.value("cookiesPerRow") ?? tray.cookiesPerRow
+            return tray
         }
     }
 }
 
 struct ConversionTests {
     @TableTest("""
-        Scenario            | Tasted                    | Window                  | Inside?
-        A day in the window | 2026-03-14                | 2025-01-01...2030-12-31 | true
-        Before the window   | 2024-12-31T23:00:00+01:00 | 2025-01-01...2030-12-31 | false
+        Scenario                   | Eaten                     | Shelf life              | Inside?
+        Before the best-before day | 2026-03-14                | 2026-03-01...2026-03-31 | true
+        The day before buying      | 2026-02-28T23:00:00+01:00 | 2026-03-01...2026-03-31 | false
         """)
-    func knowsTheDrinkingWindow(tasted: Date, window: ClosedRange<Date>, inside: Bool) {
-        #expect(window.contains(tasted) == inside)
+    func knowsTheShelfLife(eaten: Date, shelfLife: ClosedRange<Date>, inside: Bool) {
+        #expect(shelfLife.contains(eaten) == inside)
     }
 
     @TableTest("""
@@ -229,86 +228,86 @@ struct ConversionTests {
     }
 
     @TableTest("""
-        Closure   | Reseals?
-        cork      | false
-        screw cap | true
+        Diet        | Without wheat?
+        vegetarian  | false
+        gluten-free | true
         """)
-    func knowsAClosureThatReseals(closure: Closure, reseals: Bool) {
-        #expect((closure == .screwCap) == reseals)
+    func knowsADietWithoutWheat(diet: Diet, withoutWheat: Bool) {
+        #expect((diet == .glutenFree) == withoutWheat)
     }
 
     @TableTest("""
-        Lowest    | Highest | Wine      | Inside?
-        medium(-) | medium  | medium(+) | false
-        light     | full    | medium(-) | true
+        Lowest | Highest   | Dish   | Inside?
+        mild   | medium    | hot    | false
+        mild   | extra hot | medium | true
         """)
-    func placesTheBodyInASpan(lowest: Body, highest: Body, wine: Body, inside: Bool) {
-        #expect((lowest.rank...highest.rank).contains(wine.rank) == inside)
+    func placesTheHeatInARange(lowest: Heat, highest: Heat, dish: Heat, inside: Bool) {
+        #expect((lowest.rank...highest.rank).contains(dish.rank) == inside)
     }
 
     @TableTest("""
-        Tier       | Top tier?
-        grosseLage | true
-        ersteLage  | false
+        Cut     | For the grill?
+        sirloin | true
+        brisket | false
         """)
-    func knowsTheTopTier(tier: VdpTier, topTier: Bool) {
-        #expect((tier == .grosseLage) == topTier)
+    func knowsACutForTheGrill(cut: Cut, forTheGrill: Bool) {
+        #expect((cut == .sirloin) == forTheGrill)
     }
 
     @TableTest("""
-        Scenario        | Readiness           | Year | Drink?
-        Ready now       | now                 | 2026 | true
-        Before its year | from(year: 2028)    | 2026 | false
-        Inside the span | between(2025, 2030) | 2027 | true
+        Scenario        | Alarm              | Minute | Rings?
+        Rings now       | now                | 10     | true
+        Before its time | after(minutes: 12) | 10     | false
+        Inside the span | between(8, 12)     | 10     | true
         """)
-    func allowsTheYearsItIsReady(readiness: Readiness, year: Int, drink: Bool) {
-        #expect(readiness.allows(year) == drink)
+    func ringsAtItsMinute(alarm: Alarm, minute: Int, rings: Bool) {
+        #expect(alarm.rings(atMinute: minute) == rings)
     }
 
     @TableTest("""
-        Readinesses                                 | Any now?
-        ['from(year: 2028)', now]                   | true
-        ['between(2025, 2030)', 'from(year: 2026)'] | false
+        Alarms                                  | Any now?
+        ['after(minutes: 12)', now]             | true
+        ['between(8, 12)', 'after(minutes: 5)'] | false
         """)
-    func findsAWineReadyNow(readinesses: [Readiness], anyNow: Bool) {
-        #expect(readinesses.contains(.now) == anyNow)
+    func findsAnAlarmRingingNow(alarms: [Alarm], anyNow: Bool) {
+        #expect(alarms.contains(.now) == anyNow)
     }
 
     @TableTest("""
-        Bottles                                                         | Oldest?
-        [[wine: Barolo, vintage: 2015], [wine: Chablis, vintage: 2020]] | 2015
-        [[wine: Cava]]                                                  |
+        Recipes                                                       | Longest?
+        [[dish: Pancakes, minutes: 20], [dish: Risotto, minutes: 35]] | 35
+        [[dish: Salad]]                                               |
         """)
-    func findsTheOldestVintage(bottles: [Bottle], oldest: Int?) {
-        #expect(bottles.compactMap(\.vintage).min() == oldest)
+    func findsTheLongestRecipe(recipes: [Recipe], longest: Int?) {
+        #expect(recipes.compactMap(\.minutes).max() == longest)
     }
 
     @TableTest("""
-        Price     | Quantity | Total?
-        12.50 EUR | 2        | 25.00 EUR
-        0.99 USD  | 3        | 2.97 USD
+        Per serving | Servings | Total?
+        250 g       | 2        | 500 g
+        0.4 kg      | 3        | 1.2 kg
         """)
-    func multipliesThePrice(price: Money, quantity: Int, total: Money) {
-        #expect(Money(cents: price.cents * quantity, currency: price.currency) == total)
+    func scalesTheQuantity(perServing: Quantity, servings: Int, total: Quantity) {
+        #expect(Quantity(grams: perServing.grams * servings) == total)
     }
 
     @TableTest("""
-        Shelf             | Bottles?
-        [Barolo, Chablis] | 2
-        []                | 0
+        Pantry         | Items?
+        [flour, sugar] | 2
+        []             | 0
         """)
-    func countsTheBottlesOnAShelf(shelf: Shelf, bottles: Int) {
-        #expect(shelf.wines.count == bottles)
+    func countsTheItemsInThePantry(pantry: Pantry, items: Int) {
+        #expect(pantry.items.count == items)
     }
 
     @TableTest("""
-        Cellar                          | Capacity?
-        [racks: 3]                      | 360
-        [racks: 2, bottlesPerRack: 100] | 200
-        [:]                             | 120
+        Tray                        | Capacity?
+        [rows: 4]                   | 16
+        [rows: 2, cookiesPerRow: 5] | 10
+        [:]                         | 12
         """)
-    func holdsTheBottlesOfItsRacks(cellar: Cellar, capacity: Int) {
-        #expect(cellar.capacity == capacity)
+    func holdsTheCookiesOfItsRows(tray: Tray, capacity: Int) {
+        #expect(tray.capacity == capacity)
     }
 }
 
