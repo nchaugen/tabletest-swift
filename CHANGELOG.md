@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-10
+
 ### Added
 - `TableValue.readingFields` reads a map cell field by field in a `TableValueDecodable` conversion, so a cell names only the fields it sets: `[rows: 4]` for a type whose other fields have defaults. A key that the conversion does not read fails the cell, and an error names the key: ``Cannot convert `x` to Int (at `rows`)``
 

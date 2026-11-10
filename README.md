@@ -59,7 +59,7 @@ Add the package, and add the `TableTest` product to your test target:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/nchaugen/tabletest-swift.git", from: "0.1.1"),
+    .package(url: "https://github.com/nchaugen/tabletest-swift.git", from: "0.1.2"),
 ],
 targets: [
     .testTarget(
