@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-24
+
 ### Added
 - `TableTestRow` guarantees direct reflected `Int` fields named `index` and `caseNumber` for report exporters.
 - Reporting builds emit a companion manifest per table.
