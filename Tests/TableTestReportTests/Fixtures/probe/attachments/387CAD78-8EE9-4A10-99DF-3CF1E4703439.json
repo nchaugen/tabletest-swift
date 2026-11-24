@@ -1,0 +1,1 @@
+{"version":1,"title":"Disabled table","methodName":"disabledTable","suite":["ExamplesTests","ResultBundleProbe"],"testFunction":"scenarios(_:)","rows":[{"index":1,"cells":[{"roles":[],"value":{"text":"1","kind":"string"}}],"cases":[{"number":1,"displayName":"1"}]}],"headers":[{"roles":[],"value":{"text":"Value","kind":"string"}}]}

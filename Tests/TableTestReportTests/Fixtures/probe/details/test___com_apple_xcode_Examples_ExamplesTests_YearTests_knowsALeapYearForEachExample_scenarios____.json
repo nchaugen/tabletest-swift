@@ -1,16 +1,22 @@
 {
   "arguments" : [
     {
-      "value" : "Divisible by 400 (Year = 2000)"
+      "value" : "Not divisible by 4 (Year = 2002)"
     },
     {
-      "value" : "Divisible by 4 (Year = 2012)"
+      "value" : "Divisible by 4 (Year = 2008)"
     },
     {
       "value" : "Divisible by 4 (Year = 2004)"
     },
     {
-      "value" : "Divisible by 4 (Year = 2008)"
+      "value" : "Divisible by 4 (Year = 2012)"
+    },
+    {
+      "value" : "Divisible by 400 (Year = 2400)"
+    },
+    {
+      "value" : "Divisible by 400 (Year = 2000)"
     },
     {
       "value" : "Not divisible by 4 (Year = 2003)"
@@ -19,16 +25,10 @@
       "value" : "Divisible by 100, not by 400 (Year = 1900)"
     },
     {
-      "value" : "Divisible by 400 (Year = 2400)"
-    },
-    {
-      "value" : "Divisible by 100, not by 400 (Year = 2100)"
-    },
-    {
       "value" : "Not divisible by 4 (Year = 2001)"
     },
     {
-      "value" : "Not divisible by 4 (Year = 2002)"
+      "value" : "Divisible by 100, not by 400 (Year = 2100)"
     }
   ],
   "devices" : [
@@ -42,8 +42,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,001 seconds",
-  "durationInSeconds" : 0.001036691665649414,
+  "duration" : "Average duration 0,0021 seconds",
+  "durationInSeconds" : 0.002127385139465332,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -225,183 +225,10 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,000036s",
-      "durationInSeconds" : 3.600120544433594e-05,
+      "duration" : "0,0021s",
+      "durationInSeconds" : 0.002086162567138672,
       "name" : "Not divisible by 4 (Year = 2001)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 2",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"Divisible by 4\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"Divisible by 4\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Leap?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2004\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2004\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 29",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 40",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:29:40",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2004\"), location: ExamplesTests/YearTests.swift:29:40)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"true\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"true\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 29",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 61",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:29:61",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:29:61)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year = 2004\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 1 element",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : Divisible by 4 (Year = 2004)",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,000036s",
-      "durationInSeconds" : 3.600120544433594e-05,
-      "name" : "Divisible by 4 (Year = 2004)",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -571,8 +398,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,000091s",
-      "durationInSeconds" : 9.083747863769531e-05,
+      "duration" : "0,000027s",
+      "durationInSeconds" : 2.6941299438476562e-05,
       "name" : "Divisible by 4 (Year = 2012)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=18b058689d010062a25cd7fb949b2abfea1757d2de45ca3abdda17db956e506b",
       "nodeType" : "Arguments",
@@ -744,356 +571,10 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0023s",
-      "durationInSeconds" : 0.0023479461669921875,
+      "duration" : "0,0022s",
+      "durationInSeconds" : 0.0022020339965820312,
       "name" : "Not divisible by 4 (Year = 2003)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 2",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 2",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"Divisible by 4\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"Divisible by 4\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Leap?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2008\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2008\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 29",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 40",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:29:40",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2008\"), location: ExamplesTests/YearTests.swift:29:40)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"true\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"true\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 29",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 61",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:29:61",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:29:61)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year = 2008\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 1 element",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : Divisible by 4 (Year = 2008)",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,00026s",
-      "durationInSeconds" : 0.000263214111328125,
-      "name" : "Divisible by 4 (Year = 2008)",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=1ad6041faf516d0043ca4b91348ab8c8a713496b5b5ce302e0e907e4f7bcbc24",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 4",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"Divisible by 400\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"Divisible by 400\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Leap?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2000\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2000\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 31",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 40",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:31:40",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2000\"), location: ExamplesTests/YearTests.swift:31:40)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"true\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"true\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 31",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 61",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:31:61",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:31:61)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year = 2000\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 1 element",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : Divisible by 400 (Year = 2000)",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,00005s",
-      "durationInSeconds" : 4.982948303222656e-05,
-      "name" : "Divisible by 400 (Year = 2000)",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -1263,10 +744,702 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,00025s",
-      "durationInSeconds" : 0.0002512931823730469,
+      "duration" : "0,00037s",
+      "durationInSeconds" : 0.00037384033203125,
       "name" : "Divisible by 100, not by 400 (Year = 2100)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0fd922e83d21fc2fda1578059c2012e5b132fbb80fba2be9660eb85d8c3f3404",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Divisible by 4\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Divisible by 4\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2008\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2008\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 29",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 40",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:29:40",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2008\"), location: ExamplesTests/YearTests.swift:29:40)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 29",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 61",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:29:61",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:29:61)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2008\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Divisible by 4 (Year = 2008)",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,00042s",
+      "durationInSeconds" : 0.0004162788391113281,
+      "name" : "Divisible by 4 (Year = 2008)",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=1ad6041faf516d0043ca4b91348ab8c8a713496b5b5ce302e0e907e4f7bcbc24",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Divisible by 4\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Divisible by 4\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2004\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2004\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 29",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 40",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:29:40",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2004\"), location: ExamplesTests/YearTests.swift:29:40)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 29",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 61",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:29:61",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:29:61)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2004\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Divisible by 4 (Year = 2004)",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,0026s",
+      "durationInSeconds" : 0.002568960189819336,
+      "name" : "Divisible by 4 (Year = 2004)",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 4",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Divisible by 400\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Divisible by 400\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2400\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2400\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 31",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 40",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:31:40",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2400\"), location: ExamplesTests/YearTests.swift:31:40)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 31",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 61",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:31:61",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:31:61)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2400\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Divisible by 400 (Year = 2400)",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,0004s",
+      "durationInSeconds" : 0.00039696693420410156,
+      "name" : "Divisible by 400 (Year = 2400)",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=044d15dbf5c3b7e70206179fce34d75eb5ad3d40bca2ba915e9cc6f75293a9a7",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 4",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Divisible by 400\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Divisible by 400\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2000\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2000\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 31",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 40",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:31:40",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2000\"), location: ExamplesTests/YearTests.swift:31:40)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 31",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 61",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : YearTests.swift:31:61",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:31:61)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2000\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Divisible by 400 (Year = 2000)",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,0036s",
+      "durationInSeconds" : 0.0036199092864990234,
+      "name" : "Divisible by 400 (Year = 2000)",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -1436,8 +1609,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0026s",
-      "durationInSeconds" : 0.0025720596313476562,
+      "duration" : "0,0058s",
+      "durationInSeconds" : 0.005800724029541016,
       "name" : "Not divisible by 4 (Year = 2002)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
       "nodeType" : "Arguments",
@@ -1609,183 +1782,10 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,00032s",
-      "durationInSeconds" : 0.0003218650817871094,
+      "duration" : "0,0038s",
+      "durationInSeconds" : 0.003782033920288086,
       "name" : "Divisible by 100, not by 400 (Year = 1900)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 4",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 2",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"Divisible by 400\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"Divisible by 400\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Leap?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2400\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2400\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 31",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 40",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:31:40",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2400\"), location: ExamplesTests/YearTests.swift:31:40)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"true\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"true\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/YearTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 31",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 61",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : YearTests.swift:31:61",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/YearTests.swift:31:61)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Year = 2400\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 1 element",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : Divisible by 400 (Year = 2400)",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,0044s",
-      "durationInSeconds" : 0.004397869110107422,
-      "name" : "Divisible by 400 (Year = 2400)",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=044d15dbf5c3b7e70206179fce34d75eb5ad3d40bca2ba915e9cc6f75293a9a7",
       "nodeType" : "Arguments",
       "result" : "Passed"
     }

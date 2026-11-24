@@ -18,8 +18,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,0017 seconds",
-  "durationInSeconds" : 0.0016509294509887695,
+  "duration" : "Average duration 0,0013 seconds",
+  "durationInSeconds" : 0.0013464689254760742,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -129,7 +129,7 @@
                             },
                             {
                               "details" : "Swift.Int",
-                              "name" : "line : 21",
+                              "name" : "line : 22",
                               "nodeType" : "Test Value"
                             },
                             {
@@ -139,12 +139,12 @@
                             }
                           ],
                           "details" : "Testing.SourceLocation",
-                          "name" : "location : ResultBundleProbe.swift:21:9",
+                          "name" : "location : ResultBundleProbe.swift:22:9",
                           "nodeType" : "Test Value"
                         }
                       ],
                       "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.list([TableTestParser.TableValue.string(\"a\"), TableTestParser.TableValue.string(\"b\")]), location: ExamplesTests/ResultBundleProbe.swift:21:9)",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.list([TableTestParser.TableValue.string(\"a\"), TableTestParser.TableValue.string(\"b\")]), location: ExamplesTests/ResultBundleProbe.swift:22:9)",
                       "nodeType" : "Test Value"
                     },
                     {
@@ -175,7 +175,7 @@
                             },
                             {
                               "details" : "Swift.Int",
-                              "name" : "line : 21",
+                              "name" : "line : 22",
                               "nodeType" : "Test Value"
                             },
                             {
@@ -185,12 +185,12 @@
                             }
                           ],
                           "details" : "Testing.SourceLocation",
-                          "name" : "location : ResultBundleProbe.swift:21:30",
+                          "name" : "location : ResultBundleProbe.swift:22:30",
                           "nodeType" : "Test Value"
                         }
                       ],
                       "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2\"), location: ExamplesTests/ResultBundleProbe.swift:21:30)",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2\"), location: ExamplesTests/ResultBundleProbe.swift:22:30)",
                       "nodeType" : "Test Value"
                     }
                   ],
@@ -220,8 +220,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,00034s",
-      "durationInSeconds" : 0.0003418922424316406,
+      "duration" : "0,00019s",
+      "durationInSeconds" : 0.000186920166015625,
       "name" : "[a, b] | 2 [1.1]",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
       "nodeType" : "Arguments",
@@ -309,7 +309,7 @@
                             },
                             {
                               "details" : "Swift.Int",
-                              "name" : "line : 21",
+                              "name" : "line : 22",
                               "nodeType" : "Test Value"
                             },
                             {
@@ -319,12 +319,12 @@
                             }
                           ],
                           "details" : "Testing.SourceLocation",
-                          "name" : "location : ResultBundleProbe.swift:21:9",
+                          "name" : "location : ResultBundleProbe.swift:22:9",
                           "nodeType" : "Test Value"
                         }
                       ],
                       "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.list([TableTestParser.TableValue.string(\"a, b\")]), location: ExamplesTests/ResultBundleProbe.swift:21:9)",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.list([TableTestParser.TableValue.string(\"a, b\")]), location: ExamplesTests/ResultBundleProbe.swift:22:9)",
                       "nodeType" : "Test Value"
                     },
                     {
@@ -355,7 +355,7 @@
                             },
                             {
                               "details" : "Swift.Int",
-                              "name" : "line : 21",
+                              "name" : "line : 22",
                               "nodeType" : "Test Value"
                             },
                             {
@@ -365,12 +365,12 @@
                             }
                           ],
                           "details" : "Testing.SourceLocation",
-                          "name" : "location : ResultBundleProbe.swift:21:30",
+                          "name" : "location : ResultBundleProbe.swift:22:30",
                           "nodeType" : "Test Value"
                         }
                       ],
                       "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2\"), location: ExamplesTests/ResultBundleProbe.swift:21:30)",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2\"), location: ExamplesTests/ResultBundleProbe.swift:22:30)",
                       "nodeType" : "Test Value"
                     }
                   ],
@@ -422,7 +422,7 @@
               "nodeType" : "Source Code Reference",
               "sourceLocation" : {
                 "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
-                "lineNumber" : 24
+                "lineNumber" : 25
               }
             }
           ],
@@ -431,12 +431,12 @@
           "result" : "Failed",
           "sourceLocation" : {
             "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
-            "lineNumber" : 24
+            "lineNumber" : 25
           }
         }
       ],
-      "duration" : "0,003s",
-      "durationInSeconds" : 0.0029599666595458984,
+      "duration" : "0,0025s",
+      "durationInSeconds" : 0.0025060176849365234,
       "name" : "[a, b] | 2 [1.2]",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
       "nodeType" : "Arguments",
