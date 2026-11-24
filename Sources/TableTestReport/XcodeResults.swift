@@ -135,7 +135,7 @@ struct TestNode: Decodable {
     let name: String
     let nodeIdentifier: String?
     let nodeIdentifierURL: String?
-    let result: String?
+    let result: CaseStatus?
     let details: String?
     private let children: [Self]?
 
@@ -166,7 +166,7 @@ struct TestRun {
     let identity: CaseIdentity?
     let xcodeDisplayName: String?
     let caseURL: String?
-    let status: String
+    let status: CaseStatus
     let message: String?
 
     var context: RunContext {
@@ -232,7 +232,7 @@ extension TestDetails {
         return [TestRun(
             device: device, configuration: configuration, attempt: path.attempt, attemptName: path.attemptName,
             identity: path.identity, xcodeDisplayName: path.xcodeDisplayName, caseURL: node.nodeIdentifierURL,
-            status: path.identity != nil || status == "Skipped" ? status : "Unknown", message: diagnostic?.name
+            status: path.identity != nil || status == .skipped ? status : .unknown, message: diagnostic?.name
         )]
     }
 

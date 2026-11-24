@@ -64,10 +64,10 @@ enum ReportFiles {
         let outcomes = attempt.outcomes
         let byRow = Dictionary(grouping: outcomes, by: \.rowIndex)
         let notes = manifest.rows.compactMap(\.expansionError) + outcomes.filter { !$0.completed }.map { outcome in
-            let prefix = "\(outcome.status): \(outcome.displayName)."
+            let prefix = "\(outcome.status.rawValue): \(outcome.displayName)."
             return outcome.message.map { "\(prefix) \($0)" } ?? prefix
         }
-        let rows = try manifest.rows.map { row in
+        let rows = manifest.rows.map { row in
             let cases = byRow[row.index, default: []]
             let roles: [String]
             if cases.contains(where: \.failed) {
@@ -77,7 +77,7 @@ enum ReportFiles {
             } else {
                 roles = []
             }
-            return try YAML.sequence(row.cells.map { try cell($0, extraRoles: roles) })
+            return YAML.sequence(row.cells.map { cell($0, extraRoles: roles) })
         }
         let completed = outcomes.filter(\.completed).map { outcome in
             var fields: [(String, YAML)] = [
@@ -92,27 +92,26 @@ enum ReportFiles {
             ("methodName", .text(manifest.methodName)), ("slug", .text(slug)), ("title", .text(title))
         ]
         if !notes.isEmpty { fields.append(("description", .text(notes.joined(separator: "\n")))) }
-        fields.append(("headers", try .sequence(manifest.headers.map { try cell($0) })))
+        fields.append(("headers", .sequence(manifest.headers.map { cell($0) })))
         fields.append(("rows", .sequence(rows)))
         fields.append(("rowResults", .sequence(completed)))
         return fields
     }
 
-    private static func cell(_ cell: ReportCell, extraRoles: [String] = []) throws -> YAML {
-        try .mapping([
+    private static func cell(_ cell: ReportCell, extraRoles: [String] = []) -> YAML {
+        .mapping([
             ("value", value(cell.value)),
             ("roles", .sequence((cell.roles + extraRoles).map(YAML.text)))
         ])
     }
 
-    private static func value(_ value: ReportValue) throws -> YAML {
-        switch (value.kind, value.text, value.items, value.entries) {
-        case (.null, _, _, _): return .null
-        case (.string, let text?, _, _): return .text(text)
-        case (.list, _, let items?, _): return try .sequence(items.map(Self.value))
-        case (.set, _, let items?, _): return try .set(items.map(Self.value))
-        case (.map, _, _, let entries?): return try .mapping(entries.map { ($0.key, try Self.value($0.value)) })
-        default: throw ExportError("Missing data for manifest cell of kind \(value.kind.rawValue).")
+    private static func value(_ value: ReportValue) -> YAML {
+        switch value {
+        case .null: .null
+        case .string(let text): .text(text)
+        case .list(let items): .sequence(items.map(Self.value))
+        case .set(let items): .set(items.map(Self.value))
+        case .map(let entries): .mapping(entries.map { ($0.key, Self.value($0.value)) })
         }
     }
 

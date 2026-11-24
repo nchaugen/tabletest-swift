@@ -65,7 +65,7 @@ package enum ResultBundleExport {
                 let runs = tableTest.runs.filter { $0.context == context }
                 let fallback = TestRun(
                     device: device, configuration: configuration, attempt: 1, attemptName: "First Run",
-                    identity: nil, xcodeDisplayName: nil, caseURL: nil, status: "Not Run", message: nil
+                    identity: nil, xcodeDisplayName: nil, caseURL: nil, status: .notRun, message: nil
                 )
                 let planned = Set(manifest.rows.flatMap { row in row.cases.map { CaseIdentity(row: row.index, number: $0.number) } })
                 guard runs.compactMap(\.identity).allSatisfy(planned.contains) else {
@@ -204,14 +204,34 @@ struct CaseOutcome: Encodable {
     let configuration: Configuration
     let attempt: Int
     let attemptName: String
-    let status: String
+    let status: CaseStatus
     let testURL: String?
     let caseURL: String?
     let message: String?
 
+    var completed: Bool { status.completed }
+    var failed: Bool { status == .failed }
+}
+
+/// The outcome of a case on one destination, configuration and attempt. The raw values are the
+/// ones of Xcode's `TestResult`, and the two that the export adds.
+enum CaseStatus: String, Codable {
+    case passed = "Passed"
+    case failed = "Failed"
+    case skipped = "Skipped"
+    case expectedFailure = "Expected Failure"
+    /// Xcode gave no result for the case.
+    case unknown = "Unknown"
+    /// The case has no result in the bundle, because its test did not run.
+    case notRun = "Not Run"
+
+    /// Whether the case ran to an end that the report counts as passed or failed.
     var completed: Bool {
-        ["Passed", "Failed", "Expected Failure"].contains(status)
+        [.passed, .failed, .expectedFailure].contains(self)
     }
 
-    var failed: Bool { status == "Failed" }
+    init(from decoder: any Decoder) throws {
+        let text = try decoder.singleValueContainer().decode(String.self)
+        self = CaseStatus(rawValue: text) ?? .unknown
+    }
 }

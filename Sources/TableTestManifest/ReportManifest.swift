@@ -60,35 +60,61 @@ package struct ReportCell: Codable, Equatable {
     }
 }
 
-package struct ReportValue: Codable, Equatable {
-    package enum Kind: String, Codable { case null, string, list, set, map }
+/// A cell value of the manifest. It keeps the form of the ``TableValue`` that the table wrote.
+package indirect enum ReportValue: Codable, Equatable {
+    case null
+    case string(String)
+    case list([ReportValue])
+    case set([ReportValue])
+    case map([Entry])
 
     package struct Entry: Codable, Equatable {
         package let key: String
         package let value: ReportValue
     }
 
-    package let kind: Kind
-    package var text: String?
-    package var items: [ReportValue]?
-    package var entries: [Entry]?
-
     init(_ value: TableValue) {
         switch value {
+        case .null: self = .null
+        case .string(let text): self = .string(text)
+        case .list(let values): self = .list(values.map(Self.init))
+        case .set(let values): self = .set(values.map(Self.init))
+        case .map(let values): self = .map(values.map { Entry(key: $0.key, value: Self($0.value)) })
+        }
+    }
+
+    private enum Kind: String, Codable { case null, string, list, set, map }
+
+    private enum CodingKeys: String, CodingKey { case kind, text, items, entries }
+
+    package init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        switch try container.decode(Kind.self, forKey: .kind) {
+        case .null: self = .null
+        case .string: self = .string(try container.decode(String.self, forKey: .text))
+        case .list: self = .list(try container.decode([ReportValue].self, forKey: .items))
+        case .set: self = .set(try container.decode([ReportValue].self, forKey: .items))
+        case .map: self = .map(try container.decode([Entry].self, forKey: .entries))
+        }
+    }
+
+    package func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
         case .null:
-            kind = .null
-        case .string(let value):
-            kind = .string
-            text = value
-        case .list(let values):
-            kind = .list
-            items = values.map(Self.init)
-        case .set(let values):
-            kind = .set
-            items = values.map(Self.init)
-        case .map(let values):
-            kind = .map
-            entries = values.map { Entry(key: $0.key, value: Self($0.value)) }
+            try container.encode(Kind.null, forKey: .kind)
+        case .string(let text):
+            try container.encode(Kind.string, forKey: .kind)
+            try container.encode(text, forKey: .text)
+        case .list(let items):
+            try container.encode(Kind.list, forKey: .kind)
+            try container.encode(items, forKey: .items)
+        case .set(let items):
+            try container.encode(Kind.set, forKey: .kind)
+            try container.encode(items, forKey: .items)
+        case .map(let entries):
+            try container.encode(Kind.map, forKey: .kind)
+            try container.encode(entries, forKey: .entries)
         }
     }
 }
