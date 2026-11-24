@@ -1,5 +1,8 @@
 import TableTestParser
 
+/// The table of one `@TableTest` and its planned cases, as the companion test attaches it in a
+/// reporting build. Report exporters join it to the outcomes of the table's test.
+
 package struct ReportManifest: Codable, Equatable {
     package var version = 1
     package let suite: [String]
@@ -48,7 +51,7 @@ package struct ReportCase: Codable, Equatable {
 }
 
 package struct ReportCell: Codable, Equatable {
-    let value: ReportValue
+    package let value: ReportValue
     package let roles: [String]
 
     package init(value: TableValue, roles: [String]) {
@@ -57,18 +60,18 @@ package struct ReportCell: Codable, Equatable {
     }
 }
 
-struct ReportValue: Codable, Equatable {
-    enum Kind: String, Codable { case null, string, list, set, map }
+package struct ReportValue: Codable, Equatable {
+    package enum Kind: String, Codable { case null, string, list, set, map }
 
-    struct Entry: Codable, Equatable {
-        let key: String
-        let value: ReportValue
+    package struct Entry: Codable, Equatable {
+        package let key: String
+        package let value: ReportValue
     }
 
-    let kind: Kind
-    var text: String?
-    var items: [ReportValue]?
-    var entries: [Entry]?
+    package let kind: Kind
+    package var text: String?
+    package var items: [ReportValue]?
+    package var entries: [Entry]?
 
     init(_ value: TableValue) {
         switch value {

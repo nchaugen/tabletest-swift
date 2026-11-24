@@ -1,4 +1,5 @@
 import Foundation
+import TableTestManifest
 
 enum ReportFiles {
     static func write(_ tables: [[TableAttempt]], devices: [Device], to output: URL) throws {

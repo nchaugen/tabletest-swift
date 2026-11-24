@@ -1,4 +1,5 @@
 import Foundation
+import TableTestManifest
 
 /// Exports TableTest manifests and outcomes from the public Xcode result bundle commands.
 package enum ResultBundleExport {

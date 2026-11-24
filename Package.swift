@@ -42,8 +42,9 @@ let package = Package(
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
             ]
         ),
-        .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser", "TableTestReport"]),
-        .target(name: "TableTestReport", dependencies: ["TableTestParser"]),
+        .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser", "TableTestManifest"]),
+        .target(name: "TableTestManifest", dependencies: ["TableTestParser"]),
+        .target(name: "TableTestReport", dependencies: ["TableTestManifest"]),
         .target(name: "SpecFixtures", dependencies: ["TableTestParser"], path: "Tests/SpecFixtures"),
         .testTarget(
             name: "TableTestTests",

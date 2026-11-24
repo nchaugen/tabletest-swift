@@ -1,5 +1,5 @@
 import Foundation
-import TableTestReport
+import TableTestManifest
 import Testing
 
 /// Builds the companion attachment that report exporters read in a reporting build.
