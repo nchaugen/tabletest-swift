@@ -99,7 +99,7 @@ public struct TableTestMacro: PeerMacro {
                 @Test("TableTest manifest")
                 func tableTestManifest() throws {
                     try TableTestReporting.recordManifest(
-                    \(raw: tableArguments),
+                    \(raw: indentingLinesAfterTheFirst(of: tableArguments, by: 8)),
                         methodName: \(StringLiteralExprSyntax(content: name.withoutBackticks)),
                         title: \(raw: title)
                     )
@@ -117,6 +117,13 @@ public struct TableTestMacro: PeerMacro {
             }
             """,
         ]
+    }
+
+    /// The text, with each line after the first indented as the first line is where the
+    /// template places it.
+    private static func indentingLinesAfterTheFirst(of text: String, by width: Int) -> String {
+        text.split(separator: "\n", omittingEmptySubsequences: false)
+            .joined(separator: "\n" + String(repeating: " ", count: width))
     }
 
     /// The first reason the table does not parse or does not fit the function, with its position

@@ -29,8 +29,8 @@ struct ExpansionTests {
                     func tableTestManifest() throws {
                         try TableTestReporting.recordManifest(
                             table: "Year | Leap?\n2004 | true",
-                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
-                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true),
+                            parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                            source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true),
                             methodName: "knowsALeapYear",
                             title: "knowsALeapYear"
                         )
@@ -80,8 +80,8 @@ struct ExpansionTests {
                     func tableTestManifest() throws {
                         try TableTestReporting.recordManifest(
                             table: "Year | Leap?\n2004 | true",
-                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
-                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 3, column: 55, indentation: 8, isMultiline: true),
+                            parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                            source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 3, column: 55, indentation: 8, isMultiline: true),
                             methodName: "knowsALeapYear",
                             title: "Leap years"
                         )
@@ -128,8 +128,8 @@ struct ExpansionTests {
                     func tableTestManifest() throws {
                         try TableTestReporting.recordManifest(
                             table: "Year | Leap?\n2004 | true",
-                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
-                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 46, indentation: 8, isMultiline: true),
+                            parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                            source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 46, indentation: 8, isMultiline: true),
                             methodName: "knowsALeapYear",
                             title: "Leap years, by rule"
                         )
@@ -177,8 +177,8 @@ struct ExpansionTests {
                     func tableTestManifest() throws {
                         try TableTestReporting.recordManifest(
                             table: "Year | Leap?\n2004 | true",
-                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
-                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 47, indentation: 8, isMultiline: true),
+                            parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                            source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 47, indentation: 8, isMultiline: true),
                             methodName: "knowsALeapYear",
                             title: "Leap years by `year`"
                         )
@@ -226,8 +226,8 @@ struct ExpansionTests {
                     func tableTestManifest() throws {
                         try TableTestReporting.recordManifest(
                             table: "Year | Leap?\n2004 | true",
-                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
-                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true),
+                            parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                            source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true),
                             methodName: "knows a leap year",
                             title: "knows a leap year"
                         )
