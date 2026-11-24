@@ -8,7 +8,18 @@ struct ExportError: LocalizedError {
     }
 }
 
-struct XcodeResults {
+/// The parts of a result bundle that the export reads.
+protocol TestResults {
+    /// Writes the TableTest manifests of the bundle to the directory, and lists them by test.
+    func exportManifests(to directory: URL) throws -> [AttachmentGroup]
+    /// The tree of tests, with the destinations and configurations of the run.
+    func tests() throws -> TestReport
+    /// The runs of one test, by destination, configuration, attempt and case.
+    func testDetails(id: String) throws -> TestDetails
+}
+
+/// Reads a result bundle with the public `xcresulttool` commands.
+struct XcodeResults: TestResults {
     let bundle: URL
 
     func exportManifests(to directory: URL) throws -> [AttachmentGroup] {

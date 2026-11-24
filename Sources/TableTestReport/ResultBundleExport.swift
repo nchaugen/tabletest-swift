@@ -4,6 +4,10 @@ import TableTestManifest
 /// Exports TableTest manifests and outcomes from the public Xcode result bundle commands.
 package enum ResultBundleExport {
     package static func run(bundle: URL, output: URL) throws {
+        try run(results: XcodeResults(bundle: bundle), output: output)
+    }
+
+    static func run(results: some TestResults, output: URL) throws {
         let files = FileManager.default
         guard !files.fileExists(atPath: output.path) else {
             throw ExportError("Output directory already exists: \(output.path)")
@@ -14,7 +18,6 @@ package enum ResultBundleExport {
         defer { try? files.removeItem(at: staging) }
 
         let attachments = staging.appendingPathComponent("attachments", isDirectory: true)
-        let results = XcodeResults(bundle: bundle)
         let groups = try results.exportManifests(to: attachments)
         let report = try results.tests()
         let tables = try tables(in: groups, attachments: attachments, report: report, results: results)
@@ -26,7 +29,7 @@ package enum ResultBundleExport {
     }
 
     private static func tables(
-        in groups: [AttachmentGroup], attachments: URL, report: TestReport, results: XcodeResults
+        in groups: [AttachmentGroup], attachments: URL, report: TestReport, results: some TestResults
     ) throws -> [[TableAttempt]] {
         let nodes = report.testNodes.flatMap(\.descendants)
         let tests = Dictionary(grouping: nodes.filter { $0.kind == .test }, by: RowTestKey.init)
@@ -105,7 +108,7 @@ package enum ResultBundleExport {
             self.runs = runs
         }
 
-        init(parent: String, function: String, tests: [RowTestKey: [TestNode]], results: XcodeResults) throws {
+        init(parent: String, function: String, tests: [RowTestKey: [TestNode]], results: some TestResults) throws {
             let matches = tests[RowTestKey(parent: parent, function: function)] ?? []
             guard matches.count <= 1 else {
                 throw ExportError("Expected at most one result for \(parent)/\(function), found \(matches.count).")
