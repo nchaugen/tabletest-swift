@@ -86,6 +86,12 @@ struct TestReport: Decodable {
     let devices: [Device]
     let testPlanConfigurations: [Configuration]
     let testNodes: [TestNode]
+
+    /// The names that Xcode shows for the suites that hold the test, outermost first. A suite's
+    /// name is its display name when it has one.
+    func suiteNames(ofTest url: String) -> [String] {
+        testNodes.lazy.compactMap { $0.suiteNames(toTest: url, below: []) }.first ?? []
+    }
 }
 
 struct TestDetails: Decodable {
@@ -122,6 +128,7 @@ struct Configuration: RunDimension {
 
 struct TestNode: Decodable {
     enum Kind: String {
+        case suite = "Test Suite"
         case test = "Test Case"
         case device = "Device"
         case configuration = "Test Plan Configuration"
@@ -144,6 +151,12 @@ struct TestNode: Decodable {
 
     var kind: Kind? { Kind(rawValue: nodeType) }
     var descendants: [Self] { [self] + directChildren.flatMap(\.descendants) }
+
+    fileprivate func suiteNames(toTest url: String, below suites: [String]) -> [String]? {
+        if nodeIdentifierURL == url { return suites }
+        let names = kind == .suite ? suites + [name] : suites
+        return directChildren.lazy.compactMap { $0.suiteNames(toTest: url, below: names) }.first
+    }
     var directChildren: [Self] { children ?? [] }
 }
 

@@ -55,6 +55,8 @@ package enum ResultBundleExport {
                 (context: context, manifest: try manifest(in: attachments, copies: copies, test: group, context: context))
             }.sorted { $0.context < $1.context }
             let parent = parentURL(of: group.testIdentifierURL)
+            // The companion's last suite is the generated type of the table, and the one above it holds the table.
+            let suiteTitle = report.suiteNames(ofTest: group.testIdentifierURL).dropLast().last
             let functions = Set(manifests.map(\.manifest.testFunction))
             let tableTests = try Dictionary(uniqueKeysWithValues: functions.map { function in
                 (function, try TableTestRuns(parent: parent, function: function, tests: tests, results: results))
@@ -90,7 +92,7 @@ package enum ResultBundleExport {
                     let cases = byAttempt[number, default: []]
                     let names = Set(cases.map(\.attemptName))
                     return TableAttempt(
-                        manifest: manifest, outcomes: cases, device: device, configuration: configuration,
+                        manifest: manifest, suiteTitle: suiteTitle, outcomes: cases, device: device, configuration: configuration,
                         attemptName: names.count == 1 ? names.first ?? "Attempt \(number)" : "Attempt \(number)"
                     )
                 }
@@ -212,6 +214,8 @@ package enum ResultBundleExport {
 
 struct TableAttempt {
     let manifest: ReportManifest
+    /// The name that Xcode shows for the suite that holds the table.
+    let suiteTitle: String?
     let outcomes: [CaseOutcome]
     let device: Device
     let configuration: Configuration

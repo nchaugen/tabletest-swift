@@ -35,7 +35,8 @@ enum ReportFiles {
             }
             try write([
                 ("className", .text(className)), ("slug", .text(suiteSlug)),
-                ("title", .text(suite.last ?? className)), ("tableTests", .sequence(entries))
+                ("title", .text(title(of: suite, in: suites[suite, default: []]) ?? className)),
+                ("tableTests", .sequence(entries))
             ], to: directory.appendingPathComponent("TABLETEST-\(suiteSlug).yaml"))
         }
         let encoder = JSONEncoder()
@@ -50,6 +51,10 @@ enum ReportFiles {
         let suite: [String]
         let methodName: String
         let cases: [CaseOutcome]
+    }
+
+    private static func title(of suite: [String], in tables: [[TableAttempt]]) -> String? {
+        tables.lazy.compactMap { $0.first?.suiteTitle }.first ?? suite.last
     }
 
     private static func title(for attempt: TableAttempt, multiple: Bool, deviceNames: [String: [Device]]) -> String {
