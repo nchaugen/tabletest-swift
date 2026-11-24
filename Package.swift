@@ -48,7 +48,7 @@ let package = Package(
         .target(name: "SpecFixtures", dependencies: ["TableTestParser"], path: "Tests/SpecFixtures"),
         .testTarget(
             name: "TableTestTests",
-            dependencies: ["TableTest", "SpecFixtures"],
+            dependencies: ["TableTest", "TableTestManifest", "TableTestParser", "SpecFixtures"],
             resources: [.copy("Fixtures")]
         ),
         .testTarget(
