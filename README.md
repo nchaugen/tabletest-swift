@@ -683,9 +683,13 @@ java -jar /path/to/tabletest-reporter-cli.jar -f html -i /path/to/export/yaml -o
 ```
 
 The exporter uses the public Xcode result and attachment commands. It writes
-the reporter's YAML and a `joined-results.json` file with the original case
-names, outcomes, destinations, configurations, and attempts. The reporter
-renders separate table pages when outcomes span several runs.
+the reporter's YAML and a `joined-results.json` file with the case names,
+outcomes, destinations, configurations, and attempts. The reporter renders
+separate table pages when outcomes span several runs.
+
+A suite takes its `@Suite` display name as its title, or else its type name.
+Suites and tables get the same slugs as in a JVM report: `YearTests` is
+`year-tests`, and `knowsALeapYear` is `knows-a-leap-year`.
 
 [Xcode reporting example](https://github.com/nchaugen/tabletest-swift-examples#export-a-tabletest-report-from-an-xcode-result-bundle)
 
