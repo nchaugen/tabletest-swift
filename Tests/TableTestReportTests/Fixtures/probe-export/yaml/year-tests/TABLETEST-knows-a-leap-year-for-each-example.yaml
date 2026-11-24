@@ -1,5 +1,5 @@
 methodName: "knowsALeapYearForEachExample"
-slug: "knowsaleapyearforeachexample"
+slug: "knows-a-leap-year-for-each-example"
 title: "knowsALeapYearForEachExample"
 headers: [{"value": "Scenario", "roles": ["scenario"]}, {"value": "Year", "roles": []}, {"value": "Leap?", "roles": ["expectation"]}]
 rows: [[{"value": "Not divisible by 4", "roles": ["scenario", "passed"]}, {"value": !!set {? "2001" : null, ? "2002" : null, ? "2003" : null}, "roles": ["value-set", "passed"]}, {"value": "false", "roles": ["expectation", "passed"]}], [{"value": "Divisible by 4", "roles": ["scenario", "passed"]}, {"value": !!set {? "2004" : null, ? "2008" : null, ? "2012" : null}, "roles": ["value-set", "passed"]}, {"value": "true", "roles": ["expectation", "passed"]}], [{"value": "Divisible by 100, not by 400", "roles": ["scenario", "passed"]}, {"value": !!set {? "1900" : null, ? "2100" : null}, "roles": ["value-set", "passed"]}, {"value": "false", "roles": ["expectation", "passed"]}], [{"value": "Divisible by 400", "roles": ["scenario", "passed"]}, {"value": !!set {? "2000" : null, ? "2400" : null}, "roles": ["value-set", "passed"]}, {"value": "true", "roles": ["expectation", "passed"]}]]

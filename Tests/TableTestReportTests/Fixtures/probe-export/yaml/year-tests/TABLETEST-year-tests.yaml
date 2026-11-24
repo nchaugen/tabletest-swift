@@ -1,0 +1,4 @@
+className: "ExamplesTests.YearTests"
+slug: "year-tests"
+title: "YearTests"
+tableTests: [{"path": "TABLETEST-leap-years-without-a-scenario-column.yaml", "methodName": "knowsALeapYearByRow", "slug": "leap-years-without-a-scenario-column"}, {"path": "TABLETEST-knows-a-leap-year.yaml", "methodName": "knowsALeapYear", "slug": "knows-a-leap-year"}, {"path": "TABLETEST-knows-a-leap-year-for-each-example.yaml", "methodName": "knowsALeapYearForEachExample", "slug": "knows-a-leap-year-for-each-example"}]

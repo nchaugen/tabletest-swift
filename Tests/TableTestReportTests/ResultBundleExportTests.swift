@@ -46,9 +46,9 @@ struct ResultBundleExportTests {
             "No manifest for ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:), so the report leaves it out. "
                 + "Run its tableTestManifest() test too, in a build with TABLETEST_REPORTING.",
         ])
-        let suite = output.appendingPathComponent("yaml/examplestests-closuretests")
+        let suite = output.appendingPathComponent("yaml/closure-tests")
         #expect(try FileManager.default.contentsOfDirectory(atPath: suite.path).sorted() == [
-            "TABLETEST-examplestests-closuretests.yaml", "TABLETEST-staysfreshforitsdays.yaml",
+            "TABLETEST-closure-tests.yaml", "TABLETEST-stays-fresh-for-its-days.yaml",
         ])
     }
 

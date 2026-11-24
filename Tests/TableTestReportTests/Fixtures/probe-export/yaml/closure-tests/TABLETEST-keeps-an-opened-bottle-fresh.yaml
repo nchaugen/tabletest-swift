@@ -1,5 +1,5 @@
 methodName: "keepsAnOpenedBottleFresh"
-slug: "keepsanopenedbottlefresh"
+slug: "keeps-an-opened-bottle-fresh"
 title: "keepsAnOpenedBottleFresh"
 headers: [{"value": "Closure", "roles": []}, {"value": "Fresh days?", "roles": ["expectation"]}]
 rows: [[{"value": "cork", "roles": ["passed"]}, {"value": "3", "roles": ["expectation", "passed"]}], [{"value": "screw cap", "roles": ["passed"]}, {"value": "5", "roles": ["expectation", "passed"]}], [{"value": "glass", "roles": ["passed"]}, {"value": "5", "roles": ["expectation", "passed"]}]]

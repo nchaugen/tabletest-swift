@@ -1,4 +1,0 @@
-className: "ExamplesTests.GreetingTests"
-slug: "examplestests-greetingtests"
-title: "GreetingTests"
-tableTests: [{"path": "TABLETEST-greetsbythehour.yaml", "methodName": "greetsByTheHour", "slug": "greetsbythehour"}]

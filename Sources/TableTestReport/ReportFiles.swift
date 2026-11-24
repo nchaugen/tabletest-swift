@@ -12,7 +12,8 @@ enum ReportFiles {
         let sortedSuites = suites.keys.sorted { $0.lexicographicallyPrecedes($1) }
         for suite in sortedSuites {
             let className = suite.joined(separator: ".")
-            let suiteSlug = slug(for: className, reserved: &suiteSlugs)
+            let suiteTitle = title(of: suite, in: suites[suite, default: []]) ?? className
+            let suiteSlug = slug(for: suiteTitle, reserved: &suiteSlugs)
             let directory = yaml.appendingPathComponent(suiteSlug, isDirectory: true)
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
             var tableSlugs: Set<String> = [suiteSlug]
@@ -35,7 +36,7 @@ enum ReportFiles {
             }
             try write([
                 ("className", .text(className)), ("slug", .text(suiteSlug)),
-                ("title", .text(title(of: suite, in: suites[suite, default: []]) ?? className)),
+                ("title", .text(suiteTitle)),
                 ("tableTests", .sequence(entries))
             ], to: directory.appendingPathComponent("TABLETEST-\(suiteSlug).yaml"))
         }
@@ -121,9 +122,8 @@ enum ReportFiles {
     }
 
     private static func slug(for text: String, reserved: inout Set<String>) -> String {
-        let cleaned = text.lowercased().replacingOccurrences(of: "[^a-z0-9]+", with: "-", options: .regularExpression)
-            .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
-        let base = cleaned.isEmpty ? "tabletest" : cleaned
+        let slug = Slug.of(text)
+        let base = slug.isEmpty ? "tabletest" : slug
         var candidate = base
         var number = 2
         while !reserved.insert(candidate).inserted {

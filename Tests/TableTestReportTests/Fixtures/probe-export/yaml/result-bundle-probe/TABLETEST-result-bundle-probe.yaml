@@ -1,4 +1,4 @@
 className: "ExamplesTests.ResultBundleProbe"
-slug: "examplestests-resultbundleprobe"
+slug: "result-bundle-probe"
 title: "Result bundle probe"
 tableTests: [{"path": "TABLETEST-disabled-table.yaml", "methodName": "disabledTable", "slug": "disabled-table"}, {"path": "TABLETEST-leap-year-result-bundle-probe.yaml", "methodName": "leapYear", "slug": "leap-year-result-bundle-probe"}, {"path": "TABLETEST-names-collide-within-one-row.yaml", "methodName": "sameNameWithinRow", "slug": "names-collide-within-one-row"}]
