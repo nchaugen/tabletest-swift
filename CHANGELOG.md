@@ -5,7 +5,7 @@
 ### Added
 - `TableTestRow` guarantees direct reflected `Int` fields named `index` and `caseNumber` for report exporters.
 - Reporting builds emit a companion manifest per table.
-- The `tabletest-export` executable exports Xcode result bundles as TableTest Reporter YAML and preserves outcomes by destination, configuration, and attempt.
+- The `tabletest-export` executable exports Xcode result bundles as TableTest Reporter YAML and preserves outcomes by destination, configuration, and attempt. A suite takes its `@Suite` display name as its title, and suites and tables get the same slugs as in a JVM report. The exporter warns about a table test that ran without its companion.
 
 ### Fixed
 - Xcode shows a separate result for each case whose name another case of the table also has. Each of these cases adds its row and case number to its name, as in `Check leap years (Year = 2004) [2.1]`. Before, Xcode merged them into one result.
