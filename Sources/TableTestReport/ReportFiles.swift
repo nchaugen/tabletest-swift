@@ -7,7 +7,7 @@ enum ReportFiles {
         try FileManager.default.createDirectory(at: yaml, withIntermediateDirectories: false)
         let deviceNames = Dictionary(grouping: devices, by: \.name)
         let suites = Dictionary(grouping: tables) { $0.first?.manifest.suite ?? [] }
-        var receipts: [Receipt] = []
+        var tableOutcomes: [TableOutcomes] = []
         var suiteSlugs: Set<String> = []
         let sortedSuites = suites.keys.sorted { $0.lexicographicallyPrecedes($1) }
         for suite in sortedSuites {
@@ -17,10 +17,10 @@ enum ReportFiles {
             let directory = yaml.appendingPathComponent(suiteSlug, isDirectory: true)
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
             var tableSlugs: Set<String> = [suiteSlug]
-            var entries: [YAML] = []
+            var entries: [YAMLValue] = []
             for attempts in suites[suite, default: []] {
                 guard let first = attempts.first else { continue }
-                receipts.append(Receipt(
+                tableOutcomes.append(TableOutcomes(
                     title: first.manifest.title, suite: suite, methodName: first.manifest.methodName,
                     cases: attempts.flatMap(\.outcomes)
                 ))
@@ -42,12 +42,13 @@ enum ReportFiles {
         }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-        var data = try encoder.encode(receipts)
+        var data = try encoder.encode(tableOutcomes)
         data.append(contentsOf: "\n".utf8)
         try data.write(to: output.appendingPathComponent("joined-results.json"), options: .atomic)
     }
 
-    private struct Receipt: Encodable {
+    /// The outcomes of the cases of one table, as `joined-results.json` lists them.
+    private struct TableOutcomes: Encodable {
         let title: String
         let suite: [String]
         let methodName: String
@@ -65,7 +66,7 @@ enum ReportFiles {
         return "\(attempt.manifest.title) — \(name) / \(attempt.configuration.name) / \(attempt.attemptName)"
     }
 
-    private static func table(_ attempt: TableAttempt, title: String, slug: String) throws -> [(String, YAML)] {
+    private static func table(_ attempt: TableAttempt, title: String, slug: String) throws -> [(String, YAMLValue)] {
         let manifest = attempt.manifest
         let outcomes = attempt.outcomes
         let byRow = Dictionary(grouping: outcomes, by: \.rowIndex)
@@ -83,18 +84,18 @@ enum ReportFiles {
             } else {
                 roles = []
             }
-            return YAML.sequence(row.cells.map { cell($0, extraRoles: roles) })
+            return YAMLValue.sequence(row.cells.map { cell($0, extraRoles: roles) })
         }
         let completed = outcomes.filter(\.completed).map { outcome in
-            var fields: [(String, YAML)] = [
+            var fields: [(String, YAMLValue)] = [
                 ("rowIndex", .number(outcome.invocationIndex)),
                 ("passed", .boolean(!outcome.failed)),
                 ("displayName", .text(outcome.displayName))
             ]
             if let message = outcome.message { fields.append(("errorMessage", .text(message))) }
-            return YAML.mapping(fields)
+            return YAMLValue.mapping(fields)
         }
-        var fields: [(String, YAML)] = [
+        var fields: [(String, YAMLValue)] = [
             ("methodName", .text(manifest.methodName)), ("slug", .text(slug)), ("title", .text(title))
         ]
         if !notes.isEmpty { fields.append(("description", .text(notes.joined(separator: "\n")))) }
@@ -104,14 +105,14 @@ enum ReportFiles {
         return fields
     }
 
-    private static func cell(_ cell: ReportCell, extraRoles: [String] = []) -> YAML {
+    private static func cell(_ cell: ReportCell, extraRoles: [String] = []) -> YAMLValue {
         .mapping([
             ("value", value(cell.value)),
-            ("roles", .sequence((cell.roles + extraRoles).map(YAML.text)))
+            ("roles", .sequence((cell.roles + extraRoles).map(YAMLValue.text)))
         ])
     }
 
-    private static func value(_ value: ReportValue) -> YAML {
+    private static func value(_ value: ReportValue) -> YAMLValue {
         switch value {
         case .null: .null
         case .string(let text): .text(text)
@@ -133,36 +134,8 @@ enum ReportFiles {
         return candidate
     }
 
-    private static func write(_ fields: [(String, YAML)], to file: URL) throws {
+    private static func write(_ fields: [(String, YAMLValue)], to file: URL) throws {
         let content = try fields.map { key, value in "\(key): \(try value.rendered())\n" }.joined()
         try content.write(to: file, atomically: true, encoding: .utf8)
-    }
-
-    private indirect enum YAML {
-        case text(String), number(Int), boolean(Bool), null
-        case sequence([YAML]), set([YAML]), mapping([(String, YAML)])
-
-        func rendered() throws -> String {
-            switch self {
-            case .text(let text): return try Self.quoted(text)
-            case .number(let number): return String(number)
-            case .boolean(let flag): return String(flag)
-            case .null: return "null"
-            case .sequence(let items): return try "[" + items.map { try $0.rendered() }.joined(separator: ", ") + "]"
-            case .set(let items): return try "!!set {" + items.map { "? \(try $0.rendered()) : null" }.joined(separator: ", ") + "}"
-            case .mapping(let entries):
-                return try "{" + entries.map { key, value in "\(try Self.quoted(key)): \(try value.rendered())" }
-                    .joined(separator: ", ") + "}"
-            }
-        }
-
-        private static func quoted(_ text: String) throws -> String {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = [.withoutEscapingSlashes]
-            return try String(decoding: encoder.encode(text), as: UTF8.self)
-                .replacingOccurrences(of: "\u{85}", with: "\\u0085")
-                .replacingOccurrences(of: "\u{2028}", with: "\\u2028")
-                .replacingOccurrences(of: "\u{2029}", with: "\\u2029")
-        }
     }
 }
