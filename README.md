@@ -667,7 +667,8 @@ Define `TABLETEST_REPORTING` in the test target's Swift compilation conditions
 to export an Xcode run. Each table gets a companion test that attaches its
 headers, rows, and planned cases. The companion runs independently of the
 table's test traits, so the attachment covers tables with a `.disabled` trait.
-Include the companion in the test selection for every table to export.
+Include the companion in the test selection for every table to export. The
+exporter warns about a table test that ran without its companion.
 
 The examples project shows how to export the result bundle and render it.
 

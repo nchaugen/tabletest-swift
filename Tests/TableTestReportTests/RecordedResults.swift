@@ -4,10 +4,13 @@ import Foundation
 /// The results of a bundle as `Fixtures/record.sh` recorded them.
 struct RecordedResults: TestResults {
     let directory: URL
+    /// The tests whose attachments the bundle leaves out, as when a run does not select them.
+    var testsWithoutAttachments: Set<String> = []
 
     func exportManifests(to destination: URL) throws -> [AttachmentGroup] {
         try FileManager.default.copyItem(at: directory.appendingPathComponent("attachments"), to: destination)
         return try decode([AttachmentGroup].self, from: destination.appendingPathComponent("manifest.json"))
+            .filter { !testsWithoutAttachments.contains($0.testIdentifier) }
     }
 
     func tests() throws -> TestReport {

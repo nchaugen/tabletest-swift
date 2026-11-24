@@ -4,6 +4,9 @@ import TableTestParser
 /// reporting build. Report exporters join it to the outcomes of the table's test.
 
 package struct ReportManifest: Codable, Equatable {
+    /// The name of the Swift Testing function that `@TableTest` generates for the cases of a table.
+    package static let tableTestFunction = "scenarios(_:)"
+
     package var version = 1
     package let suite: [String]
     package let methodName: String

@@ -139,6 +139,9 @@ struct TestNode: Decodable {
     let details: String?
     private let children: [Self]?
 
+    /// The type that Xcode names for the reflected argument of a `@TableTest` case.
+    static let tableTestRowType = "TableTest.TableTestRow"
+
     var kind: Kind? { Kind(rawValue: nodeType) }
     var descendants: [Self] { [self] + directChildren.flatMap(\.descendants) }
     var directChildren: [Self] { children ?? [] }
@@ -175,6 +178,13 @@ struct TestRun {
 }
 
 extension TestDetails {
+    /// Whether the cases of the test take a `TableTestRow`. A test with no case arguments in the
+    /// bundle, such as a disabled one, could be a table test.
+    var takesTableTestRows: Bool {
+        let nodes = testRuns.flatMap(\.descendants)
+        return !nodes.contains { $0.kind == .arguments } || nodes.contains { $0.details == TestNode.tableTestRowType }
+    }
+
     func runs() throws -> [TestRun] {
         let defaults = RunPath(
             device: devices.count == 1 ? devices.first : nil,
@@ -248,7 +258,7 @@ extension TestDetails {
 
     private func caseIdentity(of node: TestNode) throws -> CaseIdentity {
         let values = node.directChildren.first { $0.kind == .arguments }?.directChildren ?? []
-        guard let row = values.first(where: { $0.details == "TableTest.TableTestRow" }) else {
+        guard let row = values.first(where: { $0.details == TestNode.tableTestRowType }) else {
             throw ExportError("Missing reflected TableTestRow for \(node.name).")
         }
         return try CaseIdentity(row: reflectedInt("index", in: row), number: reflectedInt("caseNumber", in: row))

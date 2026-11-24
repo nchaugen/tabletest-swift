@@ -17,7 +17,9 @@ guard arguments.count == 2 else {
 do {
     let bundle = URL(fileURLWithPath: arguments[0], isDirectory: true).standardizedFileURL
     let output = URL(fileURLWithPath: arguments[1], isDirectory: true).standardizedFileURL
-    try ResultBundleExport.run(bundle: bundle, output: output)
+    try ResultBundleExport.run(bundle: bundle, output: output) { warning in
+        FileHandle.standardError.write(Data("tabletest-export: warning: \(warning)\n".utf8))
+    }
 } catch {
     FileHandle.standardError.write(Data(("tabletest-export: \(error.localizedDescription)\n").utf8))
     exit(1)

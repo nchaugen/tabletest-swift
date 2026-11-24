@@ -13,7 +13,9 @@ struct ResultBundleExportTests {
             .appendingPathComponent("tabletest-export-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: output) }
 
-        try ResultBundleExport.run(results: RecordedResults(directory: recorded), output: output)
+        try ResultBundleExport.run(results: RecordedResults(directory: recorded), output: output) { warning in
+            Issue.record("Unexpected warning: \(warning)")
+        }
 
         if ProcessInfo.processInfo.environment["TABLETEST_RECORD_EXPORT"] != nil {
             let source = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
@@ -25,6 +27,29 @@ struct ResultBundleExportTests {
         }
         let expected = try #require(Bundle.module.url(forResource: "probe-export", withExtension: nil))
         #expect(try Self.files(in: output) == Self.files(in: expected))
+    }
+
+    @Test("Warns about a table test that has no manifest")
+    func warnsAboutATableWithoutAManifest() throws {
+        let recorded = try #require(Bundle.module.url(forResource: "probe", withExtension: nil))
+        let results = RecordedResults(
+            directory: recorded, testsWithoutAttachments: ["ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()"]
+        )
+        let output = FileManager.default.temporaryDirectory
+            .appendingPathComponent("tabletest-export-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: output) }
+        var warnings: [String] = []
+
+        try ResultBundleExport.run(results: results, output: output) { warnings.append($0) }
+
+        #expect(warnings == [
+            "No manifest for ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:), so the report leaves it out. "
+                + "Run its tableTestManifest() test too, in a build with TABLETEST_REPORTING.",
+        ])
+        let suite = output.appendingPathComponent("yaml/examplestests-closuretests")
+        #expect(try FileManager.default.contentsOfDirectory(atPath: suite.path).sorted() == [
+            "TABLETEST-examplestests-closuretests.yaml", "TABLETEST-staysfreshforitsdays.yaml",
+        ])
     }
 
     /// The text of each file below the directory, by its path relative to the directory.

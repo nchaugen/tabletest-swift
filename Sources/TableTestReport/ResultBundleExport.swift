@@ -3,11 +3,13 @@ import TableTestManifest
 
 /// Exports TableTest manifests and outcomes from the public Xcode result bundle commands.
 package enum ResultBundleExport {
-    package static func run(bundle: URL, output: URL) throws {
-        try run(results: XcodeResults(bundle: bundle), output: output)
+    /// Writes the export of the bundle to the new output directory. A table that the report
+    /// leaves out, but that the export can name, goes to `warn`.
+    package static func run(bundle: URL, output: URL, warn: (String) -> Void) throws {
+        try run(results: XcodeResults(bundle: bundle), output: output, warn: warn)
     }
 
-    static func run(results: some TestResults, output: URL) throws {
+    static func run(results: some TestResults, output: URL, warn: (String) -> Void) throws {
         let files = FileManager.default
         guard !files.fileExists(atPath: output.path) else {
             throw ExportError("Output directory already exists: \(output.path)")
@@ -23,6 +25,12 @@ package enum ResultBundleExport {
         let tables = try tables(in: groups, attachments: attachments, report: report, results: results)
         guard !tables.isEmpty else {
             throw ExportError("No TableTest manifests found. Enable TABLETEST_REPORTING and include the companion tests.")
+        }
+        try testsWithoutManifests(in: report, groups: groups, results: results).forEach { test in
+            warn(
+                "No manifest for \(test), so the report leaves it out. "
+                    + "Run its tableTestManifest() test too, in a build with TABLETEST_REPORTING."
+            )
         }
         try ReportFiles.write(tables, devices: report.devices, to: staging)
         try files.removeItem(at: attachments)
@@ -95,6 +103,22 @@ package enum ResultBundleExport {
             }
             return attempts
         }
+    }
+
+    /// The table tests that ran without a manifest beside them, as when a run selects a table's
+    /// test but not its companion. A test with arguments of another type is not a table test.
+    private static func testsWithoutManifests(
+        in report: TestReport, groups: [AttachmentGroup], results: some TestResults
+    ) throws -> [String] {
+        let tablesWithManifests = Set(groups.filter { $0.attachments.contains(where: \.isTableManifest) }
+            .map { parentURL(of: $0.testIdentifierURL) })
+        return try report.testNodes.flatMap(\.descendants)
+            .filter { test in
+                test.kind == .test && test.nodeIdentifier?.hasSuffix("/" + ReportManifest.tableTestFunction) == true
+                    && !tablesWithManifests.contains(parentURL(of: test.nodeIdentifierURL ?? ""))
+            }
+            .filter { test in try test.nodeIdentifierURL.map { try results.testDetails(id: $0).takesTableTestRows } ?? true }
+            .compactMap(\.nodeIdentifier)
     }
 
     /// The runs of the Swift Testing function that runs the cases of a table.

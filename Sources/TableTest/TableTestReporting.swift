@@ -4,9 +4,6 @@ import Testing
 
 /// Builds the companion attachment that report exporters read in a reporting build.
 public enum TableTestReporting {
-    /// The name of the generated test function that runs the cases of a table.
-    static let testFunction = "scenarios(_:)"
-
     /// Records the source table and planned cases without running the test body or its traits.
     public static func recordManifest(
         table: String, parameters: [TableParameter], source: TableSource, methodName: String, title: String
@@ -48,7 +45,7 @@ public enum TableTestReporting {
         }
         let manifest = ReportManifest(
             suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2), methodName: methodName, title: title,
-            testFunction: testFunction,
+            testFunction: ReportManifest.tableTestFunction,
             headers: zip(parsed.headers, columnRoles).map { ReportCell(value: $0, roles: $1) }, rows: rows
         )
         let data = try JSONEncoder().encode(manifest)
