@@ -10,6 +10,7 @@ let package = Package(
         .library(name: "TableTestParser", targets: ["TableTestParser"]),
         .library(name: "TableTestFormat", targets: ["TableTestFormat"]),
         .executable(name: "tabletest-format", targets: ["tabletest-format"]),
+        .executable(name: "tabletest-export", targets: ["tabletest-export"]),
         .plugin(name: "TableTestFormatPlugin", targets: ["TableTestFormatPlugin"]),
     ],
     dependencies: [
@@ -41,7 +42,8 @@ let package = Package(
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
             ]
         ),
-        .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser"]),
+        .target(name: "TableTest", dependencies: ["TableTestMacros", "TableTestParser", "TableTestReport"]),
+        .target(name: "TableTestReport", dependencies: ["TableTestParser"]),
         .target(name: "SpecFixtures", dependencies: ["TableTestParser"], path: "Tests/SpecFixtures"),
         .testTarget(
             name: "TableTestTests",
@@ -61,6 +63,7 @@ let package = Package(
             resources: [.copy("Fixtures")]
         ),
         .executableTarget(name: "tabletest-format", dependencies: ["TableTestSourceFormat"]),
+        .executableTarget(name: "tabletest-export", dependencies: ["TableTestReport"]),
         .plugin(
             name: "TableTestFormatPlugin",
             capability: .command(

@@ -24,6 +24,19 @@ struct ExpansionTests {
                 func knowsALeapYear(year: Int, leap: Bool) {}
 
                 struct knowsALeapYear {
+                    #if TABLETEST_REPORTING
+                    @Test("TableTest manifest")
+                    func tableTestManifest() throws {
+                        try TableTestReporting.recordManifest(
+                            table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true),
+                            methodName: "knowsALeapYear",
+                            title: "knowsALeapYear"
+                        )
+                    }
+                    #endif
+
                     @Test("knowsALeapYear", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
@@ -62,6 +75,19 @@ struct ExpansionTests {
                 static func knowsALeapYear(_ year: Int, _ leap: Bool) async throws {}
 
                 @MainActor struct __tabletest_knowsALeapYear {
+                    #if TABLETEST_REPORTING
+                    @Test("TableTest manifest")
+                    func tableTestManifest() throws {
+                        try TableTestReporting.recordManifest(
+                            table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 3, column: 55, indentation: 8, isMultiline: true),
+                            methodName: "knowsALeapYear",
+                            title: "Leap years"
+                        )
+                    }
+                    #endif
+
                     @Test("Leap years", .tags(.calendar), arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
@@ -97,6 +123,19 @@ struct ExpansionTests {
                 func knowsALeapYear(year: Int, leap: Bool) {}
 
                 struct `Leap years, by rule` {
+                    #if TABLETEST_REPORTING
+                    @Test("TableTest manifest")
+                    func tableTestManifest() throws {
+                        try TableTestReporting.recordManifest(
+                            table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 46, indentation: 8, isMultiline: true),
+                            methodName: "knowsALeapYear",
+                            title: "Leap years, by rule"
+                        )
+                    }
+                    #endif
+
                     @Test("Leap years, by rule", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
@@ -133,6 +172,19 @@ struct ExpansionTests {
                 func knowsALeapYear(year: Int, leap: Bool) {}
 
                 struct knowsALeapYear {
+                    #if TABLETEST_REPORTING
+                    @Test("TableTest manifest")
+                    func tableTestManifest() throws {
+                        try TableTestReporting.recordManifest(
+                            table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 47, indentation: 8, isMultiline: true),
+                            methodName: "knowsALeapYear",
+                            title: "Leap years by `year`"
+                        )
+                    }
+                    #endif
+
                     @Test("Leap years by `year`", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
@@ -169,6 +221,19 @@ struct ExpansionTests {
                 func `knows a leap year`(year: Int, leap: Bool) {}
 
                 struct `knows a leap year` {
+                    #if TABLETEST_REPORTING
+                    @Test("TableTest manifest")
+                    func tableTestManifest() throws {
+                        try TableTestReporting.recordManifest(
+                            table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 2, column: 16, indentation: 8, isMultiline: true),
+                            methodName: "knows a leap year",
+                            title: "knows a leap year"
+                        )
+                    }
+                    #endif
+
                     @Test("knows a leap year", arguments: try TableTestRows.make(
                     table: "Year | Leap?\n2004 | true",
                     parameters: [TableParameter((Int).self), TableParameter((Bool).self)],

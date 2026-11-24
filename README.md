@@ -47,6 +47,7 @@ swift-syntax `602.0.0..<604.0.0`.
 - [Errors](#errors)
 - [Escape sequences](#escape-sequences)
 - [Formatter](#formatter)
+- [Report exporters](#report-exporters)
 - [Differences from TableTest for the JVM](#differences-from-tabletest-for-the-jvm)
 - [Contributing](#contributing)
 - [License](#license)
@@ -132,6 +133,10 @@ identifier, for example ``func `knows a leap year`(year: Int, leap: Bool)``.
 In Xcode the test navigator shows each row as its own result, under the title of the test, or
 else the name of the function: `LeapYearTests > knowsALeapYear > scenarios(_:) > Divisible by 4`.
 A row with no scenario shows its cells, `2004 | true`.
+
+Xcode merges the cases of a test that have the same name into one result. So when two cases of
+a table have the same name, each of them adds its row and case number:
+`Check leap years (Year = 2004) [1.1]` and `Check leap years (Year = 2004) [2.1]`.
 
 ## Value formats
 
@@ -644,6 +649,44 @@ The formatter indents each table one level more than its `@TableTest` line. It t
 from `.editorconfig` (`indent_style`, `indent_size`), else from `.swift-format`
 (`indentation`, 2 spaces by default), else 4 spaces. It does not change a table that does not
 parse.
+
+## Report exporters
+
+A generated Swift Testing case receives a `TableTestRow`. Its Swift mirror
+exposes two direct children of type `Int` for report exporters.
+
+- `index` is the one-based position of the data row in its table.
+- `caseNumber` is the one-based position of the expanded case within that row.
+  It starts at 1 for each row, including rows without value sets.
+
+Use both fields with the identity of the parent test. When reading an Xcode
+result bundle, the exporter must account for Xcode's representation of the
+reflected values.
+
+Define `TABLETEST_REPORTING` in the test target's Swift compilation conditions
+to export an Xcode run. Each table gets a companion test that attaches its
+headers, rows, and planned cases. The companion runs independently of the
+table's test traits, so the attachment covers tables with a `.disabled` trait.
+Include the companion in the test selection for every table to export.
+
+The examples project shows how to export the result bundle and render it.
+
+### Export a result bundle
+
+Run the `tabletest-export` SwiftPM executable product on macOS with Xcode
+installed. Give it the bundle and a new output directory.
+
+```sh
+swift run --package-path /path/to/tabletest-swift tabletest-export /path/to/results.xcresult /path/to/export
+java -jar /path/to/tabletest-reporter-cli.jar -f html -i /path/to/export/yaml -o /path/to/report
+```
+
+The exporter uses the public Xcode result and attachment commands. It writes
+the reporter's YAML and a `joined-results.json` file with the original case
+names, outcomes, destinations, configurations, and attempts. The reporter
+renders separate table pages when outcomes span several runs.
+
+[Xcode reporting example](https://github.com/nchaugen/tabletest-swift-examples#export-a-tabletest-report-from-an-xcode-result-bundle)
 
 ## Differences from TableTest for the JVM
 

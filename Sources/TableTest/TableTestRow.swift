@@ -109,33 +109,53 @@ public enum TableTestRows {
     /// gives one test case for each element, and the first column changes slowest (SPEC 3.5).
     public static func make(table: String, parameters: [TableParameter], source: TableSource) throws -> [TableTestRow] {
         let parsed = try TableParser.parse(table)
-        let layout: ColumnLayout
+        let layout = try columnLayout(of: parsed, parameters: parameters)
+        let headers = parsed.headers.dropFirst(layout.leadingColumns).map(\.tableText)
+        let cases = try parsed.rows.enumerated().flatMap { offset, row in
+            try expand(row, index: offset + 1, layout: layout, headers: headers, parameters: parameters, source: source)
+        }
+        return withUniqueNames(cases)
+    }
+
+    /// Marks each case whose name another case of the table also has. Xcode merges the cases of
+    /// a test that share a name into one result, so such a case adds its row and case number to
+    /// its name.
+    static func withUniqueNames(_ cases: [TableTestRow]) -> [TableTestRow] {
+        let occurrences = Dictionary(cases.map { ($0.caseName, 1) }, uniquingKeysWith: +)
+        return cases.map { occurrences[$0.caseName, default: 0] > 1 ? $0.sharingItsName() : $0 }
+    }
+
+    private static func columnLayout(of parsed: Table, parameters: [TableParameter]) throws -> ColumnLayout {
         do {
-            layout = try parsed.columnLayout(parameterCount: parameters.count)
+            return try parsed.columnLayout(parameterCount: parameters.count)
         } catch {
             throw TableTestError(kind: error.kind == .columnCount ? .columnCount : .rowWidth, description: error.message)
         }
+    }
+
+    static func expand(
+        _ row: Row, index: Int, layout: ColumnLayout,
+        headers: [String], parameters: [TableParameter], source: TableSource
+    ) throws -> [TableTestRow] {
         let leading = layout.leadingColumns
-        let headers = parsed.headers.dropFirst(leading).map(\.tableText)
-        return try parsed.rows.enumerated().flatMap { offset, row in
-            let cells = row.cells.dropFirst(leading).map { cell in
-                TableTestRow.Cell(value: cell.value, location: source.location(line: row.line, column: cell.column))
-            }
-            let choices = try cells.enumerated().map { column, cell in
-                try choicesOf(cell, parameter: parameters[column], header: headers[column], row: offset + 1)
-            }
-            return combinations(of: choices).enumerated().map { caseOffset, combination in
-                TableTestRow(
-                    index: offset + 1,
-                    caseNumber: caseOffset + 1,
-                    scenario: layout == .scenarioFirst ? row.cells[0].value.scenarioName : nil,
-                    headers: headers,
-                    cells: combination.map(\.cell),
-                    expandedValues: zip(headers, combination)
-                        .filter { $1.isExpanded }
-                        .map { header, choice in "\(header) = \(choice.cell.value.tableText)" }
-                )
-            }
+        let cells = row.cells.dropFirst(leading).map { cell in
+            TableTestRow.Cell(value: cell.value, location: source.location(line: row.line, column: cell.column))
+        }
+        let choices = try cells.enumerated().map { column, cell in
+            try choicesOf(cell, parameter: parameters[column], header: headers[column], row: index)
+        }
+        return combinations(of: choices).enumerated().map { caseOffset, combination in
+            TableTestRow(
+                index: index,
+                caseNumber: caseOffset + 1,
+                scenario: layout == .scenarioFirst ? row.cells[0].value.scenarioName : nil,
+                headers: headers,
+                cells: combination.map(\.cell),
+                expandedValues: zip(headers, combination)
+                    .filter { $1.isExpanded }
+                    .map { header, choice in "\(header) = \(choice.cell.value.tableText)" },
+                sharesName: false
+            )
         }
     }
 
@@ -173,7 +193,7 @@ public enum TableTestRows {
 }
 
 /// One data row of a table: one test case of the generated Swift Testing test.
-public struct TableTestRow: Sendable, CustomTestStringConvertible, CustomTestArgumentEncodable {
+public struct TableTestRow: Sendable, CustomTestStringConvertible, CustomTestArgumentEncodable, CustomReflectable {
     struct Cell: Sendable {
         let value: TableValue
         let location: SourceLocation
@@ -188,14 +208,30 @@ public struct TableTestRow: Sendable, CustomTestStringConvertible, CustomTestArg
     let cells: [Cell]
     /// `header = element` for each column whose value set gave this case an element.
     let expandedValues: [String]
+    /// Whether another case of the table has the same ``caseName``.
+    let sharesName: Bool
+
+    /// The ``caseName``, followed by `[row.case]` when another case of the table has the same
+    /// name, as in `Divisible by 4 (Year = 2004) [2.1]`.
+    public var testDescription: String {
+        sharesName ? "\(caseName) [\(index).\(caseNumber)]" : caseName
+    }
 
     /// The scenario name, followed by the expanded values in parentheses, or the cells of the
     /// case when the table has no scenario column (SPEC 3.4).
-    public var testDescription: String {
+    var caseName: String {
         guard let scenario else {
             return cells.map(\.value.tableText).joined(separator: " | ")
         }
         return expandedValues.isEmpty ? scenario : "\(scenario) (\(expandedValues.joined(separator: ", ")))"
+    }
+
+    /// The same case, with the row and case number added to its name.
+    func sharingItsName() -> TableTestRow {
+        TableTestRow(
+            index: index, caseNumber: caseNumber, scenario: scenario, headers: headers,
+            cells: cells, expandedValues: expandedValues, sharesName: true
+        )
     }
 
     /// The row number and the case number, which identify the case when Xcode reruns it.
@@ -203,6 +239,20 @@ public struct TableTestRow: Sendable, CustomTestStringConvertible, CustomTestArg
         var container = encoder.unkeyedContainer()
         try container.encode(index)
         try container.encode(caseNumber)
+    }
+
+    /// Report exporters can read the direct `Int` children named `index` and `caseNumber`.
+    /// They identify a case within one table. Both numbers start at 1, and the case number
+    /// starts again for each data row.
+    public var customMirror: Mirror {
+        Mirror(self, children: [
+            "index": index,
+            "caseNumber": caseNumber,
+            "scenario": scenario as Any,
+            "headers": headers,
+            "cells": cells,
+            "expandedValues": expandedValues,
+        ], displayStyle: .struct)
     }
 
     /// The source location of the row's first parameter cell.

@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Added
+- `TableTestRow` guarantees direct reflected `Int` fields named `index` and `caseNumber` for report exporters.
+- Reporting builds emit a companion manifest per table.
+- The `tabletest-export` executable exports Xcode result bundles as TableTest Reporter YAML and preserves outcomes by destination, configuration, and attempt.
+
+### Fixed
+- Xcode shows a separate result for each case whose name another case of the table also has. Each of these cases adds its row and case number to its name, as in `Check leap years (Year = 2004) [2.1]`. Before, Xcode merged them into one result.
+
 ### Documentation
 - The README says `@retroactive` only for an Xcode app project: in a Swift package, the app and its tests are one package, and `@retroactive` is an error there
 ## [0.1.2] - 2026-11-10

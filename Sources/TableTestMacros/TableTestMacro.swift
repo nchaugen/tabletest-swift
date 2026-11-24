@@ -16,7 +16,8 @@ import TableTestSyntax
 /// creates the suite instance by the type's name, which inside the type would name the function.
 /// A static function cannot share its name with a type, so its type is `__tabletest_<name>`. The
 /// table text goes to the runtime, which parses it and converts the cells: the macro only reads
-/// the syntax around it.
+/// the syntax around it. In a build with `TABLETEST_REPORTING`, the type also holds a companion
+/// test that attaches the table's manifest for report exporters.
 public struct TableTestMacro: PeerMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -66,14 +67,17 @@ public struct TableTestMacro: PeerMacro {
             .map { "TableParameter((\($0.type.trimmedDescription)).self)" }
             .joined(separator: ", ")
         let title = arguments.displayName?.trimmedDescription ?? "\"\(name.withoutBackticks)\""
-        let testAttributeArguments = ([title] + arguments.traits.map(\.trimmedDescription) + [
-            """
-            arguments: try TableTestRows.make(
+        let tableArguments = """
                 table: \(StringLiteralExprSyntax(content: table)),
                 parameters: [\(parameterList)],
                 source: TableSource(fileID: \(fileID.file), filePath: \(filePath.file), line: \(fileID.line), \
             column: \(fileID.column), indentation: \(arguments.table.indentation), \
             isMultiline: \(arguments.table.isMultiline))
+            """
+        let testAttributeArguments = ([title] + arguments.traits.map(\.trimmedDescription) + [
+            """
+            arguments: try TableTestRows.make(
+            \(tableArguments)
             )
             """,
         ]).joined(separator: ", ")
@@ -91,6 +95,17 @@ public struct TableTestMacro: PeerMacro {
         return [
             """
             \(raw: isolation(of: function, in: context))struct \(raw: typeName(for: function, title: arguments.displayName)) {
+                #if TABLETEST_REPORTING
+                @Test("TableTest manifest")
+                func tableTestManifest() throws {
+                    try TableTestReporting.recordManifest(
+                    \(raw: tableArguments),
+                        methodName: \(StringLiteralExprSyntax(content: name.withoutBackticks)),
+                        title: \(raw: title)
+                    )
+                }
+                #endif
+
                 @Test(\(raw: testAttributeArguments))
                 func scenarios(_ row: TableTestRow) \(raw: isAsync || receiver.makesSuite ? "async " : "")throws {
                     \(raw: receiver.statement)\(raw: isThrowing ? "do" : "do throws(TableCellError)") {

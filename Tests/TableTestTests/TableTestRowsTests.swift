@@ -63,6 +63,43 @@ struct TableTestRowsTests {
         #expect(encoded == ["[1,1]", "[1,2]", "[2,1]"])
     }
 
+    @Test("Reflects the row and case number of each case")
+    func reflectsCaseIdentifiers() throws {
+        let rows = try TableTestRows.make(table: "Year\n{2004, 1900}\n2001", parameters: .values(1), source: Self.source)
+
+        let identifiers = rows.map { row in
+            let mirror = Mirror(reflecting: row)
+            return ["index", "caseNumber"].map { mirror.descendant($0) as? Int }
+        }
+        #expect(identifiers == [[1, 1], [1, 2], [2, 1]])
+    }
+
+    @Test("Adds the row and case number to a name that repeats across rows")
+    func numbersANameRepeatedAcrossRows() throws {
+        let rows = try TableTestRows.make(
+            table: """
+                Scenario | Year
+                Check    | {2004, 1900}
+                Check    | {2004}
+                """,
+            parameters: .values(1),
+            source: Self.source
+        )
+
+        #expect(rows.map(\.testDescription) == ["Check (Year = 2004) [1.1]", "Check (Year = 1900)", "Check (Year = 2004) [2.1]"])
+    }
+
+    @Test("Adds the row and case number to a name that repeats in a row")
+    func numbersANameRepeatedInARow() throws {
+        let rows = try TableTestRows.make(
+            table: "Values\n{[a, b], [\"a, b\"], [c]}",
+            parameters: [TableParameter([String].self)],
+            source: Self.source
+        )
+
+        #expect(rows.map(\.testDescription) == ["[a, b] [1.1]", "[a, b] [1.2]", "[c]"])
+    }
+
     @Test("Takes a whole set for a parameter whose type can hold one", arguments: [
         (type: "Set<String>", parameter: TableParameter(Set<String>.self), takesSet: true),
         (type: "Typealias of Set<Int>", parameter: TableParameter(Years.self), takesSet: true),
@@ -109,6 +146,35 @@ struct TableTestRowsTests {
 
         #expect(error?.description == "Row 2, column 'Year': Cannot convert `200x` to Int")
         #expect(error.map { Position($0.sourceLocation) } == Position(line: 13, column: 12))
+    }
+}
+
+private let serializedTableTrait: any TestTrait = ParallelizationTrait.serialized
+
+@MainActor
+struct SerializedTableTests {
+    private static let activeCases = ActiveCases()
+
+    @TableTest("Serializes cases across source rows", serializedTableTrait, table: """
+        Value
+        {1, 2}
+        {3, 4}
+        """)
+    func serializesCasesAcrossSourceRows(value: Int) async throws {
+        let overlapped = try await Self.activeCases.overlapsWhileSuspended()
+        #expect(!overlapped, "Case \(value) overlapped another case in the table")
+    }
+
+    private actor ActiveCases {
+        private var count = 0
+
+        func overlapsWhileSuspended() async throws -> Bool {
+            count += 1
+            defer { count -= 1 }
+            let overlapped = count > 1
+            try await Task.sleep(for: .milliseconds(40))
+            return overlapped
+        }
     }
 }
 
