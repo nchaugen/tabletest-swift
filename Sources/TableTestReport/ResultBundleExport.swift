@@ -40,70 +40,101 @@ package enum ResultBundleExport {
     private static func tables(
         in groups: [AttachmentGroup], attachments: URL, report: TestReport, results: some TestResults
     ) throws -> [[TableAttempt]] {
-        let nodes = report.testNodes.flatMap(\.descendants)
-        let tests = Dictionary(grouping: nodes.filter { $0.kind == .test }, by: RowTestKey.init)
-        let devices = Dictionary(grouping: report.devices, by: \.id)
-        let configurations = Dictionary(grouping: report.testPlanConfigurations, by: \.name)
-
+        let index = RunIndex(report)
         return try groups.sorted { $0.testIdentifierURL < $1.testIdentifierURL }.compactMap { group in
-            let copies = group.attachments.filter(\.isTableManifest)
-            guard !copies.isEmpty else { return nil }
-            let contexts = Dictionary(grouping: copies) {
-                RunContext(deviceID: $0.deviceId, configurationName: $0.configurationName)
-            }
-            let manifests = try contexts.map { context, copies in
-                (context: context, manifest: try manifest(in: attachments, copies: copies, test: group, context: context))
-            }.sorted { $0.context < $1.context }
-            let parent = parentURL(of: group.testIdentifierURL)
-            // The companion's last suite is the generated type of the table, and the one above it holds the table.
-            let suiteTitle = report.suiteNames(ofTest: group.testIdentifierURL).dropLast().last
-            let functions = Set(manifests.map(\.manifest.testFunction))
-            let tableTests = try Dictionary(uniqueKeysWithValues: functions.map { function in
-                (function, try TableTestRuns(parent: parent, function: function, tests: tests, results: results))
-            })
+            try table(of: group, attachments: attachments, report: report, index: index, results: results)
+        }
+    }
 
-            let attempts = try manifests.flatMap { context, manifest in
-                guard let matchingDevices = devices[context.deviceID], matchingDevices.count == 1 else {
-                    throw ExportError("Ambiguous destination \(context.deviceID) for \(group.testIdentifier).")
-                }
-                guard let matchingConfigurations = configurations[context.configurationName], matchingConfigurations.count == 1 else {
-                    throw ExportError("Ambiguous configuration \(context.configurationName) for \(group.testIdentifier).")
-                }
-                let device = matchingDevices[0]
-                let configuration = matchingConfigurations[0]
-                let tableTest = tableTests[manifest.testFunction] ?? .notRun
-                let runs = tableTest.runs.filter { $0.context == context }
-                let fallback = TestRun(
-                    device: device, configuration: configuration, attempt: 1, attemptName: "First Run",
-                    identity: nil, xcodeDisplayName: nil, caseURL: nil, status: .notRun, message: nil
-                )
-                let planned = Set(manifest.rows.flatMap { row in row.cases.map { CaseIdentity(row: row.index, number: $0.number) } })
-                guard runs.compactMap(\.identity).allSatisfy(planned.contains) else {
-                    throw ExportError("Unexpected case identities in \(tableTest.url ?? group.testIdentifier).")
-                }
-                let firstInvocations = manifest.rows.reduce(into: [1]) { starts, row in
-                    starts.append(starts[starts.count - 1] + row.cases.count)
-                }
-                let outcomes = try zip(manifest.rows, firstInvocations).flatMap { row, firstInvocation in
-                    try outcomes(for: row, testURL: tableTest.url, firstInvocation: firstInvocation, runs: runs, fallback: fallback)
-                }
-                let byAttempt = outcomes.isEmpty ? [1: []] : Dictionary(grouping: outcomes, by: \.attempt)
-                return byAttempt.keys.sorted().map { number in
-                    let cases = byAttempt[number, default: []]
-                    let names = Set(cases.map(\.attemptName))
-                    return TableAttempt(
-                        manifest: manifest, suiteTitle: suiteTitle, outcomes: cases, device: device, configuration: configuration,
-                        attemptName: names.count == 1 ? names.first ?? "Attempt \(number)" : "Attempt \(number)"
-                    )
-                }
+    /// The attempts of the table whose companion test is `group`, or `nil` when the group holds no
+    /// manifest. Each destination and configuration of the run gives the attempts it made.
+    private static func table(
+        of group: AttachmentGroup, attachments: URL, report: TestReport, index: RunIndex, results: some TestResults
+    ) throws -> [TableAttempt]? {
+        let copies = group.attachments.filter(\.isTableManifest)
+        guard !copies.isEmpty else { return nil }
+        let contexts = Dictionary(grouping: copies) {
+            RunContext(deviceID: $0.deviceId, configurationName: $0.configurationName)
+        }
+        let manifests = try contexts.map { context, copies in
+            (context: context, manifest: try manifest(in: attachments, copies: copies, test: group, context: context))
+        }.sorted { $0.context < $1.context }
+        let parent = parentURL(of: group.testIdentifierURL)
+        // The companion's last suite is the generated type of the table, and the one above it holds the table.
+        let suiteTitle = report.suiteNames(ofTest: group.testIdentifierURL).dropLast().last
+        let functions = Set(manifests.map(\.manifest.testFunction))
+        let tableTests = try Dictionary(uniqueKeysWithValues: functions.map { function in
+            (function, try TableTestRuns(parent: parent, function: function, tests: index.tests, results: results))
+        })
+
+        let attempts = try manifests.flatMap { context, manifest in
+            try self.attempts(
+                of: manifest, in: context, tableTest: tableTests[manifest.testFunction] ?? .notRun,
+                suiteTitle: suiteTitle, index: index, companion: group.testIdentifier
+            )
+        }
+        let observedContexts = Set(tableTests.values.flatMap { $0.runs.map(\.context) })
+        let missing = observedContexts.subtracting(contexts.keys)
+        guard missing.isEmpty else {
+            let names = missing.sorted().map { "\($0.deviceID) / \($0.configurationName)" }.joined(separator: ", ")
+            throw ExportError("Missing manifests for \(group.testIdentifier) on \(names).")
+        }
+        return attempts
+    }
+
+    /// The attempts of a table on one destination and configuration: its cases, numbered in table
+    /// order, with the outcome of each attempt.
+    private static func attempts(
+        of manifest: ReportManifest, in context: RunContext, tableTest: TableTestRuns,
+        suiteTitle: String?, index: RunIndex, companion: String
+    ) throws -> [TableAttempt] {
+        let (device, configuration) = try index.destination(of: context, companion: companion)
+        let runs = tableTest.runs.filter { $0.context == context }
+        let fallback = TestRun(
+            device: device, configuration: configuration, attempt: 1, attemptName: "First Run",
+            identity: nil, xcodeDisplayName: nil, caseURL: nil, status: .notRun, message: nil
+        )
+        let planned = Set(manifest.rows.flatMap { row in row.cases.map { CaseIdentity(row: row.index, number: $0.number) } })
+        guard runs.compactMap(\.identity).allSatisfy(planned.contains) else {
+            throw ExportError("Unexpected case identities in \(tableTest.url ?? companion).")
+        }
+        let firstInvocations = manifest.rows.reduce(into: [1]) { starts, row in
+            starts.append(starts[starts.count - 1] + row.cases.count)
+        }
+        let outcomes = try zip(manifest.rows, firstInvocations).flatMap { row, firstInvocation in
+            try self.outcomes(for: row, testURL: tableTest.url, firstInvocation: firstInvocation, runs: runs, fallback: fallback)
+        }
+        let byAttempt = outcomes.isEmpty ? [1: []] : Dictionary(grouping: outcomes, by: \.attempt)
+        return byAttempt.keys.sorted().map { number in
+            let cases = byAttempt[number, default: []]
+            let names = Set(cases.map(\.attemptName))
+            return TableAttempt(
+                manifest: manifest, suiteTitle: suiteTitle, outcomes: cases, device: device, configuration: configuration,
+                attemptName: names.count == 1 ? names.first ?? "Attempt \(number)" : "Attempt \(number)"
+            )
+        }
+    }
+
+    /// The tests, destinations and configurations of a run, for the lookups of the join.
+    private struct RunIndex {
+        let tests: [RowTestKey: [TestNode]]
+        let devices: [String: [Device]]
+        let configurations: [String: [Configuration]]
+
+        init(_ report: TestReport) {
+            tests = Dictionary(grouping: report.testNodes.flatMap(\.descendants).filter { $0.kind == .test }, by: RowTestKey.init)
+            devices = Dictionary(grouping: report.devices, by: \.id)
+            configurations = Dictionary(grouping: report.testPlanConfigurations, by: \.name)
+        }
+
+        func destination(of context: RunContext, companion: String) throws -> (Device, Configuration) {
+            guard let matchingDevices = devices[context.deviceID], matchingDevices.count == 1 else {
+                throw ExportError("Ambiguous destination \(context.deviceID) for \(companion).")
             }
-            let observedContexts = Set(tableTests.values.flatMap { $0.runs.map(\.context) })
-            let missing = observedContexts.subtracting(contexts.keys)
-            guard missing.isEmpty else {
-                let names = missing.sorted().map { "\($0.deviceID) / \($0.configurationName)" }.joined(separator: ", ")
-                throw ExportError("Missing manifests for \(group.testIdentifier) on \(names).")
+            guard let matchingConfigurations = configurations[context.configurationName], matchingConfigurations.count == 1 else {
+                throw ExportError("Ambiguous configuration \(context.configurationName) for \(companion).")
             }
-            return attempts
+            return (matchingDevices[0], matchingConfigurations[0])
         }
     }
 
