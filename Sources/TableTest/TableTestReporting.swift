@@ -9,6 +9,20 @@ public enum TableTestReporting {
         table: String, parameters: [TableParameter], source: TableSource, methodName: String, title: String
     ) throws {
         let test = try #require(Test.current)
+        let manifest = try manifest(
+            table: table, parameters: parameters, source: source,
+            suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2), methodName: methodName, title: title
+        )
+        let data = try JSONEncoder().encode(manifest)
+        Attachment.record(String(decoding: data, as: UTF8.self), named: "tabletest-manifest.json")
+    }
+
+    /// The manifest of a table: its cells with their roles, and the planned cases of each row. A
+    /// row that does not expand has its error in place of its cases.
+    static func manifest(
+        table: String, parameters: [TableParameter], source: TableSource,
+        suite: [String], methodName: String, title: String
+    ) throws -> ReportManifest {
         let parsed = try TableParser.parse(table)
         let layout = try parsed.columnLayout(parameterCount: parameters.count)
         let leading = layout.leadingColumns
@@ -43,12 +57,9 @@ public enum TableTestReporting {
                 ReportCase(number: $0.caseNumber, displayName: $0.testDescription)
             })
         }
-        let manifest = ReportManifest(
-            suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2), methodName: methodName, title: title,
-            testFunction: ReportManifest.tableTestFunction,
+        return ReportManifest(
+            suite: suite, methodName: methodName, title: title, testFunction: ReportManifest.tableTestFunction,
             headers: zip(parsed.headers, columnRoles).map { ReportCell(value: $0, roles: $1) }, rows: rows
         )
-        let data = try JSONEncoder().encode(manifest)
-        Attachment.record(String(decoding: data, as: UTF8.self), named: "tabletest-manifest.json")
     }
 }
