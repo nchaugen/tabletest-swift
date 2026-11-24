@@ -1,0 +1,1106 @@
+[
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "cork | 3",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)",
+        "xcodeDisplayName" : "cork | 3"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "screw cap | 5",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)",
+        "xcodeDisplayName" : "screw cap | 5"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "glass | 5",
+        "invocationIndex" : 3,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)",
+        "xcodeDisplayName" : "glass | 5"
+      }
+    ],
+    "methodName" : "keepsAnOpenedBottleFresh",
+    "suite" : [
+      "ExamplesTests",
+      "ClosureTests"
+    ],
+    "title" : "keepsAnOpenedBottleFresh"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Cork on the third day",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)",
+        "xcodeDisplayName" : "Cork on the third day"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Cork on the fourth day",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)",
+        "xcodeDisplayName" : "Cork on the fourth day"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Screw cap, late evening",
+        "invocationIndex" : 3,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)",
+        "xcodeDisplayName" : "Screw cap, late evening"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Screw cap, next morning",
+        "invocationIndex" : 4,
+        "rowIndex" : 4,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)",
+        "xcodeDisplayName" : "Screw cap, next morning"
+      }
+    ],
+    "methodName" : "staysFreshForItsDays",
+    "suite" : [
+      "ExamplesTests",
+      "ClosureTests"
+    ],
+    "title" : "staysFreshForItsDays"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Morning",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+        "xcodeDisplayName" : "Morning"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Afternoon",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+        "xcodeDisplayName" : "Afternoon"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "No name",
+        "invocationIndex" : 3,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+        "xcodeDisplayName" : "No name"
+      }
+    ],
+    "methodName" : "greetsByTheHour",
+    "suite" : [
+      "ExamplesTests",
+      "GreetingTests"
+    ],
+    "title" : "greetsByTheHour"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Ready now",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "Ready now"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Before its first",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "Before its first"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "From its first",
+        "invocationIndex" : 3,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "From its first"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Inside the span",
+        "invocationIndex" : 4,
+        "rowIndex" : 4,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "Inside the span"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=391834dc58548d74b2bdf0417c4e089f3d8be77f772dfbbb807ddb543cedc48b",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "After the span",
+        "invocationIndex" : 5,
+        "rowIndex" : 5,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "After the span"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=0650c33b9ac0166e8bee9c8b5dc0f892dec72eadf224a9fbfb7edbf2cd5640ca",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Ready either way (Readiness = now)",
+        "invocationIndex" : 6,
+        "rowIndex" : 6,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "Ready either way (Readiness = now)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=553ebf728dc0653dc2c591bb13c321d84cb6c71f662f7a7a10dca39054d4fde8",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Ready either way (Readiness = between(2025, 2030))",
+        "invocationIndex" : 7,
+        "rowIndex" : 6,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+        "xcodeDisplayName" : "Ready either way (Readiness = between(2025, 2030))"
+      }
+    ],
+    "methodName" : "allowsTheYearsItIsReady",
+    "suite" : [
+      "ExamplesTests",
+      "ReadinessTests"
+    ],
+    "title" : "allowsTheYearsItIsReady"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/scenarios(_:)",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "1",
+        "invocationIndex" : 1,
+        "message" : "Test skipped: Disabled on purpose",
+        "rowIndex" : 1,
+        "status" : "Skipped",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/scenarios(_:)"
+      }
+    ],
+    "methodName" : "disabledTable",
+    "suite" : [
+      "ExamplesTests",
+      "ResultBundleProbe"
+    ],
+    "title" : "Disabled table"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Check leap years (Year = 2004) [1.1]",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)",
+        "xcodeDisplayName" : "Check leap years (Year = 2004) [1.1]"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Check leap years (Year = 1900)",
+        "invocationIndex" : 2,
+        "message" : "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → false\nleap → true",
+        "rowIndex" : 1,
+        "status" : "Failed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)",
+        "xcodeDisplayName" : "Check leap years (Year = 1900)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 3,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Check leap years (Year = 2000)",
+        "invocationIndex" : 3,
+        "message" : "Test case cancelled: Skip this value-set case on purpose",
+        "rowIndex" : 1,
+        "status" : "Skipped",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)",
+        "xcodeDisplayName" : "Check leap years (Year = 2000)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Check leap years (Year = 2004) [2.1]",
+        "invocationIndex" : 4,
+        "message" : "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → true\nleap → false",
+        "rowIndex" : 2,
+        "status" : "Failed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)",
+        "xcodeDisplayName" : "Check leap years (Year = 2004) [2.1]"
+      }
+    ],
+    "methodName" : "leapYear",
+    "suite" : [
+      "ExamplesTests",
+      "ResultBundleProbe"
+    ],
+    "title" : "Leap year result bundle probe"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "[a, b] | 2 [1.1]",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)",
+        "xcodeDisplayName" : "[a, b] | 2 [1.1]"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "[a, b] | 2 [1.2]",
+        "invocationIndex" : 2,
+        "message" : "Expectation failed: values.count == count\nvalues.count → 1\ncount → 2",
+        "rowIndex" : 1,
+        "status" : "Failed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)",
+        "xcodeDisplayName" : "[a, b] | 2 [1.2]"
+      }
+    ],
+    "methodName" : "sameNameWithinRow",
+    "suite" : [
+      "ExamplesTests",
+      "ResultBundleProbe"
+    ],
+    "title" : "Names collide within one row"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "2024 | true",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)",
+        "xcodeDisplayName" : "2024 | true"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "2023 | false",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)",
+        "xcodeDisplayName" : "2023 | false"
+      }
+    ],
+    "methodName" : "knowsALeapYearByRow",
+    "suite" : [
+      "ExamplesTests",
+      "YearTests"
+    ],
+    "title" : "Leap years without a scenario column"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 4",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 4"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Not divisible by 4",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)",
+        "xcodeDisplayName" : "Not divisible by 4"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 100, not by 400",
+        "invocationIndex" : 3,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 100, not by 400"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 400",
+        "invocationIndex" : 4,
+        "rowIndex" : 4,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 400"
+      }
+    ],
+    "methodName" : "knowsALeapYear",
+    "suite" : [
+      "ExamplesTests",
+      "YearTests"
+    ],
+    "title" : "knowsALeapYear"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Not divisible by 4 (Year = 2001)",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Not divisible by 4 (Year = 2001)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Not divisible by 4 (Year = 2002)",
+        "invocationIndex" : 2,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Not divisible by 4 (Year = 2002)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 3,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Not divisible by 4 (Year = 2003)",
+        "invocationIndex" : 3,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Not divisible by 4 (Year = 2003)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 4 (Year = 2004)",
+        "invocationIndex" : 4,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 4 (Year = 2004)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=1ad6041faf516d0043ca4b91348ab8c8a713496b5b5ce302e0e907e4f7bcbc24",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 4 (Year = 2008)",
+        "invocationIndex" : 5,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 4 (Year = 2008)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 3,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=18b058689d010062a25cd7fb949b2abfea1757d2de45ca3abdda17db956e506b",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 4 (Year = 2012)",
+        "invocationIndex" : 6,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 4 (Year = 2012)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 100, not by 400 (Year = 1900)",
+        "invocationIndex" : 7,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 100, not by 400 (Year = 1900)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0fd922e83d21fc2fda1578059c2012e5b132fbb80fba2be9660eb85d8c3f3404",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 100, not by 400 (Year = 2100)",
+        "invocationIndex" : 8,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 100, not by 400 (Year = 2100)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 400 (Year = 2000)",
+        "invocationIndex" : 9,
+        "rowIndex" : 4,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 400 (Year = 2000)"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 2,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=044d15dbf5c3b7e70206179fce34d75eb5ad3d40bca2ba915e9cc6f75293a9a7",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Divisible by 400 (Year = 2400)",
+        "invocationIndex" : 10,
+        "rowIndex" : 4,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+        "xcodeDisplayName" : "Divisible by 400 (Year = 2400)"
+      }
+    ],
+    "methodName" : "knowsALeapYearForEachExample",
+    "suite" : [
+      "ExamplesTests",
+      "YearTests"
+    ],
+    "title" : "knowsALeapYearForEachExample"
+  }
+]

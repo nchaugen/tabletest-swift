@@ -1,0 +1,706 @@
+{
+  "devices" : [
+    {
+      "architecture" : "arm64",
+      "deviceId" : "00000000-0000000000000001",
+      "deviceName" : "My Mac",
+      "modelName" : "MacBook Pro",
+      "osBuildNumber" : "26B131",
+      "osVersion" : "27.2.1",
+      "platform" : "macOS"
+    }
+  ],
+  "testNodes" : [
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "children" : [
+                    {
+                      "duration" : "0,0024s",
+                      "durationInSeconds" : 0.002396821975708008,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "ReadinessTests/allowsTheYearsItIsReady/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,0044s",
+                          "durationInSeconds" : 0.004371166229248047,
+                          "name" : "After the span",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=391834dc58548d74b2bdf0417c4e089f3d8be77f772dfbbb807ddb543cedc48b",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0002s",
+                          "durationInSeconds" : 0.00019693374633789062,
+                          "name" : "Before its first",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00017s",
+                          "durationInSeconds" : 0.00017499923706054688,
+                          "name" : "From its first",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,000098s",
+                          "durationInSeconds" : 9.775161743164062e-05,
+                          "name" : "Inside the span",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0043s",
+                          "durationInSeconds" : 0.004324913024902344,
+                          "name" : "Ready either way (Readiness = between(2025, 2030))",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=553ebf728dc0653dc2c591bb13c321d84cb6c71f662f7a7a10dca39054d4fde8",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00004s",
+                          "durationInSeconds" : 3.981590270996094e-05,
+                          "name" : "Ready either way (Readiness = now)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=0650c33b9ac0166e8bee9c8b5dc0f892dec72eadf224a9fbfb7edbf2cd5640ca",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00023s",
+                          "durationInSeconds" : 0.00023102760314941406,
+                          "name" : "Ready now",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,0013s",
+                      "durationInSeconds" : 0.0013480867658342635,
+                      "name" : "allowsTheYearsItIsReady",
+                      "nodeIdentifier" : "ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "allowsTheYearsItIsReady",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "ReadinessTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,0023s",
+                          "durationInSeconds" : 0.0023310184478759766,
+                          "name" : "Cork on the fourth day",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0022s",
+                          "durationInSeconds" : 0.0022420883178710938,
+                          "name" : "Cork on the third day",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0033s",
+                          "durationInSeconds" : 0.003325939178466797,
+                          "name" : "Screw cap, late evening",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0033s",
+                          "durationInSeconds" : 0.003289937973022461,
+                          "name" : "Screw cap, next morning",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,0028s",
+                      "durationInSeconds" : 0.002797245979309082,
+                      "name" : "staysFreshForItsDays",
+                      "nodeIdentifier" : "ClosureTests/staysFreshForItsDays/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "duration" : "0,00044s",
+                      "durationInSeconds" : 0.00043702125549316406,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "ClosureTests/staysFreshForItsDays/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "staysFreshForItsDays",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                },
+                {
+                  "children" : [
+                    {
+                      "duration" : "0,0023s",
+                      "durationInSeconds" : 0.0023360252380371094,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,0021s",
+                          "durationInSeconds" : 0.002084970474243164,
+                          "name" : "cork | 3",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0045s",
+                          "durationInSeconds" : 0.004450082778930664,
+                          "name" : "glass | 5",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00021s",
+                          "durationInSeconds" : 0.00020503997802734375,
+                          "name" : "screw cap | 5",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,0022s",
+                      "durationInSeconds" : 0.002246697743733724,
+                      "name" : "keepsAnOpenedBottleFresh",
+                      "nodeIdentifier" : "ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "keepsAnOpenedBottleFresh",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "ClosureTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "children" : [
+                    {
+                      "duration" : "0,005s",
+                      "durationInSeconds" : 0.005034208297729492,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "GreetingTests/greetsByTheHour/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,00087s",
+                          "durationInSeconds" : 0.0008740425109863281,
+                          "name" : "Afternoon",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00088s",
+                          "durationInSeconds" : 0.0008840560913085938,
+                          "name" : "Morning",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00054s",
+                          "durationInSeconds" : 0.0005447864532470703,
+                          "name" : "No name",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,00077s",
+                      "durationInSeconds" : 0.0007676283518473307,
+                      "name" : "greetsByTheHour",
+                      "nodeIdentifier" : "GreetingTests/greetsByTheHour/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "greetsByTheHour",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "GreetingTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,000036s",
+                          "durationInSeconds" : 3.600120544433594e-05,
+                          "name" : "Divisible by 4 (Year = 2004)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00026s",
+                          "durationInSeconds" : 0.000263214111328125,
+                          "name" : "Divisible by 4 (Year = 2008)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=1ad6041faf516d0043ca4b91348ab8c8a713496b5b5ce302e0e907e4f7bcbc24",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,000091s",
+                          "durationInSeconds" : 9.083747863769531e-05,
+                          "name" : "Divisible by 4 (Year = 2012)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=18b058689d010062a25cd7fb949b2abfea1757d2de45ca3abdda17db956e506b",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00032s",
+                          "durationInSeconds" : 0.0003218650817871094,
+                          "name" : "Divisible by 100, not by 400 (Year = 1900)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00025s",
+                          "durationInSeconds" : 0.0002512931823730469,
+                          "name" : "Divisible by 100, not by 400 (Year = 2100)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0fd922e83d21fc2fda1578059c2012e5b132fbb80fba2be9660eb85d8c3f3404",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00005s",
+                          "durationInSeconds" : 4.982948303222656e-05,
+                          "name" : "Divisible by 400 (Year = 2000)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0044s",
+                          "durationInSeconds" : 0.004397869110107422,
+                          "name" : "Divisible by 400 (Year = 2400)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=044d15dbf5c3b7e70206179fce34d75eb5ad3d40bca2ba915e9cc6f75293a9a7",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,000036s",
+                          "durationInSeconds" : 3.600120544433594e-05,
+                          "name" : "Not divisible by 4 (Year = 2001)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0026s",
+                          "durationInSeconds" : 0.0025720596313476562,
+                          "name" : "Not divisible by 4 (Year = 2002)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0023s",
+                          "durationInSeconds" : 0.0023479461669921875,
+                          "name" : "Not divisible by 4 (Year = 2003)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,001s",
+                      "durationInSeconds" : 0.001036691665649414,
+                      "name" : "knowsALeapYearForEachExample",
+                      "nodeIdentifier" : "YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "duration" : "0,00068s",
+                      "durationInSeconds" : 0.0006818771362304688,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "YearTests/knowsALeapYearForEachExample/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "knowsALeapYearForEachExample",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,00032s",
+                          "durationInSeconds" : 0.00031685829162597656,
+                          "name" : "Divisible by 4",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00035s",
+                          "durationInSeconds" : 0.0003490447998046875,
+                          "name" : "Divisible by 100, not by 400",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,0002s",
+                          "durationInSeconds" : 0.00019788742065429688,
+                          "name" : "Divisible by 400",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,00031s",
+                          "durationInSeconds" : 0.00031304359436035156,
+                          "name" : "Not divisible by 4",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,00029s",
+                      "durationInSeconds" : 0.0002942085266113281,
+                      "name" : "knowsALeapYear",
+                      "nodeIdentifier" : "YearTests/knowsALeapYear/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "duration" : "0,0023s",
+                      "durationInSeconds" : 0.002274036407470703,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "YearTests/knowsALeapYear/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "knowsALeapYear",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,0041s",
+                          "durationInSeconds" : 0.0040740966796875,
+                          "name" : "2023 | false",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "duration" : "0,000037s",
+                          "durationInSeconds" : 3.695487976074219e-05,
+                          "name" : "2024 | true",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        }
+                      ],
+                      "duration" : "0,0021s",
+                      "durationInSeconds" : 0.002055525779724121,
+                      "name" : "Leap years without a scenario column",
+                      "nodeIdentifier" : "YearTests/`Leap years without a scenario column`/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "duration" : "0,00075s",
+                      "durationInSeconds" : 0.0007548332214355469,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "YearTests/`Leap years without a scenario column`/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "Leap years without a scenario column",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "YearTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "name" : "Test skipped: Disabled on purpose",
+                          "nodeType" : "Skip Message"
+                        }
+                      ],
+                      "name" : "Disabled table",
+                      "nodeIdentifier" : "ResultBundleProbe/`Disabled table`/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Skipped"
+                    },
+                    {
+                      "duration" : "0,00058s",
+                      "durationInSeconds" : 0.0005769729614257812,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "ResultBundleProbe/`Disabled table`/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "Disabled table",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60",
+                  "nodeType" : "Test Suite",
+                  "result" : "Passed"
+                },
+                {
+                  "children" : [
+                    {
+                      "duration" : "0,00055s",
+                      "durationInSeconds" : 0.0005459785461425781,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "ResultBundleProbe/`Leap year result bundle probe`/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "name" : "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → false\nleap → true",
+                              "nodeType" : "Failure Message",
+                              "sourceLocation" : {
+                                "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+                                "lineNumber" : 16
+                              }
+                            }
+                          ],
+                          "duration" : "0,0029s",
+                          "durationInSeconds" : 0.0029001235961914062,
+                          "name" : "Check leap years (Year = 1900)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+                          "nodeType" : "Arguments",
+                          "result" : "Failed"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "name" : "Test case cancelled: Skip this value-set case on purpose",
+                              "nodeType" : "Skip Message"
+                            }
+                          ],
+                          "duration" : "0,0005s",
+                          "durationInSeconds" : 0.0004961490631103516,
+                          "name" : "Check leap years (Year = 2000)",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
+                          "nodeType" : "Arguments",
+                          "result" : "Skipped"
+                        },
+                        {
+                          "duration" : "0,00045s",
+                          "durationInSeconds" : 0.0004506111145019531,
+                          "name" : "Check leap years (Year = 2004) [1.1]",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "name" : "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → true\nleap → false",
+                              "nodeType" : "Failure Message",
+                              "sourceLocation" : {
+                                "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+                                "lineNumber" : 16
+                              }
+                            }
+                          ],
+                          "duration" : "0,000052s",
+                          "durationInSeconds" : 5.1975250244140625e-05,
+                          "name" : "Check leap years (Year = 2004) [2.1]",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+                          "nodeType" : "Arguments",
+                          "result" : "Failed"
+                        }
+                      ],
+                      "duration" : "0,00097s",
+                      "durationInSeconds" : 0.0009747147560119629,
+                      "name" : "Leap year result bundle probe",
+                      "nodeIdentifier" : "ResultBundleProbe/`Leap year result bundle probe`/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Failed"
+                    }
+                  ],
+                  "name" : "Leap year result bundle probe",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60",
+                  "nodeType" : "Test Suite",
+                  "result" : "Failed"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "duration" : "0,00034s",
+                          "durationInSeconds" : 0.0003418922424316406,
+                          "name" : "[a, b] | 2 [1.1]",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+                          "nodeType" : "Arguments",
+                          "result" : "Passed"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "name" : "Expectation failed: values.count == count\nvalues.count → 1\ncount → 2",
+                              "nodeType" : "Failure Message",
+                              "sourceLocation" : {
+                                "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+                                "lineNumber" : 24
+                              }
+                            }
+                          ],
+                          "duration" : "0,003s",
+                          "durationInSeconds" : 0.0029599666595458984,
+                          "name" : "[a, b] | 2 [1.2]",
+                          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+                          "nodeType" : "Arguments",
+                          "result" : "Failed"
+                        }
+                      ],
+                      "duration" : "0,0017s",
+                      "durationInSeconds" : 0.0016509294509887695,
+                      "name" : "Names collide within one row",
+                      "nodeIdentifier" : "ResultBundleProbe/`Names collide within one row`/scenarios(_:)",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)",
+                      "nodeType" : "Test Case",
+                      "result" : "Failed"
+                    },
+                    {
+                      "duration" : "0,0026s",
+                      "durationInSeconds" : 0.0025582313537597656,
+                      "name" : "TableTest manifest",
+                      "nodeIdentifier" : "ResultBundleProbe/`Names collide within one row`/tableTestManifest()",
+                      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/tableTestManifest()",
+                      "nodeType" : "Test Case",
+                      "result" : "Passed"
+                    }
+                  ],
+                  "name" : "Names collide within one row",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60",
+                  "nodeType" : "Test Suite",
+                  "result" : "Failed"
+                }
+              ],
+              "name" : "ResultBundleProbe",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe",
+              "nodeType" : "Test Suite",
+              "result" : "Failed"
+            }
+          ],
+          "name" : "ExamplesTests",
+          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests",
+          "nodeType" : "Unit test bundle",
+          "result" : "Failed"
+        }
+      ],
+      "name" : "Examples",
+      "nodeType" : "Test Plan",
+      "result" : "Failed"
+    }
+  ],
+  "testPlanConfigurations" : [
+    {
+      "configurationId" : "1",
+      "configurationName" : "Test Scheme Action"
+    }
+  ]
+}

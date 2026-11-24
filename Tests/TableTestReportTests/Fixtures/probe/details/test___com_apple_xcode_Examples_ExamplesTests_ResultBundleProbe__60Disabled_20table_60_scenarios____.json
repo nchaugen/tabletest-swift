@@ -1,0 +1,58 @@
+{
+  "devices" : [
+    {
+      "architecture" : "arm64",
+      "deviceId" : "00000000-0000000000000001",
+      "deviceName" : "My Mac",
+      "modelName" : "MacBook Pro",
+      "osBuildNumber" : "26B131",
+      "osVersion" : "27.2.1",
+      "platform" : "macOS"
+    }
+  ],
+  "duration" : "",
+  "durationInSeconds" : 0,
+  "functionName" : "scenarios(_:)",
+  "hasMediaAttachments" : false,
+  "hasPerformanceMetrics" : false,
+  "testDescription" : "Test case with 1 run",
+  "testIdentifier" : "ResultBundleProbe/`Disabled table`/scenarios(_:)",
+  "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/scenarios(_:)",
+  "testName" : "scenarios(_:)",
+  "testPlanConfigurations" : [
+    {
+      "configurationId" : "1",
+      "configurationName" : "Test Scheme Action"
+    }
+  ],
+  "testResult" : "Skipped",
+  "testRuns" : [
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "name" : "Test skipped: Disabled on purpose",
+              "nodeType" : "Test Case Run",
+              "result" : "Skipped"
+            }
+          ],
+          "duration" : "0s",
+          "durationInSeconds" : 0,
+          "name" : "Test Scheme Action",
+          "nodeIdentifier" : "1",
+          "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/scenarios(_:)",
+          "nodeType" : "Test Plan Configuration",
+          "result" : "Skipped"
+        }
+      ],
+      "details" : "macOS 27.2.1",
+      "duration" : "0s",
+      "durationInSeconds" : 0,
+      "name" : "MacBook Pro",
+      "nodeIdentifier" : "00000000-0000000000000001",
+      "nodeType" : "Device",
+      "result" : "Skipped"
+    }
+  ]
+}

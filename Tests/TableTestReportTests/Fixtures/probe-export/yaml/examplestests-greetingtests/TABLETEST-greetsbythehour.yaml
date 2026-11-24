@@ -1,0 +1,6 @@
+methodName: "greetsByTheHour"
+slug: "greetsbythehour"
+title: "greetsByTheHour"
+headers: [{"value": "Scenario", "roles": ["scenario"]}, {"value": "Name", "roles": []}, {"value": "Hour", "roles": []}, {"value": "Greeting?", "roles": ["expectation"]}]
+rows: [[{"value": "Morning", "roles": ["scenario", "passed"]}, {"value": "Ada", "roles": ["passed"]}, {"value": "9", "roles": ["passed"]}, {"value": "Good morning, Ada", "roles": ["expectation", "passed"]}], [{"value": "Afternoon", "roles": ["scenario", "passed"]}, {"value": "Ada", "roles": ["passed"]}, {"value": "14", "roles": ["passed"]}, {"value": "Good afternoon, Ada", "roles": ["expectation", "passed"]}], [{"value": "No name", "roles": ["scenario", "passed"]}, {"value": "", "roles": ["passed"]}, {"value": "22", "roles": ["passed"]}, {"value": "Good evening", "roles": ["expectation", "passed"]}]]
+rowResults: [{"rowIndex": 1, "passed": true, "displayName": "Morning"}, {"rowIndex": 2, "passed": true, "displayName": "Afternoon"}, {"rowIndex": 3, "passed": true, "displayName": "No name"}]

@@ -84,6 +84,12 @@ let package = Package(
         ),
         .testTarget(name: "ReadmeExamples", dependencies: ["TableTest"]),
         .testTarget(
+            name: "TableTestReportTests",
+            dependencies: ["TableTestReport"],
+            exclude: ["Fixtures/record.sh"],
+            resources: [.copy("Fixtures/probe"), .copy("Fixtures/probe-export")]
+        ),
+        .testTarget(
             name: "TableTestParserTests",
             dependencies: ["TableTestParser", "SpecFixtures"],
             resources: [.copy("Fixtures")]

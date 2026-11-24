@@ -1,0 +1,6 @@
+methodName: "sameNameWithinRow"
+slug: "names-collide-within-one-row"
+title: "Names collide within one row"
+headers: [{"value": "Values", "roles": []}, {"value": "Count?", "roles": ["expectation"]}]
+rows: [[{"value": !!set {? ["a", "b"] : null, ? ["a, b"] : null}, "roles": ["value-set", "failed"]}, {"value": "2", "roles": ["expectation", "failed"]}]]
+rowResults: [{"rowIndex": 1, "passed": true, "displayName": "[a, b] | 2 [1.1]"}, {"rowIndex": 2, "passed": false, "displayName": "[a, b] | 2 [1.2]", "errorMessage": "Expectation failed: values.count == count\nvalues.count → 1\ncount → 2"}]

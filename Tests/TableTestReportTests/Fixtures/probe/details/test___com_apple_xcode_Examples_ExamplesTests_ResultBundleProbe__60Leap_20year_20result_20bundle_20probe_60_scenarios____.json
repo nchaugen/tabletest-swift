@@ -1,0 +1,812 @@
+{
+  "arguments" : [
+    {
+      "value" : "Check leap years (Year = 2004) [1.1]"
+    },
+    {
+      "value" : "Check leap years (Year = 2000)"
+    },
+    {
+      "value" : "Check leap years (Year = 1900)"
+    },
+    {
+      "value" : "Check leap years (Year = 2004) [2.1]"
+    }
+  ],
+  "devices" : [
+    {
+      "architecture" : "arm64",
+      "deviceId" : "00000000-0000000000000001",
+      "deviceName" : "My Mac",
+      "modelName" : "MacBook Pro",
+      "osBuildNumber" : "26B131",
+      "osVersion" : "27.2.1",
+      "platform" : "macOS"
+    }
+  ],
+  "duration" : "Average duration 0,00097 seconds",
+  "durationInSeconds" : 0.0009747147560119629,
+  "functionName" : "scenarios(_:)",
+  "hasMediaAttachments" : false,
+  "hasPerformanceMetrics" : false,
+  "testDescription" : "Test case with 4 runs",
+  "testIdentifier" : "ResultBundleProbe/`Leap year result bundle probe`/scenarios(_:)",
+  "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)",
+  "testName" : "scenarios(_:)",
+  "testPlanConfigurations" : [
+    {
+      "configurationId" : "1",
+      "configurationName" : "Test Scheme Action"
+    }
+  ],
+  "testResult" : "Failed",
+  "testRuns" : [
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Check leap years\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Check leap years\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2004\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2004\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 9",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:9:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2004\"), location: ExamplesTests/ResultBundleProbe.swift:9:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 9",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 49",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:9:49",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/ResultBundleProbe.swift:9:49)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2004\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Check leap years (Year = 2004) [1.1]",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,00045s",
+      "durationInSeconds" : 0.0004506111145019531,
+      "name" : "Check leap years (Year = 2004) [1.1]",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Check leap years\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Check leap years\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"1900\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"1900\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 9",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:9:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"1900\"), location: ExamplesTests/ResultBundleProbe.swift:9:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 9",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 49",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:9:49",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/ResultBundleProbe.swift:9:49)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 1900\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Check leap years (Year = 1900)",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        },
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Bool",
+                  "name" : "Year(year).isLeap : false",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Bool",
+                  "name" : "leap : true",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "name" : "Results",
+              "nodeType" : "Expression"
+            },
+            {
+              "name" : "ResultBundleProbe.leapYear(year:leap:)",
+              "nodeType" : "Source Code Reference",
+              "sourceLocation" : {
+                "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+                "lineNumber" : 16
+              }
+            }
+          ],
+          "name" : "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → false\nleap → true",
+          "nodeType" : "Test Case Run",
+          "result" : "Failed",
+          "sourceLocation" : {
+            "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+            "lineNumber" : 16
+          }
+        }
+      ],
+      "duration" : "0,0029s",
+      "durationInSeconds" : 0.0029001235961914062,
+      "name" : "Check leap years (Year = 1900)",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
+      "nodeType" : "Arguments",
+      "result" : "Failed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 3",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Check leap years\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Check leap years\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2000\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2000\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 9",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:9:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2000\"), location: ExamplesTests/ResultBundleProbe.swift:9:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 9",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 49",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:9:49",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/ResultBundleProbe.swift:9:49)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2000\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Check leap years (Year = 2000)",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        },
+        {
+          "name" : "Test case cancelled: Skip this value-set case on purpose",
+          "nodeType" : "Test Case Run",
+          "result" : "Skipped"
+        }
+      ],
+      "duration" : "0,0005s",
+      "durationInSeconds" : 0.0004961490631103516,
+      "name" : "Check leap years (Year = 2000)",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
+      "nodeType" : "Arguments",
+      "result" : "Skipped"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Check leap years\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Check leap years\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Leap?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2004\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2004\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 10",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:10:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"2004\"), location: ExamplesTests/ResultBundleProbe.swift:10:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"false\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"false\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 10",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 49",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:10:49",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"false\"), location: ExamplesTests/ResultBundleProbe.swift:10:49)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Year = 2004\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Check leap years (Year = 2004) [2.1]",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        },
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Bool",
+                  "name" : "Year(year).isLeap : true",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Bool",
+                  "name" : "leap : false",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "name" : "Results",
+              "nodeType" : "Expression"
+            },
+            {
+              "name" : "ResultBundleProbe.leapYear(year:leap:)",
+              "nodeType" : "Source Code Reference",
+              "sourceLocation" : {
+                "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+                "lineNumber" : 16
+              }
+            }
+          ],
+          "name" : "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → true\nleap → false",
+          "nodeType" : "Test Case Run",
+          "result" : "Failed",
+          "sourceLocation" : {
+            "filePath" : "/path/to/ExamplesTests/ResultBundleProbe.swift",
+            "lineNumber" : 16
+          }
+        }
+      ],
+      "duration" : "0,000052s",
+      "durationInSeconds" : 5.1975250244140625e-05,
+      "name" : "Check leap years (Year = 2004) [2.1]",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+      "nodeType" : "Arguments",
+      "result" : "Failed"
+    }
+  ]
+}

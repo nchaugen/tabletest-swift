@@ -1,0 +1,4 @@
+className: "ExamplesTests.ClosureTests"
+slug: "examplestests-closuretests"
+title: "ClosureTests"
+tableTests: [{"path": "TABLETEST-keepsanopenedbottlefresh.yaml", "methodName": "keepsAnOpenedBottleFresh", "slug": "keepsanopenedbottlefresh"}, {"path": "TABLETEST-staysfreshforitsdays.yaml", "methodName": "staysFreshForItsDays", "slug": "staysfreshforitsdays"}]

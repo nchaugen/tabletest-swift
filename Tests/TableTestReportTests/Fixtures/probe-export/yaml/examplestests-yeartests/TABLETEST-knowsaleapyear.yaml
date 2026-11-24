@@ -1,0 +1,6 @@
+methodName: "knowsALeapYear"
+slug: "knowsaleapyear"
+title: "knowsALeapYear"
+headers: [{"value": "Scenario", "roles": ["scenario"]}, {"value": "Year", "roles": []}, {"value": "Leap?", "roles": ["expectation"]}]
+rows: [[{"value": "Divisible by 4", "roles": ["scenario", "passed"]}, {"value": "2004", "roles": ["passed"]}, {"value": "true", "roles": ["expectation", "passed"]}], [{"value": "Not divisible by 4", "roles": ["scenario", "passed"]}, {"value": "2001", "roles": ["passed"]}, {"value": "false", "roles": ["expectation", "passed"]}], [{"value": "Divisible by 100, not by 400", "roles": ["scenario", "passed"]}, {"value": "1900", "roles": ["passed"]}, {"value": "false", "roles": ["expectation", "passed"]}], [{"value": "Divisible by 400", "roles": ["scenario", "passed"]}, {"value": "2000", "roles": ["passed"]}, {"value": "true", "roles": ["expectation", "passed"]}]]
+rowResults: [{"rowIndex": 1, "passed": true, "displayName": "Divisible by 4"}, {"rowIndex": 2, "passed": true, "displayName": "Not divisible by 4"}, {"rowIndex": 3, "passed": true, "displayName": "Divisible by 100, not by 400"}, {"rowIndex": 4, "passed": true, "displayName": "Divisible by 400"}]

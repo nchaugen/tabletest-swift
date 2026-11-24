@@ -1,0 +1,7 @@
+methodName: "leapYear"
+slug: "leap-year-result-bundle-probe"
+title: "Leap year result bundle probe"
+description: "Skipped: Check leap years (Year = 2000). Test case cancelled: Skip this value-set case on purpose"
+headers: [{"value": "Scenario", "roles": ["scenario"]}, {"value": "Year", "roles": []}, {"value": "Leap?", "roles": ["expectation"]}]
+rows: [[{"value": "Check leap years", "roles": ["scenario", "failed"]}, {"value": !!set {? "2004" : null, ? "1900" : null, ? "2000" : null}, "roles": ["value-set", "failed"]}, {"value": "true", "roles": ["expectation", "failed"]}], [{"value": "Check leap years", "roles": ["scenario", "failed"]}, {"value": !!set {? "2004" : null}, "roles": ["value-set", "failed"]}, {"value": "false", "roles": ["expectation", "failed"]}]]
+rowResults: [{"rowIndex": 1, "passed": true, "displayName": "Check leap years (Year = 2004) [1.1]"}, {"rowIndex": 2, "passed": false, "displayName": "Check leap years (Year = 1900)", "errorMessage": "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → false\nleap → true"}, {"rowIndex": 4, "passed": false, "displayName": "Check leap years (Year = 2004) [2.1]", "errorMessage": "Expectation failed: Year(year).isLeap == leap\nYear(year).isLeap → true\nleap → false"}]

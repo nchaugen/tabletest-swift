@@ -1,0 +1,6 @@
+methodName: "keepsAnOpenedBottleFresh"
+slug: "keepsanopenedbottlefresh"
+title: "keepsAnOpenedBottleFresh"
+headers: [{"value": "Closure", "roles": []}, {"value": "Fresh days?", "roles": ["expectation"]}]
+rows: [[{"value": "cork", "roles": ["passed"]}, {"value": "3", "roles": ["expectation", "passed"]}], [{"value": "screw cap", "roles": ["passed"]}, {"value": "5", "roles": ["expectation", "passed"]}], [{"value": "glass", "roles": ["passed"]}, {"value": "5", "roles": ["expectation", "passed"]}]]
+rowResults: [{"rowIndex": 1, "passed": true, "displayName": "cork | 3"}, {"rowIndex": 2, "passed": true, "displayName": "screw cap | 5"}, {"rowIndex": 3, "passed": true, "displayName": "glass | 5"}]

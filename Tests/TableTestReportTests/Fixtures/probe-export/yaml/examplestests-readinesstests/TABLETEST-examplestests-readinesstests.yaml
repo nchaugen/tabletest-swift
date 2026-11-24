@@ -1,0 +1,4 @@
+className: "ExamplesTests.ReadinessTests"
+slug: "examplestests-readinesstests"
+title: "ReadinessTests"
+tableTests: [{"path": "TABLETEST-allowstheyearsitisready.yaml", "methodName": "allowsTheYearsItIsReady", "slug": "allowstheyearsitisready"}]

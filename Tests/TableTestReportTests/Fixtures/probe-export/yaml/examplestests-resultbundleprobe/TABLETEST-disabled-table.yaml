@@ -1,0 +1,7 @@
+methodName: "disabledTable"
+slug: "disabled-table"
+title: "Disabled table"
+description: "Skipped: 1. Test skipped: Disabled on purpose"
+headers: [{"value": "Value", "roles": []}]
+rows: [[{"value": "1", "roles": []}]]
+rowResults: []
