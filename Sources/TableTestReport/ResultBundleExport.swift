@@ -25,6 +25,7 @@ package enum ResultBundleExport {
             throw ExportError("No TableTest manifests found. Enable TABLETEST_REPORTING and include the companion tests.")
         }
         try ReportFiles.write(tables, devices: report.devices, to: staging)
+        try files.removeItem(at: attachments)
         try files.moveItem(at: staging, to: output)
     }
 
