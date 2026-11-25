@@ -22,6 +22,7 @@ package enum ResultBundleExport {
         let attachments = staging.appendingPathComponent("attachments", isDirectory: true)
         let groups = try results.exportManifests(to: attachments)
         let report = try results.tests()
+        let results = PrefetchedResults(results, report: report)
         let tables = try tables(in: groups, attachments: attachments, report: report, results: results)
         guard !tables.isEmpty else {
             throw ExportError("No TableTest manifests found. Enable TABLETEST_REPORTING and include the companion tests.")
