@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-25
+
 ### Added
 - A table takes the doc comment above its `@TableTest` function as its description in an exported report. A note about a skipped or unfinished case follows it.
 - A suite takes the doc comment above its type as its description in an exported report. The doc comment of an extension does not count.
