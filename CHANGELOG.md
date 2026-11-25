@@ -3,9 +3,9 @@
 ## [Unreleased]
 
 ### Added
-- A table takes the doc comment above its `@TableTest` function as its description in an exported report, as `@Description` does in TableTest for the JVM. A note about a skipped or unfinished case follows it.
-- An exported report groups the suites by the folders of their files below the test target, as a JVM report groups classes by package: a suite in `AppTests/Cellar/` has the class name `AppTests.Cellar.BottleTests`. `joined-results.json` lists its tables in that order.
+- A table takes the doc comment above its `@TableTest` function as its description in an exported report. A note about a skipped or unfinished case follows it.
 - A suite takes the doc comment above its type as its description in an exported report. The doc comment of an extension does not count.
+- An exported report groups the suites by the folders of their files below the test target: a suite in `AppTests/Cellar/` has the class name `AppTests.Cellar.BottleTests`. `joined-results.json` lists its tables in that order.
 
 ## [0.2.0] - 2026-11-24
 
