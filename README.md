@@ -688,20 +688,18 @@ outcomes, destinations, configurations, and attempts. The reporter renders
 separate table pages when outcomes span several runs.
 
 The report groups the suites by the folders of their files below the test
-target, as a JVM report groups classes by package. A file in
-`AppTests/Cellar/` puts its suite in a `Cellar` section, under the name the
-folder has. The exporter finds the test target's folder by its name, which is
+target. A file in `AppTests/Cellar/` puts its suite in a `Cellar` section,
+under the name the folder has. The exporter finds the test target's folder by its name, which is
 the module name in SwiftPM and in the Xcode templates. When no folder has that
 name, every suite is at the top level. A dot in a folder name becomes a hyphen.
 
 A suite takes its `@Suite` display name as its title, or else its type name.
-Suites and tables get the same slugs as in a JVM report: `YearTests` is
-`year-tests`, and `knowsALeapYear` is `knows-a-leap-year`.
+Suites and tables get slugs from their names: `YearTests` is `year-tests`, and
+`knowsALeapYear` is `knows-a-leap-year`.
 
 A table takes the doc comment above its `@TableTest` function as its
-description, without the `///` or `/** */` markers. It is the counterpart of
-`@Description` in TableTest for the JVM. A plain `//` comment is not a
-description. A suite takes the doc comment above its type in the same way. The
+description, without the `///` or `/** */` markers. A plain `//` comment is
+not a description. A suite takes the doc comment above its type in the same way. The
 doc comment of an extension is not a suite description, so a suite whose tables
 are all in extensions has none.
 
@@ -734,6 +732,8 @@ formats the same way in both. If you know the JVM version, these parts differ:
 | A table in an external `.table` file | `@TableTest(resource = …)` | not supported; a macro cannot read files |
 | The scenario as a parameter | `@Scenario` | not supported; the scenario only names the row |
 | Escape sequences | processed in Java, not in Kotlin raw strings | processed, except in a raw literal `#"""…"""#` |
+| A description in the report | `@Description` | the doc comment above the function or the suite type |
+| Sections of the report | the package of the test class | the folders of the test file below the test target |
 
 ## Contributing
 
