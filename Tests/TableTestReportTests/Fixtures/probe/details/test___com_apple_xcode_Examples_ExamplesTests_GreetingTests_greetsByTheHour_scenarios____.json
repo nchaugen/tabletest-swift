@@ -1,13 +1,13 @@
 {
   "arguments" : [
     {
-      "value" : "Morning"
+      "value" : "Afternoon"
     },
     {
       "value" : "No name"
     },
     {
-      "value" : "Afternoon"
+      "value" : "Morning"
     }
   ],
   "devices" : [
@@ -21,8 +21,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,0024 seconds",
-  "durationInSeconds" : 0.00242463747660319,
+  "duration" : "Average duration 0,0026 seconds",
+  "durationInSeconds" : 0.0026466846466064453,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -248,227 +248,10 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0025s",
-      "durationInSeconds" : 0.002460956573486328,
+      "duration" : "0,0027s",
+      "durationInSeconds" : 0.0026531219482421875,
       "name" : "Morning",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 3",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"No name\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"No name\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Name\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Hour\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "2 : \"Greeting?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 3 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/GreetingTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/GreetingTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 13",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 21",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : GreetingTests.swift:13:21",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"\"), location: ExamplesTests/GreetingTests.swift:13:21)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"22\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"22\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/GreetingTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/GreetingTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 13",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 28",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : GreetingTests.swift:13:28",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"22\"), location: ExamplesTests/GreetingTests.swift:13:28)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"Good evening\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"Good evening\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/GreetingTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/GreetingTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 13",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 35",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : GreetingTests.swift:13:35",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"Good evening\"), location: ExamplesTests/GreetingTests.swift:13:35)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 3 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 0 elements",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : No name",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,0024s",
-      "durationInSeconds" : 0.0023539066314697266,
-      "name" : "No name",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -682,10 +465,227 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0025s",
-      "durationInSeconds" : 0.0024590492248535156,
+      "duration" : "0,0027s",
+      "durationInSeconds" : 0.0026750564575195312,
       "name" : "Afternoon",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 3",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"No name\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"No name\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Name\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Hour\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "2 : \"Greeting?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 3 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/GreetingTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/GreetingTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 13",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 21",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : GreetingTests.swift:13:21",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"\"), location: ExamplesTests/GreetingTests.swift:13:21)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"22\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"22\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/GreetingTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/GreetingTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 13",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : GreetingTests.swift:13:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"22\"), location: ExamplesTests/GreetingTests.swift:13:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"Good evening\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"Good evening\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/GreetingTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/GreetingTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 13",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 35",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : GreetingTests.swift:13:35",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"Good evening\"), location: ExamplesTests/GreetingTests.swift:13:35)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 3 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 0 elements",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : No name",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,0026s",
+      "durationInSeconds" : 0.002611875534057617,
+      "name" : "No name",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
       "nodeType" : "Arguments",
       "result" : "Passed"
     }

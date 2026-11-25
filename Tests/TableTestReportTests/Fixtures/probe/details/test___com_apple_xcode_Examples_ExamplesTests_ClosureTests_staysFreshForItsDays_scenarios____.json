@@ -1,16 +1,16 @@
 {
   "arguments" : [
     {
-      "value" : "Screw cap, next morning"
-    },
-    {
-      "value" : "Cork on the fourth day"
+      "value" : "Cork on the third day"
     },
     {
       "value" : "Screw cap, late evening"
     },
     {
-      "value" : "Cork on the third day"
+      "value" : "Screw cap, next morning"
+    },
+    {
+      "value" : "Cork on the fourth day"
     }
   ],
   "devices" : [
@@ -24,8 +24,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,0023 seconds",
-  "durationInSeconds" : 0.0022500157356262207,
+  "duration" : "Average duration 0,0024 seconds",
+  "durationInSeconds" : 0.002373814582824707,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -302,8 +302,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0015s",
-      "durationInSeconds" : 0.0015439987182617188,
+      "duration" : "0,002s",
+      "durationInSeconds" : 0.0020291805267333984,
       "name" : "Cork on the third day",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
       "nodeType" : "Arguments",
@@ -570,10 +570,278 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0015s",
-      "durationInSeconds" : 0.0015070438385009766,
+      "duration" : "0,002s",
+      "durationInSeconds" : 0.001970052719116211,
       "name" : "Cork on the fourth day",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 4",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Screw cap, next morning\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Screw cap, next morning\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Closure\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Opened\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "2 : \"Checked\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "3 : \"Fresh?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 4 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"screw cap\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"screw cap\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 24",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 35",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ClosureTests.swift:24:35",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"screw cap\"), location: ExamplesTests/ClosureTests.swift:24:35)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2026-03-14\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2026-03-14\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 24",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 47",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ClosureTests.swift:24:47",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2026-03-14\"), location: ExamplesTests/ClosureTests.swift:24:47)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2026-03-19T09:00:00Z\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2026-03-19T09:00:00Z\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 24",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 60",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ClosureTests.swift:24:60",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"2026-03-19T09:00:00Z\"), location: ExamplesTests/ClosureTests.swift:24:60)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"false\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"false\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 24",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 88",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ClosureTests.swift:24:88",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "3 : Cell(value: TableTestParser.TableValue.string(\"false\"), location: ExamplesTests/ClosureTests.swift:24:88)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 4 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 0 elements",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Screw cap, next morning",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,0027s",
+      "durationInSeconds" : 0.0026679039001464844,
+      "name" : "Screw cap, next morning",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -839,277 +1107,9 @@
         }
       ],
       "duration" : "0,0028s",
-      "durationInSeconds" : 0.002827882766723633,
+      "durationInSeconds" : 0.0028281211853027344,
       "name" : "Screw cap, late evening",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 4",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"Screw cap, next morning\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"Screw cap, next morning\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Closure\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Opened\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "2 : \"Checked\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "3 : \"Fresh?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 4 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"screw cap\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"screw cap\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 24",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 35",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ClosureTests.swift:24:35",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"screw cap\"), location: ExamplesTests/ClosureTests.swift:24:35)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2026-03-14\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2026-03-14\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 24",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 47",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ClosureTests.swift:24:47",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2026-03-14\"), location: ExamplesTests/ClosureTests.swift:24:47)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2026-03-19T09:00:00Z\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2026-03-19T09:00:00Z\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 24",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 60",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ClosureTests.swift:24:60",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"2026-03-19T09:00:00Z\"), location: ExamplesTests/ClosureTests.swift:24:60)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"false\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"false\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ClosureTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 24",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 88",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ClosureTests.swift:24:88",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "3 : Cell(value: TableTestParser.TableValue.string(\"false\"), location: ExamplesTests/ClosureTests.swift:24:88)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 4 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 0 elements",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : Screw cap, next morning",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,0031s",
-      "durationInSeconds" : 0.0031211376190185547,
-      "name" : "Screw cap, next morning",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
       "nodeType" : "Arguments",
       "result" : "Passed"
     }

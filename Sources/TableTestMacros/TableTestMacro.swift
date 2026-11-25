@@ -101,7 +101,7 @@ public struct TableTestMacro: PeerMacro {
                     try TableTestReporting.recordManifest(
                     \(raw: indentingLinesAfterTheFirst(of: tableArguments, by: 8)),
                         methodName: \(StringLiteralExprSyntax(content: name.withoutBackticks)),
-                        title: \(raw: title)\(raw: descriptionArgument(of: declaration))
+                        title: \(raw: title)\(raw: descriptionArgument(of: declaration))\(raw: suiteDescriptionArgument(in: context))
                     )
                 }
                 #endif
@@ -148,6 +148,15 @@ public struct TableTestMacro: PeerMacro {
     private static func descriptionArgument(of declaration: some DeclSyntaxProtocol) -> String {
         guard let text = declaration.leadingTrivia.docCommentText else { return "" }
         return ",\n            description: \(StringLiteralExprSyntax(content: text))"
+    }
+
+    /// The `suiteDescription:` argument of the manifest call: the doc comment above the type that
+    /// holds the function. An extension's doc comment is about the extension, so it gives none.
+    private static func suiteDescriptionArgument(in context: some MacroExpansionContext) -> String {
+        guard let type = context.lexicalContext.first, !type.is(ExtensionDeclSyntax.self),
+              let text = type.leadingTrivia.docCommentText
+        else { return "" }
+        return ",\n            suiteDescription: \(StringLiteralExprSyntax(content: text))"
     }
 
     private static func typeName(for function: FunctionDeclSyntax, title: StringLiteralExprSyntax?) -> String {

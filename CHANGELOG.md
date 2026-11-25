@@ -4,6 +4,7 @@
 
 ### Added
 - A table takes the doc comment above its `@TableTest` function as its description in an exported report, as `@Description` does in TableTest for the JVM. A note about a skipped or unfinished case follows it.
+- A suite takes the doc comment above its type as its description in an exported report. The doc comment of an extension does not count.
 
 ## [0.2.0] - 2026-11-24
 

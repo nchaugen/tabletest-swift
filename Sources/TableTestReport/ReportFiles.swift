@@ -34,11 +34,14 @@ enum ReportFiles {
                     ]))
                 }
             }
-            try write([
-                ("className", .text(className)), ("slug", .text(suiteSlug)),
-                ("title", .text(suiteTitle)),
-                ("tableTests", .sequence(entries))
-            ], to: directory.appendingPathComponent("TABLETEST-\(suiteSlug).yaml"))
+            var suiteFields: [(String, YAMLValue)] = [
+                ("className", .text(className)), ("slug", .text(suiteSlug)), ("title", .text(suiteTitle))
+            ]
+            if let description = description(of: suites[suite, default: []]) {
+                suiteFields.append(("description", .text(description)))
+            }
+            suiteFields.append(("tableTests", .sequence(entries)))
+            try write(suiteFields, to: directory.appendingPathComponent("TABLETEST-\(suiteSlug).yaml"))
         }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
@@ -57,6 +60,11 @@ enum ReportFiles {
 
     private static func title(of suite: [String], in tables: [[TableAttempt]]) -> String? {
         tables.lazy.compactMap { $0.first?.suiteTitle }.first ?? suite.last
+    }
+
+    /// The doc comment of a suite, from the first of its tables that sits in the type itself.
+    private static func description(of tables: [[TableAttempt]]) -> String? {
+        tables.lazy.compactMap { $0.first?.manifest.suiteDescription }.first
     }
 
     private static func title(for attempt: TableAttempt, multiple: Bool, deviceNames: [String: [Device]]) -> String {

@@ -1,4 +1,5 @@
 className: "ExamplesTests.GreetingTests"
 slug: "greeting-tests"
 title: "GreetingTests"
+description: "Calls main-actor code from a table. The generated test runs on the main actor because the\nsuite is `@MainActor`."
 tableTests: [{"path": "TABLETEST-greets-by-the-hour.yaml", "methodName": "greetsByTheHour", "slug": "greets-by-the-hour"}]

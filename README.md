@@ -694,7 +694,9 @@ Suites and tables get the same slugs as in a JVM report: `YearTests` is
 A table takes the doc comment above its `@TableTest` function as its
 description, without the `///` or `/** */` markers. It is the counterpart of
 `@Description` in TableTest for the JVM. A plain `//` comment is not a
-description.
+description. A suite takes the doc comment above its type in the same way. The
+doc comment of an extension is not a suite description, so a suite whose tables
+are all in extensions has none.
 
 ```swift
 /// A year that 100 divides is a leap year only when 400 also divides it.

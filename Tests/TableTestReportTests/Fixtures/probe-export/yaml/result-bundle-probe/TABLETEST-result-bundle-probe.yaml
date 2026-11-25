@@ -1,4 +1,5 @@
 className: "ExamplesTests.ResultBundleProbe"
 slug: "result-bundle-probe"
 title: "Result bundle probe"
+description: "Tables that fail, skip and collide on purpose, for the export check."
 tableTests: [{"path": "TABLETEST-disabled-table.yaml", "methodName": "disabledTable", "slug": "disabled-table"}, {"path": "TABLETEST-leap-year-result-bundle-probe.yaml", "methodName": "leapYear", "slug": "leap-year-result-bundle-probe"}, {"path": "TABLETEST-names-collide-within-one-row.yaml", "methodName": "sameNameWithinRow", "slug": "names-collide-within-one-row"}]

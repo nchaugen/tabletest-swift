@@ -13,19 +13,23 @@ package struct ReportManifest: Codable, Equatable {
     package let title: String
     /// The doc comment above the `@TableTest` function, without its markers.
     package let description: String?
+    /// The doc comment above the type that holds the `@TableTest` function, without its markers.
+    package let suiteDescription: String?
     /// The name of the Swift Testing function that runs the cases, as in `scenarios(_:)`.
     package let testFunction: String
     package let headers: [ReportCell]
     package let rows: [ReportRow]
 
     package init(
-        suite: [String], methodName: String, title: String, description: String? = nil, testFunction: String,
+        suite: [String], methodName: String, title: String, description: String? = nil,
+        suiteDescription: String? = nil, testFunction: String,
         headers: [ReportCell], rows: [ReportRow]
     ) {
         self.suite = suite
         self.methodName = methodName
         self.title = title
         self.description = description
+        self.suiteDescription = suiteDescription
         self.testFunction = testFunction
         self.headers = headers
         self.rows = rows

@@ -87,4 +87,16 @@ struct TableTestReportingTests {
 
         #expect(manifest.description == "Every year of the table is a leap year.")
     }
+
+    @Test("Keeps the suite description that the doc comment of the type gives")
+    func keepsTheSuiteDescription() throws {
+        let manifest = try TableTestReporting.manifest(
+            table: "Year\n2004",
+            parameters: [TableParameter(Int.self)],
+            source: Self.source, suite: ["Module", "YearTests"], methodName: "readsYears", title: "readsYears",
+            suiteDescription: "Leap years by the Gregorian rules."
+        )
+
+        #expect(manifest.suiteDescription == "Leap years by the Gregorian rules.")
+    }
 }
