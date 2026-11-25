@@ -18,8 +18,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,0022 seconds",
-  "durationInSeconds" : 0.0022420883178710938,
+  "duration" : "Average duration 0,00018 seconds",
+  "durationInSeconds" : 0.00017952919006347656,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -187,8 +187,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0022s",
-      "durationInSeconds" : 0.0022192001342773438,
+      "duration" : "0,000055s",
+      "durationInSeconds" : 5.507469177246094e-05,
       "name" : "2023 | false",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
       "nodeType" : "Arguments",
@@ -346,8 +346,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0023s",
-      "durationInSeconds" : 0.0022649765014648438,
+      "duration" : "0,0003s",
+      "durationInSeconds" : 0.0003039836883544922,
       "name" : "2024 | true",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
       "nodeType" : "Arguments",

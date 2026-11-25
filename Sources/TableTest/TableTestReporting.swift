@@ -6,12 +6,14 @@ import Testing
 public enum TableTestReporting {
     /// Records the source table and planned cases without running the test body or its traits.
     public static func recordManifest(
-        table: String, parameters: [TableParameter], source: TableSource, methodName: String, title: String
+        table: String, parameters: [TableParameter], source: TableSource, methodName: String, title: String,
+        description: String? = nil
     ) throws {
         let test = try #require(Test.current)
         let manifest = try manifest(
             table: table, parameters: parameters, source: source,
-            suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2), methodName: methodName, title: title
+            suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2), methodName: methodName, title: title,
+            description: description
         )
         let data = try JSONEncoder().encode(manifest)
         Attachment.record(String(decoding: data, as: UTF8.self), named: "tabletest-manifest.json")
@@ -21,7 +23,7 @@ public enum TableTestReporting {
     /// row that does not expand has its error in place of its cases.
     static func manifest(
         table: String, parameters: [TableParameter], source: TableSource,
-        suite: [String], methodName: String, title: String
+        suite: [String], methodName: String, title: String, description: String? = nil
     ) throws -> ReportManifest {
         let parsed = try TableParser.parse(table)
         let layout = try parsed.columnLayout(parameterCount: parameters.count)
@@ -58,7 +60,7 @@ public enum TableTestReporting {
             })
         }
         return ReportManifest(
-            suite: suite, methodName: methodName, title: title, testFunction: ReportManifest.tableTestFunction,
+            suite: suite, methodName: methodName, title: title, description: description, testFunction: ReportManifest.tableTestFunction,
             headers: zip(parsed.headers, columnRoles).map { ReportCell(value: $0, roles: $1) }, rows: rows
         )
     }

@@ -55,6 +55,8 @@ let package = Package(
             name: "TableTestMacrosTests",
             dependencies: [
                 "TableTestMacros",
+                "TableTestSyntax",
+                .product(name: "SwiftParser", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax"),
             ]
         ),

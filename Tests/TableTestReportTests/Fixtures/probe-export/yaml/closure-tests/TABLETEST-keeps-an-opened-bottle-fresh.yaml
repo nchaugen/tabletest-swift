@@ -1,6 +1,7 @@
 methodName: "keepsAnOpenedBottleFresh"
 slug: "keeps-an-opened-bottle-fresh"
 title: "keepsAnOpenedBottleFresh"
+description: "A cell names an enum case by its raw value, when the enum has text raw values."
 headers: [{"value": "Closure", "roles": []}, {"value": "Fresh days?", "roles": ["expectation"]}]
 rows: [[{"value": "cork", "roles": ["passed"]}, {"value": "3", "roles": ["expectation", "passed"]}], [{"value": "screw cap", "roles": ["passed"]}, {"value": "5", "roles": ["expectation", "passed"]}], [{"value": "glass", "roles": ["passed"]}, {"value": "5", "roles": ["expectation", "passed"]}]]
 rowResults: [{"rowIndex": 1, "passed": true, "displayName": "cork | 3"}, {"rowIndex": 2, "passed": true, "displayName": "screw cap | 5"}, {"rowIndex": 3, "passed": true, "displayName": "glass | 5"}]

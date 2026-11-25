@@ -33,6 +33,16 @@ struct LeapYearTests {
         #expect(Year(year).isLeap == leap)
     }
 
+    /// A year that 100 divides is a leap year only when 400 also divides it.
+    @TableTest("""
+        Scenario       | Year | Leap?
+        Century        | 1900 | false
+        Fourth century | 2000 | true
+        """)
+    func knowsACenturyLeapYear(year: Int, leap: Bool) {
+        #expect(Year(year).isLeap == leap)
+    }
+
     @TableTest("Leap years by rule", .tags(.calendar), table: """
         Year | Leap?
         2004 | true

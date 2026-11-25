@@ -691,6 +691,23 @@ A suite takes its `@Suite` display name as its title, or else its type name.
 Suites and tables get the same slugs as in a JVM report: `YearTests` is
 `year-tests`, and `knowsALeapYear` is `knows-a-leap-year`.
 
+A table takes the doc comment above its `@TableTest` function as its
+description, without the `///` or `/** */` markers. It is the counterpart of
+`@Description` in TableTest for the JVM. A plain `//` comment is not a
+description.
+
+```swift
+/// A year that 100 divides is a leap year only when 400 also divides it.
+@TableTest("""
+    Scenario       | Year | Leap?
+    Century        | 1900 | false
+    Fourth century | 2000 | true
+    """)
+func knowsACenturyLeapYear(year: Int, leap: Bool) {
+    #expect(Year(year).isLeap == leap)
+}
+```
+
 [Xcode reporting example](https://github.com/nchaugen/tabletest-swift-examples#export-a-tabletest-report-from-an-xcode-result-bundle)
 
 ## Differences from TableTest for the JVM

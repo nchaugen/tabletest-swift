@@ -101,7 +101,7 @@ public struct TableTestMacro: PeerMacro {
                     try TableTestReporting.recordManifest(
                     \(raw: indentingLinesAfterTheFirst(of: tableArguments, by: 8)),
                         methodName: \(StringLiteralExprSyntax(content: name.withoutBackticks)),
-                        title: \(raw: title)
+                        title: \(raw: title)\(raw: descriptionArgument(of: declaration))
                     )
                 }
                 #endif
@@ -143,6 +143,13 @@ public struct TableTestMacro: PeerMacro {
 
     /// The test's title as a raw identifier, so Xcode shows the title. Else the function's own
     /// name; for a static function, which cannot share its name with a type, `__tabletest_<name>`.
+    /// The `description:` argument of the manifest call: the doc comment above the function, or
+    /// nothing when it has none.
+    private static func descriptionArgument(of declaration: some DeclSyntaxProtocol) -> String {
+        guard let text = declaration.leadingTrivia.docCommentText else { return "" }
+        return ",\n            description: \(StringLiteralExprSyntax(content: text))"
+    }
+
     private static func typeName(for function: FunctionDeclSyntax, title: StringLiteralExprSyntax?) -> String {
         let name = function.name.text
         if function.isStatic {

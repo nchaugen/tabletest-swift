@@ -1,25 +1,25 @@
 {
   "arguments" : [
     {
-      "value" : "After the span"
-    },
-    {
       "value" : "Ready either way (Readiness = now)"
     },
     {
       "value" : "Inside the span"
     },
     {
-      "value" : "Ready now"
-    },
-    {
-      "value" : "Ready either way (Readiness = between(2025, 2030))"
+      "value" : "From its first"
     },
     {
       "value" : "Before its first"
     },
     {
-      "value" : "From its first"
+      "value" : "Ready now"
+    },
+    {
+      "value" : "After the span"
+    },
+    {
+      "value" : "Ready either way (Readiness = between(2025, 2030))"
     }
   ],
   "devices" : [
@@ -33,8 +33,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,00055 seconds",
-  "durationInSeconds" : 0.0005491461072649274,
+  "duration" : "Average duration 0,00054 seconds",
+  "durationInSeconds" : 0.0005401543208530971,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -50,440 +50,6 @@
   ],
   "testResult" : "Passed",
   "testRuns" : [
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 2",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"Before its first\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"Before its first\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Readiness\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Year\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "2 : \"Drink?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 3 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"from(year: 2028)\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"from(year: 2028)\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 11",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 28",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ReadinessTests.swift:11:28",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"from(year: 2028)\"), location: ExamplesTests/ReadinessTests.swift:11:28)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2026\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2026\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 11",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 59",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ReadinessTests.swift:11:59",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2026\"), location: ExamplesTests/ReadinessTests.swift:11:59)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"false\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"false\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 11",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 66",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ReadinessTests.swift:11:66",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"false\"), location: ExamplesTests/ReadinessTests.swift:11:66)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 3 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 0 elements",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : Before its first",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,00033s",
-      "durationInSeconds" : 0.00033283233642578125,
-      "name" : "Before its first",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 3",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "some : \"From its first\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : \"From its first\"",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Readiness\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Year\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "2 : \"Drink?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 3 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"from(year: 2028)\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"from(year: 2028)\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 12",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 28",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ReadinessTests.swift:12:28",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"from(year: 2028)\"), location: ExamplesTests/ReadinessTests.swift:12:28)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2028\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2028\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 12",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 59",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ReadinessTests.swift:12:59",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2028\"), location: ExamplesTests/ReadinessTests.swift:12:59)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"true\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"true\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 12",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 66",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ReadinessTests.swift:12:66",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/ReadinessTests.swift:12:66)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 3 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 0 elements",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : From its first",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,00041s",
-      "durationInSeconds" : 0.000408172607421875,
-      "name" : "From its first",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
     {
       "children" : [
         {
@@ -694,10 +260,227 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,00046s",
-      "durationInSeconds" : 0.0004589557647705078,
+      "duration" : "0,00023s",
+      "durationInSeconds" : 0.00022983551025390625,
       "name" : "Ready now",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 2",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"Before its first\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"Before its first\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Readiness\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "2 : \"Drink?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 3 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"from(year: 2028)\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"from(year: 2028)\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 11",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ReadinessTests.swift:11:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"from(year: 2028)\"), location: ExamplesTests/ReadinessTests.swift:11:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2026\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2026\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 11",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 59",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ReadinessTests.swift:11:59",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2026\"), location: ExamplesTests/ReadinessTests.swift:11:59)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"false\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"false\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 11",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 66",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ReadinessTests.swift:11:66",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"false\"), location: ExamplesTests/ReadinessTests.swift:11:66)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 3 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 0 elements",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : Before its first",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,00059s",
+      "durationInSeconds" : 0.0005931854248046875,
+      "name" : "Before its first",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -911,10 +694,227 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0004s",
-      "durationInSeconds" : 0.00039696693420410156,
+      "duration" : "0,00026s",
+      "durationInSeconds" : 0.0002620220184326172,
       "name" : "Inside the span",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=0902273898c615b9a33636abdae05602410f12cc0d35e663887e9cbb006d4208",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 3",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "some : \"From its first\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : \"From its first\"",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Readiness\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Year\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "2 : \"Drink?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 3 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"from(year: 2028)\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"from(year: 2028)\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 12",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 28",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ReadinessTests.swift:12:28",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.string(\"from(year: 2028)\"), location: ExamplesTests/ReadinessTests.swift:12:28)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2028\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2028\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 12",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 59",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ReadinessTests.swift:12:59",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2028\"), location: ExamplesTests/ReadinessTests.swift:12:59)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"true\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"true\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ReadinessTests.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 12",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 66",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ReadinessTests.swift:12:66",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "2 : Cell(value: TableTestParser.TableValue.string(\"true\"), location: ExamplesTests/ReadinessTests.swift:12:66)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 3 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 0 elements",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : From its first",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,00051s",
+      "durationInSeconds" : 0.0005059242248535156,
+      "name" : "From its first",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
       "nodeType" : "Arguments",
       "result" : "Passed"
     },
@@ -1128,8 +1128,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,00012s",
-      "durationInSeconds" : 0.00011897087097167969,
+      "duration" : "0,00025s",
+      "durationInSeconds" : 0.0002529621124267578,
       "name" : "After the span",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=391834dc58548d74b2bdf0417c4e089f3d8be77f772dfbbb807ddb543cedc48b",
       "nodeType" : "Arguments",
@@ -1352,8 +1352,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,00012s",
-      "durationInSeconds" : 0.00011920928955078125,
+      "duration" : "0,00013s",
+      "durationInSeconds" : 0.00013303756713867188,
       "name" : "Ready either way (Readiness = between(2025, 2030))",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=553ebf728dc0653dc2c591bb13c321d84cb6c71f662f7a7a10dca39054d4fde8",
       "nodeType" : "Arguments",
@@ -1576,8 +1576,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,002s",
-      "durationInSeconds" : 0.0020089149475097656,
+      "duration" : "0,0018s",
+      "durationInSeconds" : 0.0018041133880615234,
       "name" : "Ready either way (Readiness = now)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=0650c33b9ac0166e8bee9c8b5dc0f892dec72eadf224a9fbfb7edbf2cd5640ca",
       "nodeType" : "Arguments",

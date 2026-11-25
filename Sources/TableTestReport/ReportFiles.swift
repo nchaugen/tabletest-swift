@@ -98,7 +98,9 @@ enum ReportFiles {
         var fields: [(String, YAMLValue)] = [
             ("methodName", .text(manifest.methodName)), ("slug", .text(slug)), ("title", .text(title))
         ]
-        if !notes.isEmpty { fields.append(("description", .text(notes.joined(separator: "\n")))) }
+        let description = [manifest.description, notes.isEmpty ? nil : notes.joined(separator: "\n")]
+            .compactMap { $0 }.joined(separator: "\n\n")
+        if !description.isEmpty { fields.append(("description", .text(description))) }
         fields.append(("headers", .sequence(manifest.headers.map { cell($0) })))
         fields.append(("rows", .sequence(rows)))
         fields.append(("rowResults", .sequence(completed)))

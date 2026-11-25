@@ -106,6 +106,59 @@ struct ExpansionTests {
         )
     }
 
+    @Test("Passes the doc comment of the function as the description")
+    func passesTheDocComment() {
+        assertTableTestExpansion(
+            """
+            struct YearTests {
+                /// Divisible by 4, except by 100,
+                /// unless by 400.
+                @TableTest(\"\"\"
+                    Year | Leap?
+                    2004 | true
+                    \"\"\")
+                static func knowsALeapYear(year: Int, leap: Bool) {}
+            }
+            """,
+            expandedSource: #"""
+            struct YearTests {
+                /// Divisible by 4, except by 100,
+                /// unless by 400.
+                static func knowsALeapYear(year: Int, leap: Bool) {}
+
+                struct __tabletest_knowsALeapYear {
+                    #if TABLETEST_REPORTING
+                    @Test("TableTest manifest")
+                    func tableTestManifest() throws {
+                        try TableTestReporting.recordManifest(
+                            table: "Year | Leap?\n2004 | true",
+                            parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                            source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 4, column: 16, indentation: 8, isMultiline: true),
+                            methodName: "knowsALeapYear",
+                            title: "knowsALeapYear",
+                            description: "Divisible by 4, except by 100,\nunless by 400."
+                        )
+                    }
+                    #endif
+
+                    @Test("knowsALeapYear", arguments: try TableTestRows.make(
+                    table: "Year | Leap?\n2004 | true",
+                    parameters: [TableParameter((Int).self), TableParameter((Bool).self)],
+                    source: TableSource(fileID: "TestModule/test.swift", filePath: "test.swift", line: 4, column: 16, indentation: 8, isMultiline: true)
+                    ))
+                    func scenarios(_ row: TableTestRow) throws {
+                        do throws(TableCellError) {
+                            try YearTests.knowsALeapYear(year: row.decode(0, as: (Int).self), leap: row.decode(1, as: (Bool).self))
+                        } catch {
+                            Issue.record(error, sourceLocation: error.sourceLocation)
+                        }
+                    }
+                }
+            }
+            """#
+        )
+    }
+
     @Test("Names the nested test type after the title")
     func namesTheTypeAfterTheTitle() {
         assertTableTestExpansion(

@@ -75,4 +75,16 @@ struct TableTestReportingTests {
         #expect(manifest.rows.map(\.cases) == [[ReportCase(number: 1, displayName: "2004")], []])
         #expect(manifest.rows.map { $0.expansionError != nil } == [false, true])
     }
+
+    @Test("Keeps the description that the doc comment of the function gives")
+    func keepsTheDescription() throws {
+        let manifest = try TableTestReporting.manifest(
+            table: "Year\n2004",
+            parameters: [TableParameter(Int.self)],
+            source: Self.source, suite: ["Module", "YearTests"], methodName: "readsYears", title: "readsYears",
+            description: "Every year of the table is a leap year."
+        )
+
+        #expect(manifest.description == "Every year of the table is a leap year.")
+    }
 }
