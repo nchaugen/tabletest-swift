@@ -8,8 +8,9 @@ struct ExportError: LocalizedError {
     }
 }
 
-/// The parts of a result bundle that the export reads.
-protocol TestResults {
+/// The parts of a result bundle that the export reads. The export reads test details from
+/// several threads at once.
+protocol TestResults: Sendable {
     /// Writes the TableTest manifests of the bundle to the directory, and lists them by test.
     func exportManifests(to directory: URL) throws -> [AttachmentGroup]
     /// The tree of tests, with the destinations and configurations of the run.
