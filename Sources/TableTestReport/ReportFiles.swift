@@ -62,7 +62,9 @@ enum ReportFiles {
     /// types. The reporter makes a level of each.
     private static func reportPath(of attempt: TableAttempt) -> [String] {
         let suite = attempt.manifest.suite
-        return Array(suite.prefix(1)) + attempt.manifest.folders + suite.dropFirst()
+        let module = Array(suite.prefix(1))
+        let types = Array(suite.dropFirst())
+        return module + attempt.manifest.folders + types
     }
 
     private static func title(of suite: [String], in tables: [[TableAttempt]]) -> String? {
