@@ -5,70 +5,10 @@
         "configurationName" : "Test Scheme Action",
         "deviceId" : "00000000-0000000000000001",
         "deviceName" : "My Mac",
-        "exportedFileName" : "1DFCC879-D90D-4A0A-8064-4C7288099EDC.json",
+        "exportedFileName" : "477156FB-258B-4CC5-9F1D-67C488B0F404.json",
         "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_C748EE31-89A7-4260-8833-FA86D63A1983.json",
-        "timestamp" : 1795643389.819
-      }
-    ],
-    "testIdentifier" : "GreetingTests/greetsByTheHour/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/tableTestManifest()"
-  },
-  {
-    "attachments" : [
-      {
-        "configurationName" : "Test Scheme Action",
-        "deviceId" : "00000000-0000000000000001",
-        "deviceName" : "My Mac",
-        "exportedFileName" : "86C0307F-4E34-40B4-BFDE-EF268C868A39.json",
-        "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_7CFC68BB-0C81-4CD6-88CE-2C3628E28C2C.json",
-        "timestamp" : 1795643389.818
-      }
-    ],
-    "testIdentifier" : "YearTests/`Leap years without a scenario column`/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/tableTestManifest()"
-  },
-  {
-    "attachments" : [
-      {
-        "configurationName" : "Test Scheme Action",
-        "deviceId" : "00000000-0000000000000001",
-        "deviceName" : "My Mac",
-        "exportedFileName" : "0DD093B6-38FD-43BF-956D-93BDD6418A14.json",
-        "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_7BB28540-7A7D-4243-9A41-E404B0D77FD4.json",
-        "timestamp" : 1795643389.821
-      }
-    ],
-    "testIdentifier" : "YearTests/knowsALeapYear/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/tableTestManifest()"
-  },
-  {
-    "attachments" : [
-      {
-        "configurationName" : "Test Scheme Action",
-        "deviceId" : "00000000-0000000000000001",
-        "deviceName" : "My Mac",
-        "exportedFileName" : "FFFF0C6B-456B-4050-935F-38C637919269.json",
-        "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_32E4005D-A4AE-4A9F-AD66-15A0043EDD14.json",
-        "timestamp" : 1795643389.819
-      }
-    ],
-    "testIdentifier" : "YearTests/knowsALeapYearForEachExample/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/tableTestManifest()"
-  },
-  {
-    "attachments" : [
-      {
-        "configurationName" : "Test Scheme Action",
-        "deviceId" : "00000000-0000000000000001",
-        "deviceName" : "My Mac",
-        "exportedFileName" : "2A79883C-BD6B-49C6-B949-1BBAD3540E9D.json",
-        "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_0DA1DC2D-67B8-4320-A0DC-59326BC896D0.json",
-        "timestamp" : 1795643389.819
+        "suggestedHumanReadableName" : "tabletest-manifest_0_0607CF76-24F2-44ED-ACBA-5480CA22C6E7.json",
+        "timestamp" : 1795643880.418
       }
     ],
     "testIdentifier" : "ReadinessTests/allowsTheYearsItIsReady/tableTestManifest()",
@@ -80,14 +20,14 @@
         "configurationName" : "Test Scheme Action",
         "deviceId" : "00000000-0000000000000001",
         "deviceName" : "My Mac",
-        "exportedFileName" : "4AF1F18C-06B9-4CFC-8177-A8C8D14A5138.json",
+        "exportedFileName" : "7C2A77EA-9EAB-40CC-B08C-A27615757989.json",
         "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_0028D8E7-07E7-4547-AF10-3E85CDD39BE8.json",
-        "timestamp" : 1795643389.818
+        "suggestedHumanReadableName" : "tabletest-manifest_0_3304EC34-0183-46DA-8F80-F5DF4539C001.json",
+        "timestamp" : 1795643880.425
       }
     ],
-    "testIdentifier" : "ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()"
+    "testIdentifier" : "ResultBundleProbe/`Leap year result bundle probe`/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/tableTestManifest()"
   },
   {
     "attachments" : [
@@ -95,40 +35,10 @@
         "configurationName" : "Test Scheme Action",
         "deviceId" : "00000000-0000000000000001",
         "deviceName" : "My Mac",
-        "exportedFileName" : "C6899371-2805-4724-9F00-277C30DB2DAF.json",
+        "exportedFileName" : "28C890BB-E2ED-4361-A826-ED7C6B48F3CA.json",
         "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_E8DC2479-8DA3-429F-839D-B57FCC3433E4.json",
-        "timestamp" : 1795643389.821
-      }
-    ],
-    "testIdentifier" : "ClosureTests/staysFreshForItsDays/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/tableTestManifest()"
-  },
-  {
-    "attachments" : [
-      {
-        "configurationName" : "Test Scheme Action",
-        "deviceId" : "00000000-0000000000000001",
-        "deviceName" : "My Mac",
-        "exportedFileName" : "6E312F4B-489B-49FF-8ABC-C6A66F43FFEC.json",
-        "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_EEC64B46-E806-4064-A153-CC3BA2226930.json",
-        "timestamp" : 1795643389.818
-      }
-    ],
-    "testIdentifier" : "ResultBundleProbe/`Disabled table`/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/tableTestManifest()"
-  },
-  {
-    "attachments" : [
-      {
-        "configurationName" : "Test Scheme Action",
-        "deviceId" : "00000000-0000000000000001",
-        "deviceName" : "My Mac",
-        "exportedFileName" : "5A1FF266-477B-4047-866C-807212DDE0B2.json",
-        "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_01E51648-2D4E-4133-A6DF-21BC972AD2A8.json",
-        "timestamp" : 1795643389.819
+        "suggestedHumanReadableName" : "tabletest-manifest_0_463C7584-C288-48D8-89E6-5C1C9920EA6E.json",
+        "timestamp" : 1795643880.418
       }
     ],
     "testIdentifier" : "ResultBundleProbe/`Names collide within one row`/tableTestManifest()",
@@ -140,13 +50,103 @@
         "configurationName" : "Test Scheme Action",
         "deviceId" : "00000000-0000000000000001",
         "deviceName" : "My Mac",
-        "exportedFileName" : "20B10043-1BC0-4593-AD8D-30D41DF51725.json",
+        "exportedFileName" : "0DE378B9-B26D-48DA-90A9-D774B69AC10E.json",
         "isAssociatedWithFailure" : false,
-        "suggestedHumanReadableName" : "tabletest-manifest_0_FA8A3188-3238-4E4D-9CAD-11CD21DEAF82.json",
-        "timestamp" : 1795643389.819
+        "suggestedHumanReadableName" : "tabletest-manifest_0_24223A1B-49D9-43D0-A2E8-FB27227F7B74.json",
+        "timestamp" : 1795643880.418
       }
     ],
-    "testIdentifier" : "ResultBundleProbe/`Leap year result bundle probe`/tableTestManifest()",
-    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/tableTestManifest()"
+    "testIdentifier" : "ResultBundleProbe/`Disabled table`/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Disabled%20table%60/tableTestManifest()"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "00000000-0000000000000001",
+        "deviceName" : "My Mac",
+        "exportedFileName" : "B8AA447B-BF55-462E-8C14-15D5D967FACB.json",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "tabletest-manifest_0_2D532D69-2F29-40F3-8843-53663E5EF7DD.json",
+        "timestamp" : 1795643880.411
+      }
+    ],
+    "testIdentifier" : "YearTests/knowsALeapYearForEachExample/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYearForEachExample/tableTestManifest()"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "00000000-0000000000000001",
+        "deviceName" : "My Mac",
+        "exportedFileName" : "4EEF9E9A-13CB-4D46-9E23-4618F30AA160.json",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "tabletest-manifest_0_5166FC18-E8D2-451C-A74C-39B3A6AD2EC8.json",
+        "timestamp" : 1795643880.411
+      }
+    ],
+    "testIdentifier" : "YearTests/`Leap years without a scenario column`/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/tableTestManifest()"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "00000000-0000000000000001",
+        "deviceName" : "My Mac",
+        "exportedFileName" : "630961A6-A275-430B-8642-0271F5BE9B51.json",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "tabletest-manifest_0_BFB38271-05A8-4C54-BCB8-7F8165E2B230.json",
+        "timestamp" : 1795643880.418
+      }
+    ],
+    "testIdentifier" : "YearTests/knowsALeapYear/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/knowsALeapYear/tableTestManifest()"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "00000000-0000000000000001",
+        "deviceName" : "My Mac",
+        "exportedFileName" : "4490C42B-399E-4206-891D-C9200E5805E6.json",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "tabletest-manifest_0_CE18911C-5764-481C-B2D3-A65F049DBBF3.json",
+        "timestamp" : 1795643880.411
+      }
+    ],
+    "testIdentifier" : "ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/keepsAnOpenedBottleFresh/tableTestManifest()"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "00000000-0000000000000001",
+        "deviceName" : "My Mac",
+        "exportedFileName" : "50AFA724-F6CE-4D2B-9995-13B8C8F57958.json",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "tabletest-manifest_0_B9F28F86-9A15-4FEB-A751-6D9C7BD424E0.json",
+        "timestamp" : 1795643880.411
+      }
+    ],
+    "testIdentifier" : "ClosureTests/staysFreshForItsDays/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ClosureTests/staysFreshForItsDays/tableTestManifest()"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "00000000-0000000000000001",
+        "deviceName" : "My Mac",
+        "exportedFileName" : "8941C8FE-5E4D-4374-ADC3-0736061788EA.json",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "tabletest-manifest_0_E56F633E-2860-496D-B1FC-0819D09BECA6.json",
+        "timestamp" : 1795643880.418
+      }
+    ],
+    "testIdentifier" : "GreetingTests/greetsByTheHour/tableTestManifest()",
+    "testIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/tableTestManifest()"
   }
 ]

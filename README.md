@@ -687,6 +687,13 @@ the reporter's YAML and a `joined-results.json` file with the case names,
 outcomes, destinations, configurations, and attempts. The reporter renders
 separate table pages when outcomes span several runs.
 
+The report groups the suites by the folders of their files below the test
+target, as a JVM report groups classes by package. A file in
+`AppTests/Cellar/` puts its suite in a `Cellar` section, under the name the
+folder has. The exporter finds the test target's folder by its name, which is
+the module name in SwiftPM and in the Xcode templates. When no folder has that
+name, every suite is at the top level. A dot in a folder name becomes a hyphen.
+
 A suite takes its `@Suite` display name as its title, or else its type name.
 Suites and tables get the same slugs as in a JVM report: `YearTests` is
 `year-tests`, and `knowsALeapYear` is `knows-a-leap-year`.

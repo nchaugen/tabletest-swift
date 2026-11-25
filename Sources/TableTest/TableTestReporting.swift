@@ -12,18 +12,29 @@ public enum TableTestReporting {
         let test = try #require(Test.current)
         let manifest = try manifest(
             table: table, parameters: parameters, source: source,
-            suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2), methodName: methodName, title: title,
+            suite: [test.id.moduleName] + test.id.nameComponents.dropLast(2),
+            folders: folders(ofFile: source.filePath, module: test.id.moduleName), methodName: methodName, title: title,
             description: description, suiteDescription: suiteDescription
         )
         let data = try JSONEncoder().encode(manifest)
         Attachment.record(String(decoding: data, as: UTF8.self), named: "tabletest-manifest.json")
     }
 
+    /// The folders between the test target's folder and the file: those after the last folder
+    /// that has the module's name, which SwiftPM and the Xcode templates give the target's folder.
+    /// None when no folder has that name. A dot in a folder name would part it into two report
+    /// levels, so it becomes a hyphen.
+    static func folders(ofFile filePath: String, module: String) -> [String] {
+        let folders = filePath.split(separator: "/").dropLast()
+        guard let target = folders.lastIndex(where: { $0 == module }) else { return [] }
+        return folders[(target + 1)...].map { $0.replacingOccurrences(of: ".", with: "-") }
+    }
+
     /// The manifest of a table: its cells with their roles, and the planned cases of each row. A
     /// row that does not expand has its error in place of its cases.
     static func manifest(
         table: String, parameters: [TableParameter], source: TableSource,
-        suite: [String], methodName: String, title: String, description: String? = nil,
+        suite: [String], folders: [String] = [], methodName: String, title: String, description: String? = nil,
         suiteDescription: String? = nil
     ) throws -> ReportManifest {
         let parsed = try TableParser.parse(table)
@@ -61,7 +72,7 @@ public enum TableTestReporting {
             })
         }
         return ReportManifest(
-            suite: suite, methodName: methodName, title: title, description: description,
+            suite: suite, folders: folders, methodName: methodName, title: title, description: description,
             suiteDescription: suiteDescription, testFunction: ReportManifest.tableTestFunction,
             headers: zip(parsed.headers, columnRoles).map { ReportCell(value: $0, roles: $1) }, rows: rows
         )

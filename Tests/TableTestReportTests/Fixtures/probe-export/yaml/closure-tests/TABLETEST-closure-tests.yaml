@@ -1,4 +1,4 @@
-className: "ExamplesTests.ClosureTests"
+className: "ExamplesTests.Cellar.ClosureTests"
 slug: "closure-tests"
 title: "ClosureTests"
 tableTests: [{"path": "TABLETEST-keeps-an-opened-bottle-fresh.yaml", "methodName": "keepsAnOpenedBottleFresh", "slug": "keeps-an-opened-bottle-fresh"}, {"path": "TABLETEST-stays-fresh-for-its-days.yaml", "methodName": "staysFreshForItsDays", "slug": "stays-fresh-for-its-days"}]

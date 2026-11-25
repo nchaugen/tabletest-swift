@@ -1,10 +1,10 @@
 {
   "arguments" : [
     {
-      "value" : "[a, b] | 2 [1.1]"
+      "value" : "[a, b] | 2 [1.2]"
     },
     {
-      "value" : "[a, b] | 2 [1.2]"
+      "value" : "[a, b] | 2 [1.1]"
     }
   ],
   "devices" : [
@@ -18,8 +18,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,0013 seconds",
-  "durationInSeconds" : 0.0012754201889038086,
+  "duration" : "Average duration 0,007 seconds",
+  "durationInSeconds" : 0.006982088088989258,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -35,198 +35,6 @@
   ],
   "testResult" : "Failed",
   "testRuns" : [
-    {
-      "children" : [
-        {
-          "children" : [
-            {
-              "children" : [
-                {
-                  "details" : "Swift.Int",
-                  "name" : "index : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Int",
-                  "name" : "caseNumber : 1",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "details" : "Swift.Optional<Swift.String>",
-                  "name" : "scenario : nil",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Values\"",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "details" : "Swift.String",
-                      "name" : "1 : \"Count?\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "headers : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "children" : [
-                                {
-                                  "children" : [
-                                    {
-                                      "details" : "Swift.String",
-                                      "name" : "string : \"a\"",
-                                      "nodeType" : "Test Value"
-                                    }
-                                  ],
-                                  "details" : "TableTestParser.TableValue",
-                                  "name" : "0 : .string(\"a\")",
-                                  "nodeType" : "Test Value"
-                                },
-                                {
-                                  "children" : [
-                                    {
-                                      "details" : "Swift.String",
-                                      "name" : "string : \"b\"",
-                                      "nodeType" : "Test Value"
-                                    }
-                                  ],
-                                  "details" : "TableTestParser.TableValue",
-                                  "name" : "1 : .string(\"b\")",
-                                  "nodeType" : "Test Value"
-                                }
-                              ],
-                              "details" : "Swift.Array<TableTestParser.TableValue>",
-                              "name" : "list : 2 elements",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .list([TableTestParser.TableValue.string(\"a\"), TableTestParser.TableValue.string(\"b\")])",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 26",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 9",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ResultBundleProbe.swift:26:9",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "0 : Cell(value: TableTestParser.TableValue.list([TableTestParser.TableValue.string(\"a\"), TableTestParser.TableValue.string(\"b\")]), location: ExamplesTests/ResultBundleProbe.swift:26:9)",
-                      "nodeType" : "Test Value"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "string : \"2\"",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "TableTestParser.TableValue",
-                          "name" : "value : .string(\"2\")",
-                          "nodeType" : "Test Value"
-                        },
-                        {
-                          "children" : [
-                            {
-                              "details" : "Swift.String",
-                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.String",
-                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "line : 26",
-                              "nodeType" : "Test Value"
-                            },
-                            {
-                              "details" : "Swift.Int",
-                              "name" : "column : 30",
-                              "nodeType" : "Test Value"
-                            }
-                          ],
-                          "details" : "Testing.SourceLocation",
-                          "name" : "location : ResultBundleProbe.swift:26:30",
-                          "nodeType" : "Test Value"
-                        }
-                      ],
-                      "details" : "TableTest.TableTestRow.Cell",
-                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2\"), location: ExamplesTests/ResultBundleProbe.swift:26:30)",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
-                  "name" : "cells : 2 elements",
-                  "nodeType" : "Test Value"
-                },
-                {
-                  "children" : [
-                    {
-                      "details" : "Swift.String",
-                      "name" : "0 : \"Values = [a, b]\"",
-                      "nodeType" : "Test Value"
-                    }
-                  ],
-                  "details" : "Swift.Array<Swift.String>",
-                  "name" : "expandedValues : 1 element",
-                  "nodeType" : "Test Value"
-                }
-              ],
-              "details" : "TableTest.TableTestRow",
-              "name" : "row : [a, b] | 2 [1.1]",
-              "nodeType" : "Test Value"
-            }
-          ],
-          "name" : "Arguments",
-          "nodeType" : "Arguments"
-        }
-      ],
-      "duration" : "0,00015s",
-      "durationInSeconds" : 0.00015282630920410156,
-      "name" : "[a, b] | 2 [1.1]",
-      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
-      "nodeType" : "Arguments",
-      "result" : "Passed"
-    },
     {
       "children" : [
         {
@@ -435,12 +243,204 @@
           }
         }
       ],
-      "duration" : "0,0024s",
-      "durationInSeconds" : 0.0023980140686035156,
+      "duration" : "0,0073s",
+      "durationInSeconds" : 0.007342100143432617,
       "name" : "[a, b] | 2 [1.2]",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
       "nodeType" : "Arguments",
       "result" : "Failed"
+    },
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "details" : "Swift.Int",
+                  "name" : "index : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Int",
+                  "name" : "caseNumber : 1",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "details" : "Swift.Optional<Swift.String>",
+                  "name" : "scenario : nil",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Values\"",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "details" : "Swift.String",
+                      "name" : "1 : \"Count?\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "headers : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "children" : [
+                                {
+                                  "children" : [
+                                    {
+                                      "details" : "Swift.String",
+                                      "name" : "string : \"a\"",
+                                      "nodeType" : "Test Value"
+                                    }
+                                  ],
+                                  "details" : "TableTestParser.TableValue",
+                                  "name" : "0 : .string(\"a\")",
+                                  "nodeType" : "Test Value"
+                                },
+                                {
+                                  "children" : [
+                                    {
+                                      "details" : "Swift.String",
+                                      "name" : "string : \"b\"",
+                                      "nodeType" : "Test Value"
+                                    }
+                                  ],
+                                  "details" : "TableTestParser.TableValue",
+                                  "name" : "1 : .string(\"b\")",
+                                  "nodeType" : "Test Value"
+                                }
+                              ],
+                              "details" : "Swift.Array<TableTestParser.TableValue>",
+                              "name" : "list : 2 elements",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .list([TableTestParser.TableValue.string(\"a\"), TableTestParser.TableValue.string(\"b\")])",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 26",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 9",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:26:9",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "0 : Cell(value: TableTestParser.TableValue.list([TableTestParser.TableValue.string(\"a\"), TableTestParser.TableValue.string(\"b\")]), location: ExamplesTests/ResultBundleProbe.swift:26:9)",
+                      "nodeType" : "Test Value"
+                    },
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "string : \"2\"",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "TableTestParser.TableValue",
+                          "name" : "value : .string(\"2\")",
+                          "nodeType" : "Test Value"
+                        },
+                        {
+                          "children" : [
+                            {
+                              "details" : "Swift.String",
+                              "name" : "fileID : \"ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.String",
+                              "name" : "filePath : \"/path/to/ExamplesTests/ResultBundleProbe.swift\"",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "line : 26",
+                              "nodeType" : "Test Value"
+                            },
+                            {
+                              "details" : "Swift.Int",
+                              "name" : "column : 30",
+                              "nodeType" : "Test Value"
+                            }
+                          ],
+                          "details" : "Testing.SourceLocation",
+                          "name" : "location : ResultBundleProbe.swift:26:30",
+                          "nodeType" : "Test Value"
+                        }
+                      ],
+                      "details" : "TableTest.TableTestRow.Cell",
+                      "name" : "1 : Cell(value: TableTestParser.TableValue.string(\"2\"), location: ExamplesTests/ResultBundleProbe.swift:26:30)",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<TableTest.TableTestRow.Cell>",
+                  "name" : "cells : 2 elements",
+                  "nodeType" : "Test Value"
+                },
+                {
+                  "children" : [
+                    {
+                      "details" : "Swift.String",
+                      "name" : "0 : \"Values = [a, b]\"",
+                      "nodeType" : "Test Value"
+                    }
+                  ],
+                  "details" : "Swift.Array<Swift.String>",
+                  "name" : "expandedValues : 1 element",
+                  "nodeType" : "Test Value"
+                }
+              ],
+              "details" : "TableTest.TableTestRow",
+              "name" : "row : [a, b] | 2 [1.1]",
+              "nodeType" : "Test Value"
+            }
+          ],
+          "name" : "Arguments",
+          "nodeType" : "Arguments"
+        }
+      ],
+      "duration" : "0,0066s",
+      "durationInSeconds" : 0.0066220760345458984,
+      "name" : "[a, b] | 2 [1.1]",
+      "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Names%20collide%20within%20one%20row%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+      "nodeType" : "Arguments",
+      "result" : "Passed"
     }
   ]
 }

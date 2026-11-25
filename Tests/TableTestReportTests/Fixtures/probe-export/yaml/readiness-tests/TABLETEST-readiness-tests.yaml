@@ -1,4 +1,4 @@
-className: "ExamplesTests.ReadinessTests"
+className: "ExamplesTests.Cellar.ReadinessTests"
 slug: "readiness-tests"
 title: "ReadinessTests"
 tableTests: [{"path": "TABLETEST-allows-the-years-it-is-ready.yaml", "methodName": "allowsTheYearsItIsReady", "slug": "allows-the-years-it-is-ready"}]

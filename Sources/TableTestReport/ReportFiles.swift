@@ -6,7 +6,7 @@ enum ReportFiles {
         let yaml = output.appendingPathComponent("yaml", isDirectory: true)
         try FileManager.default.createDirectory(at: yaml, withIntermediateDirectories: false)
         let deviceNames = Dictionary(grouping: devices, by: \.name)
-        let suites = Dictionary(grouping: tables) { $0.first?.manifest.suite ?? [] }
+        let suites = Dictionary(grouping: tables) { $0.first.map(reportPath) ?? [] }
         var tableOutcomes: [TableOutcomes] = []
         var suiteSlugs: Set<String> = []
         let sortedSuites = suites.keys.sorted { $0.lexicographicallyPrecedes($1) }
@@ -21,7 +21,7 @@ enum ReportFiles {
             for attempts in suites[suite, default: []] {
                 guard let first = attempts.first else { continue }
                 tableOutcomes.append(TableOutcomes(
-                    title: first.manifest.title, suite: suite, methodName: first.manifest.methodName,
+                    title: first.manifest.title, suite: first.manifest.suite, methodName: first.manifest.methodName,
                     cases: attempts.flatMap(\.outcomes)
                 ))
                 for attempt in attempts {
@@ -56,6 +56,13 @@ enum ReportFiles {
         let suite: [String]
         let methodName: String
         let cases: [CaseOutcome]
+    }
+
+    /// Where a table's suite sits in the report: its module, the folders of its file, and its
+    /// types. The reporter makes a level of each.
+    private static func reportPath(of attempt: TableAttempt) -> [String] {
+        let suite = attempt.manifest.suite
+        return Array(suite.prefix(1)) + attempt.manifest.folders + suite.dropFirst()
     }
 
     private static func title(of suite: [String], in tables: [[TableAttempt]]) -> String? {

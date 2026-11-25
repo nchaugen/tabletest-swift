@@ -1,10 +1,10 @@
 {
   "arguments" : [
     {
-      "value" : "2024 | true"
+      "value" : "2023 | false"
     },
     {
-      "value" : "2023 | false"
+      "value" : "2024 | true"
     }
   ],
   "devices" : [
@@ -18,8 +18,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,002 seconds",
-  "durationInSeconds" : 0.0020465850830078125,
+  "duration" : "Average duration 0,00033 seconds",
+  "durationInSeconds" : 0.0003275871276855469,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -187,8 +187,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0021s",
-      "durationInSeconds" : 0.0021021366119384766,
+      "duration" : "0,0003s",
+      "durationInSeconds" : 0.0002980232238769531,
       "name" : "2024 | true",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
       "nodeType" : "Arguments",
@@ -346,8 +346,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,002s",
-      "durationInSeconds" : 0.0019910335540771484,
+      "duration" : "0,00036s",
+      "durationInSeconds" : 0.0003571510314941406,
       "name" : "2023 | false",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/YearTests/%60Leap%20years%20without%20a%20scenario%20column%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
       "nodeType" : "Arguments",

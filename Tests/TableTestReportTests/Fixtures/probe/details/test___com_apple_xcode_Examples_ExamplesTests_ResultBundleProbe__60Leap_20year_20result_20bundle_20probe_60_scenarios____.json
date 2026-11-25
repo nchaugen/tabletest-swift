@@ -1,16 +1,16 @@
 {
   "arguments" : [
     {
-      "value" : "Check leap years (Year = 1900)"
+      "value" : "Check leap years (Year = 2004) [1.1]"
     },
     {
       "value" : "Check leap years (Year = 2000)"
     },
     {
-      "value" : "Check leap years (Year = 2004) [1.1]"
+      "value" : "Check leap years (Year = 2004) [2.1]"
     },
     {
-      "value" : "Check leap years (Year = 2004) [2.1]"
+      "value" : "Check leap years (Year = 1900)"
     }
   ],
   "devices" : [
@@ -24,8 +24,8 @@
       "platform" : "macOS"
     }
   ],
-  "duration" : "Average duration 0,0018 seconds",
-  "durationInSeconds" : 0.0018367171287536621,
+  "duration" : "Average duration 0,0045 seconds",
+  "durationInSeconds" : 0.004477262496948242,
   "functionName" : "scenarios(_:)",
   "hasMediaAttachments" : false,
   "hasPerformanceMetrics" : false,
@@ -207,8 +207,8 @@
           "nodeType" : "Arguments"
         }
       ],
-      "duration" : "0,0022s",
-      "durationInSeconds" : 0.002151966094970703,
+      "duration" : "0,00011s",
+      "durationInSeconds" : 0.00011420249938964844,
       "name" : "Check leap years (Year = 2004) [1.1]",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
       "nodeType" : "Arguments",
@@ -415,8 +415,8 @@
           }
         }
       ],
-      "duration" : "0,00071s",
-      "durationInSeconds" : 0.0007061958312988281,
+      "duration" : "0,0073s",
+      "durationInSeconds" : 0.00729680061340332,
       "name" : "Check leap years (Year = 1900)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=49a64717d5d4cb19952e6eac2946415cf6879adacf9908e7d872332d32c6e684",
       "nodeType" : "Arguments",
@@ -593,8 +593,8 @@
           "result" : "Skipped"
         }
       ],
-      "duration" : "0,0044s",
-      "durationInSeconds" : 0.004434823989868164,
+      "duration" : "0,000082s",
+      "durationInSeconds" : 8.20159912109375e-05,
       "name" : "Check leap years (Year = 2000)",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=2335c54ffe3749ceafac20eea51040b4fa52beab7682f26d5d1bb75d1878478b",
       "nodeType" : "Arguments",
@@ -801,8 +801,8 @@
           }
         }
       ],
-      "duration" : "0,000054s",
-      "durationInSeconds" : 5.3882598876953125e-05,
+      "duration" : "0,01s",
+      "durationInSeconds" : 0.010416030883789062,
       "name" : "Check leap years (Year = 2004) [2.1]",
       "nodeIdentifierURL" : "test://com.apple.xcode/Examples/ExamplesTests/ResultBundleProbe/%60Leap%20year%20result%20bundle%20probe%60/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
       "nodeType" : "Arguments",

@@ -9,6 +9,8 @@ package struct ReportManifest: Codable, Equatable {
 
     package var version = 1
     package let suite: [String]
+    /// The folders between the test target's folder and the file that holds the table.
+    package let folders: [String]
     package let methodName: String
     package let title: String
     /// The doc comment above the `@TableTest` function, without its markers.
@@ -21,11 +23,12 @@ package struct ReportManifest: Codable, Equatable {
     package let rows: [ReportRow]
 
     package init(
-        suite: [String], methodName: String, title: String, description: String? = nil,
+        suite: [String], folders: [String] = [], methodName: String, title: String, description: String? = nil,
         suiteDescription: String? = nil, testFunction: String,
         headers: [ReportCell], rows: [ReportRow]
     ) {
         self.suite = suite
+        self.folders = folders
         self.methodName = methodName
         self.title = title
         self.description = description
@@ -33,6 +36,29 @@ package struct ReportManifest: Codable, Equatable {
         self.testFunction = testFunction
         self.headers = headers
         self.rows = rows
+    }
+}
+
+extension ReportManifest {
+    private enum CodingKeys: String, CodingKey {
+        case version, suite, folders, methodName, title, description, suiteDescription, testFunction, headers, rows
+    }
+
+    /// Reads a manifest of an earlier version too, whose tables have no folders.
+    package init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            suite: try container.decode([String].self, forKey: .suite),
+            folders: try container.decodeIfPresent([String].self, forKey: .folders) ?? [],
+            methodName: try container.decode(String.self, forKey: .methodName),
+            title: try container.decode(String.self, forKey: .title),
+            description: try container.decodeIfPresent(String.self, forKey: .description),
+            suiteDescription: try container.decodeIfPresent(String.self, forKey: .suiteDescription),
+            testFunction: try container.decode(String.self, forKey: .testFunction),
+            headers: try container.decode([ReportCell].self, forKey: .headers),
+            rows: try container.decode([ReportRow].self, forKey: .rows)
+        )
+        version = try container.decode(Int.self, forKey: .version)
     }
 }
 

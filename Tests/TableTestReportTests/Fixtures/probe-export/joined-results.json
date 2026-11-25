@@ -200,91 +200,6 @@
         "attempt" : 1,
         "attemptName" : "First Run",
         "caseNumber" : 1,
-        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
-        "configuration" : {
-          "configurationId" : "1",
-          "configurationName" : "Test Scheme Action"
-        },
-        "device" : {
-          "architecture" : "arm64",
-          "deviceId" : "00000000-0000000000000001",
-          "deviceName" : "My Mac",
-          "modelName" : "MacBook Pro",
-          "osBuildNumber" : "26B131",
-          "osVersion" : "27.2.1",
-          "platform" : "macOS"
-        },
-        "displayName" : "Morning",
-        "invocationIndex" : 1,
-        "rowIndex" : 1,
-        "status" : "Passed",
-        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
-        "xcodeDisplayName" : "Morning"
-      },
-      {
-        "attempt" : 1,
-        "attemptName" : "First Run",
-        "caseNumber" : 1,
-        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
-        "configuration" : {
-          "configurationId" : "1",
-          "configurationName" : "Test Scheme Action"
-        },
-        "device" : {
-          "architecture" : "arm64",
-          "deviceId" : "00000000-0000000000000001",
-          "deviceName" : "My Mac",
-          "modelName" : "MacBook Pro",
-          "osBuildNumber" : "26B131",
-          "osVersion" : "27.2.1",
-          "platform" : "macOS"
-        },
-        "displayName" : "Afternoon",
-        "invocationIndex" : 2,
-        "rowIndex" : 2,
-        "status" : "Passed",
-        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
-        "xcodeDisplayName" : "Afternoon"
-      },
-      {
-        "attempt" : 1,
-        "attemptName" : "First Run",
-        "caseNumber" : 1,
-        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
-        "configuration" : {
-          "configurationId" : "1",
-          "configurationName" : "Test Scheme Action"
-        },
-        "device" : {
-          "architecture" : "arm64",
-          "deviceId" : "00000000-0000000000000001",
-          "deviceName" : "My Mac",
-          "modelName" : "MacBook Pro",
-          "osBuildNumber" : "26B131",
-          "osVersion" : "27.2.1",
-          "platform" : "macOS"
-        },
-        "displayName" : "No name",
-        "invocationIndex" : 3,
-        "rowIndex" : 3,
-        "status" : "Passed",
-        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
-        "xcodeDisplayName" : "No name"
-      }
-    ],
-    "methodName" : "greetsByTheHour",
-    "suite" : [
-      "ExamplesTests",
-      "GreetingTests"
-    ],
-    "title" : "greetsByTheHour"
-  },
-  {
-    "cases" : [
-      {
-        "attempt" : 1,
-        "attemptName" : "First Run",
-        "caseNumber" : 1,
         "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/ReadinessTests/allowsTheYearsItIsReady/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
         "configuration" : {
           "configurationId" : "1",
@@ -463,6 +378,91 @@
       "ReadinessTests"
     ],
     "title" : "allowsTheYearsItIsReady"
+  },
+  {
+    "cases" : [
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=e61b9f584dbe27741cef6e9ee440831d7d94470c0871b0871541f0308916efea",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Morning",
+        "invocationIndex" : 1,
+        "rowIndex" : 1,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+        "xcodeDisplayName" : "Morning"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=af1a1fc110b6094c48582b0ef83553cb7908d7a4365424eef28e76ef6c88d630",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "Afternoon",
+        "invocationIndex" : 2,
+        "rowIndex" : 2,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+        "xcodeDisplayName" : "Afternoon"
+      },
+      {
+        "attempt" : 1,
+        "attemptName" : "First Run",
+        "caseNumber" : 1,
+        "caseURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)?args=51ad5c36f38fc1f146295801f5d2db92ebddab58bf285e6b9ae54b50b843374f",
+        "configuration" : {
+          "configurationId" : "1",
+          "configurationName" : "Test Scheme Action"
+        },
+        "device" : {
+          "architecture" : "arm64",
+          "deviceId" : "00000000-0000000000000001",
+          "deviceName" : "My Mac",
+          "modelName" : "MacBook Pro",
+          "osBuildNumber" : "26B131",
+          "osVersion" : "27.2.1",
+          "platform" : "macOS"
+        },
+        "displayName" : "No name",
+        "invocationIndex" : 3,
+        "rowIndex" : 3,
+        "status" : "Passed",
+        "testURL" : "test://com.apple.xcode/Examples/ExamplesTests/GreetingTests/greetsByTheHour/scenarios(_:)",
+        "xcodeDisplayName" : "No name"
+      }
+    ],
+    "methodName" : "greetsByTheHour",
+    "suite" : [
+      "ExamplesTests",
+      "GreetingTests"
+    ],
+    "title" : "greetsByTheHour"
   },
   {
     "cases" : [
